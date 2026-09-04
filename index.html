@@ -12,10 +12,15 @@
 
 <style>
 
+/* ==================================================
+   기본
+================================================== */
+
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
   user-select:none;
+  -webkit-user-select:none;
 }
 
 html,
@@ -25,23 +30,45 @@ body{
   height:100%;
   overflow:hidden;
   font-family:
-    Arial,
+    -apple-system,
+    BlinkMacSystemFont,
     "Apple SD Gothic Neo",
+    "Malgun Gothic",
     sans-serif;
-  background:#f4e7cf;
+  background:#f5ead8;
+  color:#51351f;
 }
 
 button{
-  border:0;
   font-family:inherit;
+  border:0;
   cursor:pointer;
 }
 
+img{
+  -webkit-user-drag:none;
+  user-drag:none;
+}
+
+#app{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  position:relative;
+}
+
+
+/* ==================================================
+   화면
+================================================== */
+
 .screen{
-  position:fixed;
+  position:absolute;
   inset:0;
+  width:100%;
+  height:100%;
   display:none;
-  flex-direction:column;
+  overflow:hidden;
 }
 
 .screen.active{
@@ -54,975 +81,25 @@ button{
 ================================================== */
 
 #startScreen{
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  flex-direction:column;
   background:
-    linear-gradient(
-      #fff4dc 0 65%,
-      #d7a76e 65% 100%
+    radial-gradient(
+      circle at 50% 35%,
+      #fff8e9 0%,
+      #f8e7ca 50%,
+      #efd2a5 100%
     );
-  text-align:center;
 }
 
 .start-potato{
-  font-size:110px;
+  font-size:90px;
   animation:
-    potatoFloat 2s infinite ease-in-out;
+    potatoBounce 1.5s ease-in-out infinite;
 }
 
-.start-title{
-  margin-top:10px;
-  font-size:38px;
-  font-weight:900;
-  color:#5c351d;
-}
-
-.start-sub{
-  margin-top:8px;
-  color:#8c6345;
-}
-
-.start-button{
-  margin-top:35px;
-  padding:16px 55px;
-  border-radius:18px;
-  background:#8c5a32;
-  color:white;
-  font-size:20px;
-  font-weight:900;
-  box-shadow:
-    0 6px 0 #5c351d;
-}
-
-.start-button:active{
-  transform:translateY(5px);
-  box-shadow:
-    0 1px 0 #5c351d;
-}
-
-
-/* ==================================================
-   새싹 키우기
-================================================== */
-
-#sproutScreen{
-  background:
-    linear-gradient(
-      #bde8ff 0 63%,
-      #8cc96d 63% 100%
-    );
-  align-items:center;
-  color:#54351e;
-}
-
-.sprout-header{
-  width:100%;
-  padding:22px 20px 10px;
-  text-align:center;
-}
-
-.sprout-header h1{
-  margin:0;
-  font-size:28px;
-}
-
-.growth-box{
-  width:calc(100% - 40px);
-  max-width:500px;
-  margin-top:10px;
-}
-
-.growth-label{
-  display:flex;
-  justify-content:space-between;
-  font-weight:900;
-}
-
-.progress{
-  margin-top:8px;
-  height:20px;
-  border-radius:20px;
-  overflow:hidden;
-  background:#eee0c9;
-  border:3px solid #704522;
-}
-
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:#6dbb4b;
-  transition:width .3s;
-}
-
-.sprout-area{
-  flex:1;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-}
-
-.sprout-pot{
-  width:230px;
-  height:230px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:150px;
-  transition:.3s;
-}
-
-.sprout-pot.grow{
-  animation:sproutBounce .4s;
-}
-
-.sprout-stage{
-  position:absolute;
-  bottom:10%;
-  font-size:20px;
-  font-weight:900;
-  background:#fff8e8;
-  padding:8px 18px;
-  border-radius:15px;
-}
-
-.growth-actions{
-  width:100%;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  padding:15px 20px 25px;
-  max-width:500px;
-}
-
-.growth-action{
-  min-height:65px;
-  border-radius:18px;
-  background:white;
-  box-shadow:0 4px 0 #c39b72;
-  font-size:16px;
-  font-weight:900;
-  color:#5a3923;
-}
-
-.growth-action:active{
-  transform:translateY(4px);
-  box-shadow:0 0 0 #c39b72;
-}
-
-
-/* ==================================================
-   부화
-================================================== */
-
-.hatch-overlay{
-  position:fixed;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-  background:rgba(255,248,226,.94);
-  flex-direction:column;
-}
-
-.hatch-overlay.show{
-  display:flex;
-}
-
-.hatch-egg{
-  font-size:120px;
-  animation:hatchShake .35s infinite alternate;
-}
-
-.hatch-text{
-  margin-top:20px;
-  font-size:27px;
-  font-weight:900;
-  color:#5c351d;
-}
-
-
-/* ==================================================
-   감자 키우기 화면
-================================================== */
-
-#growScreen{
-  background:#f7ecd9;
-}
-
-.grow-header{
-  flex:none;
-  height:115px;
-  padding:12px 15px;
-  background:#fff8ea;
-  border-bottom:2px solid #d7b78e;
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:10px;
-}
-
-.grow-title{
-  font-weight:900;
-  font-size:17px;
-}
-
-.day{
-  color:#886044;
-  font-size:13px;
-}
-
-.potato-info{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-
-.info-img{
-  width:72px;
-  height:72px;
-  object-fit:contain;
-}
-
-.message-box{
-  min-width:0;
-}
-
-.message{
-  background:white;
-  border:2px solid #b58b63;
-  border-radius:12px;
-  padding:7px 10px;
-  font-size:13px;
-  min-height:42px;
-}
-
-.potato-name{
-  font-weight:900;
-  margin-top:4px;
-}
-
-.personality{
-  font-size:11px;
-  color:#8b694e;
-}
-
-
-/* ==================================================
-   스탯
-================================================== */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  padding:9px 12px;
-  background:#ead5b8;
-}
-
-.stat{
-  text-align:center;
-  font-size:11px;
-  font-weight:900;
-}
-
-.stat-bar{
-  height:8px;
-  margin-top:4px;
-  border-radius:10px;
-  overflow:hidden;
-  background:#d0b89b;
-}
-
-.stat-fill{
-  height:100%;
-  width:100%;
-  background:#7fb65a;
-}
-
-
-/* ==================================================
-   메인 감자 영역
-================================================== */
-
-.grow-main{
-  flex:1;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.main-potato{
-  width:min(70vw,300px);
-  height:min(70vw,300px);
-  object-fit:contain;
-  transition:.2s;
-}
-
-.main-potato.jump{
-  animation:potatoJump .55s;
-}
-
-.effect{
-  position:absolute;
-  font-size:42px;
-  pointer-events:none;
-  animation:effectUp 1s forwards;
-}
-
-
-/* ==================================================
-   감자 행동 버튼
-================================================== */
-
-.grow-actions{
-  flex:none;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  padding:9px 10px;
-  background:#fff8ea;
-  border-top:2px solid #d7b78e;
-}
-
-.grow-action{
-  min-height:55px;
-  border-radius:13px;
-  background:#f0ddbd;
-  color:#573820;
-  font-weight:900;
-  font-size:12px;
-}
-
-.grow-action:active{
-  transform:scale(.94);
-}
-
-
-/* ==================================================
-   하단 메뉴
-================================================== */
-
-.bottom-menu{
-  height:58px;
-  flex:none;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  background:#765034;
-}
-
-.bottom-menu button{
-  background:transparent;
-  color:#fff4dd;
-  font-weight:900;
-  font-size:14px;
-}
-
-.bottom-menu button.active{
-  background:#5a3924;
-}
-
-
-/* ==================================================
-   감자사전
-================================================== */
-
-#dictionaryScreen{
-  background:#f4e6cf;
-}
-
-.dictionary-header{
-  height:70px;
-  flex:none;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 15px;
-  background:#fff8e9;
-  border-bottom:2px solid #cba77b;
-}
-
-.dictionary-title{
-  font-size:23px;
-  font-weight:900;
-  color:#5a3924;
-}
-
-.back-button{
-  padding:9px 13px;
-  border-radius:10px;
-  background:#765034;
-  color:white;
-  font-weight:900;
-}
-
-.dictionary-room{
-  flex:1;
-  padding:10px;
-  display:flex;
-  flex-direction:column;
-  min-height:0;
-}
-
-.room-tabs{
-  display:flex;
-  gap:5px;
-  overflow-x:auto;
-  padding-bottom:8px;
-}
-
-.room-tab{
-  flex:none;
-  padding:8px 12px;
-  border-radius:10px;
-  background:#d9c2a1;
-  font-weight:900;
-}
-
-.room-tab.active{
-  background:#765034;
-  color:white;
-}
-
-
-/* ==================================================
-   18비트 느낌의 다마고치 화면
-================================================== */
-
-.tama-frame{
-  flex:1;
-  min-height:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.tama-screen{
-  width:min(92vw,500px);
-  aspect-ratio:1 / .82;
-  max-height:100%;
-  position:relative;
-  overflow:hidden;
-
-  image-rendering:pixelated;
-
-  border:
-    10px solid #5a3a27;
-
-  box-shadow:
-    inset 0 0 0 4px #b68b5e,
-    0 7px 0 #3d281b;
-
-  background:#c9b083;
-}
-
-
-/* 18비트 픽셀 타일 */
-
-.pixel-grid{
-  position:absolute;
-  inset:0;
-  background-image:
-    linear-gradient(
-      rgba(0,0,0,.055) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(0,0,0,.055) 1px,
-      transparent 1px
-    );
-  background-size:18px 18px;
-  pointer-events:none;
-  z-index:20;
-}
-
-
-/* ==================================================
-   거실
-================================================== */
-
-.room-living{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      #d6bd8d 0 62%,
-      #9c6c46 62% 100%
-    );
-}
-
-.window{
-  position:absolute;
-  width:105px;
-  height:75px;
-  left:16px;
-  top:16px;
-  background:#8dd8e8;
-  border:7px solid #765034;
-}
-
-.window:before,
-.window:after{
-  content:"";
-  position:absolute;
-  background:#765034;
-}
-
-.window:before{
-  width:7px;
-  height:100%;
-  left:43px;
-}
-
-.window:after{
-  height:7px;
-  width:100%;
-  top:31px;
-}
-
-.sun{
-  position:absolute;
-  width:20px;
-  height:20px;
-  right:10px;
-  top:10px;
-  background:#f3d45e;
-}
-
-.sofa{
-  position:absolute;
-  width:150px;
-  height:58px;
-  left:50%;
-  bottom:43px;
-  transform:translateX(-50%);
-  background:#8c5b3a;
-  border:6px solid #654129;
-}
-
-.sofa:before{
-  content:"";
-  position:absolute;
-  left:8px;
-  right:8px;
-  top:-31px;
-  height:32px;
-  background:#9f6a45;
-  border:6px solid #654129;
-}
-
-.tv{
-  position:absolute;
-  width:92px;
-  height:65px;
-  right:17px;
-  top:15px;
-  background:#352e2a;
-  border:7px solid #60452f;
-}
-
-.tv-screen{
-  position:absolute;
-  inset:9px;
-  background:#7ab7a3;
-}
-
-.tv-stand{
-  position:absolute;
-  bottom:-22px;
-  left:29px;
-  width:28px;
-  height:17px;
-  background:#60452f;
-}
-
-
-/* ==================================================
-   주방
-================================================== */
-
-.room-kitchen{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      #e2cda7 0 63%,
-      #a97850 63% 100%
-    );
-}
-
-.kitchen-counter{
-  position:absolute;
-  left:10px;
-  right:10px;
-  bottom:55px;
-  height:75px;
-  background:#765034;
-  border-top:10px solid #b98b5e;
-}
-
-.kitchen-sink{
-  position:absolute;
-  left:22px;
-  top:18px;
-  width:60px;
-  height:35px;
-  background:#9cb4b3;
-  border:5px solid #624735;
-}
-
-.kitchen-fridge{
-  position:absolute;
-  right:18px;
-  top:15px;
-  width:65px;
-  height:120px;
-  background:#ddd5c7;
-  border:7px solid #766a5b;
-}
-
-.kitchen-table{
-  position:absolute;
-  left:50%;
-  bottom:20px;
-  width:115px;
-  height:18px;
-  transform:translateX(-50%);
-  background:#71462d;
-}
-
-
-/* ==================================================
-   침실
-================================================== */
-
-.room-bedroom{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      #d9c5ae 0 62%,
-      #9c765b 62% 100%
-    );
-}
-
-.bed{
-  position:absolute;
-  width:185px;
-  height:78px;
-  left:50%;
-  bottom:37px;
-  transform:translateX(-50%);
-  background:#a97d67;
-  border:7px solid #674939;
-}
-
-.pillow{
-  position:absolute;
-  width:55px;
-  height:32px;
-  left:13px;
-  top:10px;
-  background:#eee0ca;
-}
-
-.lamp{
-  position:absolute;
-  right:30px;
-  top:35px;
-  width:25px;
-  height:65px;
-  background:#765034;
-}
-
-.lamp:before{
-  content:"";
-  position:absolute;
-  width:45px;
-  height:28px;
-  left:-10px;
-  top:-20px;
-  background:#e8cb72;
-  border:5px solid #765034;
-}
-
-
-/* ==================================================
-   욕실
-================================================== */
-
-.room-bathroom{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      #d4e4df 0 63%,
-      #91aaa4 63% 100%
-    );
-}
-
-.bath{
-  position:absolute;
-  width:160px;
-  height:70px;
-  left:50%;
-  bottom:45px;
-  transform:translateX(-50%);
-  background:#f2f0df;
-  border:7px solid #6f7f79;
-}
-
-.mirror{
-  position:absolute;
-  width:90px;
-  height:70px;
-  right:18px;
-  top:15px;
-  background:#a8d5d7;
-  border:7px solid #6d7772;
-}
-
-.sink{
-  position:absolute;
-  left:20px;
-  top:25px;
-  width:70px;
-  height:38px;
-  background:#eeeade;
-  border:6px solid #6f7f79;
-}
-
-
-/* ==================================================
-   놀이터
-================================================== */
-
-.room-playground{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      #a9dcf0 0 58%,
-      #74b65c 58% 100%
-    );
-}
-
-.cloud{
-  position:absolute;
-  width:65px;
-  height:25px;
-  background:white;
-  top:25px;
-  left:30px;
-}
-
-.swing{
-  position:absolute;
-  right:35px;
-  bottom:42px;
-  width:75px;
-  height:90px;
-  border-left:7px solid #765034;
-  border-right:7px solid #765034;
-}
-
-.swing:before{
-  content:"";
-  position:absolute;
-  left:-7px;
-  top:15px;
-  width:75px;
-  height:7px;
-  background:#765034;
-}
-
-.swing:after{
-  content:"";
-  position:absolute;
-  width:50px;
-  height:6px;
-  left:5px;
-  top:65px;
-  background:#765034;
-}
-
-.slide{
-  position:absolute;
-  left:25px;
-  bottom:38px;
-  width:80px;
-  height:55px;
-  border-bottom:12px solid #d67c55;
-  border-right:12px solid #d67c55;
-}
-
-
-/* ==================================================
-   다마고치 감자
-================================================== */
-
-.tama-potato{
-  position:absolute;
-  width:55px;
-  height:55px;
-  object-fit:contain;
-  z-index:10;
-  touch-action:none;
-  transition:
-    left .35s,
-    top .35s,
-    transform .25s;
-}
-
-.tama-potato.following{
-  animation:tinyBounce .7s infinite;
-}
-
-.tama-potato.stunned{
-  filter:grayscale(.7);
-  animation:stun 1s infinite;
-}
-
-.tama-emotion{
-  position:absolute;
-  z-index:30;
-  font-size:25px;
-  pointer-events:none;
-  animation:effectUp 1.2s forwards;
-}
-
-.sleep-overlay{
-  position:absolute;
-  inset:0;
-  z-index:50;
-  background:rgba(25,35,60,.78);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  color:white;
-  font-weight:900;
-}
-
-.sleep-overlay.show{
-  display:flex;
-}
-
-.sleep-stars{
-  font-size:35px;
-}
-
-
-/* ==================================================
-   다마고치 조작
-================================================== */
-
-.tama-controls{
-  flex:none;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin-top:8px;
-}
-
-.tama-control{
-  padding:10px 4px;
-  border-radius:11px;
-  background:#765034;
-  color:white;
-  font-weight:900;
-  font-size:12px;
-}
-
-
-/* ==================================================
-   사전 목록
-================================================== */
-
-.collection{
-  flex:none;
-  max-height:150px;
-  overflow-y:auto;
-  margin-top:8px;
-  background:#fff8e9;
-  border:2px solid #cba77b;
-  border-radius:12px;
-  padding:8px;
-}
-
-.collection-title{
-  font-weight:900;
-  color:#5a3924;
-}
-
-.collection-count{
-  font-size:12px;
-  color:#8a694d;
-  margin-top:2px;
-}
-
-.collection-item{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:6px 0;
-  border-bottom:1px solid #e4d2b7;
-}
-
-.collection-item:last-child{
-  border-bottom:0;
-}
-
-.collection-item img{
-  width:42px;
-  height:42px;
-  object-fit:contain;
-}
-
-.collection-name{
-  flex:1;
-  font-weight:900;
-  font-size:13px;
-}
-
-.toggle{
-  width:44px;
-  height:25px;
-  border-radius:20px;
-  background:#aaa;
-  position:relative;
-}
-
-.toggle.on{
-  background:#6ca54f;
-}
-
-.toggle:after{
-  content:"";
-  position:absolute;
-  width:19px;
-  height:19px;
-  border-radius:50%;
-  background:white;
-  top:3px;
-  left:3px;
-  transition:.2s;
-}
-
-.toggle.on:after{
-  left:22px;
-}
-
-
-/* ==================================================
-   애니메이션
-================================================== */
-
-@keyframes potatoFloat{
+@keyframes potatoBounce{
   0%,100%{
     transform:translateY(0);
   }
@@ -1031,104 +108,1005 @@ button{
   }
 }
 
-@keyframes sproutBounce{
-  0%{
-    transform:scale(1);
-  }
-  50%{
-    transform:scale(1.12);
-  }
-  100%{
-    transform:scale(1);
-  }
+.game-title{
+  margin-top:15px;
+  font-size:36px;
+  font-weight:900;
 }
 
-@keyframes hatchShake{
+.game-subtitle{
+  margin-top:8px;
+  color:#987452;
+  font-size:14px;
+}
+
+.start-button{
+  margin-top:35px;
+  padding:16px 42px;
+  border-radius:18px;
+  background:#8d603c;
+  color:white;
+  font-size:19px;
+  font-weight:800;
+  box-shadow:0 6px 0 #65432b;
+}
+
+.start-button:active{
+  transform:translateY(4px);
+  box-shadow:0 2px 0 #65432b;
+}
+
+
+/* ==================================================
+   공통 버튼
+================================================== */
+
+.action-button{
+  min-height:58px;
+  padding:10px 8px;
+  border-radius:16px;
+  background:#fff8ea;
+  border:2px solid #e4cba7;
+  color:#5a3d26;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 3px 0 #d2b28b;
+}
+
+.action-button:active{
+  transform:translateY(2px);
+  box-shadow:0 1px 0 #d2b28b;
+}
+
+.action-button:disabled{
+  opacity:.5;
+}
+
+
+/* ==================================================
+   새싹 키우기
+================================================== */
+
+#sproutScreen{
+  flex-direction:column;
+  background:#f7ecd9;
+}
+
+.sprout-header{
+  flex:none;
+  padding:18px 18px 10px;
+  text-align:center;
+}
+
+.sprout-header h1{
+  margin:0;
+  font-size:24px;
+}
+
+.sprout-day{
+  margin-top:5px;
+  color:#987452;
+  font-size:13px;
+}
+
+.sprout-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  padding:10px 16px 110px;
+}
+
+.growth-card{
+  background:#fff8ea;
+  border:2px solid #e6cfaa;
+  border-radius:22px;
+  padding:18px;
+  text-align:center;
+}
+
+.growth-stage{
+  font-size:18px;
+  font-weight:900;
+}
+
+.sprout-box{
+  height:250px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  margin:10px 0;
+}
+
+.sprout{
+  position:relative;
+  font-size:100px;
+  transition:.3s;
+}
+
+.sprout.small{
+  font-size:55px;
+}
+
+.sprout.medium{
+  font-size:75px;
+}
+
+.sprout.large{
+  font-size:100px;
+}
+
+.growth-percent{
+  font-size:30px;
+  font-weight:900;
+  color:#739344;
+}
+
+.progress-bar{
+  width:100%;
+  height:20px;
+  margin-top:10px;
+  background:#e5dccb;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:#8db45c;
+  border-radius:20px;
+  transition:.3s;
+}
+
+.growth-message{
+  margin-top:10px;
+  min-height:25px;
+  color:#856746;
+  font-size:13px;
+}
+
+.sprout-actions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:15px;
+}
+
+.sprout-actions button{
+  min-height:72px;
+  font-size:15px;
+}
+
+
+/* ==================================================
+   감자 키우기
+================================================== */
+
+#growScreen{
+  flex-direction:column;
+  background:#f7ecd9;
+  overflow:hidden;
+}
+
+
+/*
+   중요:
+   이 영역은 스크롤 밖에 둔다.
+   따라서 이름/성격까지 절대 내려가지 않는다.
+*/
+
+.grow-header{
+  flex:none;
+  height:145px;
+  padding:10px 14px 8px;
+  background:#fff7e8;
+  border-bottom:2px solid #e3cba6;
+  z-index:50;
+}
+
+.grow-header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.grow-title{
+  font-size:20px;
+  font-weight:900;
+}
+
+.grow-day{
+  font-size:13px;
+  color:#987452;
+}
+
+.potato-info{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:6px;
+}
+
+.header-potato-img{
+  width:64px;
+  height:64px;
+  object-fit:contain;
+  flex:none;
+}
+
+.header-info{
+  min-width:0;
+  flex:1;
+}
+
+.message-box{
+  min-height:31px;
+  padding:5px 9px;
+  background:#f4e4cb;
+  border-radius:10px;
+  font-size:12px;
+  line-height:1.3;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.potato-name{
+  margin-top:4px;
+  font-size:16px;
+  font-weight:900;
+}
+
+.potato-personality{
+  margin-top:2px;
+  font-size:12px;
+  color:#967250;
+}
+
+
+/*
+   여기만 스크롤된다.
+*/
+
+.grow-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  padding:10px 14px 105px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+
+.stat{
+  background:#fff8ea;
+  border:1px solid #e3c9a3;
+  border-radius:12px;
+  padding:7px 3px;
+  text-align:center;
+}
+
+.stat-name{
+  font-size:10px;
+  color:#8e6c4d;
+}
+
+.stat-value{
+  margin-top:3px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.stat-bar{
+  height:5px;
+  margin:4px 4px 0;
+  background:#ded4c4;
+  border-radius:5px;
+  overflow:hidden;
+}
+
+.stat-fill{
+  height:100%;
+  width:100%;
+  background:#9dbb67;
+  transition:.3s;
+}
+
+.grow-main{
+  min-height:430px;
+  margin-top:10px;
+  background:
+    linear-gradient(
+      #e7f2d4 0 68%,
+      #b4c987 68% 100%
+    );
+  border:2px solid #b5c58e;
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.grow-sky{
+  position:absolute;
+  top:15px;
+  right:20px;
+  font-size:42px;
+  opacity:.75;
+}
+
+.grow-ground{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:31%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #9dbb70 0 10px,
+      #a9c47b 10px 20px
+    );
+}
+
+.grow-potato-wrap{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+.main-potato-img{
+  width:180px;
+  height:180px;
+  object-fit:contain;
+  transition:.25s;
+}
+
+.main-potato-img.walking{
+  animation:
+    potatoWalk .3s infinite alternate;
+}
+
+.main-potato-img.jumping{
+  animation:
+    potatoJump .45s ease;
+}
+
+@keyframes potatoWalk{
   from{
-    transform:rotate(-7deg) scale(1);
+    transform:translateY(0) rotate(-3deg);
   }
   to{
-    transform:rotate(7deg) scale(1.08);
+    transform:translateY(-8px) rotate(3deg);
   }
 }
 
 @keyframes potatoJump{
   0%{
-    transform:translateY(0) rotate(0);
-  }
-  40%{
-    transform:translateY(-45px) rotate(-8deg);
-  }
-  70%{
-    transform:translateY(-20px) rotate(8deg);
-  }
-  100%{
-    transform:translateY(0) rotate(0);
-  }
-}
-
-@keyframes effectUp{
-  0%{
-    opacity:1;
-    transform:translateY(0) scale(.8);
-  }
-  100%{
-    opacity:0;
-    transform:translateY(-70px) scale(1.3);
-  }
-}
-
-@keyframes tinyBounce{
-  0%,100%{
     transform:translateY(0);
   }
   50%{
-    transform:translateY(-5px);
+    transform:translateY(-45px) rotate(8deg);
+  }
+  100%{
+    transform:translateY(0);
   }
 }
 
-@keyframes stun{
-  0%,100%{
-    transform:rotate(0);
+.grow-emotion{
+  min-height:35px;
+  font-size:25px;
+  font-weight:900;
+}
+
+.grow-message{
+  max-width:270px;
+  margin:7px auto 0;
+  padding:8px 12px;
+  border-radius:12px;
+  background:rgba(255,255,255,.88);
+  font-size:13px;
+  line-height:1.4;
+}
+
+.grow-actions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:12px;
+}
+
+.grow-actions .harvest{
+  grid-column:span 2;
+  background:#d8b27c;
+}
+
+.bottom-menu{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:66px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  background:#fff9ed;
+  border-top:2px solid #dfc8a5;
+  z-index:100;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+
+.bottom-menu button{
+  background:transparent;
+  color:#8c6b4c;
+  font-size:13px;
+  font-weight:800;
+}
+
+.bottom-menu button.active{
+  color:#65452c;
+  background:#f3e3c9;
+}
+
+
+/* ==================================================
+   감자사전
+================================================== */
+
+#dictionaryScreen{
+  flex-direction:column;
+  background:#f7ecd9;
+}
+
+.dictionary-header{
+  flex:none;
+  height:64px;
+  padding:8px 12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#fff8ea;
+  border-bottom:2px solid #e3cba6;
+  z-index:20;
+}
+
+.back-button{
+  padding:8px 11px;
+  border-radius:10px;
+  background:#ead5b5;
+  color:#65452d;
+  font-weight:900;
+}
+
+.dictionary-title{
+  font-size:21px;
+  font-weight:900;
+}
+
+.dictionary-day{
+  margin-left:auto;
+  color:#987452;
+  font-size:12px;
+}
+
+.dictionary-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:10px 12px 20px;
+}
+
+.room-tabs{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  padding-bottom:7px;
+}
+
+.room-tab{
+  flex:none;
+  padding:8px 11px;
+  border-radius:12px;
+  background:#ead8bb;
+  color:#76583d;
+  font-size:12px;
+  font-weight:900;
+}
+
+.room-tab.active{
+  background:#8d6846;
+  color:white;
+}
+
+
+/* ==================================================
+   18비트 다마고치 방
+================================================== */
+
+.tamagotchi-frame{
+  background:#493b31;
+  border:6px solid #705943;
+  border-radius:15px;
+  padding:8px;
+  box-shadow:
+    inset 0 0 0 3px #2e2722,
+    0 5px 0 #b99b73;
+}
+
+.tamagotchi-screen{
+  position:relative;
+  width:100%;
+  aspect-ratio:1/1;
+  min-height:290px;
+  max-height:420px;
+  overflow:hidden;
+  image-rendering:pixelated;
+  background:#b8d49d;
+  touch-action:none;
+}
+
+
+/* 거실 */
+
+.room-living{
+  background:
+    linear-gradient(
+      #9cc4dc 0 57%,
+      #d5b080 57% 100%
+    );
+}
+
+.room-living::before{
+  content:"";
+  position:absolute;
+  left:9%;
+  top:9%;
+  width:23%;
+  height:23%;
+  background:#d9f0f7;
+  border:4px solid #745b46;
+  box-shadow:
+    inset 0 0 0 3px #a6d2dc;
+}
+
+.sofa{
+  position:absolute;
+  left:12%;
+  bottom:19%;
+  width:42%;
+  height:21%;
+  background:#8b6d5a;
+  border:4px solid #614b3c;
+  border-radius:8px;
+}
+
+.sofa::before{
+  content:"";
+  position:absolute;
+  left:5%;
+  right:5%;
+  top:-18%;
+  height:35%;
+  background:#9d7b65;
+  border:4px solid #614b3c;
+  border-radius:8px;
+}
+
+.tv{
+  position:absolute;
+  right:9%;
+  top:15%;
+  width:28%;
+  height:22%;
+  background:#423d38;
+  border:4px solid #2e2925;
+}
+
+.tv::after{
+  content:"";
+  position:absolute;
+  left:36%;
+  bottom:-24%;
+  width:28%;
+  height:22%;
+  background:#614d3d;
+}
+
+
+/* 주방 */
+
+.room-kitchen{
+  background:
+    linear-gradient(
+      #ead5b0 0 58%,
+      #aeb77f 58% 100%
+    );
+}
+
+.kitchen-counter{
+  position:absolute;
+  left:5%;
+  right:5%;
+  top:25%;
+  height:18%;
+  background:#9b7655;
+  border:4px solid #654b39;
+}
+
+.kitchen-fridge{
+  position:absolute;
+  right:8%;
+  top:7%;
+  width:24%;
+  height:48%;
+  background:#d7d7cd;
+  border:4px solid #77736a;
+}
+
+
+/* 침실 */
+
+.room-bedroom{
+  background:
+    linear-gradient(
+      #b8cbe0 0 58%,
+      #b99676 58% 100%
+    );
+}
+
+.bed{
+  position:absolute;
+  left:8%;
+  bottom:15%;
+  width:58%;
+  height:28%;
+  background:#d5b6a3;
+  border:4px solid #715849;
+}
+
+.bed::before{
+  content:"";
+  position:absolute;
+  left:5%;
+  right:5%;
+  top:5%;
+  height:52%;
+  background:#f0e2d2;
+}
+
+.lamp{
+  position:absolute;
+  right:15%;
+  top:18%;
+  width:13%;
+  height:25%;
+  background:#f0d890;
+  border:4px solid #80664c;
+}
+
+
+/* 욕실 */
+
+.room-bathroom{
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #cce5e5 0 28px,
+      #b8d8d8 28px 30px
+    );
+}
+
+.bathtub{
+  position:absolute;
+  left:10%;
+  bottom:17%;
+  width:62%;
+  height:28%;
+  background:#f1f2ea;
+  border:5px solid #6d8886;
+  border-radius:20px;
+}
+
+.toilet{
+  position:absolute;
+  right:9%;
+  bottom:17%;
+  width:20%;
+  height:23%;
+  background:#f0eee7;
+  border:4px solid #6d8886;
+  border-radius:50% 50% 30% 30%;
+}
+
+
+/* 놀이터 */
+
+.room-playground{
+  background:
+    linear-gradient(
+      #a9d4ed 0 57%,
+      #9dc478 57% 100%
+    );
+}
+
+.slide{
+  position:absolute;
+  left:13%;
+  bottom:16%;
+  width:24%;
+  height:46%;
+  border-left:10px solid #e48467;
+  border-bottom:10px solid #e48467;
+  transform:skewY(15deg);
+}
+
+.swing{
+  position:absolute;
+  right:17%;
+  top:18%;
+  width:25%;
+  height:38%;
+  border-left:5px solid #75593e;
+  border-right:5px solid #75593e;
+}
+
+.swing::after{
+  content:"";
+  position:absolute;
+  left:20%;
+  right:20%;
+  bottom:5%;
+  height:5px;
+  background:#75593e;
+}
+
+
+/* ==================================================
+   픽셀 감자
+================================================== */
+
+.pixel-potato{
+  position:absolute;
+  width:32px;
+  height:32px;
+  z-index:10;
+  touch-action:none;
+  cursor:grab;
+  transition:transform .15s;
+}
+
+.pixel-potato.dragging{
+  cursor:grabbing;
+  transform:scale(1.15);
+}
+
+.pixel-potato img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  image-rendering:pixelated;
+  pointer-events:none;
+}
+
+.pixel-potato.jumping{
+  animation:
+    pixelJump .5s ease;
+}
+
+@keyframes pixelJump{
+  0%{
+    transform:translateY(0);
   }
-  25%{
-    transform:rotate(-10deg);
+  50%{
+    transform:translateY(-20px) rotate(8deg);
   }
-  75%{
-    transform:rotate(10deg);
+  100%{
+    transform:translateY(0);
+  }
+}
+
+.pixel-emotion{
+  position:absolute;
+  pointer-events:none;
+  z-index:30;
+  font-size:20px;
+  animation:
+    emotionUp 1s ease forwards;
+}
+
+@keyframes emotionUp{
+  0%{
+    opacity:1;
+    transform:translateY(0);
+  }
+  100%{
+    opacity:0;
+    transform:translateY(-35px);
   }
 }
 
 
 /* ==================================================
-   작은 화면
+   다마고치 조작
 ================================================== */
 
-@media(max-height:650px){
+.room-controls{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+
+.room-controls button{
+  min-height:50px;
+  border-radius:13px;
+  background:#fff8ea;
+  border:2px solid #dfc8a4;
+  color:#60452e;
+  font-size:13px;
+  font-weight:900;
+}
+
+.room-controls button:active{
+  transform:scale(.97);
+}
+
+
+/* ==================================================
+   감자 사전 목록
+================================================== */
+
+.collection-card{
+  margin-top:12px;
+  background:#fff8ea;
+  border:2px solid #dfc8a4;
+  border-radius:17px;
+  padding:13px;
+}
+
+.collection-title{
+  font-size:17px;
+  font-weight:900;
+}
+
+.collection-subtitle{
+  margin-top:3px;
+  font-size:12px;
+  color:#967250;
+}
+
+.collection-count{
+  margin-top:5px;
+  font-size:12px;
+  color:#8c6849;
+}
+
+.potato-list{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  margin-top:10px;
+}
+
+.dictionary-item{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:8px;
+  background:#f5e8d3;
+  border-radius:12px;
+}
+
+.dictionary-item img{
+  width:45px;
+  height:45px;
+  object-fit:contain;
+}
+
+.dictionary-info{
+  flex:1;
+}
+
+.dictionary-name{
+  font-weight:900;
+  font-size:14px;
+}
+
+.dictionary-personality{
+  margin-top:2px;
+  font-size:11px;
+  color:#92704f;
+}
+
+.toggle{
+  width:45px;
+  height:25px;
+  border-radius:20px;
+  background:#c4b9aa;
+  position:relative;
+}
+
+.toggle.on{
+  background:#88a85d;
+}
+
+.toggle::after{
+  content:"";
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:19px;
+  height:19px;
+  border-radius:50%;
+  background:white;
+  transition:.2s;
+}
+
+.toggle.on::after{
+  left:23px;
+}
+
+
+/* ==================================================
+   토스트
+================================================== */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:80px;
+  transform:translateX(-50%) translateY(20px);
+  max-width:85%;
+  padding:10px 15px;
+  background:rgba(55,43,33,.92);
+  color:white;
+  border-radius:13px;
+  font-size:13px;
+  font-weight:700;
+  opacity:0;
+  pointer-events:none;
+  z-index:9999;
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+
+/* ==================================================
+   반응형
+================================================== */
+
+@media(max-width:380px){
 
   .grow-header{
-    height:95px;
+    height:138px;
   }
 
-  .info-img{
-    width:58px;
-    height:58px;
+  .header-potato-img{
+    width:57px;
+    height:57px;
   }
 
-  .grow-actions{
-    padding:5px;
+  .grow-main{
+    min-height:390px;
   }
 
-  .grow-action{
-    min-height:45px;
-  }
-
-  .bottom-menu{
-    height:48px;
-  }
-
-  .collection{
-    max-height:105px;
+  .main-potato-img{
+    width:150px;
+    height:150px;
   }
 
 }
@@ -1139,29 +1117,29 @@ button{
 
 <body>
 
+<div id="app">
+
 
 <!-- ==================================================
      시작
 ================================================== -->
 
-<section
-  id="startScreen"
-  class="screen active">
+<section id="startScreen" class="screen active">
 
   <div class="start-potato">🥔</div>
 
-  <div class="start-title">
+  <div class="game-title">
     감자키우기
   </div>
 
-  <div class="start-sub">
+  <div class="game-subtitle">
     나만의 감자를 키워보세요
   </div>
 
   <button
     class="start-button"
     onclick="startGame()">
-    게임 시작
+    🌱 시작하기
   </button>
 
 </section>
@@ -1171,82 +1149,90 @@ button{
      새싹 키우기
 ================================================== -->
 
-<section
-  id="sproutScreen"
-  class="screen">
+<section id="sproutScreen" class="screen">
 
   <div class="sprout-header">
 
-    <h1>
-      🌱 새싹 키우기
-    </h1>
+    <h1>🌱 새싹 키우기</h1>
 
-    <div class="growth-box">
+    <div class="sprout-day">
+      감자가 태어날 준비를 하고 있어요
+    </div>
 
-      <div class="growth-label">
-        <span id="growthStage">
-          싹
-        </span>
+  </div>
 
-        <span>
-          <span id="growthPercent">0</span>%
-        </span>
+
+  <div class="sprout-scroll">
+
+    <div class="growth-card">
+
+      <div
+        id="growthStage"
+        class="growth-stage">
+        싹
       </div>
 
-      <div class="progress">
+      <div class="sprout-box">
+
+        <div
+          id="sprout"
+          class="sprout small">
+          🌱
+        </div>
+
+      </div>
+
+      <div
+        id="growthPercent"
+        class="growth-percent">
+        0%
+      </div>
+
+      <div class="progress-bar">
+
         <div
           id="growthFill"
           class="progress-fill">
         </div>
+
+      </div>
+
+      <div
+        id="growthMessage"
+        class="growth-message">
+        감자가 태어날 준비를 하고 있어요.
       </div>
 
     </div>
 
-  </div>
 
+    <div class="sprout-actions">
 
-  <div class="sprout-area">
+      <button
+        class="action-button"
+        onclick="growBy(8,'🌱','비료를 듬뿍 줬어요!')">
+        🌱<br>비료 주기
+      </button>
 
-    <div
-      id="sproutPot"
-      class="sprout-pot">
-      🌱
+      <button
+        class="action-button"
+        onclick="growBy(8,'💧','물을 촉촉하게 줬어요!')">
+        💧<br>물 주기
+      </button>
+
+      <button
+        class="action-button"
+        onclick="growBy(7,'☀️','햇빛을 쬐게 해줬어요!')">
+        ☀️<br>햇빛 쬐기
+      </button>
+
+      <button
+        class="action-button"
+        onclick="growBy(6,'💕','따뜻하게 응원했어요!')">
+        💕<br>응원하기
+      </button>
+
     </div>
-
-    <div
-      id="sproutStage"
-      class="sprout-stage">
-      싹
-    </div>
-
-  </div>
-
-
-  <div class="growth-actions">
-
-    <button
-      class="growth-action"
-      onclick="growthAction(10)">
-      🌱 비료 주기
-    </button>
-
-    <button
-      class="growth-action"
-      onclick="growthAction(8)">
-      💧 물 주기
-    </button>
-
-    <button
-      class="growth-action"
-      onclick="growthAction(7)">
-      ☀️ 햇빛 쬐기
-    </button>
-
-    <button
-      class="growth-action"
-      onclick="growthAction(5)">
-      💕 응원하기
-    </button>
 
   </div>
 
@@ -1254,194 +1240,246 @@ button{
 
 
 <!-- ==================================================
-     부화 오버레이
-================================================== -->
-
-<div
-  id="hatchOverlay"
-  class="hatch-overlay">
-
-  <div class="hatch-egg">
-    🥔
-  </div>
-
-  <div class="hatch-text">
-    감자가 태어나고 있어요!
-  </div>
-
-</div>
-
-
-<!-- ==================================================
      감자 키우기
 ================================================== -->
 
-<section
-  id="growScreen"
-  class="screen">
+<section id="growScreen" class="screen">
+
+
+  <!-- 고정 헤더 -->
 
   <div class="grow-header">
 
-    <div>
+    <div class="grow-header-top">
 
       <div class="grow-title">
-        나의 감자
+        🥔 나의 감자
       </div>
 
-      <div class="day">
-        <span id="dayText">
-          1
-        </span>일차
+      <div
+        id="growDay"
+        class="grow-day">
+        1일차
       </div>
 
-      <div class="potato-info">
+    </div>
+
+
+    <div class="potato-info">
+
+      <img
+        id="headerPotatoImage"
+        class="header-potato-img"
+        src=""
+        alt="감자">
+
+      <div class="header-info">
+
+        <div
+          id="potatoMessage"
+          class="message-box">
+          감자가 태어났어요!
+        </div>
+
+        <div
+          id="potatoName"
+          class="potato-name">
+          감자
+        </div>
+
+        <div
+          id="potatoPersonality"
+          class="potato-personality">
+          성격
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- 여기만 스크롤 -->
+
+  <div class="grow-scroll">
+
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <div class="stat-name">
+          🍖 배고픔
+        </div>
+
+        <div
+          id="hungerValue"
+          class="stat-value">
+          100
+        </div>
+
+        <div class="stat-bar">
+          <div
+            id="hungerFill"
+            class="stat-fill">
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-name">
+          💧 수분
+        </div>
+
+        <div
+          id="waterValue"
+          class="stat-value">
+          100
+        </div>
+
+        <div class="stat-bar">
+          <div
+            id="waterFill"
+            class="stat-fill">
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-name">
+          ❤️ 사랑
+        </div>
+
+        <div
+          id="loveValue"
+          class="stat-value">
+          50
+        </div>
+
+        <div class="stat-bar">
+          <div
+            id="loveFill"
+            class="stat-fill">
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-name">
+          ⚡ 체력
+        </div>
+
+        <div
+          id="energyValue"
+          class="stat-value">
+          100
+        </div>
+
+        <div class="stat-bar">
+          <div
+            id="energyFill"
+            class="stat-fill">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="grow-main">
+
+      <div class="grow-sky">
+        ☀️
+      </div>
+
+      <div class="grow-ground"></div>
+
+      <div class="grow-potato-wrap">
+
+        <div
+          id="growEmotion"
+          class="grow-emotion">
+        </div>
 
         <img
-          id="infoImg"
-          class="info-img"
-          src="Potato1.Png"
-          alt="감자">
+          id="mainPotatoImage"
+          class="main-potato-img"
+          src=""
+          alt="감자"
+          onclick="petPotato()">
 
-        <div class="message-box">
-
-          <div
-            id="message"
-            class="message">
-            감자가 태어났어요! 🥔
-          </div>
-
-          <div
-            id="potatoName"
-            class="potato-name">
-            꾼감자
-          </div>
-
-          <div
-            id="personality"
-            class="personality">
-            모두를 좋아해요
-          </div>
-
+        <div
+          id="growMessage"
+          class="grow-message">
+          감자를 터치해보세요!
         </div>
 
       </div>
+
+    </div>
+
+
+    <div class="grow-actions">
+
+      <button
+        class="action-button"
+        onclick="feedPotato()">
+        🍖 먹이 주기
+      </button>
+
+      <button
+        class="action-button"
+        onclick="waterPotato()">
+        💧 물 주기
+      </button>
+
+      <button
+        class="action-button"
+        onclick="petPotato()">
+        ❤️ 쓰다듬기
+      </button>
+
+      <button
+        class="action-button"
+        onclick="walkPotato()">
+        🏃 산책하기
+      </button>
+
+      <button
+        class="action-button harvest"
+        onclick="harvestPotato()">
+        🥔 수확하기
+      </button>
 
     </div>
 
   </div>
 
 
-  <div class="stats">
-
-    <div class="stat">
-      🍖 배고픔
-      <div class="stat-bar">
-        <div
-          id="hungerBar"
-          class="stat-fill">
-        </div>
-      </div>
-    </div>
-
-    <div class="stat">
-      💧 수분
-      <div class="stat-bar">
-        <div
-          id="waterBar"
-          class="stat-fill">
-        </div>
-      </div>
-    </div>
-
-    <div class="stat">
-      ❤️ 사랑
-      <div class="stat-bar">
-        <div
-          id="loveBar"
-          class="stat-fill">
-        </div>
-      </div>
-    </div>
-
-    <div class="stat">
-      ⚡ 체력
-      <div class="stat-bar">
-        <div
-          id="energyBar"
-          class="stat-fill">
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-
-  <div
-    id="growMain"
-    class="grow-main"
-    onclick="petMainPotato()">
-
-    <img
-      id="mainPotato"
-      class="main-potato"
-      src="Potato1.Png"
-      alt="나의 감자">
-
-  </div>
-
-
-  <div class="grow-actions">
-
-    <button
-      class="grow-action"
-      onclick="feedPotato()">
-      🍖 먹이 주기
-    </button>
-
-    <button
-      class="grow-action"
-      onclick="waterPotato()">
-      💧 물 주기
-    </button>
-
-    <button
-      class="grow-action"
-      onclick="petPotato()">
-      ❤️ 쓰다듬기
-    </button>
-
-    <button
-      class="grow-action"
-      onclick="walkPotato()">
-      🏃 산책하기
-    </button>
-
-    <button
-      class="grow-action"
-      onclick="harvestPotato()">
-      🥔 수확하기
-    </button>
-
-    <button
-      class="grow-action"
-      onclick="showDictionary()">
-      📖 감자사전
-    </button>
-
-  </div>
-
+  <!-- 고정 하단 메뉴 -->
 
   <div class="bottom-menu">
 
     <button
       class="active"
-      onclick="showGrow()">
-      🏠 키우기
+      onclick="showGrowScreen()">
+      🏠<br>키우기
     </button>
 
     <button
       onclick="showDictionary()">
-      📖 감자사전
+      📖<br>감자사전
     </button>
 
   </div>
@@ -1453,235 +1491,132 @@ button{
      감자사전
 ================================================== -->
 
-<section
-  id="dictionaryScreen"
-  class="screen">
+<section id="dictionaryScreen" class="screen">
+
 
   <div class="dictionary-header">
+
+    <button
+      class="back-button"
+      onclick="showGrowScreen()">
+      ←
+    </button>
 
     <div class="dictionary-title">
       📖 감자사전
     </div>
 
-    <button
-      class="back-button"
-      onclick="showGrow()">
-      키우기로
-    </button>
+    <div
+      id="dictionaryDay"
+      class="dictionary-day">
+      1일차
+    </div>
 
   </div>
 
 
-  <div class="dictionary-room">
+  <div class="dictionary-scroll">
+
 
     <div class="room-tabs">
 
       <button
         class="room-tab active"
-        data-room="living"
-        onclick="changeRoom('living',this)">
-        🛋️ 거실
+        onclick="changeRoom('living')">
+        🛋 거실
       </button>
 
       <button
         class="room-tab"
-        data-room="kitchen"
-        onclick="changeRoom('kitchen',this)">
+        onclick="changeRoom('kitchen')">
         🍳 주방
       </button>
 
       <button
         class="room-tab"
-        data-room="bedroom"
-        onclick="changeRoom('bedroom',this)">
-        🛏️ 침실
+        onclick="changeRoom('bedroom')">
+        🛏 침실
       </button>
 
       <button
         class="room-tab"
-        data-room="bathroom"
-        onclick="changeRoom('bathroom',this)">
+        onclick="changeRoom('bathroom')">
         🛁 욕실
       </button>
 
       <button
         class="room-tab"
-        data-room="playground"
-        onclick="changeRoom('playground',this)">
+        onclick="changeRoom('playground')">
         🛝 놀이터
       </button>
 
     </div>
 
 
-    <div class="tama-frame">
+    <div class="tamagotchi-frame">
 
       <div
-        id="tamaScreen"
-        class="tama-screen">
-
-        <div
-          id="roomLiving"
-          class="room-living">
-
-          <div class="window"></div>
-          <div class="sun"></div>
-
-          <div class="sofa"></div>
-
-          <div class="tv">
-            <div class="tv-screen"></div>
-            <div class="tv-stand"></div>
-          </div>
-
-        </div>
-
-
-        <div
-          id="roomKitchen"
-          class="room-kitchen"
-          style="display:none">
-
-          <div class="kitchen-counter">
-
-            <div class="kitchen-sink"></div>
-
-          </div>
-
-          <div class="kitchen-fridge"></div>
-
-          <div class="kitchen-table"></div>
-
-        </div>
-
-
-        <div
-          id="roomBedroom"
-          class="room-bedroom"
-          style="display:none">
-
-          <div class="bed">
-            <div class="pillow"></div>
-          </div>
-
-          <div class="lamp"></div>
-
-        </div>
-
-
-        <div
-          id="roomBathroom"
-          class="room-bathroom"
-          style="display:none">
-
-          <div class="bath"></div>
-          <div class="mirror"></div>
-          <div class="sink"></div>
-
-        </div>
-
-
-        <div
-          id="roomPlayground"
-          class="room-playground"
-          style="display:none">
-
-          <div class="cloud"></div>
-          <div class="swing"></div>
-          <div class="slide"></div>
-
-        </div>
-
-
-        <div
-          id="tamaPotatoes">
-        </div>
-
-
-        <div
-          class="pixel-grid">
-        </div>
-
-
-        <div
-          id="sleepOverlay"
-          class="sleep-overlay">
-
-          <div class="sleep-stars">
-            ✨ 💤 ✨
-          </div>
-
-          <div>
-            감자들이 자고 있어요
-          </div>
-
-        </div>
-
+        id="room"
+        class="tamagotchi-screen room-living">
       </div>
 
     </div>
 
 
-    <div class="tama-controls">
+    <div class="room-controls">
 
       <button
-        class="tama-control"
-        onclick="tamaPet()">
+        onclick="petAllPotatoes()">
         ❤️ 쓰다듬기
       </button>
 
       <button
-        class="tama-control"
-        onclick="tamaSnack()">
+        onclick="feedAllPotatoes()">
         🍬 간식주기
       </button>
 
       <button
-        class="tama-control"
-        onclick="tamaSleep()">
-        💤 잠자기
+        onclick="sleepAllPotatoes()">
+        😴 잠자기
       </button>
 
     </div>
 
 
-    <div class="collection">
+    <div class="collection-card">
 
       <div class="collection-title">
-        감자 사전
+        🥔 감자 사전
       </div>
 
-      <div class="collection-count">
-        지금까지 만난 감자들이에요 ·
-        발견한 감자
-        <span id="collectionCount">
-          0
-        </span>/5
+      <div class="collection-subtitle">
+        지금까지 만난 감자들이에요
       </div>
 
-      <div id="collectionList"></div>
+      <div
+        id="collectionCount"
+        class="collection-count">
+        발견한 감자 0/5
+      </div>
+
+      <div
+        id="potatoList"
+        class="potato-list">
+      </div>
 
     </div>
 
   </div>
 
-
-  <div class="bottom-menu">
-
-    <button
-      onclick="showGrow()">
-      🏠 키우기
-    </button>
-
-    <button
-      class="active"
-      onclick="showDictionary()">
-      📖 감자사전
-    </button>
-
-  </div>
-
 </section>
+
+
+<div
+  id="toast"
+  class="toast">
+</div>
+
+</div>
 
 
 <script>
@@ -1690,55 +1625,70 @@ button{
    감자 데이터
 ================================================== */
 
-const POTATO_DATA = {
+const POTATOES = {
 
-  Potato1:{
+  potato1:{
+    id:"potato1",
     name:"꾼감자",
-    personality:"모두를 좋아하고 사랑을 표현해요",
-    lines:[
+    image:"Potato1.Png",
+    personality:"모두를 좋아하고 사랑을 표현하는 감자",
+    messages:[
+      "다 좋아! ❤️",
       "너도 좋아! ❤️",
-      "우리 친하게 지내자! 💕",
-      "감자는 사랑이야! ❤️"
+      "감자 친구 최고! 💕",
+      "사랑해! ❤️❤️"
     ]
   },
 
-  Potato2:{
+  potato2:{
+    id:"potato2",
     name:"대장감자",
-    personality:"친구들을 이끄는 리더예요",
-    lines:[
-      "다들 내 뒤를 따라와!",
-      "저능감자는 내가 지켜줄게.",
-      "감자들은 내가 책임진다!"
+    image:"Potato2.Png",
+    personality:"친구들을 이끄는 리더 감자",
+    messages:[
+      "다들 따라와!",
+      "내가 대장이야!",
+      "저능감자는 내가 챙길게.",
+      "모두 사이좋게 지내!"
     ]
   },
 
-  Potato3:{
+  potato3:{
+    id:"potato3",
     name:"독감자",
-    personality:"혼자 있는 걸 좋아하고 조금 위험해요",
-    lines:[
-      "...건드리지 마.",
+    image:"Potato3.Png",
+    personality:"혼자 있는 걸 좋아하는 까칠한 감자",
+    messages:[
+      "가까이 오지 마.",
       "혼자 있고 싶어.",
-      "다가오지 마."
+      "...",
+      "왜 건드려."
     ]
   },
 
-  Potato4:{
+  potato4:{
+    id:"potato4",
     name:"폭력감자",
-    personality:"싸움을 좋아하지만 독감자에게는 다정해요",
-    lines:[
+    image:"Potato4.Png",
+    personality:"툭하면 싸우지만 독감자에게는 친절한 감자",
+    messages:[
       "한판 붙자!",
-      "누가 내 상대야?",
-      "독감자는 건드리지 마. ❤️"
+      "누가 내 상대야!",
+      "독감자야 ❤️",
+      "오늘은 봐준다."
     ]
   },
 
-  Potato5:{
+  potato5:{
+    id:"potato5",
     name:"저능감자",
-    personality:"순하고 모두에게 사랑받아요",
-    lines:[
-      "우와아!",
-      "감자다!",
-      "헤헤 좋아!"
+    image:"Potato5.Png",
+    personality:"조금 느리지만 모두에게 사랑받는 감자",
+    messages:[
+      "어...?",
+      "뭐였지?",
+      "배고파...",
+      "헤헤..."
     ]
   }
 
@@ -1749,76 +1699,85 @@ const POTATO_DATA = {
    상태
 ================================================== */
 
-let growth = 0;
+let state = {
 
-let currentPotato = null;
+  growth:0,
 
-let currentRoom = "living";
+  day:1,
 
-let day = 1;
+  potato:null,
 
-let stats = {
-  hunger:100,
-  water:100,
-  love:100,
-  energy:100
+  stats:{
+    hunger:100,
+    water:100,
+    love:50,
+    energy:100
+  },
+
+  collection:[],
+
+  activePotatoes:{},
+
+  room:"living"
+
 };
-
-let collection =
-  JSON.parse(
-    localStorage.getItem(
-      "potatoCollection"
-    ) || "[]"
-  );
-
-let activePotatoes =
-  JSON.parse(
-    localStorage.getItem(
-      "activePotatoes"
-    ) || "[]"
-  );
-
-
-let roomPotatoes = [];
-
-let followLeader = false;
-
-let draggedPotato = null;
-
-let dragOffsetX = 0;
-let dragOffsetY = 0;
-
-let sleepTimer = null;
 
 
 /* ==================================================
-   이미지
+   저장
 ================================================== */
 
-function potatoImage(id){
+function saveGame(){
 
-  return `${id}.Png`;
+  localStorage.setItem(
+    "potatoGame",
+    JSON.stringify(state)
+  );
 
 }
 
 
 /* ==================================================
-   시작
+   불러오기
 ================================================== */
 
-function startGame(){
+function loadGame(){
 
-  document
-    .getElementById("startScreen")
-    .classList.remove("active");
+  const saved =
+    localStorage.getItem("potatoGame");
 
-  document
-    .getElementById("sproutScreen")
-    .classList.add("active");
+  if(!saved){
+    return;
+  }
 
-  growth = 0;
+  try{
 
-  updateGrowth();
+    const parsed =
+      JSON.parse(saved);
+
+    state = {
+      ...state,
+      ...parsed
+    };
+
+    if(!state.collection){
+      state.collection=[];
+    }
+
+    if(!state.activePotatoes){
+      state.activePotatoes={};
+    }
+
+    if(state.potato){
+      showGrowScreen();
+      updateGrowScreen();
+    }
+
+  }catch(e){
+
+    console.log("저장 데이터 오류");
+
+  }
 
 }
 
@@ -1843,447 +1802,302 @@ function showScreen(id){
 
 
 /* ==================================================
-   성장
+   시작
 ================================================== */
 
-function growthAction(amount){
+function startGame(){
 
-  if(growth >= 100){
-    return;
-  }
+  state.growth=0;
+  state.day=1;
+  state.potato=null;
 
-  growth += amount;
+  showScreen("sproutScreen");
 
-  if(growth > 100){
-    growth = 100;
-  }
+  updateSprout();
 
-  updateGrowth();
-
-  const sprout =
-    document.getElementById(
-      "sproutPot"
-    );
-
-  sprout.classList.remove("grow");
-
-  void sprout.offsetWidth;
-
-  sprout.classList.add("grow");
-
-  if(growth >= 100){
-
-    setTimeout(
-      hatchPotato,
-      600
-    );
-
-  }
-
-}
-
-
-function updateGrowth(){
-
-  document
-    .getElementById(
-      "growthPercent"
-    )
-    .textContent = growth;
-
-  document
-    .getElementById(
-      "growthFill"
-    )
-    .style.width =
-      growth + "%";
-
-
-  let stage = "싹";
-  let emoji = "🌱";
-
-  if(growth >= 25){
-
-    stage = "이파리";
-    emoji = "🌿";
-
-  }
-
-  if(growth >= 50){
-
-    stage = "나무";
-    emoji = "🌳";
-
-  }
-
-  if(growth >= 75){
-
-    stage = "감자";
-    emoji = "🥔";
-
-  }
-
-
-  document
-    .getElementById(
-      "growthStage"
-    )
-    .textContent = stage;
-
-  document
-    .getElementById(
-      "sproutStage"
-    )
-    .textContent = stage;
-
-  document
-    .getElementById(
-      "sproutPot"
-    )
-    .textContent = emoji;
+  saveGame();
 
 }
 
 
 /* ==================================================
-   감자 부화
+   새싹 성장
+================================================== */
+
+function growBy(amount,emoji,message){
+
+  if(state.growth>=100){
+    return;
+  }
+
+  state.growth =
+    Math.min(
+      100,
+      state.growth + amount
+    );
+
+  updateSprout();
+
+  showToast(
+    emoji + " " + message
+  );
+
+  if(state.growth>=100){
+
+    setTimeout(
+      hatchPotato,
+      700
+    );
+
+  }
+
+  saveGame();
+
+}
+
+
+/* ==================================================
+   새싹 화면
+================================================== */
+
+function updateSprout(){
+
+  const growth =
+    state.growth;
+
+  const percent =
+    document.getElementById(
+      "growthPercent"
+    );
+
+  const fill =
+    document.getElementById(
+      "growthFill"
+    );
+
+  const sprout =
+    document.getElementById(
+      "sprout"
+    );
+
+  const stage =
+    document.getElementById(
+      "growthStage"
+    );
+
+  const message =
+    document.getElementById(
+      "growthMessage"
+    );
+
+
+  percent.textContent =
+    growth + "%";
+
+  fill.style.width =
+    growth + "%";
+
+
+  if(growth<25){
+
+    stage.textContent="싹";
+
+    sprout.textContent="🌱";
+
+    sprout.className=
+      "sprout small";
+
+    message.textContent=
+      "작은 싹이 올라왔어요!";
+
+  }
+
+  else if(growth<50){
+
+    stage.textContent="이파리";
+
+    sprout.textContent="🌿";
+
+    sprout.className=
+      "sprout medium";
+
+    message.textContent=
+      "이파리가 자라고 있어요!";
+
+  }
+
+  else if(growth<75){
+
+    stage.textContent="나무";
+
+    sprout.textContent="🌳";
+
+    sprout.className=
+      "sprout large";
+
+    message.textContent=
+      "무럭무럭 자라고 있어요!";
+
+  }
+
+  else if(growth<100){
+
+    stage.textContent="감자";
+
+    sprout.textContent="🥔";
+
+    sprout.className=
+      "sprout large";
+
+    message.textContent=
+      "감자가 태어나기 직전이에요!";
+
+  }
+
+  else{
+
+    stage.textContent="감자 탄생!";
+
+    sprout.textContent="🥔";
+
+    sprout.className=
+      "sprout large";
+
+    message.textContent=
+      "감자가 태어났어요!";
+
+  }
+
+}
+
+
+/* ==================================================
+   감자 탄생
 ================================================== */
 
 function hatchPotato(){
 
-  const ids = Object.keys(
-    POTATO_DATA
-  );
+  if(state.potato){
+    return;
+  }
 
-  const id =
-    ids[
+  const keys =
+    Object.keys(POTATOES);
+
+  const randomKey =
+    keys[
       Math.floor(
-        Math.random() * ids.length
+        Math.random()*keys.length
       )
     ];
 
-
-  currentPotato = {
-
-    id:id,
-
-    name:
-      POTATO_DATA[id].name,
-
-    personality:
-      POTATO_DATA[id].personality,
-
-    lines:
-      [...POTATO_DATA[id].lines],
-
-    birthDay:day
-
-  };
-
-
-  const overlay =
-    document.getElementById(
-      "hatchOverlay"
+  state.potato =
+    JSON.parse(
+      JSON.stringify(
+        POTATOES[randomKey]
+      )
     );
 
-  overlay.classList.add("show");
+  state.stats={
+    hunger:100,
+    water:100,
+    love:50,
+    energy:100
+  };
 
+  /*
+     수확한 감자만 사전에 등록.
+     탄생 즉시 등록하지 않는다.
+  */
+
+  showToast(
+    "🥔 감자가 태어났어요!"
+  );
 
   setTimeout(()=>{
 
-    overlay.classList.remove("show");
+    showGrowScreen();
+    updateGrowScreen();
 
-    showScreen("growScreen");
+  },900);
 
-    renderCurrentPotato();
-
-    updateStats();
-
-    showMessage(
-      `${currentPotato.name}이(가) 태어났어요! 🥔`
-    );
-
-  },1200);
+  saveGame();
 
 }
 
 
 /* ==================================================
-   현재 감자 표시
+   감자 화면
 ================================================== */
 
-function renderCurrentPotato(){
+function showGrowScreen(){
 
-  if(!currentPotato){
+  if(!state.potato){
+
+    showScreen("sproutScreen");
+
+    return;
+
+  }
+
+  showScreen("growScreen");
+
+  updateGrowScreen();
+
+}
+
+
+/* ==================================================
+   감자 정보 업데이트
+================================================== */
+
+function updateGrowScreen(){
+
+  if(!state.potato){
     return;
   }
 
-  const src =
-    potatoImage(
-      currentPotato.id
-    );
+  const p =
+    state.potato;
 
 
   document
-    .getElementById("mainPotato")
-    .src = src;
+    .getElementById("growDay")
+    .textContent =
+      state.day + "일차";
+
 
   document
-    .getElementById("infoImg")
-    .src = src;
+    .getElementById("dictionaryDay")
+    .textContent =
+      state.day + "일차";
+
 
   document
     .getElementById("potatoName")
     .textContent =
-      currentPotato.name;
+      p.name;
+
 
   document
-    .getElementById("personality")
+    .getElementById("potatoPersonality")
     .textContent =
-      currentPotato.personality;
+      p.personality;
 
-}
-
-
-/* ==================================================
-   메시지
-================================================== */
-
-function showMessage(text){
 
   document
-    .getElementById("message")
-    .textContent = text;
-
-}
-
-
-function randomLine(){
-
-  if(!currentPotato){
-    return "";
-  }
-
-  const lines =
-    currentPotato.lines;
-
-  return lines[
-    Math.floor(
-      Math.random() * lines.length
-    )
-  ];
-
-}
+    .getElementById("headerPotatoImage")
+    .src =
+      p.image;
 
 
-/* ==================================================
-   감자 행동
-================================================== */
+  document
+    .getElementById("mainPotatoImage")
+    .src =
+      p.image;
 
-function feedPotato(){
-
-  stats.hunger =
-    Math.min(
-      100,
-      stats.hunger + 20
-    );
-
-  stats.energy =
-    Math.min(
-      100,
-      stats.energy + 5
-    );
-
-  showMessage(
-    "냠냠! 맛있어! 🍖"
-  );
-
-  createEffect(
-    "🍖",
-    document.getElementById(
-      "growMain"
-    )
-  );
 
   updateStats();
-
-}
-
-
-function waterPotato(){
-
-  stats.water =
-    Math.min(
-      100,
-      stats.water + 20
-    );
-
-  showMessage(
-    "꿀꺽꿀꺽! 💧"
-  );
-
-  createEffect(
-    "💧",
-    document.getElementById(
-      "growMain"
-    )
-  );
-
-  updateStats();
-
-}
-
-
-function petPotato(){
-
-  stats.love =
-    Math.min(
-      100,
-      stats.love + 12
-    );
-
-  stats.energy =
-    Math.max(
-      0,
-      stats.energy - 2
-    );
-
-  const potato =
-    document.getElementById(
-      "mainPotato"
-    );
-
-  potato.classList.remove("jump");
-
-  void potato.offsetWidth;
-
-  potato.classList.add("jump");
-
-  showMessage(
-    randomLine()
-  );
-
-  createEffect(
-    "💕",
-    document.getElementById(
-      "growMain"
-    )
-  );
-
-  updateStats();
-
-}
-
-
-function petMainPotato(){
-
-  petPotato();
-
-}
-
-
-function walkPotato(){
-
-  stats.energy =
-    Math.max(
-      0,
-      stats.energy - 12
-    );
-
-  stats.love =
-    Math.min(
-      100,
-      stats.love + 8
-    );
-
-  showMessage(
-    "산책 가자! 🏃🥔"
-  );
-
-  const potato =
-    document.getElementById(
-      "mainPotato"
-    );
-
-  potato.classList.remove("jump");
-
-  void potato.offsetWidth;
-
-  potato.classList.add("jump");
-
-  createEffect(
-    "🏃",
-    document.getElementById(
-      "growMain"
-    )
-  );
-
-  updateStats();
-
-}
-
-
-/* ==================================================
-   수확
-================================================== */
-
-function harvestPotato(){
-
-  if(!currentPotato){
-    return;
-  }
-
-
-  const id =
-    currentPotato.id;
-
-
-  if(
-    !collection.includes(id)
-  ){
-
-    collection.push(id);
-
-    localStorage.setItem(
-      "potatoCollection",
-      JSON.stringify(collection)
-    );
-
-  }
-
-
-  if(
-    !activePotatoes.includes(id)
-  ){
-
-    activePotatoes.push(id);
-
-    localStorage.setItem(
-      "activePotatoes",
-      JSON.stringify(activePotatoes)
-    );
-
-  }
-
-
-  showMessage(
-    `${currentPotato.name}을(를) 수확했어요! 🥔`
-  );
-
-
-  setTimeout(()=>{
-
-    currentPotato = null;
-
-    growth = 0;
-
-    updateGrowth();
-
-    showScreen(
-      "sproutScreen"
-    );
-
-  },700);
 
 }
 
@@ -2294,219 +2108,450 @@ function harvestPotato(){
 
 function updateStats(){
 
-  document
-    .getElementById("hungerBar")
-    .style.width =
-      stats.hunger + "%";
+  const stats =
+    state.stats;
+
+  setStat(
+    "hunger",
+    stats.hunger
+  );
+
+  setStat(
+    "water",
+    stats.water
+  );
+
+  setStat(
+    "love",
+    stats.love
+  );
+
+  setStat(
+    "energy",
+    stats.energy
+  );
+
+}
+
+
+function setStat(name,value){
+
+  value =
+    Math.max(
+      0,
+      Math.min(100,value)
+    );
 
   document
-    .getElementById("waterBar")
-    .style.width =
-      stats.water + "%";
+    .getElementById(
+      name+"Value"
+    )
+    .textContent =
+      Math.round(value);
 
   document
-    .getElementById("loveBar")
+    .getElementById(
+      name+"Fill"
+    )
     .style.width =
-      stats.love + "%";
-
-  document
-    .getElementById("energyBar")
-    .style.width =
-      stats.energy + "%";
+      value+"%";
 
 }
 
 
 /* ==================================================
-   효과
+   감자 반응
 ================================================== */
 
-function createEffect(
-  emoji,
-  parent
+function getRandomMessage(){
+
+  const list =
+    state.potato.messages;
+
+  return list[
+    Math.floor(
+      Math.random()*list.length
+    )
+  ];
+
+}
+
+
+function showPotatoMessage(
+  emotion,
+  message
 ){
 
-  const effect =
-    document.createElement("div");
+  document
+    .getElementById(
+      "growEmotion"
+    )
+    .textContent =
+      emotion;
 
-  effect.className =
-    "effect";
+  document
+    .getElementById(
+      "growMessage"
+    )
+    .textContent =
+      message;
 
-  effect.textContent =
-    emoji;
-
-  effect.style.left =
-    (45 + Math.random()*10)
-    + "%";
-
-  effect.style.top =
-    "45%";
-
-  parent.appendChild(effect);
-
-  setTimeout(
-    ()=>effect.remove(),
-    1000
-  );
+  document
+    .getElementById(
+      "potatoMessage"
+    )
+    .textContent =
+      message;
 
 }
 
 
 /* ==================================================
-   감자사전 열기
+   먹이
 ================================================== */
 
-function showDictionary(){
+function feedPotato(){
 
-  showScreen(
-    "dictionaryScreen"
+  if(!state.potato){
+    return;
+  }
+
+  state.stats.hunger =
+    Math.min(
+      100,
+      state.stats.hunger+20
+    );
+
+  state.stats.energy =
+    Math.min(
+      100,
+      state.stats.energy+5
+    );
+
+  showPotatoMessage(
+    "😋",
+    "냠냠! 맛있다!"
   );
 
-  renderCollection();
-
-  renderRoom();
+  updateStats();
+  saveGame();
 
 }
 
 
 /* ==================================================
-   키우기 화면
+   물
 ================================================== */
 
-function showGrow(){
+function waterPotato(){
 
-  if(!currentPotato){
+  if(!state.potato){
+    return;
+  }
 
-    showScreen(
-      "sproutScreen"
+  state.stats.water =
+    Math.min(
+      100,
+      state.stats.water+20
+    );
+
+  showPotatoMessage(
+    "💧",
+    "꿀꺽꿀꺽! 시원해!"
+  );
+
+  updateStats();
+  saveGame();
+
+}
+
+
+/* ==================================================
+   쓰다듬기
+================================================== */
+
+function petPotato(){
+
+  if(!state.potato){
+    return;
+  }
+
+  state.stats.love =
+    Math.min(
+      100,
+      state.stats.love+8
+    );
+
+  const img =
+    document.getElementById(
+      "mainPotatoImage"
+    );
+
+  img.classList.remove(
+    "jumping"
+  );
+
+  void img.offsetWidth;
+
+  img.classList.add(
+    "jumping"
+  );
+
+  showPotatoMessage(
+    state.potato.id==="potato3"
+      ? "😑"
+      : "❤️",
+    getRandomMessage()
+  );
+
+  updateStats();
+  saveGame();
+
+}
+
+
+/* ==================================================
+   산책
+================================================== */
+
+function walkPotato(){
+
+  if(!state.potato){
+    return;
+  }
+
+  if(state.stats.energy<10){
+
+    showPotatoMessage(
+      "🥱",
+      "너무 피곤해..."
     );
 
     return;
 
   }
 
-  showScreen(
-    "growScreen"
+  state.stats.energy-=10;
+
+  const img =
+    document.getElementById(
+      "mainPotatoImage"
+    );
+
+  img.classList.add(
+    "walking"
   );
+
+  showPotatoMessage(
+    "🏃",
+    "산책하러 가자!"
+  );
+
+  setTimeout(()=>{
+
+    img.classList.remove(
+      "walking"
+    );
+
+    showPotatoMessage(
+      "😊",
+      "산책 재밌었다!"
+    );
+
+  },3000);
+
+  updateStats();
+  saveGame();
 
 }
 
 
 /* ==================================================
-   사전 목록
+   수확
 ================================================== */
 
-function renderCollection(){
+function harvestPotato(){
 
-  const list =
-    document.getElementById(
-      "collectionList"
-    );
-
-  list.innerHTML = "";
+  if(!state.potato){
+    return;
+  }
 
 
-  document
-    .getElementById(
-      "collectionCount"
-    )
-    .textContent =
-      collection.length;
+  const id =
+    state.potato.id;
 
 
-  collection.forEach(id=>{
+  /*
+     수확할 때만 사전에 등록
+  */
 
-    const data =
-      POTATO_DATA[id];
+  if(
+    !state.collection.includes(id)
+  ){
 
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "collection-item";
-
-
-    const img =
-      document.createElement("img");
-
-    img.src =
-      potatoImage(id);
-
-
-    const name =
-      document.createElement("div");
-
-    name.className =
-      "collection-name";
-
-    name.textContent =
-      data.name;
-
-
-    const toggle =
-      document.createElement("button");
-
-    toggle.className =
-      "toggle " +
-      (
-        activePotatoes.includes(id)
-          ? "on"
-          : ""
-      );
-
-
-    toggle.onclick =
-      (event)=>{
-
-        event.stopPropagation();
-
-        togglePotato(id);
-
-      };
-
-
-    item.appendChild(img);
-    item.appendChild(name);
-    item.appendChild(toggle);
-
-    list.appendChild(item);
-
-  });
-
-}
-
-
-function togglePotato(id){
-
-  const index =
-    activePotatoes.indexOf(id);
-
-
-  if(index >= 0){
-
-    activePotatoes.splice(
-      index,
-      1
-    );
-
-  }else{
-
-    activePotatoes.push(id);
+    state.collection.push(id);
 
   }
 
 
-  localStorage.setItem(
-    "activePotatoes",
-    JSON.stringify(
-      activePotatoes
-    )
+  /*
+     새로 발견한 감자는 자동 ON
+  */
+
+  state.activePotatoes[id]=true;
+
+
+  showToast(
+    "🥔 "+state.potato.name+
+    "을(를) 수확했어요!"
   );
 
 
-  renderCollection();
+  state.potato=null;
+
+  state.growth=0;
+
+  state.day++;
+
+
+  setTimeout(()=>{
+
+    showScreen("sproutScreen");
+
+    updateSprout();
+
+  },700);
+
+
+  saveGame();
+
+}
+
+
+/* ==================================================
+   감자사전
+================================================== */
+
+function showDictionary(){
+
+  if(!state.potato){
+
+    showScreen("sproutScreen");
+
+    return;
+
+  }
+
+  showScreen(
+    "dictionaryScreen"
+  );
+
+  renderDictionary();
 
   renderRoom();
+
+}
+
+
+function renderDictionary(){
+
+  const list =
+    document.getElementById(
+      "potatoList"
+    );
+
+  const count =
+    document.getElementById(
+      "collectionCount"
+    );
+
+
+  count.textContent =
+    "발견한 감자 "+
+    state.collection.length+
+    "/5";
+
+
+  list.innerHTML="";
+
+
+  state.collection
+    .forEach(id=>{
+
+      const p =
+        POTATOES[id];
+
+      if(!p){
+        return;
+      }
+
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+      item.className=
+        "dictionary-item";
+
+
+      item.innerHTML=`
+
+        <img
+          src="${p.image}"
+          alt="${p.name}">
+
+        <div
+          class="dictionary-info">
+
+          <div
+            class="dictionary-name">
+            ${p.name}
+          </div>
+
+          <div
+            class="dictionary-personality">
+            ${p.personality}
+          </div>
+
+        </div>
+
+        <button
+          class="toggle ${
+            state.activePotatoes[id]
+              ? "on"
+              : ""
+          }"
+          onclick="
+            togglePotato(
+              '${id}'
+            )
+          ">
+        </button>
+
+      `;
+
+
+      list.appendChild(item);
+
+    });
+
+}
+
+
+/* ==================================================
+   ON/OFF
+================================================== */
+
+function togglePotato(id){
+
+  state.activePotatoes[id] =
+    !state.activePotatoes[id];
+
+  renderDictionary();
+  renderRoom();
+
+  saveGame();
 
 }
 
@@ -2515,29 +2560,42 @@ function togglePotato(id){
    방 변경
 ================================================== */
 
-function changeRoom(
-  room,
-  button
-){
+function changeRoom(room){
 
-  currentRoom =
-    room;
-
+  state.room=room;
 
   document
     .querySelectorAll(
       ".room-tab"
     )
-    .forEach(tab=>{
-      tab.classList.remove(
+    .forEach(button=>{
+      button.classList.remove(
         "active"
       );
     });
 
 
-  button.classList.add(
-    "active"
-  );
+  const buttons =
+    document.querySelectorAll(
+      ".room-tab"
+    );
+
+
+  const index={
+    living:0,
+    kitchen:1,
+    bedroom:2,
+    bathroom:3,
+    playground:4
+  }[room];
+
+
+  if(buttons[index]){
+    buttons[index]
+      .classList.add(
+        "active"
+      );
+  }
 
 
   renderRoom();
@@ -2549,209 +2607,342 @@ function changeRoom(
    방 렌더링
 ================================================== */
 
+let roomPotatoes=[];
+
 function renderRoom(){
 
-  const rooms = {
-
-    living:
-      "roomLiving",
-
-    kitchen:
-      "roomKitchen",
-
-    bedroom:
-      "roomBedroom",
-
-    bathroom:
-      "roomBathroom",
-
-    playground:
-      "roomPlayground"
-
-  };
-
-
-  Object.entries(rooms)
-    .forEach(([key,id])=>{
-
-      document
-        .getElementById(id)
-        .style.display =
-          key === currentRoom
-            ? "block"
-            : "none";
-
-    });
-
-
-  const container =
+  const room =
     document.getElementById(
-      "tamaPotatoes"
+      "room"
     );
 
-  container.innerHTML = "";
+  if(!room){
+    return;
+  }
 
 
-  roomPotatoes = [];
+  room.className=
+    "tamagotchi-screen room-"+
+    state.room;
 
 
-  activePotatoes.forEach(
-    (id,index)=>{
+  room.innerHTML="";
 
-      createTamaPotato(
+
+  addFurniture(state.room);
+
+
+  roomPotatoes=[];
+
+
+  /*
+     발견했고 ON인 감자만 등장
+  */
+
+  state.collection
+    .filter(id=>
+      state.activePotatoes[id]
+    )
+    .forEach((id,index)=>{
+
+      createRoomPotato(
         id,
         index
       );
 
-    }
-  );
+    });
 
 }
 
 
 /* ==================================================
-   다마고치 감자 생성
+   가구
 ================================================== */
 
-function createTamaPotato(
+function addFurniture(room){
+
+  const el =
+    document.getElementById(
+      "room"
+    );
+
+
+  if(room==="living"){
+
+    const sofa =
+      document.createElement(
+        "div"
+      );
+
+    sofa.className="sofa";
+
+    el.appendChild(sofa);
+
+
+    const tv =
+      document.createElement(
+        "div"
+      );
+
+    tv.className="tv";
+
+    el.appendChild(tv);
+
+  }
+
+
+  if(room==="kitchen"){
+
+    const counter =
+      document.createElement(
+        "div"
+      );
+
+    counter.className=
+      "kitchen-counter";
+
+    el.appendChild(counter);
+
+
+    const fridge =
+      document.createElement(
+        "div"
+      );
+
+    fridge.className=
+      "kitchen-fridge";
+
+    el.appendChild(fridge);
+
+  }
+
+
+  if(room==="bedroom"){
+
+    const bed =
+      document.createElement(
+        "div"
+      );
+
+    bed.className="bed";
+
+    el.appendChild(bed);
+
+
+    const lamp =
+      document.createElement(
+        "div"
+      );
+
+    lamp.className="lamp";
+
+    el.appendChild(lamp);
+
+  }
+
+
+  if(room==="bathroom"){
+
+    const bathtub =
+      document.createElement(
+        "div"
+      );
+
+    bathtub.className=
+      "bathtub";
+
+    el.appendChild(bathtub);
+
+
+    const toilet =
+      document.createElement(
+        "div"
+      );
+
+    toilet.className=
+      "toilet";
+
+    el.appendChild(toilet);
+
+  }
+
+
+  if(room==="playground"){
+
+    const slide =
+      document.createElement(
+        "div"
+      );
+
+    slide.className="slide";
+
+    el.appendChild(slide);
+
+
+    const swing =
+      document.createElement(
+        "div"
+      );
+
+    swing.className="swing";
+
+    el.appendChild(swing);
+
+  }
+
+}
+
+
+/* ==================================================
+   방 감자 생성
+================================================== */
+
+function createRoomPotato(
   id,
   index
 ){
 
+  const room =
+    document.getElementById(
+      "room"
+    );
+
+  const p =
+    POTATOES[id];
+
+
+  const potato =
+    document.createElement(
+      "div"
+    );
+
+  potato.className=
+    "pixel-potato";
+
+  potato.dataset.id=id;
+
+
   const img =
-    document.createElement("img");
+    document.createElement(
+      "img"
+    );
 
-  img.className =
-    "tama-potato";
-
-  img.src =
-    potatoImage(id);
-
-  img.dataset.id =
-    id;
-
-  img.draggable =
-    false;
+  img.src=p.image;
+  img.alt=p.name;
 
 
-  const x =
-    15 +
-    Math.random() * 70;
-
-  const y =
-    35 +
-    Math.random() * 40;
+  potato.appendChild(img);
 
 
-  img.style.left =
-    x + "%";
+  /*
+     초기 위치
+  */
 
-  img.style.top =
-    y + "%";
+  const positions=[
+    [10,65],
+    [45,70],
+    [72,66],
+    [28,48],
+    [63,48]
+  ];
 
 
-  const potato = {
+  const pos =
+    positions[
+      index % positions.length
+    ];
 
-    id:id,
-    element:img,
-    x:x,
-    y:y,
-    stunnedUntil:0
+
+  potato.style.left=
+    pos[0]+"%";
+
+  potato.style.top=
+    pos[1]+"%";
+
+
+  room.appendChild(
+    potato
+  );
+
+
+  const data={
+
+    id,
+
+    element:potato,
+
+    x:pos[0],
+
+    y:pos[1],
+
+    vx:
+      (Math.random()-.5)*0.025,
+
+    vy:
+      (Math.random()-.5)*0.025,
+
+    dragging:false,
+
+    followLeader:false,
+
+    stunned:false
 
   };
 
 
-  roomPotatoes.push(
-    potato
+  roomPotatoes.push(data);
+
+
+  setupPotatoTouch(
+    data
   );
-
-
-  addPotatoTouch(
-    potato
-  );
-
-
-  document
-    .getElementById(
-      "tamaPotatoes"
-    )
-    .appendChild(img);
 
 }
 
 
 /* ==================================================
-   터치 / 드래그
+   감자 터치 / 드래그
 ================================================== */
 
-function addPotatoTouch(
-  potato
+function setupPotatoTouch(
+  data
 ){
 
   const el =
-    potato.element;
+    data.element;
 
 
-  let startX = 0;
-  let startY = 0;
-  let dragging = false;
-  let longPress = null;
+  let timer=null;
+  let dragging=false;
+  let startX=0;
+  let startY=0;
 
 
   el.addEventListener(
     "pointerdown",
-    event=>{
+    e=>{
 
-      event.preventDefault();
+      e.preventDefault();
 
-      startX =
-        event.clientX;
-
-      startY =
-        event.clientY;
+      startX=e.clientX;
+      startY=e.clientY;
 
 
-      const rect =
-        el.getBoundingClientRect();
+      timer=setTimeout(()=>{
 
+        dragging=true;
 
-      dragOffsetX =
-        event.clientX -
-        rect.left;
+        data.dragging=true;
 
-      dragOffsetY =
-        event.clientY -
-        rect.top;
+        el.classList.add(
+          "dragging"
+        );
 
+        el.setPointerCapture(
+          e.pointerId
+        );
 
-      longPress =
-        setTimeout(()=>{
-
-          dragging = true;
-
-          draggedPotato =
-            potato;
-
-          el.setPointerCapture(
-            event.pointerId
-          );
-
-
-          if(
-            potato.id ===
-            "Potato2"
-          ){
-
-            followLeader =
-              true;
-
-            showRoomMessage(
-              "대장감자가 다른 감자들을 이끌기 시작했어요!"
-            );
-
-          }
-
-        },450);
+      },450);
 
     }
   );
@@ -2759,60 +2950,82 @@ function addPotatoTouch(
 
   el.addEventListener(
     "pointermove",
-    event=>{
+    e=>{
 
-      if(
-        !dragging ||
-        draggedPotato !== potato
-      ){
+      if(!dragging){
         return;
       }
 
 
       const room =
         document.getElementById(
-          "tamaScreen"
+          "room"
         );
 
       const rect =
         room.getBoundingClientRect();
 
 
-      let x =
-        event.clientX -
-        rect.left -
-        dragOffsetX;
-
-      let y =
-        event.clientY -
-        rect.top -
-        dragOffsetY;
+      data.x=
+        ((e.clientX-rect.left)
+        /rect.width)*100;
 
 
-      x =
+      data.y=
+        ((e.clientY-rect.top)
+        /rect.height)*100;
+
+
+      data.x=
         Math.max(
-          0,
+          3,
           Math.min(
-            rect.width - el.offsetWidth,
-            x
-          )
-        );
-
-      y =
-        Math.max(
-          0,
-          Math.min(
-            rect.height - el.offsetHeight,
-            y
+            94,
+            data.x
           )
         );
 
 
-      el.style.left =
-        x + "px";
+      data.y=
+        Math.max(
+          5,
+          Math.min(
+            88,
+            data.y
+          )
+        );
 
-      el.style.top =
-        y + "px";
+
+      el.style.left=
+        data.x+"%";
+
+      el.style.top=
+        data.y+"%";
+
+
+      /*
+         대장감자 드래그 시
+         다른 감자들이 따라오도록 설정.
+         손을 떼도 유지된다.
+      */
+
+      if(data.id==="potato2"){
+
+        roomPotatoes
+          .forEach(other=>{
+
+            if(
+              other.id!=="potato2" &&
+              other.id!=="potato3"
+            ){
+
+              other.followLeader=true;
+
+            }
+
+          });
+
+      }
 
     }
   );
@@ -2820,27 +3033,29 @@ function addPotatoTouch(
 
   el.addEventListener(
     "pointerup",
-    event=>{
+    e=>{
 
-      clearTimeout(
-        longPress
-      );
+      clearTimeout(timer);
 
 
-      if(!dragging){
+      if(dragging){
 
-        touchTamaPotato(
-          potato
+        dragging=false;
+
+        data.dragging=false;
+
+        el.classList.remove(
+          "dragging"
         );
+
+        return;
 
       }
 
 
-      dragging =
-        false;
-
-      draggedPotato =
-        null;
+      interactWithRoomPotato(
+        data.id
+      );
 
     }
   );
@@ -2849,15 +3064,23 @@ function addPotatoTouch(
   el.addEventListener(
     "pointercancel",
     ()=>{
-      clearTimeout(
-        longPress
+      clearTimeout(timer);
+
+      dragging=false;
+
+      data.dragging=false;
+
+      el.classList.remove(
+        "dragging"
       );
+    }
+  );
 
-      dragging =
-        false;
 
-      draggedPotato =
-        null;
+  el.addEventListener(
+    "contextmenu",
+    e=>{
+      e.preventDefault();
     }
   );
 
@@ -2865,181 +3088,229 @@ function addPotatoTouch(
 
 
 /* ==================================================
-   감자 터치 반응
+   감자 상호작용
 ================================================== */
 
-function touchTamaPotato(
-  potato
+function interactWithRoomPotato(
+  id
 ){
 
-  const now =
-    Date.now();
+  const target =
+    POTATOES[id];
 
+
+  if(!target){
+    return;
+  }
+
+
+  /*
+     독감자 접촉 스턴
+     10%
+  */
+
+  if(id==="potato3"){
+
+    const others =
+      roomPotatoes
+        .filter(
+          p=>p.id!=="potato3"
+        );
+
+
+    if(
+      others.length &&
+      Math.random()<.10
+    ){
+
+      const targetData =
+        others[
+          Math.floor(
+            Math.random()*
+            others.length
+          )
+        ];
+
+
+      stunPotato(
+        targetData
+      );
+
+      showEmotion(
+        targetData,
+        "⚡"
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  let emotion="❤️";
+
+
+  if(id==="potato4"){
+    emotion="💢";
+  }
+
+  if(id==="potato3"){
+    emotion="😑";
+  }
+
+  if(id==="potato5"){
+    emotion="❓";
+  }
+
+  if(id==="potato2"){
+    emotion="👑";
+  }
+
+
+  /*
+     꾼감자는 하트 남발
+  */
+
+  if(id==="potato1"){
+
+    emotion=
+      Math.random()<.5
+        ? "❤️"
+        : "💕";
+
+  }
+
+
+  showEmotionById(
+    id,
+    emotion
+  );
+
+
+  showToast(
+    target.name+
+    ": "+
+    target.messages[
+      Math.floor(
+        Math.random()*
+        target.messages.length
+      )
+    ]
+  );
+
+
+  /*
+     독감자는 대장감자를 따르지 않음
+     폭력감자는 독감자를 좋아함
+  */
+
+  if(id==="potato4"){
+
+    const toxic =
+      roomPotatoes.find(
+        p=>p.id==="potato3"
+      );
+
+    if(toxic){
+
+      dataFollow(
+        roomPotatoes.find(
+          p=>p.id==="potato4"
+        ),
+        toxic
+      );
+
+    }
+
+  }
+
+}
+
+
+/* ==================================================
+   스턴
+================================================== */
+
+function stunPotato(data){
 
   if(
-    potato.stunnedUntil >
-    now
+    !data ||
+    data.id==="potato3"
   ){
-
-    showRoomMessage(
-      "😵 기절해 있어요!"
-    );
-
     return;
-
   }
 
 
-  const id =
-    potato.id;
+  data.stunned=true;
 
 
-  let emoji = "💭";
-  let text =
-    POTATO_DATA[id].lines[
-      Math.floor(
-        Math.random() *
-        POTATO_DATA[id].lines.length
-      )
-    ];
+  showEmotion(
+    data,
+    "⚡"
+  );
 
 
-  /* 독감자 */
-
-  if(id === "Potato3"){
-
-    emoji = "⚡";
-
-    if(
-      Math.random() < .1
-    ){
-
-      const others =
-        roomPotatoes.filter(
-          p=>p !== potato
-        );
+  data.element.style.filter=
+    "grayscale(1)";
 
 
-      if(others.length){
+  setTimeout(()=>{
 
-        const target =
-          others[
-            Math.floor(
-              Math.random() *
-              others.length
-            )
-          ];
+    data.stunned=false;
 
+    data.element.style.filter=
+      "";
 
-        target.stunnedUntil =
-          now + 3000;
+  },3000);
 
-        target.element.classList.add(
-          "stunned"
-        );
+}
 
 
-        setTimeout(()=>{
+/* ==================================================
+   감정
+================================================== */
 
-          target.element.classList.remove(
-            "stunned"
-          );
+function showEmotion(
+  data,
+  emoji
+){
 
-        },3000);
-
-        text =
-          "건드리지 마! ⚡";
-
-      }
-
-    }
-
+  if(!data){
+    return;
   }
 
 
-  /* 꾼감자 */
-
-  if(id === "Potato1"){
-
-    emoji = "❤️";
-
-  }
-
-
-  /* 폭력감자 */
-
-  if(id === "Potato4"){
-
-    if(
-      roomPotatoes.some(
-        p=>
-          p.id === "Potato3"
-      )
-    ){
-
-      emoji = "💕";
-
-      text =
-        "독감자는 내가 지켜줄게. ❤️";
-
-    }else{
-
-      emoji = "💢";
-
-      text =
-        "한판 붙자!";
-
-    }
-
-  }
-
-
-  /* 저능감자 */
-
-  if(id === "Potato5"){
-
-    emoji = "✨";
-
-  }
-
-
-  showTamaEmotion(
-    potato,
+  showEmotionByElement(
+    data.element,
     emoji
   );
 
-  showRoomMessage(
-    `${POTATO_DATA[id].name}: ${text}`
-  );
-
 }
 
 
-/* ==================================================
-   다마고치 메시지
-================================================== */
-
-function showRoomMessage(
-  text
+function showEmotionById(
+  id,
+  emoji
 ){
 
-  const message =
-    document.getElementById(
-      "message"
+  const data =
+    roomPotatoes.find(
+      p=>p.id===id
     );
 
-  message.textContent =
-    text;
+  if(data){
+    showEmotion(
+      data,
+      emoji
+    );
+  }
 
 }
 
 
-/* ==================================================
-   다마고치 감정
-================================================== */
-
-function showTamaEmotion(
-  potato,
+function showEmotionByElement(
+  element,
   emoji
 ){
 
@@ -3048,200 +3319,31 @@ function showTamaEmotion(
       "div"
     );
 
-  emotion.className =
-    "tama-emotion";
+  emotion.className=
+    "pixel-emotion";
 
-  emotion.textContent =
+  emotion.textContent=
     emoji;
 
+  emotion.style.left=
+    element.offsetLeft+
+    "px";
 
-  const room =
-    document.getElementById(
-      "tamaScreen"
+  emotion.style.top=
+    (element.offsetTop-15)+
+    "px";
+
+
+  document
+    .getElementById("room")
+    .appendChild(
+      emotion
     );
 
 
-  const rect =
-    potato.element.getBoundingClientRect();
-
-  const roomRect =
-    room.getBoundingClientRect();
-
-
-  emotion.style.left =
-    (
-      rect.left -
-      roomRect.left +
-      15
-    ) + "px";
-
-
-  emotion.style.top =
-    (
-      rect.top -
-      roomRect.top -
-      10
-    ) + "px";
-
-
-  room.appendChild(
-    emotion
-  );
-
-
-  setTimeout(
-    ()=>emotion.remove(),
-    1200
-  );
-
-}
-
-
-/* ==================================================
-   다마고치 쓰다듬기
-================================================== */
-
-function tamaPet(){
-
-  if(!roomPotatoes.length){
-    return;
-  }
-
-
-  roomPotatoes.forEach(
-    potato=>{
-
-      potato.element.style.transform =
-        "translateY(-12px)";
-
-      setTimeout(()=>{
-
-        potato.element.style.transform =
-          "translateY(0)";
-
-      },350);
-
-    }
-  );
-
-
-  roomPotatoes.forEach(
-    potato=>{
-
-      showTamaEmotion(
-        potato,
-        "❤️"
-      );
-
-    }
-  );
-
-}
-
-
-/* ==================================================
-   간식
-================================================== */
-
-function tamaSnack(){
-
-  const room =
-    document.getElementById(
-      "tamaScreen"
-    );
-
-
-  const snack =
-    document.createElement(
-      "div"
-    );
-
-
-  snack.className =
-    "tama-emotion";
-
-  snack.textContent =
-    "🍬";
-
-  snack.style.left =
-    (
-      20 +
-      Math.random()*60
-    ) + "%";
-
-  snack.style.top =
-    "0px";
-
-  snack.style.animation =
-    "none";
-
-  snack.style.transition =
-    "top 1s linear";
-
-
-  room.appendChild(
-    snack
-  );
-
-
-  requestAnimationFrame(()=>{
-
-    snack.style.top =
-      "75%";
-
-  });
-
-
-  setTimeout(
-    ()=>snack.remove(),
-    1100
-  );
-
-
-  roomPotatoes.forEach(
-    potato=>{
-
-      showTamaEmotion(
-        potato,
-        "😋"
-      );
-
-    }
-  );
-
-}
-
-
-/* ==================================================
-   잠자기
-================================================== */
-
-function tamaSleep(){
-
-  const overlay =
-    document.getElementById(
-      "sleepOverlay"
-    );
-
-
-  overlay.classList.add(
-    "show"
-  );
-
-
-  clearTimeout(
-    sleepTimer
-  );
-
-
-  sleepTimer =
-    setTimeout(()=>{
-
-      overlay.classList.remove(
-        "show"
-      );
-
-    },10000);
+  setTimeout(()=>{
+    emotion.remove();
+  },1000);
 
 }
 
@@ -3250,157 +3352,447 @@ function tamaSleep(){
    대장감자 따라가기
 ================================================== */
 
-setInterval(()=>{
+function dataFollow(
+  follower,
+  leader
+){
 
   if(
-    !followLeader ||
-    !roomPotatoes.length
+    !follower ||
+    !leader
   ){
     return;
   }
 
 
-  const leader =
-    roomPotatoes.find(
-      p=>p.id === "Potato2"
-    );
-
-
-  if(!leader){
+  if(
+    follower.id==="potato3"
+  ){
     return;
   }
 
 
-  roomPotatoes.forEach(
-    potato=>{
+  follower.followTarget=
+    leader.id;
 
-      if(
-        potato === leader ||
-        potato.id === "Potato3"
-      ){
+}
+
+
+/* ==================================================
+   방 감자 자동 이동
+================================================== */
+
+function animateRoom(){
+
+  const room =
+    document.getElementById(
+      "room"
+    );
+
+
+  if(
+    !room ||
+    !document
+      .getElementById(
+        "dictionaryScreen"
+      )
+      .classList
+      .contains("active")
+  ){
+
+    requestAnimationFrame(
+      animateRoom
+    );
+
+    return;
+
+  }
+
+
+  roomPotatoes
+    .forEach(data=>{
+
+      if(data.dragging){
+        return;
+      }
+
+      if(data.stunned){
         return;
       }
 
 
-      const leaderRect =
-        leader.element.getBoundingClientRect();
+      /*
+         독감자는 혼자 돌아다님.
+         대장감자는 자유롭게 이동.
+      */
+
+      if(
+        data.followTarget
+      ){
+
+        const target =
+          roomPotatoes.find(
+            p=>
+              p.id===
+              data.followTarget
+          );
 
 
-      const room =
-        document.getElementById(
-          "tamaScreen"
+        if(target){
+
+          const dx=
+            target.x-data.x;
+
+          const dy=
+            target.y-data.y;
+
+
+          data.x +=
+            dx*0.008;
+
+          data.y +=
+            dy*0.008;
+
+        }
+
+      }
+      else{
+
+        data.x +=
+          data.vx;
+
+        data.y +=
+          data.vy;
+
+
+        /*
+           벽에 닿으면 방향 변경
+        */
+
+        if(
+          data.x<3 ||
+          data.x>94
+        ){
+
+          data.vx=
+            -data.vx;
+
+        }
+
+
+        if(
+          data.y<5 ||
+          data.y>88
+        ){
+
+          data.vy=
+            -data.vy;
+
+        }
+
+
+        /*
+           가끔 방향 변경
+        */
+
+        if(
+          Math.random()<0.008
+        ){
+
+          data.vx=
+            (Math.random()-.5)
+            *0.025;
+
+          data.vy=
+            (Math.random()-.5)
+            *0.025;
+
+        }
+
+      }
+
+
+      data.x=
+        Math.max(
+          3,
+          Math.min(
+            94,
+            data.x
+          )
         );
 
-      const roomRect =
-        room.getBoundingClientRect();
 
-
-      const targetX =
-        leaderRect.left -
-        roomRect.left -
-        60;
-
-
-      const targetY =
-        leaderRect.top -
-        roomRect.top +
-        (
-          Math.random()*50-25
+      data.y=
+        Math.max(
+          5,
+          Math.min(
+            88,
+            data.y
+          )
         );
 
 
-      potato.element.style.left =
-        Math.max(
-          0,
-          Math.min(
-            roomRect.width - 55,
-            targetX
-          )
-        ) + "px";
+      data.element.style.left=
+        data.x+"%";
 
 
-      potato.element.style.top =
-        Math.max(
-          0,
-          Math.min(
-            roomRect.height - 55,
-            targetY
-          )
-        ) + "px";
+      data.element.style.top=
+        data.y+"%";
+
+    });
 
 
-      potato.element.classList.add(
-        "following"
-      );
-
-    }
+  requestAnimationFrame(
+    animateRoom
   );
 
-},1000);
+}
 
 
 /* ==================================================
-   날짜
+   전체 쓰다듬기
 ================================================== */
 
-setInterval(()=>{
+function petAllPotatoes(){
 
-  if(currentPotato){
+  roomPotatoes
+    .forEach(data=>{
 
-    day++;
+      data.element.classList.remove(
+        "jumping"
+      );
 
-    document
-      .getElementById(
-        "dayText"
-      )
-      .textContent =
-        day;
+      void data.element.offsetWidth;
 
-  }
+      data.element.classList.add(
+        "jumping"
+      );
 
-},60000);
+
+      let emotion="❤️";
+
+      if(data.id==="potato3"){
+        emotion="😑";
+      }
+
+      if(data.id==="potato4"){
+        emotion="💢";
+      }
+
+      if(data.id==="potato2"){
+        emotion="👑";
+      }
+
+      showEmotion(
+        data,
+        emotion
+      );
+
+    });
+
+}
 
 
 /* ==================================================
-   기본 스탯 감소
+   전체 간식
+================================================== */
+
+function feedAllPotatoes(){
+
+  roomPotatoes
+    .forEach(data=>{
+
+      createFallingSnack(
+        data
+      );
+
+    });
+
+
+  showToast(
+    "🍬 간식이 하늘에서 내려와요!"
+  );
+
+}
+
+
+function createFallingSnack(
+  data
+){
+
+  const room =
+    document.getElementById(
+      "room"
+    );
+
+
+  const snack =
+    document.createElement(
+      "div"
+    );
+
+  snack.textContent=
+    "🍬";
+
+  snack.style.position=
+    "absolute";
+
+  snack.style.left=
+    data.x+"%";
+
+  snack.style.top=
+    "-10px";
+
+  snack.style.fontSize=
+    "20px";
+
+  snack.style.zIndex=
+    "50";
+
+  room.appendChild(
+    snack
+  );
+
+
+  let y=-10;
+
+
+  const timer =
+    setInterval(()=>{
+
+      y+=2.5;
+
+      snack.style.top=
+        y+"%";
+
+
+      if(y>data.y){
+
+        clearInterval(timer);
+
+        showEmotion(
+          data,
+          "😋"
+        );
+
+        snack.remove();
+
+      }
+
+    },30);
+
+}
+
+
+/* ==================================================
+   전체 잠자기
+================================================== */
+
+function sleepAllPotatoes(){
+
+  showToast(
+    "😴 감자들이 잠들었어요..."
+  );
+
+
+  roomPotatoes
+    .forEach(data=>{
+
+      showEmotion(
+        data,
+        "💤"
+      );
+
+    });
+
+
+  setTimeout(()=>{
+
+    showToast(
+      "☀️ 감자들이 일어났어요!"
+    );
+
+  },10000);
+
+}
+
+
+/* ==================================================
+   토스트
+================================================== */
+
+let toastTimer=null;
+
+function showToast(
+  text
+){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.textContent=
+    text;
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(()=>{
+
+      toast.classList.remove(
+        "show"
+      );
+
+    },1800);
+
+}
+
+
+/* ==================================================
+   시간 경과
 ================================================== */
 
 setInterval(()=>{
 
   if(
-    !currentPotato ||
-    !document
+    state.potato &&
+    document
       .getElementById(
         "growScreen"
       )
-      .classList.contains("active")
+      .classList
+      .contains("active")
   ){
-    return;
+
+    state.stats.hunger=
+      Math.max(
+        0,
+        state.stats.hunger-1
+      );
+
+    state.stats.water=
+      Math.max(
+        0,
+        state.stats.water-1
+      );
+
+    updateStats();
+
+    saveGame();
+
   }
 
-
-  stats.hunger =
-    Math.max(
-      0,
-      stats.hunger - 2
-    );
-
-  stats.water =
-    Math.max(
-      0,
-      stats.water - 2
-    );
-
-  stats.energy =
-    Math.max(
-      0,
-      stats.energy - 1
-    );
-
-
-  updateStats();
-
-},10000);
+},30000);
 
 
 /* ==================================================
@@ -3409,41 +3801,27 @@ setInterval(()=>{
 
 document.addEventListener(
   "contextmenu",
-  event=>{
-    event.preventDefault();
+  e=>{
+    e.preventDefault();
   }
 );
+
 
 document.addEventListener(
   "selectstart",
-  event=>{
-    event.preventDefault();
-  }
-);
-
-document.addEventListener(
-  "dragstart",
-  event=>{
-    event.preventDefault();
+  e=>{
+    e.preventDefault();
   }
 );
 
 
 /* ==================================================
-   저장 데이터 정리
+   초기화
 ================================================== */
 
-if(
-  !Array.isArray(collection)
-){
-  collection = [];
-}
+loadGame();
 
-if(
-  !Array.isArray(activePotatoes)
-){
-  activePotatoes = [];
-}
+animateRoom();
 
 </script>
 
