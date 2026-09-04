@@ -2662,6 +2662,26 @@ function updateStats(){
 }
 
 /* ==================================================
+   스탯 자동 감소
+================================================== */
+
+setInterval(function(){
+
+    game.stats.hunger =
+        clamp(game.stats.hunger - 1);
+
+    game.stats.water =
+        clamp(game.stats.water - 1);
+
+    game.stats.energy =
+        clamp(game.stats.energy - 1);
+
+    // 사랑은 감소하지 않음
+    updateStats();
+
+}, 60000);
+
+/* ==================================================
    감자 정보
 ================================================== */
 
