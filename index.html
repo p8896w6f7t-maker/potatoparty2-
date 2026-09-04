@@ -6721,6 +6721,97 @@ document.addEventListener(
     }
 );
 
+/* ==========================================
+   🐈 꾼감자 고양이
+========================================== */
+
+(function(){
+
+    const room = document.getElementById("room");
+
+    if(!room) return;
+
+    // 고양이 생성
+    const cat = document.createElement("div");
+
+    cat.id = "kkungCat";
+    cat.textContent = "🐈";
+
+    cat.style.position = "absolute";
+    cat.style.fontSize = "30px";
+    cat.style.zIndex = "30";
+    cat.style.pointerEvents = "none";
+    cat.style.transition =
+        "left 2.5s linear, top 2.5s linear";
+
+    room.appendChild(cat);
+
+
+    // 처음 위치
+    let catX = 50;
+    let catY = 50;
+
+    cat.style.left = catX + "px";
+    cat.style.top = catY + "px";
+
+
+    // 고양이 자연스럽게 이동
+    function moveCat(){
+
+        const maxX =
+            Math.max(10, room.clientWidth - 45);
+
+        const maxY =
+            Math.max(10, room.clientHeight - 55);
+
+
+        // 완전 랜덤보다는 현재 위치 근처로 이동
+        const moveX =
+            catX + (Math.random() - 0.5) * 180;
+
+        const moveY =
+            catY + (Math.random() - 0.5) * 140;
+
+
+        catX =
+            Math.max(
+                10,
+                Math.min(maxX, moveX)
+            );
+
+        catY =
+            Math.max(
+                10,
+                Math.min(maxY, moveY)
+            );
+
+
+        cat.style.left = catX + "px";
+        cat.style.top = catY + "px";
+    }
+
+
+    // 2~4초마다 이동
+    function randomMove(){
+
+        moveCat();
+
+        const nextTime =
+            2000 + Math.random() * 2000;
+
+        setTimeout(
+            randomMove,
+            nextTime
+        );
+    }
+
+
+    // 시작
+    randomMove();
+
+
+})();
+
 </script>
 
 </body>
