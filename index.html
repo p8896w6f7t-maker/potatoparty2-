@@ -388,15 +388,15 @@ button:active{
 }
 
 .petImage.running{
-    animation:runPotato .25s infinite alternate;
+    animation:runPotato .55s infinite alternate;
 }
 
 @keyframes runPotato{
     from{
-        transform:translate(-50%,-50%) translateY(2px) rotate(-5deg);
+        transform:translate(-50%,-50%) translateY(2px) rotate(-3deg);
     }
     to{
-        transform:translate(-50%,-50%) translateY(-5px) rotate(5deg);
+        transform:translate(-50%,-50%) translateY(-3px) rotate(3deg);
     }
 }
 
@@ -754,18 +754,22 @@ button:active{
     filter:drop-shadow(0 0 7px white) brightness(1.08);
 }
 
+.tamaPotato.leaderHeld{
+    filter:drop-shadow(0 0 10px #ffd84d) brightness(1.12);
+}
+
 .tamaPotato.walking{
-    animation:tamaWalk .22s infinite alternate;
+    animation:tamaWalk .55s infinite alternate;
 }
 
 @keyframes tamaWalk{
     from{
         margin-top:2px;
-        transform:translate3d(-50%,-50%,0) rotate(-3deg);
+        transform:translate3d(-50%,-50%,0) rotate(-2deg);
     }
     to{
         margin-top:-2px;
-        transform:translate3d(-50%,-50%,0) rotate(3deg);
+        transform:translate3d(-50%,-50%,0) rotate(2deg);
     }
 }
 
@@ -812,6 +816,11 @@ button:active{
     white-space:nowrap;
     pointer-events:none;
     animation:speech 1.5s ease forwards;
+}
+
+.tamaSpeech.groupSpeech{
+    font-size:10px;
+    padding:4px 7px;
 }
 
 @keyframes speech{
@@ -1241,14 +1250,9 @@ button:active{
 
 /* ==================================================
    감자 데이터
-   키우기 대사와 다마고치 대사를 완전히 분리
 ================================================== */
 
 const POTATOES=[
-
-/* ==================================================
-   꾼감자
-================================================== */
 
 {
     name:"꾼감자",
@@ -1258,7 +1262,6 @@ const POTATOES=[
     favorite:"모두",
 
     lines:{
-
         food:[
             "오! 먹을 거다! 나눠 먹자!",
             "냠냠! 이것도 사랑의 맛인가?",
@@ -1273,7 +1276,6 @@ const POTATOES=[
             "이거 정말 맛있어!",
             "조금만 더 먹어도 돼?"
         ],
-
         water:[
             "물이다! 시원하다!",
             "역시 물은 생명의 친구야!",
@@ -1288,7 +1290,6 @@ const POTATOES=[
             "물 한 잔이면 행복해!",
             "시원하다! 다시 놀 수 있겠어!"
         ],
-
         pet:[
             "꺄! 더 쓰다듬어줘!",
             "너 정말 좋은 감자구나!",
@@ -1303,7 +1304,6 @@ const POTATOES=[
             "이런 관심 너무 좋아!",
             "나도 너 좋아해!"
         ],
-
         walk:[
             "산책이다! 같이 가자!",
             "어디든 좋아! 친구랑 가면!",
@@ -1318,7 +1318,6 @@ const POTATOES=[
             "오늘은 오래 걷고 싶어!",
             "산책 끝나면 또 놀자!"
         ],
-
         touch:[
             "어? 나 불렀어?",
             "헤헤! 나 여기 있어!",
@@ -1331,11 +1330,9 @@ const POTATOES=[
             "반가워!",
             "같이 놀자!"
         ]
-
     },
 
     tama:{
-
         idle:[
             "오늘은 누구랑 놀까?",
             "친구가 많으면 좋겠다!",
@@ -1352,7 +1349,6 @@ const POTATOES=[
             "다들 잘 지내고 있겠지?",
             "혼자 있는 것도 잠깐은 괜찮아."
         ],
-
         meet:[
             "어! 안녕!",
             "친구다! 같이 놀자!",
@@ -1367,7 +1363,6 @@ const POTATOES=[
             "반가워! ❤️",
             "우리 친구 맞지?"
         ],
-
         snack:[
             "간식이다! 냠냠!",
             "우와! 맛있는 냄새!",
@@ -1378,7 +1373,6 @@ const POTATOES=[
             "맛있다! ❤️",
             "이건 친구랑 나눠 먹고 싶어!"
         ],
-
         sleep:[
             "이제 잘 시간이야?",
             "졸려...",
@@ -1389,7 +1383,6 @@ const POTATOES=[
             "조금만 쉬어야겠다.",
             "Zzz... ❤️"
         ],
-
         touch:[
             "나 찾았어?",
             "헤헤! 반가워!",
@@ -1400,13 +1393,8 @@ const POTATOES=[
             "기분 좋아!",
             "친구가 찾아왔다!"
         ]
-
     }
 },
-
-/* ==================================================
-   대장감자
-================================================== */
 
 {
     name:"대장감자",
@@ -1416,7 +1404,6 @@ const POTATOES=[
     favorite:"저능감자",
 
     lines:{
-
         food:[
             "좋다. 대장에게 힘을 보태라.",
             "훌륭한 보급이다.",
@@ -1431,7 +1418,6 @@ const POTATOES=[
             "이제 다시 임무를 수행한다.",
             "다음에는 다른 감자들도 챙겨라."
         ],
-
         water:[
             "좋아. 수분 보충 완료.",
             "대장에게 필요한 물이다.",
@@ -1446,7 +1432,6 @@ const POTATOES=[
             "보급 완료.",
             "이제 임무를 계속한다."
         ],
-
         pet:[
             "흠. 나쁘지 않군.",
             "대장도 가끔은 쉬어야 하지.",
@@ -1461,7 +1446,6 @@ const POTATOES=[
             "나를 믿고 있는 모양이군.",
             "좋다. 충분히 쉬었다."
         ],
-
         walk:[
             "전원 따라와!",
             "대장이 앞장선다!",
@@ -1476,7 +1460,6 @@ const POTATOES=[
             "좋다. 계속 전진한다.",
             "오늘도 순찰을 시작한다."
         ],
-
         touch:[
             "무슨 일이지?",
             "대장을 불렀나?",
@@ -1487,11 +1470,9 @@ const POTATOES=[
             "좋다. 계속 지켜보도록.",
             "대장은 여기 있다."
         ]
-
     },
 
     tama:{
-
         idle:[
             "현재 인원 확인.",
             "모두 잘 있군.",
@@ -1508,7 +1489,6 @@ const POTATOES=[
             "잠시 쉬어도 괜찮겠지.",
             "저 감자는 잘 따라오고 있군."
         ],
-
         meet:[
             "전원 집합!",
             "여기 있었군.",
@@ -1521,7 +1501,6 @@ const POTATOES=[
             "너무 멀리 가지 마라.",
             "주변을 조심하도록."
         ],
-
         snack:[
             "보급품 확인.",
             "간식 보급인가?",
@@ -1532,7 +1511,6 @@ const POTATOES=[
             "간식 확보.",
             "모두 먹었는지 확인해야겠군."
         ],
-
         sleep:[
             "오늘 순찰은 여기까지다.",
             "전원 휴식.",
@@ -1543,7 +1521,6 @@ const POTATOES=[
             "휴식 명령.",
             "Zzz... 내일 보자."
         ],
-
         touch:[
             "대장을 호출했나?",
             "무슨 일이지?",
@@ -1554,13 +1531,8 @@ const POTATOES=[
             "좋다.",
             "집합!"
         ]
-
     }
 },
-
-/* ==================================================
-   독감자
-================================================== */
 
 {
     name:"독감자",
@@ -1570,7 +1542,6 @@ const POTATOES=[
     favorite:"폭력감자",
 
     lines:{
-
         food:[
             "가까이 오지 말고 그냥 놔.",
             "먹을 건 두고 가.",
@@ -1585,7 +1556,6 @@ const POTATOES=[
             "별로 기대 안 했는데 괜찮군.",
             "됐어. 이제 가."
         ],
-
         water:[
             "물은 두고 가.",
             "목말랐던 건 아니야.",
@@ -1600,7 +1570,6 @@ const POTATOES=[
             "물만 놓고 가.",
             "이제 가도 돼."
         ],
-
         pet:[
             "만지지 마.",
             "...한 번 정도는 봐줄게.",
@@ -1615,7 +1584,6 @@ const POTATOES=[
             "그만하면 됐어.",
             "더 이상은 안 돼."
         ],
-
         walk:[
             "혼자 갈 거야.",
             "따라오지 마.",
@@ -1630,7 +1598,6 @@ const POTATOES=[
             "저쪽으로 가야겠어.",
             "따라오면 화낼 거야."
         ],
-
         touch:[
             "왜?",
             "뭐야.",
@@ -1641,11 +1608,9 @@ const POTATOES=[
             "흥.",
             "...뭐."
         ]
-
     },
 
     tama:{
-
         idle:[
             "조용하네.",
             "혼자가 편해.",
@@ -1662,7 +1627,6 @@ const POTATOES=[
             "그냥 내버려 둬.",
             "오늘은 싸우고 싶지 않아."
         ],
-
         meet:[
             "왜 왔어?",
             "가까이 오지 마.",
@@ -1675,7 +1639,6 @@ const POTATOES=[
             "거리를 좀 둬.",
             "괜히 건드리지 마."
         ],
-
         snack:[
             "간식인가.",
             "놓고 가.",
@@ -1686,7 +1649,6 @@ const POTATOES=[
             "조용히 먹게 해.",
             "하나 더 있나?"
         ],
-
         sleep:[
             "드디어 조용해졌네.",
             "잠이나 자야겠다.",
@@ -1697,7 +1659,6 @@ const POTATOES=[
             "조용히 잘 거야.",
             "Zzz..."
         ],
-
         touch:[
             "건드렸어?",
             "왜 만져?",
@@ -1708,13 +1669,8 @@ const POTATOES=[
             "...괜찮아.",
             "딱 한 번만."
         ]
-
     }
 },
-
-/* ==================================================
-   폭력감자
-================================================== */
 
 {
     name:"폭력감자",
@@ -1724,7 +1680,6 @@ const POTATOES=[
     favorite:"독감자",
 
     lines:{
-
         food:[
             "더 줘! 이걸로 부족해!",
             "힘이 난다! 누구 없냐!",
@@ -1739,7 +1694,6 @@ const POTATOES=[
             "좋다! 힘이 돌아온다!",
             "먹었으니 몸 좀 풀어볼까?"
         ],
-
         water:[
             "물! 좋다!",
             "힘이 돌아온다!",
@@ -1754,7 +1708,6 @@ const POTATOES=[
             "좋아! 준비 완료!",
             "몸이 가벼워졌다!"
         ],
-
         pet:[
             "뭐야! 건드렸냐!",
             "...계속해도 된다.",
@@ -1769,7 +1722,6 @@ const POTATOES=[
             "한 번 더 해봐.",
             "이 정도는 괜찮다."
         ],
-
         walk:[
             "달려! 누가 먼저 도착하나!",
             "비켜! 지나간다!",
@@ -1784,7 +1736,6 @@ const POTATOES=[
             "저 감자 한번 만나볼까?",
             "가자! 한판이다!"
         ],
-
         touch:[
             "누구냐!",
             "뭐야!",
@@ -1795,11 +1746,9 @@ const POTATOES=[
             "심심했는데 잘 됐군!",
             "싸울 준비 됐냐?"
         ]
-
     },
 
     tama:{
-
         idle:[
             "심심하다.",
             "누구랑 한판 붙을까?",
@@ -1816,7 +1765,6 @@ const POTATOES=[
             "한판만 하면 딱 좋겠는데.",
             "오늘은 조용하군."
         ],
-
         meet:[
             "어이! 거기!",
             "한판 붙을래?",
@@ -1829,7 +1777,6 @@ const POTATOES=[
             "오늘 운이 좋군!",
             "누구든 환영이다!"
         ],
-
         snack:[
             "간식이다!",
             "냠! 힘이 난다!",
@@ -1840,7 +1787,6 @@ const POTATOES=[
             "힘이 솟는다!",
             "이제 싸울 준비 끝!"
         ],
-
         sleep:[
             "젠장, 벌써 자야 해?",
             "오늘은 여기까지인가.",
@@ -1851,7 +1797,6 @@ const POTATOES=[
             "잠깐만 쉬자.",
             "Zzz..."
         ],
-
         touch:[
             "오! 왔냐!",
             "한판 할래?",
@@ -1862,13 +1807,8 @@ const POTATOES=[
             "같이 뛰자!",
             "좋은 타이밍이다!"
         ]
-
     }
 },
-
-/* ==================================================
-   저능감자
-================================================== */
 
 {
     name:"저능감자",
@@ -1878,7 +1818,6 @@ const POTATOES=[
     favorite:"모두",
 
     lines:{
-
         food:[
             "먹는 거... 맞지?",
             "우와... 맛있다...",
@@ -1893,7 +1832,6 @@ const POTATOES=[
             "우와... 맛있다...",
             "나 배부른 것 같아..."
         ],
-
         water:[
             "물이네...",
             "꼴깍... 시원하다...",
@@ -1908,7 +1846,6 @@ const POTATOES=[
             "물을 왜 마시는 거지?",
             "아무튼 맛있다..."
         ],
-
         pet:[
             "헤헤...",
             "기분 좋다...",
@@ -1923,7 +1860,6 @@ const POTATOES=[
             "계속 해줘...",
             "나도 좋아..."
         ],
-
         walk:[
             "어... 어디 가?",
             "잠깐만... 나도 갈래.",
@@ -1938,7 +1874,6 @@ const POTATOES=[
             "우와! 밖이다!",
             "저쪽으로 가는 거 맞아?"
         ],
-
         touch:[
             "어... 나야?",
             "왜?",
@@ -1949,11 +1884,9 @@ const POTATOES=[
             "나 불렀어?",
             "음..."
         ]
-
     },
 
     tama:{
-
         idle:[
             "음...",
             "뭐 하지?",
@@ -1970,7 +1903,6 @@ const POTATOES=[
             "음... 모르겠다.",
             "누가 나를 부른 것 같은데?"
         ],
-
         meet:[
             "어... 안녕?",
             "같이 가도 돼?",
@@ -1983,7 +1915,6 @@ const POTATOES=[
             "나 길 잃었는데...",
             "저쪽으로 가는 거 맞아?"
         ],
-
         snack:[
             "먹어도 돼?",
             "냠냠...",
@@ -1994,7 +1925,6 @@ const POTATOES=[
             "맛있어서 기분 좋아...",
             "냠... 뭐였더라?"
         ],
-
         sleep:[
             "졸려...",
             "이제 자는 거야?",
@@ -2005,7 +1935,6 @@ const POTATOES=[
             "잘 자...",
             "Zzz..."
         ],
-
         touch:[
             "어? 나 찾았어?",
             "헤헤...",
@@ -2016,12 +1945,10 @@ const POTATOES=[
             "반가워!",
             "나 안 잤어!"
         ]
-
     }
 }
 
 ];
-
 
 /* ==================================================
    게임 상태
@@ -2049,9 +1976,17 @@ let game={
 
     sleeping:false,
     tamaAnimationId:null,
-    lastTamaTime:0
-};
+    lastTamaTime:0,
 
+    /* 새 대화 상태 */
+    dialogueLock:false,
+    dialogueUntil:0,
+    nextGroupDialogue:0,
+
+    /* 대장 */
+    leaderHeld:false,
+    leaderRescueMode:false
+};
 
 /* ==================================================
    성장 단계
@@ -2071,7 +2006,6 @@ const STAGE_EMOJIS=[
     "🥔"
 ];
 
-
 /* ==================================================
    DOM
 ================================================== */
@@ -2087,7 +2021,6 @@ const growthText=document.getElementById("growthText");
 const stageText=document.getElementById("stageText");
 const petImage=document.getElementById("petImage");
 
-
 /* ==================================================
    화면 전환
 ================================================== */
@@ -2099,7 +2032,9 @@ function showScreen(screen){
         growScreen,
         petScreen,
         dictionaryScreen
-    ].forEach(s=>s.classList.add("hidden"));
+    ].forEach(
+        s=>s.classList.add("hidden")
+    );
 
     screen.classList.remove("hidden");
 
@@ -2111,7 +2046,6 @@ function showScreen(screen){
         stopTamaLoop();
     }
 }
-
 
 /* ==================================================
    시작
@@ -2129,7 +2063,6 @@ document.getElementById("startBtn").addEventListener(
         showScreen(growScreen);
     }
 );
-
 
 /* ==================================================
    성장
@@ -2162,12 +2095,17 @@ function growAction(type){
     );
 
     growPotato.classList.remove("jump");
+
     void growPotato.offsetWidth;
+
     growPotato.classList.add("jump");
 
     updateGrow();
 
-    if(game.growth>=100&&!creatingPotato){
+    if(
+        game.growth>=100 &&
+        !creatingPotato
+    ){
 
         creatingPotato=true;
 
@@ -2181,12 +2119,16 @@ function growAction(type){
     }
 }
 
-
 function updateGrow(){
 
-    growthBar.style.width=game.growth+"%";
-    growthText.textContent=game.growth+" / 100%";
-    stageText.textContent=STAGES[game.stage];
+    growthBar.style.width=
+        game.growth+"%";
+
+    growthText.textContent=
+        game.growth+" / 100%";
+
+    stageText.textContent=
+        STAGES[game.stage];
 
     growPotato.textContent=
         STAGE_EMOJIS[game.stage];
@@ -2194,7 +2136,6 @@ function updateGrow(){
     document.getElementById("growDay").textContent=
         game.day+"일차";
 }
-
 
 /* ==================================================
    랜덤 감자 탄생
@@ -2213,7 +2154,9 @@ function createRandomPotato(){
 
     if(!game.discovered.includes(potato.name)){
 
-        game.discovered.push(potato.name);
+        game.discovered.push(
+            potato.name
+        );
 
         game.tamaEnabled[potato.name]=true;
     }
@@ -2242,7 +2185,6 @@ function createRandomPotato(){
     );
 }
 
-
 /* ==================================================
    감정
 ================================================== */
@@ -2256,7 +2198,6 @@ function emotionEmoji(p){
 
     return "🥺";
 }
-
 
 function emotionSet(p){
 
@@ -2275,22 +2216,24 @@ function emotionSet(p){
     return ["🥺","😳","💭","😊"];
 }
 
-
 /* ==================================================
    키우기 감정
 ================================================== */
 
 function showEmotion(emoji){
 
-    const stage=document.getElementById("petStage");
+    const stage=
+        document.getElementById("petStage");
 
-    const old=stage.querySelector(".petEmotion");
+    const old=
+        stage.querySelector(".petEmotion");
 
     if(old){
         old.remove();
     }
 
-    const el=document.createElement("div");
+    const el=
+        document.createElement("div");
 
     el.className="petEmotion";
     el.textContent=emoji;
@@ -2307,7 +2250,6 @@ function showEmotion(emoji){
     );
 }
 
-
 /* ==================================================
    키우기 감자 터치
 ================================================== */
@@ -2323,13 +2265,18 @@ petImage.addEventListener(
 
         e.preventDefault();
 
-        petTouchStart=performance.now();
+        petTouchStart=
+            performance.now();
+
         petTouchStartX=e.clientX;
         petTouchStartY=e.clientY;
+
         petTouchMoved=false;
 
         try{
-            petImage.setPointerCapture(e.pointerId);
+            petImage.setPointerCapture(
+                e.pointerId
+            );
         }catch(err){}
 
     },
@@ -2342,10 +2289,15 @@ petImage.addEventListener(
 
         e.preventDefault();
 
-        const dx=e.clientX-petTouchStartX;
-        const dy=e.clientY-petTouchStartY;
+        const dx=
+            e.clientX-petTouchStartX;
 
-        if(Math.hypot(dx,dy)>8){
+        const dy=
+            e.clientY-petTouchStartY;
+
+        if(
+            Math.hypot(dx,dy)>8
+        ){
             petTouchMoved=true;
         }
 
@@ -2360,7 +2312,8 @@ petImage.addEventListener(
         e.preventDefault();
 
         const elapsed=
-            performance.now()-petTouchStart;
+            performance.now()-
+            petTouchStart;
 
         if(
             !petTouchMoved &&
@@ -2373,10 +2326,8 @@ petImage.addEventListener(
     {passive:false}
 );
 
-
 /* ==================================================
    키우기 감자 터치 반응
-   다마고치 대사와 절대 공유하지 않음
 ================================================== */
 
 function touchPet(){
@@ -2395,16 +2346,23 @@ function touchPet(){
     void petImage.offsetWidth;
 
     if(Math.random()<.55){
-        petImage.classList.add("petJump");
+        petImage.classList.add(
+            "petJump"
+        );
     }else{
-        petImage.classList.add("tilt");
+        petImage.classList.add(
+            "tilt"
+        );
     }
 
     petImage.classList.add("breathe");
 
-    const emotions=emotionSet(p);
+    const emotions=
+        emotionSet(p);
 
-    showEmotion(random(emotions));
+    showEmotion(
+        random(emotions)
+    );
 
     speak(
         random(p.lines.touch)+
@@ -2413,11 +2371,12 @@ function touchPet(){
     );
 
     game.stats.love=
-        clamp(game.stats.love+5);
+        clamp(
+            game.stats.love+5
+        );
 
     updateStats();
 }
-
 
 /* ==================================================
    키우기 상호작용
@@ -2433,7 +2392,9 @@ function petAction(type){
     if(type==="food"){
 
         game.stats.hunger=
-            clamp(game.stats.hunger+20);
+            clamp(
+                game.stats.hunger+20
+            );
 
         speak(
             random(p.lines.food)+
@@ -2441,7 +2402,9 @@ function petAction(type){
             random(emotionSet(p))
         );
 
-        showEmotion(random(emotionSet(p)));
+        showEmotion(
+            random(emotionSet(p))
+        );
 
         jumpPet();
     }
@@ -2449,7 +2412,9 @@ function petAction(type){
     if(type==="water"){
 
         game.stats.water=
-            clamp(game.stats.water+20);
+            clamp(
+                game.stats.water+20
+            );
 
         speak(
             random(p.lines.water)+
@@ -2467,7 +2432,9 @@ function petAction(type){
     if(type==="pet"){
 
         game.stats.love=
-            clamp(game.stats.love+15);
+            clamp(
+                game.stats.love+15
+            );
 
         speak(
             random(p.lines.pet)+
@@ -2475,7 +2442,9 @@ function petAction(type){
             random(emotionSet(p))
         );
 
-        showEmotion(random(emotionSet(p)));
+        showEmotion(
+            random(emotionSet(p))
+        );
 
         if(Math.random()<.5){
             jumpPet();
@@ -2487,7 +2456,9 @@ function petAction(type){
     if(type==="walk"){
 
         game.stats.energy=
-            clamp(game.stats.energy-15);
+            clamp(
+                game.stats.energy-15
+            );
 
         speak(
             random(p.lines.walk)+
@@ -2503,7 +2474,6 @@ function petAction(type){
     updateStats();
 }
 
-
 /* ==================================================
    키우기 모션
 ================================================== */
@@ -2517,9 +2487,10 @@ function jumpPet(){
 
     void petImage.offsetWidth;
 
-    petImage.classList.add("petJump");
+    petImage.classList.add(
+        "petJump"
+    );
 }
-
 
 function tiltPet(){
 
@@ -2530,9 +2501,10 @@ function tiltPet(){
 
     void petImage.offsetWidth;
 
-    petImage.classList.add("tilt");
+    petImage.classList.add(
+        "tilt"
+    );
 }
-
 
 /* ==================================================
    산책
@@ -2546,12 +2518,18 @@ let petWalkDirection=1;
 function runPet(){
 
     if(petWalkFrame){
-        cancelAnimationFrame(petWalkFrame);
+        cancelAnimationFrame(
+            petWalkFrame
+        );
     }
 
-    petImage.classList.add("running");
+    petImage.classList.add(
+        "running"
+    );
 
-    petWalkStart=performance.now();
+    petWalkStart=
+        performance.now();
+
     petWalkX=50;
 
     petWalkDirection=
@@ -2566,7 +2544,9 @@ function runPet(){
 
         if(elapsed>=3000){
 
-            petImage.classList.remove("running");
+            petImage.classList.remove(
+                "running"
+            );
 
             petImage.style.left="50%";
 
@@ -2576,14 +2556,16 @@ function runPet(){
         }
 
         petWalkX+=
-            petWalkDirection*.12;
+            petWalkDirection*.08;
 
         if(petWalkX>=78){
+
             petWalkX=78;
             petWalkDirection=-1;
         }
 
         if(petWalkX<=22){
+
             petWalkX=22;
             petWalkDirection=1;
         }
@@ -2592,13 +2574,16 @@ function runPet(){
             petWalkX+"%";
 
         petWalkFrame=
-            requestAnimationFrame(walkFrame);
+            requestAnimationFrame(
+                walkFrame
+            );
     }
 
     petWalkFrame=
-        requestAnimationFrame(walkFrame);
+        requestAnimationFrame(
+            walkFrame
+        );
 }
-
 
 /* ==================================================
    메시지
@@ -2607,7 +2592,9 @@ function runPet(){
 function speak(text){
 
     const box=
-        document.getElementById("petMessage");
+        document.getElementById(
+            "petMessage"
+        );
 
     box.textContent=text;
 
@@ -2632,7 +2619,6 @@ function speak(text){
     );
 }
 
-
 /* ==================================================
    스탯
 ================================================== */
@@ -2641,26 +2627,39 @@ function clamp(value){
 
     return Math.max(
         0,
-        Math.min(100,value)
+        Math.min(
+            100,
+            value
+        )
     );
 }
 
-
 function updateStats(){
 
-    document.getElementById("hunger").textContent=
-        game.stats.hunger+" / 100";
+    document.getElementById(
+        "hunger"
+    ).textContent=
+        game.stats.hunger+
+        " / 100";
 
-    document.getElementById("water").textContent=
-        game.stats.water+" / 100";
+    document.getElementById(
+        "water"
+    ).textContent=
+        game.stats.water+
+        " / 100";
 
-    document.getElementById("love").textContent=
-        game.stats.love+" / 100";
+    document.getElementById(
+        "love"
+    ).textContent=
+        game.stats.love+
+        " / 100";
 
-    document.getElementById("energy").textContent=
-        game.stats.energy+" / 100";
+    document.getElementById(
+        "energy"
+    ).textContent=
+        game.stats.energy+
+        " / 100";
 }
-
 
 /* ==================================================
    감자 정보
@@ -2674,21 +2673,29 @@ function updatePet(){
     petImage.style.backgroundImage=
         `url("${game.potato.image}")`;
 
-    document.getElementById("potatoName").textContent=
+    document.getElementById(
+        "potatoName"
+    ).textContent=
         game.potato.name;
 
-    document.getElementById("potatoPersonality").textContent=
-        "성격 • "+game.potato.personality;
+    document.getElementById(
+        "potatoPersonality"
+    ).textContent=
+        "성격 • "+
+        game.potato.personality;
 
-    document.getElementById("petDay").textContent=
-        game.day+"일차";
+    document.getElementById(
+        "petDay"
+    ).textContent=
+        game.day+
+        "일차";
 
     updateStats();
 }
 
-
 /* ==================================================
    수확
+   확인창 추가
 ================================================== */
 
 function harvest(){
@@ -2696,7 +2703,31 @@ function harvest(){
     if(!game.potato)
         return;
 
-    const old=game.potato;
+    const old=
+        game.potato;
+
+    const confirmed=
+        window.confirm(
+            "정말 "+old.name+"을(를) 수확할까요?\n\n"+
+            "수확하면 현재 감자와의 키우기가 끝나고\n"+
+            "다음 감자를 키우게 됩니다."
+        );
+
+    if(!confirmed){
+        speak(
+            random([
+                "휴... 아직 같이 있고 싶어.",
+                "수확은 조금 나중에 하자!",
+                "아직 더 놀고 싶어!",
+                "조금만 더 키워줘!",
+                "벌써 수확하려고?"
+            ])
+        );
+
+        showEmotion("🥺");
+
+        return;
+    }
 
     speak(
         random([
@@ -2718,12 +2749,13 @@ function harvest(){
 
             updateGrow();
 
-            showScreen(growScreen);
+            showScreen(
+                growScreen
+            );
         },
         900
     );
 }
-
 
 /* ==================================================
    사전
@@ -2733,17 +2765,19 @@ function openDictionary(){
 
     renderDictionary();
 
-    showScreen(dictionaryScreen);
+    showScreen(
+        dictionaryScreen
+    );
 }
-
 
 function backToPet(){
 
     updatePet();
 
-    showScreen(petScreen);
+    showScreen(
+        petScreen
+    );
 }
-
 
 /* ==================================================
    감자 사전
@@ -2751,16 +2785,23 @@ function backToPet(){
 
 function renderDictionary(){
 
-    document.getElementById("dictionaryDay").textContent=
-        game.day+"일차";
+    document.getElementById(
+        "dictionaryDay"
+    ).textContent=
+        game.day+
+        "일차";
 
-    document.getElementById("discoveredCount").textContent=
+    document.getElementById(
+        "discoveredCount"
+    ).textContent=
         "발견한 감자 "+
         game.discovered.length+
         "/5";
 
     const list=
-        document.getElementById("potatoList");
+        document.getElementById(
+            "potatoList"
+        );
 
     list.innerHTML="";
 
@@ -2768,35 +2809,68 @@ function renderDictionary(){
         p=>{
 
             const found=
-                game.discovered.includes(p.name);
+                game.discovered.includes(
+                    p.name
+                );
 
             if(!found){
 
-                const div=document.createElement("div");
+                const div=
+                    document.createElement(
+                        "div"
+                    );
 
-                div.className="bookItem";
+                div.className=
+                    "bookItem";
 
-                const image=document.createElement("div");
+                const image=
+                    document.createElement(
+                        "div"
+                    );
 
-                image.className="bookImage";
+                image.className=
+                    "bookImage";
+
                 image.textContent="?";
-                image.style.display="flex";
-                image.style.alignItems="center";
-                image.style.justifyContent="center";
-                image.style.fontSize="28px";
 
-                const info=document.createElement("div");
+                image.style.display=
+                    "flex";
 
-                info.className="bookItemName";
+                image.style.alignItems=
+                    "center";
 
-                const name=document.createElement("div");
+                image.style.justifyContent=
+                    "center";
 
-                name.textContent="미발견";
+                image.style.fontSize=
+                    "28px";
 
-                const status=document.createElement("div");
+                const info=
+                    document.createElement(
+                        "div"
+                    );
 
-                status.className="bookStatus";
-                status.textContent="아직 만나지 못한 감자";
+                info.className=
+                    "bookItemName";
+
+                const name=
+                    document.createElement(
+                        "div"
+                    );
+
+                name.textContent=
+                    "미발견";
+
+                const status=
+                    document.createElement(
+                        "div"
+                    );
+
+                status.className=
+                    "bookStatus";
+
+                status.textContent=
+                    "아직 만나지 못한 감자";
 
                 info.appendChild(name);
                 info.appendChild(status);
@@ -2809,31 +2883,53 @@ function renderDictionary(){
                 return;
             }
 
-            const item=document.createElement("div");
+            const item=
+                document.createElement(
+                    "div"
+                );
 
-            item.className="bookItem";
+            item.className=
+                "bookItem";
 
-            const image=document.createElement("div");
+            const image=
+                document.createElement(
+                    "div"
+                );
 
-            image.className="bookImage";
+            image.className=
+                "bookImage";
 
             image.style.backgroundImage=
                 `url("${p.image}")`;
 
-            const info=document.createElement("div");
+            const info=
+                document.createElement(
+                    "div"
+                );
 
-            info.className="bookItemName";
+            info.className=
+                "bookItemName";
 
-            const name=document.createElement("div");
+            const name=
+                document.createElement(
+                    "div"
+                );
 
-            name.textContent=p.name;
+            name.textContent=
+                p.name;
 
-            const status=document.createElement("div");
+            const status=
+                document.createElement(
+                    "div"
+                );
 
-            status.className="bookStatus";
+            status.className=
+                "bookStatus";
 
             const enabled=
-                game.tamaEnabled[p.name]!==false;
+                game.tamaEnabled[
+                    p.name
+                ]!==false;
 
             status.textContent=
                 enabled
@@ -2843,19 +2939,30 @@ function renderDictionary(){
             info.appendChild(name);
             info.appendChild(status);
 
-            const toggle=document.createElement("button");
+            const toggle=
+                document.createElement(
+                    "button"
+                );
 
             toggle.type="button";
 
             toggle.className=
                 "potatoToggle"+
-                (enabled?" on":"");
+                (
+                    enabled
+                    ? " on"
+                    : ""
+                );
 
             toggle.setAttribute(
                 "aria-label",
                 p.name+
                 " 등장 "+
-                (enabled?"ON":"OFF")
+                (
+                    enabled
+                    ? "ON"
+                    : "OFF"
+                )
             );
 
             toggle.addEventListener(
@@ -2864,7 +2971,9 @@ function renderDictionary(){
                     e.preventDefault();
                     e.stopPropagation();
                 },
-                {passive:false}
+                {
+                    passive:false
+                }
             );
 
             toggle.addEventListener(
@@ -2874,8 +2983,9 @@ function renderDictionary(){
                     e.preventDefault();
                     e.stopPropagation();
 
-                    game.tamaEnabled[p.name]=
-                        !enabled;
+                    game.tamaEnabled[
+                        p.name
+                    ]=!enabled;
 
                     renderDictionary();
                 }
@@ -2892,7 +3002,6 @@ function renderDictionary(){
     renderTama();
 }
 
-
 /* ==================================================
    다마고치 생성
 ================================================== */
@@ -2900,7 +3009,9 @@ function renderDictionary(){
 function renderTama(){
 
     const tama=
-        document.getElementById("tama");
+        document.getElementById(
+            "tama"
+        );
 
     tama.querySelectorAll(
         ".tamaPotato,"+
@@ -2913,8 +3024,12 @@ function renderTama(){
     );
 
     game.tamaPotatoes=[];
-
     game.tamaSnacks=[];
+
+    game.dialogueLock=false;
+    game.dialogueUntil=0;
+    game.leaderHeld=false;
+    game.leaderRescueMode=false;
 
     const selected=
         game.discovered.filter(
@@ -2928,7 +3043,8 @@ function renderTama(){
 
                 const p=
                     POTATOES.find(
-                        x=>x.name===name
+                        x=>
+                            x.name===name
                     );
 
                 const angle=
@@ -2943,7 +3059,8 @@ function renderTama(){
                 const radius=
                     Math.min(
                         20,
-                        8+selected.length*2
+                        8+
+                        selected.length*2
                     );
 
                 return{
@@ -2958,11 +3075,13 @@ function renderTama(){
 
                     x:
                         50+
-                        Math.cos(angle)*radius,
+                        Math.cos(angle)*
+                        radius,
 
                     y:
                         72+
-                        Math.sin(angle)*12,
+                        Math.sin(angle)*
+                        12,
 
                     vx:0,
                     vy:0,
@@ -2970,9 +3089,13 @@ function renderTama(){
                     targetX:null,
                     targetY:null,
 
+                    /*
+                       기존보다 훨씬 느리게.
+                       걸어다니는 느낌으로 설정.
+                    */
                     maxSpeed:
-                        4+
-                        Math.random()*2.5,
+                        0.85+
+                        Math.random()*.45,
 
                     dragging:false,
                     sleeping:false,
@@ -2983,8 +3106,8 @@ function renderTama(){
 
                     nextSpeech:
                         performance.now()+
-                        4000+
-                        Math.random()*5000,
+                        5000+
+                        Math.random()*7000,
 
                     nextInteraction:0,
 
@@ -3010,7 +3133,6 @@ function renderTama(){
     );
 }
 
-
 /* ==================================================
    다마고치 감자 DOM
 ================================================== */
@@ -3018,9 +3140,12 @@ function renderTama(){
 function createTamaPotato(obj){
 
     const el=
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    el.className="tamaPotato";
+    el.className=
+        "tamaPotato";
 
     el.dataset.name=
         obj.data.name;
@@ -3048,13 +3173,17 @@ function createTamaPotato(obj){
         obj.y+"%";
 
     const tama=
-        document.getElementById("tama");
+        document.getElementById(
+            "tama"
+        );
 
     tama.appendChild(el);
 
-    enableLongPress(el,obj);
+    enableLongPress(
+        el,
+        obj
+    );
 }
-
 
 /* ==================================================
    기본 기능 차단
@@ -3073,8 +3202,12 @@ function createTamaPotato(obj){
             eventName,
             e=>{
                 if(
-                    e.target.closest(".tama") ||
-                    e.target.closest(".petStage")
+                    e.target.closest(
+                        ".tama"
+                    ) ||
+                    e.target.closest(
+                        ".petStage"
+                    )
                 ){
                     e.preventDefault();
                 }
@@ -3091,8 +3224,12 @@ document.addEventListener(
     "touchstart",
     e=>{
         if(
-            e.target.closest(".tamaPotato") ||
-            e.target.closest(".petImage")
+            e.target.closest(
+                ".tamaPotato"
+            ) ||
+            e.target.closest(
+                ".petImage"
+            )
         ){
             e.preventDefault();
         }
@@ -3103,12 +3240,15 @@ document.addEventListener(
     }
 );
 
-
 /* ==================================================
    롱프레스 드래그
+   대장감자 구출 이벤트 포함
 ================================================== */
 
-function enableLongPress(element,obj){
+function enableLongPress(
+    element,
+    obj
+){
 
     let pointerId=null;
 
@@ -3127,7 +3267,8 @@ function enableLongPress(element,obj){
 
             e.preventDefault();
 
-            pointerId=e.pointerId;
+            pointerId=
+                e.pointerId;
 
             startX=e.clientX;
             startY=e.clientY;
@@ -3136,7 +3277,9 @@ function enableLongPress(element,obj){
             dragging=false;
 
             try{
-                element.setPointerCapture(pointerId);
+                element.setPointerCapture(
+                    pointerId
+                );
             }catch(err){}
 
             longPressTimer=
@@ -3150,20 +3293,42 @@ function enableLongPress(element,obj){
                         obj.vx=0;
                         obj.vy=0;
 
-                        element.classList.add("selected");
+                        element.classList.add(
+                            "selected"
+                        );
+
+                        /* 대장을 들었을 때 */
+                        if(
+                            obj.data.style===
+                            "leader"
+                        ){
+
+                            game.leaderHeld=true;
+                            game.leaderRescueMode=true;
+
+                            element.classList.add(
+                                "leaderHeld"
+                            );
+
+                            startLeaderRescue(obj);
+                        }
 
                     },
                     400
                 );
         },
-        {passive:false}
+        {
+            passive:false
+        }
     );
 
     element.addEventListener(
         "pointermove",
         e=>{
 
-            if(e.pointerId!==pointerId)
+            if(
+                e.pointerId!==pointerId
+            )
                 return;
 
             e.preventDefault();
@@ -3174,34 +3339,42 @@ function enableLongPress(element,obj){
             const dy=
                 e.clientY-startY;
 
-            if(Math.hypot(dx,dy)>8){
+            if(
+                Math.hypot(dx,dy)>8
+            ){
                 moved=true;
             }
 
             if(!dragging){
 
                 if(moved){
-                    clearTimeout(longPressTimer);
+                    clearTimeout(
+                        longPressTimer
+                    );
                 }
 
                 return;
             }
 
             const tama=
-                document.getElementById("tama");
+                document.getElementById(
+                    "tama"
+                );
 
             const rect=
                 tama.getBoundingClientRect();
 
             let x=
                 (
-                    (e.clientX-rect.left)/
+                    (e.clientX-
+                    rect.left)/
                     rect.width
                 )*100;
 
             let y=
                 (
-                    (e.clientY-rect.top)/
+                    (e.clientY-
+                    rect.top)/
                     rect.height
                 )*100;
 
@@ -3216,18 +3389,40 @@ function enableLongPress(element,obj){
 
             updateTamaDOM(obj);
 
+            /*
+               대장을 들고 움직이면
+               다른 감자들이 즉시 대장을 따라감
+            */
+            if(
+                obj.data.style===
+                "leader"
+            ){
+
+                game.leaderHeld=true;
+
+                updateLeaderFollowing(
+                    true
+                );
+            }
+
         },
-        {passive:false}
+        {
+            passive:false
+        }
     );
 
     function finish(e){
 
-        if(e.pointerId!==pointerId)
+        if(
+            e.pointerId!==pointerId
+        )
             return;
 
         e.preventDefault();
 
-        clearTimeout(longPressTimer);
+        clearTimeout(
+            longPressTimer
+        );
 
         if(dragging){
 
@@ -3235,14 +3430,32 @@ function enableLongPress(element,obj){
 
             dragging=false;
 
-            element.classList.remove("selected");
+            element.classList.remove(
+                "selected"
+            );
+
+            if(
+                obj.data.style===
+                "leader"
+            ){
+
+                game.leaderHeld=false;
+                game.leaderRescueMode=false;
+
+                element.classList.remove(
+                    "leaderHeld"
+                );
+
+                finishLeaderRescue(
+                    obj
+                );
+            }
 
             tamaReaction(obj);
 
         }else if(!moved){
 
             tamaReaction(obj);
-
         }
 
         pointerId=null;
@@ -3251,32 +3464,43 @@ function enableLongPress(element,obj){
     element.addEventListener(
         "pointerup",
         finish,
-        {passive:false}
+        {
+            passive:false
+        }
     );
 
     element.addEventListener(
         "pointercancel",
         finish,
-        {passive:false}
+        {
+            passive:false
+        }
     );
 }
-
 
 /* ==================================================
    좌표
 ================================================== */
 
 function clampTamaX(x){
+
     return Math.max(
         8,
-        Math.min(92,x)
+        Math.min(
+            92,
+            x
+        )
     );
 }
 
 function clampTamaY(y){
+
     return Math.max(
         50,
-        Math.min(89,y)
+        Math.min(
+            89,
+            y
+        )
     );
 }
 
@@ -3288,21 +3512,29 @@ function distanceBetween(a,b){
     );
 }
 
-function randomRange(min,max){
+function randomRange(
+    min,
+    max
+){
 
     return min+
-        Math.random()*(max-min);
+        Math.random()*
+        (max-min);
 }
-
 
 /* ==================================================
    랜덤 대사
-   같은 대사가 바로 연속해서 나오지 않게 함
 ================================================== */
 
-function randomDialogue(array,obj){
+function randomDialogue(
+    array,
+    obj
+){
 
-    if(!array||!array.length)
+    if(
+        !array||
+        !array.length
+    )
         return "";
 
     if(array.length===1)
@@ -3317,14 +3549,16 @@ function randomDialogue(array,obj){
         result=
             array[
                 Math.floor(
-                    Math.random()*array.length
+                    Math.random()*
+                    array.length
                 )
             ];
 
         tries++;
 
     }while(
-        result===obj.lastDialogue &&
+        result===
+        obj.lastDialogue &&
         tries<10
     );
 
@@ -3333,19 +3567,21 @@ function randomDialogue(array,obj){
     return result;
 }
 
-
 function random(array){
 
-    if(!array||array.length===0)
+    if(
+        !array||
+        array.length===0
+    )
         return "";
 
     return array[
         Math.floor(
-            Math.random()*array.length
+            Math.random()*
+            array.length
         )
     ];
 }
-
 
 /* ==================================================
    DOM 위치
@@ -3356,13 +3592,15 @@ function getTamaElement(obj){
     return [
         ...document
             .getElementById("tama")
-            .querySelectorAll(".tamaPotato")
+            .querySelectorAll(
+                ".tamaPotato"
+            )
     ].find(
         el=>
-            el.dataset.id===obj.id
+            el.dataset.id===
+            obj.id
     );
 }
-
 
 function updateTamaDOM(obj){
 
@@ -3379,7 +3617,6 @@ function updateTamaDOM(obj){
         obj.y+"%";
 }
 
-
 /* ==================================================
    초기 목표
 ================================================== */
@@ -3387,25 +3624,70 @@ function updateTamaDOM(obj){
 function chooseInitialTarget(obj){
 
     obj.targetX=
-        randomRange(15,85);
+        randomRange(
+            15,
+            85
+        );
 
     obj.targetY=
-        randomRange(57,84);
+        randomRange(
+            57,
+            84
+        );
 }
-
 
 /* ==================================================
    AI 목표
 ================================================== */
 
-function chooseAITarget(obj,now){
+function chooseAITarget(
+    obj,
+    now
+){
 
     if(
         obj.sleeping||
         obj.dragging||
-        now<obj.stunnedUntil
+        now<obj.stunnedUntil||
+        game.dialogueLock
     )
         return;
+
+    /* 대장을 들고 있는 동안 */
+    if(
+        game.leaderHeld &&
+        obj.data.style!=="leader"
+    ){
+
+        const leader=
+            game.tamaPotatoes.find(
+                x=>
+                    x.data.style===
+                    "leader"
+            );
+
+        if(leader){
+
+            const offset=
+                formationOffset(
+                    obj
+                );
+
+            obj.targetX=
+                clampTamaX(
+                    leader.x+
+                    offset.x
+                );
+
+            obj.targetY=
+                clampTamaY(
+                    leader.y+
+                    offset.y
+                );
+
+            return;
+        }
+    }
 
     const style=
         obj.data.style;
@@ -3427,34 +3709,46 @@ function chooseAITarget(obj,now){
 
             avgX=
                 others.reduce(
-                    (sum,x)=>sum+x.x,
+                    (sum,x)=>
+                        sum+x.x,
                     0
-                )/others.length;
+                )/
+                others.length;
 
             avgY=
                 others.reduce(
-                    (sum,x)=>sum+x.y,
+                    (sum,x)=>
+                        sum+x.y,
                     0
-                )/others.length;
+                )/
+                others.length;
         }
 
-        let dx=obj.x-avgX;
-        let dy=obj.y-avgY;
+        let dx=
+            obj.x-avgX;
+
+        let dy=
+            obj.y-avgY;
 
         const len=
-            Math.hypot(dx,dy)||1;
+            Math.hypot(
+                dx,
+                dy
+            )||1;
 
         dx/=len;
         dy/=len;
 
         obj.targetX=
             clampTamaX(
-                obj.x+dx*25
+                obj.x+
+                dx*18
             );
 
         obj.targetY=
             clampTamaY(
-                obj.y+dy*20
+                obj.y+
+                dy*14
             );
 
         return;
@@ -3466,32 +3760,39 @@ function chooseAITarget(obj,now){
         const toxic=
             game.tamaPotatoes.find(
                 x=>
-                    x.data.style==="toxic"
+                    x.data.style===
+                    "toxic"
             );
 
         if(toxic){
 
             const angle=
-                Math.random()*Math.PI*2;
+                Math.random()*
+                Math.PI*2;
 
             const radius=
-                8+Math.random()*9;
+                9+
+                Math.random()*7;
 
             obj.targetX=
                 clampTamaX(
                     toxic.x+
-                    Math.cos(angle)*radius
+                    Math.cos(angle)*
+                    radius
                 );
 
             obj.targetY=
                 clampTamaY(
                     toxic.y+
-                    Math.sin(angle)*radius
+                    Math.sin(angle)*
+                    radius
                 );
 
         }else{
 
-            chooseInitialTarget(obj);
+            chooseInitialTarget(
+                obj
+            );
         }
 
         return;
@@ -3501,10 +3802,16 @@ function chooseAITarget(obj,now){
     if(style==="leader"){
 
         obj.targetX=
-            randomRange(18,82);
+            randomRange(
+                25,
+                75
+            );
 
         obj.targetY=
-            randomRange(58,83);
+            randomRange(
+                60,
+                82
+            );
 
         return;
     }
@@ -3515,22 +3822,34 @@ function chooseAITarget(obj,now){
         const leader=
             game.tamaPotatoes.find(
                 x=>
-                    x.data.style==="leader"
+                    x.data.style===
+                    "leader"
             );
 
         if(leader){
 
+            const offset=
+                formationOffset(
+                    obj
+                );
+
             obj.targetX=
-                leader.x+
-                randomRange(-10,10);
+                clampTamaX(
+                    leader.x+
+                    offset.x
+                );
 
             obj.targetY=
-                leader.y+
-                randomRange(-7,7);
+                clampTamaY(
+                    leader.y+
+                    offset.y
+                );
 
         }else{
 
-            chooseInitialTarget(obj);
+            chooseInitialTarget(
+                obj
+            );
         }
 
         return;
@@ -3552,31 +3871,81 @@ function chooseAITarget(obj,now){
                 random(others);
 
             obj.targetX=
-                other.x+
-                randomRange(-7,7);
+                clampTamaX(
+                    other.x+
+                    randomRange(
+                        -10,
+                        10
+                    )
+                );
 
             obj.targetY=
-                other.y+
-                randomRange(-7,7);
+                clampTamaY(
+                    other.y+
+                    randomRange(
+                        -7,
+                        7
+                    )
+                );
 
         }else{
 
-            chooseInitialTarget(obj);
+            chooseInitialTarget(
+                obj
+            );
         }
     }
 }
 
+/* ==================================================
+   대장 주변의 감자 위치
+   서로 겹치지 않도록 작은 편대 형태
+================================================== */
+
+function formationOffset(obj){
+
+    const others=
+        game.tamaPotatoes.filter(
+            x=>
+                x!==obj &&
+                x.data.style!=="toxic"
+        );
+
+    const index=
+        Math.max(
+            0,
+            others.indexOf(obj)
+        );
+
+    const positions=[
+        {x:-11,y:3},
+        {x:11,y:3},
+        {x:-7,y:10},
+        {x:7,y:10},
+        {x:-15,y:10},
+        {x:15,y:10}
+    ];
+
+    return positions[
+        index%
+        positions.length
+    ];
+}
 
 /* ==================================================
    대장 추종
+   대장을 들고 있으면 최우선
 ================================================== */
 
-function updateLeaderFollowing(){
+function updateLeaderFollowing(
+    held=false
+){
 
     const leader=
         game.tamaPotatoes.find(
             obj=>
-                obj.data.style==="leader"
+                obj.data.style===
+                "leader"
         );
 
     if(!leader)
@@ -3588,26 +3957,244 @@ function updateLeaderFollowing(){
             if(
                 obj===leader||
                 obj.dragging||
-                obj.sleeping||
+                obj.sleeping
+            )
+                return;
+
+            /*
+               대장을 들고 있으면
+               독감자와 폭력감자까지
+               일단 대장 위치를 우선적으로 본다.
+            */
+            if(held){
+
+                const offset=
+                    formationOffset(
+                        obj
+                    );
+
+                obj.targetX=
+                    clampTamaX(
+                        leader.x+
+                        offset.x
+                    );
+
+                obj.targetY=
+                    clampTamaY(
+                        leader.y+
+                        offset.y
+                    );
+
+                obj.nextDecision=
+                    performance.now()+
+                    1000;
+
+                return;
+            }
+
+            /*
+               평소에는 독감자와 폭력감자를
+               강제로 따라가게 하지 않음.
+            */
+            if(
                 obj.data.style==="toxic"||
                 obj.data.style==="violent"
             )
                 return;
 
+            const offset=
+                formationOffset(
+                    obj
+                );
+
             obj.targetX=
-                leader.x+
-                randomRange(-12,12);
+                clampTamaX(
+                    leader.x+
+                    offset.x
+                );
 
             obj.targetY=
-                leader.y+
-                randomRange(-8,8);
+                clampTamaY(
+                    leader.y+
+                    offset.y
+                );
         }
     );
 }
 
+/* ==================================================
+   대장 구출 시작
+================================================== */
+
+function startLeaderRescue(
+    leader
+){
+
+    const followers=
+        game.tamaPotatoes.filter(
+            obj=>
+                obj!==leader &&
+                !obj.sleeping
+        );
+
+    if(!followers.length)
+        return;
+
+    game.dialogueLock=true;
+
+    game.dialogueUntil=
+        performance.now()+
+        1700;
+
+    followers.forEach(
+        (obj,index)=>{
+
+            obj.targetX=
+                clampTamaX(
+                    leader.x+
+                    randomRange(
+                        -12,
+                        12
+                    )
+                );
+
+            obj.targetY=
+                clampTamaY(
+                    leader.y+
+                    randomRange(
+                        -8,
+                        8
+                    )
+                );
+
+            obj.vx=0;
+            obj.vy=0;
+
+            const lines=[
+                "대장! 안 돼!",
+                "대장! 어디 가!",
+                "대장을 구해야 해!",
+                "대장님! 기다려!",
+                "대장! 잡혀갔다!",
+                "대장을 놓아줘!",
+                "대장! 우리가 갈게!",
+                "대장! 괜찮아?",
+                "대장님을 구하자!",
+                "대장이 위험해!"
+            ];
+
+            setTimeout(
+                ()=>{
+                    showTamaSpeech(
+                        obj,
+                        randomDialogue(
+                            lines,
+                            obj
+                        )
+                    );
+
+                    showTamaEmotion(
+                        obj,
+                        random([
+                            "😱",
+                            "😭",
+                            "💦",
+                            "⚠️",
+                            "🏃"
+                        ])
+                    );
+                },
+                index*180
+            );
+        }
+    );
+
+    setTimeout(
+        ()=>{
+            game.dialogueLock=false;
+        },
+        1800
+    );
+}
+
+/* ==================================================
+   대장 구출 종료
+================================================== */
+
+function finishLeaderRescue(
+    leader
+){
+
+    const followers=
+        game.tamaPotatoes.filter(
+            obj=>
+                obj!==leader &&
+                !obj.sleeping
+        );
+
+    if(!followers.length)
+        return;
+
+    game.dialogueLock=true;
+
+    game.dialogueUntil=
+        performance.now()+
+        1500;
+
+    followers.forEach(
+        (obj,index)=>{
+
+            setTimeout(
+                ()=>{
+
+                    showTamaSpeech(
+                        obj,
+                        randomDialogue(
+                            [
+                                "대장 괜찮아?",
+                                "다행이다!",
+                                "대장 무사했구나!",
+                                "휴... 놀랐잖아!",
+                                "다시는 혼자 가지 마!",
+                                "대장을 지켜야 해!",
+                                "대장 곁에 있을게.",
+                                "무사해서 다행이야!"
+                            ],
+                            obj
+                        )
+                    );
+
+                    showTamaEmotion(
+                        obj,
+                        random([
+                            "❤️",
+                            "🥺",
+                            "😮‍💨",
+                            "🫡"
+                        ])
+                    );
+
+                },
+                index*160
+            );
+        }
+    );
+
+    setTimeout(
+        ()=>{
+            game.dialogueLock=false;
+
+            updateLeaderFollowing(
+                false
+            );
+        },
+        1600
+    );
+}
 
 /* ==================================================
    부드러운 이동
+   느린 걷기 + 대화 중 정지
 ================================================== */
 
 function updateTamaMovement(
@@ -3618,9 +4205,27 @@ function updateTamaMovement(
 
     if(
         obj.sleeping||
-        obj.dragging
-    )
+        obj.dragging||
+        game.dialogueLock
+    ){
+
+        if(game.dialogueLock){
+
+            obj.vx*=.7;
+            obj.vy*=.7;
+
+            const el=
+                getTamaElement(obj);
+
+            if(el){
+                el.classList.remove(
+                    "walking"
+                );
+            }
+        }
+
         return;
+    }
 
     if(now<obj.stunnedUntil){
 
@@ -3645,18 +4250,32 @@ function updateTamaMovement(
         return;
 
     let dx=
-        obj.targetX-obj.x;
+        obj.targetX-
+        obj.x;
 
     let dy=
-        obj.targetY-obj.y;
+        obj.targetY-
+        obj.y;
 
     const dist=
-        Math.hypot(dx,dy);
+        Math.hypot(
+            dx,
+            dy
+        );
 
-    if(dist<1.8){
+    if(dist<1.5){
 
-        obj.vx*=.88;
-        obj.vy*=.88;
+        obj.vx*=.82;
+        obj.vy*=.82;
+
+        const el=
+            getTamaElement(obj);
+
+        if(el){
+            el.classList.remove(
+                "walking"
+            );
+        }
 
         return;
     }
@@ -3667,22 +4286,35 @@ function updateTamaMovement(
     let speed=
         obj.maxSpeed;
 
+    /*
+       각 감자별 속도 차이를 아주 작게.
+       전부 뛰어다니는 것처럼 보이는 문제 제거.
+    */
     if(obj.data.style==="dummy")
-        speed*=.48;
+        speed*=.75;
 
     if(obj.data.style==="toxic")
-        speed*=1.12;
+        speed*=.85;
 
     if(obj.data.style==="violent")
-        speed*=1.15;
+        speed*=1.05;
 
-    const acceleration=.065;
+    if(
+        game.leaderHeld &&
+        obj.data.style!=="leader"
+    ){
+        speed*=1.15;
+    }
+
+    const acceleration=.025;
 
     obj.vx+=
-        dx*acceleration;
+        dx*
+        acceleration;
 
     obj.vy+=
-        dy*acceleration;
+        dy*
+        acceleration;
 
     const velocity=
         Math.hypot(
@@ -3693,10 +4325,14 @@ function updateTamaMovement(
     if(velocity>speed){
 
         obj.vx=
-            obj.vx/velocity*speed;
+            obj.vx/
+            velocity*
+            speed;
 
         obj.vy=
-            obj.vy/velocity*speed;
+            obj.vy/
+            velocity*
+            speed;
     }
 
     const frameScale=
@@ -3706,17 +4342,21 @@ function updateTamaMovement(
         );
 
     obj.x+=
-        obj.vx*frameScale;
+        obj.vx*
+        frameScale;
 
     obj.y+=
-        obj.vy*frameScale;
+        obj.vy*
+        frameScale;
 
     if(obj.x<8){
 
         obj.x=8;
 
         obj.vx=
-            Math.abs(obj.vx);
+            Math.abs(
+                obj.vx
+            );
     }
 
     if(obj.x>92){
@@ -3724,7 +4364,9 @@ function updateTamaMovement(
         obj.x=92;
 
         obj.vx=
-            -Math.abs(obj.vx);
+            -Math.abs(
+                obj.vx
+            );
     }
 
     if(obj.y<50){
@@ -3732,7 +4374,9 @@ function updateTamaMovement(
         obj.y=50;
 
         obj.vy=
-            Math.abs(obj.vy);
+            Math.abs(
+                obj.vy
+            );
     }
 
     if(obj.y>89){
@@ -3740,7 +4384,9 @@ function updateTamaMovement(
         obj.y=89;
 
         obj.vy=
-            -Math.abs(obj.vy);
+            -Math.abs(
+                obj.vy
+            );
     }
 
     const el=
@@ -3748,7 +4394,7 @@ function updateTamaMovement(
 
     if(el){
 
-        if(velocity>.25){
+        if(velocity>.08){
 
             el.classList.add(
                 "walking"
@@ -3765,6 +4411,124 @@ function updateTamaMovement(
     updateTamaDOM(obj);
 }
 
+/* ==================================================
+   감자끼리 너무 겹치지 않게
+   밀어내기는 아주 약하게만 적용
+================================================== */
+
+function keepPotatoesSeparated(){
+
+    const list=
+        game.tamaPotatoes;
+
+    for(
+        let i=0;
+        i<list.length;
+        i++
+    ){
+
+        const a=list[i];
+
+        if(
+            a.sleeping||
+            a.dragging
+        )
+            continue;
+
+        for(
+            let j=i+1;
+            j<list.length;
+            j++
+        ){
+
+            const b=list[j];
+
+            if(
+                b.sleeping||
+                b.dragging
+            )
+                continue;
+
+            /*
+               독감자는 사람을 피하려고 하므로
+               별도의 간격을 유지.
+            */
+            const toxicPair=
+                a.data.style==="toxic"||
+                b.data.style==="toxic";
+
+            const minDistance=
+                toxicPair
+                ? 12
+                : 6.5;
+
+            const d=
+                distanceBetween(
+                    a,
+                    b
+                );
+
+            if(
+                d>0 &&
+                d<minDistance
+            ){
+
+                let dx=
+                    a.x-b.x;
+
+                let dy=
+                    a.y-b.y;
+
+                const len=
+                    Math.hypot(
+                        dx,
+                        dy
+                    )||1;
+
+                dx/=len;
+                dy/=len;
+
+                const push=
+                    (
+                        minDistance-d
+                    )*
+                    (
+                        toxicPair
+                        ? .025
+                        : .012
+                    );
+
+                /*
+                   같은 곳에 있어도 괜찮게
+                   아주 조금만 분리.
+                */
+                a.x=
+                    clampTamaX(
+                        a.x+
+                        dx*push
+                    );
+
+                a.y=
+                    clampTamaY(
+                        a.y+
+                        dy*push
+                    );
+
+                b.x=
+                    clampTamaX(
+                        b.x-
+                        dx*push
+                    );
+
+                b.y=
+                    clampTamaY(
+                        b.y-
+                        dy*push
+                    );
+            }
+        }
+    }
+}
 
 /* ==================================================
    감자끼리 상호작용
@@ -3775,11 +4539,26 @@ function processPotatoInteractions(now){
     const list=
         game.tamaPotatoes;
 
-    for(let i=0;i<list.length;i++){
+    /*
+       대장을 들고 있으면
+       기존 대화보다 구출 행동을 우선.
+    */
+    if(game.leaderHeld)
+        return;
+
+    for(
+        let i=0;
+        i<list.length;
+        i++
+    ){
 
         const a=list[i];
 
-        for(let j=i+1;j<list.length;j++){
+        for(
+            let j=i+1;
+            j<list.length;
+            j++
+        ){
 
             const b=list[j];
 
@@ -3792,10 +4571,13 @@ function processPotatoInteractions(now){
                 continue;
 
             const distance=
-                distanceBetween(a,b);
+                distanceBetween(
+                    a,
+                    b
+                );
 
             if(
-                distance<11&&
+                distance<10 &&
                 now>
                 Math.max(
                     a.nextInteraction,
@@ -3809,52 +4591,761 @@ function processPotatoInteractions(now){
                     now
                 );
             }
-
-            if(
-                distance<7&&
-                distance>0
-            ){
-
-                let dx=a.x-b.x;
-                let dy=a.y-b.y;
-
-                const len=
-                    Math.hypot(dx,dy)||1;
-
-                dx/=len;
-                dy/=len;
-
-                const push=
-                    (7-distance)*.05;
-
-                a.vx+=dx*push;
-                a.vy+=dy*push;
-
-                b.vx-=dx*push;
-                b.vy-=dy*push;
-            }
         }
     }
 }
 
+/* ==================================================
+   2인 대화용 추가 대사
+================================================== */
+
+const TWO_PERSON_DIALOGUES={
+
+    social_social:[
+        ["꾼감자","친구다! 같이 가자!"],
+        ["꾼감자","오늘도 같이 다니자!"],
+        ["꾼감자","너랑 있으면 재밌어!"],
+        ["꾼감자","우리 어디 가볼까?"],
+        ["꾼감자","같이 있자!"],
+        ["꾼감자","친구가 있어서 좋아!"]
+    ],
+
+    leader_social:[
+        ["leader","잘 따라오고 있나?"],
+        ["social","응! 같이 갈게!"],
+        ["leader","좋다. 함께 이동하지."],
+        ["social","대장 따라가면 되지?"],
+        ["leader","주변을 잘 살펴라."],
+        ["social","알겠어!"],
+        ["leader","오늘도 기분이 좋아 보이는군."],
+        ["social","대장도 좋아 보여!"]
+    ],
+
+    leader_dummy:[
+        ["leader","내 뒤를 따라와."],
+        ["dummy","응... 천천히 갈게."],
+        ["leader","길을 잃지 마라."],
+        ["dummy","대장만 따라가면 되지?"],
+        ["leader","그래. 내가 앞장선다."],
+        ["dummy","헤헤... 든든하다."],
+        ["leader","괜찮다. 함께 가자."],
+        ["dummy","응! 같이 갈래."]
+    ],
+
+    social_dummy:[
+        ["social","같이 놀래?"],
+        ["dummy","응... 뭐 하고 놀아?"],
+        ["social","그냥 같이 돌아다니자!"],
+        ["dummy","헤헤... 좋아."],
+        ["social","오늘 친구 많이 생겼다!"],
+        ["dummy","친구... 맞지?"],
+        ["social","당연하지!"],
+        ["dummy","그럼 나도 좋아."]
+    ],
+
+    violent_social:[
+        ["violent","야! 같이 뛰자!"],
+        ["social","좋아! 어디로 갈까?"],
+        ["violent","저쪽으로 가자!"],
+        ["social","응! 같이 가자!"],
+        ["violent","오늘 재밌겠다!"],
+        ["social","너랑 놀면 재밌어!"]
+    ],
+
+    violent_dummy:[
+        ["violent","야! 너 같이 갈래?"],
+        ["dummy","어... 어디 가는데?"],
+        ["violent","그냥 따라와!"],
+        ["dummy","알겠어..."],
+        ["violent","느려! 빨리 와!"],
+        ["dummy","천천히 가면 안 돼?"]
+    ],
+
+    leader_violent:[
+        ["leader","대열을 유지해라."],
+        ["violent","알았어! 근데 좀 뛰어도 되지?"],
+        ["leader","너무 멀리 가지 마라."],
+        ["violent","조금만!"],
+        ["leader","정찰은 좋지만 조심하도록."],
+        ["violent","알겠어!"]
+    ],
+
+    toxic_social:[
+        ["social","같이 놀자!"],
+        ["toxic","가까이 오지 마."],
+        ["social","조금만 같이 있으면 안 돼?"],
+        ["toxic","조금만 떨어져 있어."],
+        ["social","알겠어... 그래도 친구야!"],
+        ["toxic","...마음대로 해."]
+    ],
+
+    toxic_dummy:[
+        ["dummy","같이 가도 돼?"],
+        ["toxic","너무 가까이 오지 마."],
+        ["dummy","응... 조금 떨어질게."],
+        ["toxic","그 정도면 괜찮아."],
+        ["dummy","헤헤... 다행이다."],
+        ["toxic","조용히 있으면 더 좋고."]
+    ],
+
+    toxic_leader:[
+        ["leader","주변에 너무 가까이 가지 마라."],
+        ["toxic","나도 알고 있어."],
+        ["leader","다른 감자들에게 너무 날카롭게 굴지 마라."],
+        ["toxic","내가 알아서 할게."],
+        ["leader","좋다. 서로 적당한 거리를 유지하도록."],
+        ["toxic","그건 마음에 드네."]
+    ],
+
+    toxic_violent:[
+        ["violent","독감자! 거기 있었냐!"],
+        ["toxic","시끄럽네."],
+        ["violent","오늘은 뭐 할까?"],
+        ["toxic","조용히 있으면 좋겠는데."],
+        ["violent","그래도 같이 있자!"],
+        ["toxic","...네가 아니면 괜찮아."]
+    ]
+};
+
+/* ==================================================
+   3인 대화
+================================================== */
+
+const THREE_PERSON_DIALOGUES=[
+
+    {
+        styles:["leader","dummy","social"],
+        lines:[
+            ["leader","전원 이쪽으로 이동한다."],
+            ["dummy","응... 나도 갈게."],
+            ["social","나도 같이 갈래!"],
+            ["leader","좋다. 모두 따라오도록."],
+            ["dummy","대장 뒤에 있으면 돼?"],
+            ["social","응! 같이 가자!"]
+        ]
+    },
+
+    {
+        styles:["leader","dummy","violent"],
+        lines:[
+            ["leader","너무 앞서가지 마라."],
+            ["violent","알았어!"],
+            ["dummy","나도 천천히 갈게."],
+            ["leader","좋다. 셋이 함께 움직인다."],
+            ["violent","그래도 조금 뛰면 안 돼?"],
+            ["leader","조금만 허용하지."],
+            ["dummy","나는 천천히 갈래..."]
+        ]
+    },
+
+    {
+        styles:["leader","social","violent"],
+        lines:[
+            ["violent","대장! 저쪽 가보자!"],
+            ["leader","좋다. 단, 질서를 지켜라."],
+            ["social","나도 같이 갈래!"],
+            ["violent","셋이 같이 가자!"],
+            ["leader","좋다. 전원 이동."],
+            ["social","재밌겠다!"]
+        ]
+    },
+
+    {
+        styles:["social","dummy","violent"],
+        lines:[
+            ["social","우리 셋이 같이 놀자!"],
+            ["violent","좋아! 뭐 할까?"],
+            ["dummy","음... 나는 그냥 따라갈게."],
+            ["social","그럼 같이 돌아다니자!"],
+            ["violent","좋아! 빨리 가자!"],
+            ["dummy","천천히 가자..."]
+        ]
+    },
+
+    {
+        styles:["toxic","violent","social"],
+        lines:[
+            ["violent","다 같이 있네!"],
+            ["social","응! 같이 놀자!"],
+            ["toxic","너희는 너무 시끄러워."],
+            ["violent","시끄러운 게 재밌지!"],
+            ["social","독감자도 같이 있으면 재밌어!"],
+            ["toxic","...조금만 조용히 해."],
+            ["violent","알겠어!"],
+            ["social","헤헤!"]
+        ]
+    },
+
+    {
+        styles:["toxic","leader","dummy"],
+        lines:[
+            ["leader","서로 적당한 거리를 유지하도록."],
+            ["toxic","그건 마음에 드네."],
+            ["dummy","나는 대장 가까이 있을래."],
+            ["leader","그래. 내 곁에 있어라."],
+            ["toxic","나는 조금 떨어져 있겠다."],
+            ["dummy","저기서 뭐 하는 거야?"],
+            ["leader","신경 쓰지 말고 따라와."]
+        ]
+    },
+
+    {
+        styles:["toxic","violent","dummy"],
+        lines:[
+            ["violent","야! 같이 가자!"],
+            ["toxic","가까이 오지 마."],
+            ["dummy","나는 어디로 가야 해?"],
+            ["violent","그냥 나 따라와!"],
+            ["toxic","둘 다 조금 떨어져 있어."],
+            ["dummy","응..."],
+            ["violent","알았어!"]
+        ]
+    },
+
+    {
+        styles:["leader","toxic","violent"],
+        lines:[
+            ["leader","둘 다 싸우지 마라."],
+            ["violent","아직 안 싸웠는데!"],
+            ["toxic","쟤가 먼저 시끄럽게 했어."],
+            ["leader","둘 다 조용히."],
+            ["violent","알았어."],
+            ["toxic","흥."],
+            ["leader","좋다. 다시 이동한다."]
+        ]
+    }
+];
+
+/* ==================================================
+   스타일 조합 키
+================================================== */
+
+function getPairKey(
+    a,
+    b
+){
+
+    const styles=[
+        a.data.style,
+        b.data.style
+    ].sort();
+
+    return styles.join("_");
+}
+
+/* ==================================================
+   대화용 스타일 변환
+================================================== */
+
+function styleMatch(
+    obj,
+    style
+){
+
+    return obj.data.style===
+        style;
+}
+
+/* ==================================================
+   2인 대화 실행
+================================================== */
+
+function runTwoPersonDialogue(
+    a,
+    b
+){
+
+    const key=
+        getPairKey(
+            a,
+            b
+        );
+
+    const data=
+        TWO_PERSON_DIALOGUES[key];
+
+    if(
+        !data||
+        !data.length
+    )
+        return false;
+
+    const shuffled=[
+        ...data
+    ];
+
+    /*
+       대사 세트를 랜덤하게 조금 섞음
+    */
+    const selected=
+        random(shuffled);
+
+    /*
+       selected가 두 줄이면
+       첫 감자와 둘째 감자의 순서를
+       실제 감자에 맞게 변경.
+    */
+    if(
+        selected.length>=2
+    ){
+
+        const firstStyle=
+            selected[0][0];
+
+        const secondStyle=
+            selected[1][0];
+
+        let firstObj=null;
+        let secondObj=null;
+
+        if(
+            styleMatch(
+                a,
+                firstStyle
+            )
+        ){
+            firstObj=a;
+        }else if(
+            styleMatch(
+                b,
+                firstStyle
+            )
+        ){
+            firstObj=b;
+        }
+
+        if(
+            styleMatch(
+                a,
+                secondStyle
+            )
+        ){
+            secondObj=a;
+        }else if(
+            styleMatch(
+                b,
+                secondStyle
+            )
+        ){
+            secondObj=b;
+        }
+
+        if(
+            firstObj&&
+            secondObj
+        ){
+
+            freezeForDialogue(
+                [a,b],
+                2300
+            );
+
+            showTamaSpeech(
+                firstObj,
+                selected[0][1]
+            );
+
+            showTamaEmotion(
+                firstObj,
+                random(
+                    emotionSet(
+                        firstObj.data
+                    )
+                )
+            );
+
+            setTimeout(
+                ()=>{
+                    if(
+                        !firstObj.sleeping &&
+                        !firstObj.dragging
+                    ){
+                        showTamaSpeech(
+                            secondObj,
+                            selected[1][1]
+                        );
+
+                        showTamaEmotion(
+                            secondObj,
+                            random(
+                                emotionSet(
+                                    secondObj.data
+                                )
+                            )
+                        );
+                    }
+                },
+                850
+            );
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/* ==================================================
+   3인 대화 실행
+================================================== */
+
+function runThreePersonDialogue(
+    group
+){
+
+    const styles=
+        group
+        .map(
+            obj=>
+                obj.data.style
+        )
+        .sort();
+
+    const script=
+        THREE_PERSON_DIALOGUES.find(
+            item=>
+                [...item.styles]
+                    .sort()
+                    .join("_")===
+                styles.join("_")
+        );
+
+    if(!script)
+        return false;
+
+    freezeForDialogue(
+        group,
+        3600
+    );
+
+    let delay=0;
+
+    script.lines.forEach(
+        line=>{
+
+            const style=
+                line[0];
+
+            const text=
+                line[1];
+
+            const obj=
+                group.find(
+                    x=>
+                        x.data.style===
+                        style
+                );
+
+            if(!obj)
+                return;
+
+            setTimeout(
+                ()=>{
+
+                    if(
+                        obj.sleeping||
+                        obj.dragging
+                    )
+                        return;
+
+                    showTamaSpeech(
+                        obj,
+                        text
+                    );
+
+                    showTamaEmotion(
+                        obj,
+                        random(
+                            emotionSet(
+                                obj.data
+                            )
+                        )
+                    );
+
+                },
+                delay
+            );
+
+            delay+=650;
+        }
+    );
+
+    return true;
+}
+
+/* ==================================================
+   대화 중 감자 정지
+================================================== */
+
+function freezeForDialogue(
+    group,
+    duration
+){
+
+    game.dialogueLock=true;
+
+    game.dialogueUntil=
+        Math.max(
+            game.dialogueUntil,
+            performance.now()+
+            duration
+        );
+
+    group.forEach(
+        obj=>{
+
+            if(
+                obj.sleeping||
+                obj.dragging
+            )
+                return;
+
+            obj.vx=0;
+            obj.vy=0;
+
+            obj.targetX=obj.x;
+            obj.targetY=obj.y;
+
+            const el=
+                getTamaElement(
+                    obj
+                );
+
+            if(el){
+                el.classList.remove(
+                    "walking"
+                );
+            }
+        }
+    );
+}
+
+/* ==================================================
+   2인 / 3인 대화 후보 찾기
+================================================== */
+
+function findNearbyGroup(){
+
+    const active=
+        game.tamaPotatoes.filter(
+            obj=>
+                !obj.sleeping &&
+                !obj.dragging &&
+                obj.data.style!=="toxic"
+        );
+
+    if(active.length<2)
+        return null;
+
+    /*
+       3명이 가까우면 3인 대화를 우선.
+    */
+    for(
+        let i=0;
+        i<active.length;
+        i++
+    ){
+
+        for(
+            let j=i+1;
+            j<active.length;
+            j++
+        ){
+
+            const a=active[i];
+            const b=active[j];
+
+            if(
+                distanceBetween(
+                    a,
+                    b
+                )>13
+            )
+                continue;
+
+            for(
+                let k=j+1;
+                k<active.length;
+                k++
+            ){
+
+                const c=active[k];
+
+                if(
+                    distanceBetween(
+                        a,
+                        c
+                    )<14 &&
+                    distanceBetween(
+                        b,
+                        c
+                    )<14
+                ){
+
+                    const possible=
+                        THREE_PERSON_DIALOGUES.some(
+                            item=>
+                                [...item.styles]
+                                    .sort()
+                                    .join("_")===
+                                [
+                                    a.data.style,
+                                    b.data.style,
+                                    c.data.style
+                                ].sort().join("_")
+                        );
+
+                    if(possible){
+                        return [
+                            a,
+                            b,
+                            c
+                        ];
+                    }
+                }
+            }
+        }
+    }
+
+    /*
+       2인
+    */
+    for(
+        let i=0;
+        i<active.length;
+        i++
+    ){
+
+        for(
+            let j=i+1;
+            j<active.length;
+            j++
+        ){
+
+            const a=active[i];
+            const b=active[j];
+
+            if(
+                distanceBetween(
+                    a,
+                    b
+                )>12
+            )
+                continue;
+
+            const key=
+                getPairKey(
+                    a,
+                    b
+                );
+
+            if(
+                TWO_PERSON_DIALOGUES[key]
+            ){
+                return [
+                    a,
+                    b
+                ];
+            }
+        }
+    }
+
+    return null;
+}
+
+/* ==================================================
+   일반 대화 처리
+================================================== */
+
+function tryGroupDialogue(
+    now
+){
+
+    if(
+        game.dialogueLock||
+        game.leaderHeld||
+        now<game.nextGroupDialogue
+    )
+        return;
+
+    const group=
+        findNearbyGroup();
+
+    if(!group)
+        return;
+
+    let success=false;
+
+    if(group.length===3){
+
+        success=
+            runThreePersonDialogue(
+                group
+            );
+
+    }else{
+
+        success=
+            runTwoPersonDialogue(
+                group[0],
+                group[1]
+            );
+    }
+
+    if(success){
+
+        game.nextGroupDialogue=
+            now+
+            6500+
+            Math.random()*5000;
+    }
+}
 
 /* ==================================================
    만남
-   여기부터 다마고치 전용 대사만 사용
 ================================================== */
 
-function handlePotatoMeeting(a,b,now){
+function handlePotatoMeeting(
+    a,
+    b,
+    now
+){
 
     const cooldown=
         now+
-        1800+
-        Math.random()*2500;
+        2200+
+        Math.random()*3000;
 
-    a.nextInteraction=cooldown;
-    b.nextInteraction=cooldown;
+    a.nextInteraction=
+        cooldown;
 
-    const styleA=a.data.style;
-    const styleB=b.data.style;
+    b.nextInteraction=
+        cooldown;
+
+    const styleA=
+        a.data.style;
+
+    const styleB=
+        b.data.style;
+
+    /*
+       대화 시작하면
+       서로 잠깐 멈춤
+    */
+    if(
+        styleA!=="toxic" &&
+        styleB!=="toxic"
+    ){
+
+        if(
+            runTwoPersonDialogue(
+                a,
+                b
+            )
+        ){
+            return;
+        }
+    }
 
     /* 독감자 관련 */
     if(
@@ -3874,8 +5365,14 @@ function handlePotatoMeeting(a,b,now){
 
         /* 독감자 + 폭력감자 */
         if(
-            target.data.style==="violent"
+            target.data.style===
+            "violent"
         ){
+
+            freezeForDialogue(
+                [a,b],
+                2600
+            );
 
             showTamaSpeech(
                 target,
@@ -3888,7 +5385,9 @@ function handlePotatoMeeting(a,b,now){
                         "오늘은 뭐 할까?",
                         "역시 너야!",
                         "재밌겠다!",
-                        "한판 할래?"
+                        "한판 할래!",
+                        "오늘도 만나서 반갑다!",
+                        "같이 돌아다니자!"
                     ],
                     target
                 )
@@ -3899,43 +5398,60 @@ function handlePotatoMeeting(a,b,now){
                 random([
                     "❤️",
                     "🔥",
-                    "👊"
+                    "👊",
+                    "😆"
                 ])
             );
 
-            showTamaSpeech(
-                toxic,
-                randomDialogue(
-                    [
-                        "...또 너냐.",
-                        "넌 괜찮아.",
-                        "너라면 가까이 와도 돼.",
-                        "오늘은 안 쫓아낼게.",
-                        "흥. 너는 봐준다.",
-                        "시끄럽긴 하지만 싫진 않아.",
-                        "같이 있어도 상관없어.",
-                        "왔냐."
-                    ],
-                    toxic
-                )
-            );
+            setTimeout(
+                ()=>{
+                    if(
+                        !toxic.dragging &&
+                        !toxic.sleeping
+                    ){
 
-            showTamaEmotion(
-                toxic,
-                random([
-                    "😑",
-                    "❤️",
-                    "☠️"
-                ])
+                        showTamaSpeech(
+                            toxic,
+                            randomDialogue(
+                                [
+                                    "...또 너냐.",
+                                    "넌 괜찮아.",
+                                    "너라면 가까이 와도 돼.",
+                                    "오늘은 안 쫓아낼게.",
+                                    "흥. 너는 봐준다.",
+                                    "시끄럽긴 하지만 싫진 않아.",
+                                    "같이 있어도 상관없어.",
+                                    "왔냐.",
+                                    "너는 좀 덜 귀찮군."
+                                ],
+                                toxic
+                            )
+                        );
+
+                        showTamaEmotion(
+                            toxic,
+                            random([
+                                "😑",
+                                "❤️",
+                                "☠️"
+                            ])
+                        );
+                    }
+                },
+                800
             );
 
             return;
         }
 
         /* 10% 스턴 */
-        if(Math.random()<.10){
+        if(
+            Math.random()<.10
+        ){
 
-            stunTama(target);
+            stunTama(
+                target
+            );
 
             showTamaSpeech(
                 toxic,
@@ -3975,7 +5491,11 @@ function handlePotatoMeeting(a,b,now){
             return;
         }
 
-        /* 스턴이 안 걸린 경우 */
+        freezeForDialogue(
+            [a,b],
+            1800
+        );
+
         showTamaSpeech(
             toxic,
             randomDialogue(
@@ -3996,269 +5516,134 @@ function handlePotatoMeeting(a,b,now){
         return;
     }
 
-    /* ==================================================
-       대장 + 저능감자
-    ================================================== */
+    /*
+       기존의 일반 만남
+    */
 
     if(
-        styleA==="leader"&&
-        styleB==="dummy"
+        styleA==="social"
     ){
 
         showTamaSpeech(
             a,
-            random([
-                "따라와라.",
-                "내 뒤를 따라와.",
-                "괜찮다. 천천히 와.",
-                "길을 알려주지.",
-                "대장 옆에 있어라.",
-                "걱정하지 마.",
-                "내가 앞장선다.",
-                "같이 움직이자."
-            ])
+            randomDialogue(
+                a.data.tama.meet,
+                a
+            )
         );
 
-        showTamaSpeech(
-            b,
+        showTamaEmotion(
+            a,
             random([
-                "응... 어디 가?",
-                "알겠어...",
-                "천천히 갈게.",
-                "대장 따라갈게.",
-                "나 안 놓고 갈 거지?",
-                "같이 가자.",
-                "헤헤... 고마워.",
-                "저기 맞아?"
+                "💕",
+                "❤️",
+                "🥰"
             ])
         );
-
-        showTamaEmotion(a,"🫡");
-        showTamaEmotion(b,"🥺");
-
-        a.targetX=b.x;
-        a.targetY=b.y;
-
-        b.targetX=
-            a.x+
-            randomRange(-7,7);
-
-        b.targetY=
-            a.y+
-            randomRange(-5,5);
-
-        return;
     }
 
     if(
-        styleB==="leader"&&
+        styleB==="social"
+    ){
+
+        showTamaSpeech(
+            b,
+            randomDialogue(
+                b.data.tama.meet,
+                b
+            )
+        );
+
+        showTamaEmotion(
+            b,
+            random([
+                "💕",
+                "❤️",
+                "🥰"
+            ])
+        );
+    }
+
+    if(
         styleA==="dummy"
     ){
 
         showTamaSpeech(
+            a,
+            randomDialogue(
+                a.data.tama.meet,
+                a
+            )
+        );
+
+        showTamaEmotion(
+            a,
+            "🥺"
+        );
+    }
+
+    if(
+        styleB==="dummy"
+    ){
+
+        showTamaSpeech(
             b,
+            randomDialogue(
+                b.data.tama.meet,
+                b
+            )
+        );
+
+        showTamaEmotion(
+            b,
+            "🥺"
+        );
+    }
+
+    if(
+        styleA==="violent"
+    ){
+
+        showTamaSpeech(
+            a,
+            randomDialogue(
+                a.data.tama.meet,
+                a
+            )
+        );
+
+        showTamaEmotion(
+            a,
             random([
-                "따라와라.",
-                "내 뒤를 따라와.",
-                "괜찮다. 천천히 와.",
-                "길을 알려주지.",
-                "대장 옆에 있어라.",
-                "걱정하지 마.",
-                "내가 앞장선다.",
-                "같이 움직이자."
+                "💢",
+                "🔥",
+                "👊"
             ])
         );
+    }
+
+    if(
+        styleB==="violent"
+    ){
 
         showTamaSpeech(
-            a,
+            b,
+            randomDialogue(
+                b.data.tama.meet,
+                b
+            )
+        );
+
+        showTamaEmotion(
+            b,
             random([
-                "응... 어디 가?",
-                "알겠어...",
-                "천천히 갈게.",
-                "대장 따라갈게.",
-                "나 안 놓고 갈 거지?",
-                "같이 가자.",
-                "헤헤... 고마워.",
-                "저기 맞아?"
+                "💢",
+                "🔥",
+                "👊"
             ])
-        );
-
-        showTamaEmotion(b,"🫡");
-        showTamaEmotion(a,"🥺");
-
-        b.targetX=a.x;
-        b.targetY=a.y;
-
-        a.targetX=
-            b.x+
-            randomRange(-7,7);
-
-        a.targetY=
-            b.y+
-            randomRange(-5,5);
-
-        return;
-    }
-
-    /* ==================================================
-       꾼감자
-    ================================================== */
-
-    if(styleA==="social"){
-
-        showTamaSpeech(
-            a,
-            randomDialogue(
-                a.data.tama.meet,
-                a
-            )
-        );
-
-        showTamaEmotion(
-            a,
-            random(["💕","❤️","🥰"])
-        );
-    }
-
-    if(styleB==="social"){
-
-        showTamaSpeech(
-            b,
-            randomDialogue(
-                b.data.tama.meet,
-                b
-            )
-        );
-
-        showTamaEmotion(
-            b,
-            random(["💕","❤️","🥰"])
-        );
-    }
-
-    /* ==================================================
-       저능감자
-    ================================================== */
-
-    if(
-        styleA==="dummy"&&
-        styleB!=="toxic"
-    ){
-
-        showTamaSpeech(
-            a,
-            randomDialogue(
-                a.data.tama.meet,
-                a
-            )
-        );
-
-        showTamaEmotion(
-            b,
-            styleB==="violent"
-            ? "❤️"
-            : "💕"
-        );
-    }
-
-    if(
-        styleB==="dummy"&&
-        styleA!=="toxic"
-    ){
-
-        showTamaSpeech(
-            b,
-            randomDialogue(
-                b.data.tama.meet,
-                b
-            )
-        );
-
-        showTamaEmotion(
-            a,
-            styleA==="violent"
-            ? "❤️"
-            : "💕"
-        );
-    }
-
-    /* ==================================================
-       폭력감자 일반 만남
-    ================================================== */
-
-    if(
-        styleA==="violent"&&
-        styleB!=="dummy"
-    ){
-
-        showTamaSpeech(
-            a,
-            randomDialogue(
-                a.data.tama.meet,
-                a
-            )
-        );
-
-        showTamaEmotion(
-            a,
-            random(["💢","🔥","👊"])
-        );
-    }
-
-    if(
-        styleB==="violent"&&
-        styleA!=="dummy"
-    ){
-
-        showTamaSpeech(
-            b,
-            randomDialogue(
-                b.data.tama.meet,
-                b
-            )
-        );
-
-        showTamaEmotion(
-            b,
-            random(["💢","🔥","👊"])
-        );
-    }
-
-    /* ==================================================
-       둘 다 일반적인 경우
-    ================================================== */
-
-    if(
-        styleA!=="social"&&
-        styleA!=="dummy"&&
-        styleA!=="violent"&&
-        styleB!=="leader"
-    ){
-        showTamaSpeech(
-            a,
-            randomDialogue(
-                a.data.tama.meet,
-                a
-            )
-        );
-    }
-
-    if(
-        styleB!=="social"&&
-        styleB!=="dummy"&&
-        styleB!=="violent"&&
-        styleA!=="leader"
-    ){
-        showTamaSpeech(
-            b,
-            randomDialogue(
-                b.data.tama.meet,
-                b
-            )
         );
     }
 }
-
 
 /* ==================================================
    스턴
@@ -4267,23 +5652,29 @@ function handlePotatoMeeting(a,b,now){
 function stunTama(obj){
 
     if(
-        obj.data.style==="violent"
+        obj.data.style===
+        "violent"
     )
         return;
 
     obj.stunnedUntil=
-        performance.now()+3000;
+        performance.now()+
+        3000;
 
     obj.vx=0;
     obj.vy=0;
 
     const el=
-        getTamaElement(obj);
+        getTamaElement(
+            obj
+        );
 
     if(!el)
         return;
 
-    el.classList.add("stunned");
+    el.classList.add(
+        "stunned"
+    );
 
     showTamaEmotion(
         obj,
@@ -4307,14 +5698,17 @@ function stunTama(obj){
 
     setTimeout(
         ()=>{
-            if(el.parentNode){
-                el.classList.remove("stunned");
+            if(
+                el.parentNode
+            ){
+                el.classList.remove(
+                    "stunned"
+                );
             }
         },
         3000
     );
 }
-
 
 /* ==================================================
    다마고치 감자 터치
@@ -4328,10 +5722,13 @@ function tamaReaction(obj){
     )
         return;
 
-    const p=obj.data;
+    const p=
+        obj.data;
 
     const el=
-        getTamaElement(obj);
+        getTamaElement(
+            obj
+        );
 
     if(el){
 
@@ -4343,17 +5740,19 @@ function tamaReaction(obj){
         void el.offsetWidth;
 
         if(Math.random()<.55){
+
             el.classList.add(
                 "reactionJump"
             );
+
         }else{
+
             el.classList.add(
                 "reactionTilt"
             );
         }
     }
 
-    /* 다마고치 전용 touch 대사 */
     showTamaSpeech(
         obj,
         randomDialogue(
@@ -4364,24 +5763,37 @@ function tamaReaction(obj){
 
     showTamaEmotion(
         obj,
-        random(emotionSet(p))
+        random(
+            emotionSet(p)
+        )
     );
 
-    if(p.style==="leader"){
-        makeLeaderFollow(obj);
+    if(
+        p.style==="leader"
+    ){
+
+        makeLeaderFollow(
+            obj
+        );
     }
 
-    if(p.style==="toxic"){
-        toxicAttack(obj);
+    if(
+        p.style==="toxic"
+    ){
+
+        toxicAttack(
+            obj
+        );
     }
 }
-
 
 /* ==================================================
    대장 따라가기
 ================================================== */
 
-function makeLeaderFollow(leader){
+function makeLeaderFollow(
+    leader
+){
 
     if(
         !leader||
@@ -4389,35 +5801,85 @@ function makeLeaderFollow(leader){
     )
         return;
 
-    game.tamaPotatoes.forEach(
-        other=>{
-
-            if(
-                other===leader||
-                other.data.style==="toxic"||
-                other.data.style==="violent"||
-                other.dragging||
-                other.sleeping
-            )
-                return;
-
-            other.targetX=
-                leader.x+
-                randomRange(-10,10);
-
-            other.targetY=
-                leader.y+
-                randomRange(-7,7);
-        }
+    updateLeaderFollowing(
+        false
     );
-}
 
+    /*
+       대장을 직접 눌렀을 때도
+       감자들이 잠깐 모임.
+    */
+    const followers=
+        game.tamaPotatoes.filter(
+            other=>
+                other!==leader &&
+                !other.dragging &&
+                !other.sleeping &&
+                other.data.style!=="toxic" &&
+                other.data.style!=="violent"
+        );
+
+    if(followers.length){
+
+        game.dialogueLock=true;
+
+        game.dialogueUntil=
+            performance.now()+
+            1500;
+
+        followers.slice(
+            0,
+            3
+        ).forEach(
+            (obj,index)=>{
+
+                setTimeout(
+                    ()=>{
+                        showTamaSpeech(
+                            obj,
+                            randomDialogue(
+                                [
+                                    "대장 따라갈래!",
+                                    "대장 어디 가?",
+                                    "나도 같이 갈게!",
+                                    "대장 옆에 있을래.",
+                                    "대장 기다려!",
+                                    "같이 가자!"
+                                ],
+                                obj
+                            )
+                        );
+
+                        showTamaEmotion(
+                            obj,
+                            random([
+                                "🫡",
+                                "💕",
+                                "🥺"
+                            ])
+                        );
+                    },
+                    index*180
+                );
+            }
+        );
+
+        setTimeout(
+            ()=>{
+                game.dialogueLock=false;
+            },
+            1600
+        );
+    }
+}
 
 /* ==================================================
    독감자 공격
 ================================================== */
 
-function toxicAttack(toxic){
+function toxicAttack(
+    toxic
+){
 
     game.tamaPotatoes.forEach(
         other=>{
@@ -4439,12 +5901,13 @@ function toxicAttack(toxic){
                 Math.random()<.10
             ){
 
-                stunTama(other);
+                stunTama(
+                    other
+                );
             }
         }
     );
 }
-
 
 /* ==================================================
    다마고치 말풍선
@@ -4456,7 +5919,9 @@ function showTamaSpeech(
 ){
 
     const tama=
-        document.getElementById("tama");
+        document.getElementById(
+            "tama"
+        );
 
     if(
         obj.speechEl&&
@@ -4466,37 +5931,49 @@ function showTamaSpeech(
     }
 
     const speech=
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     speech.className=
         "tamaSpeech";
 
-    speech.textContent=text;
+    speech.textContent=
+        text;
 
     speech.style.left=
         obj.x+"%";
 
     speech.style.top=
-        (obj.y-11)+"%";
+        (
+            obj.y-11
+        )+"%";
 
-    tama.appendChild(speech);
+    tama.appendChild(
+        speech
+    );
 
-    obj.speechEl=speech;
+    obj.speechEl=
+        speech;
 
     setTimeout(
         ()=>{
-            if(speech.parentNode){
+            if(
+                speech.parentNode
+            ){
                 speech.remove();
             }
 
-            if(obj.speechEl===speech){
+            if(
+                obj.speechEl===
+                speech
+            ){
                 obj.speechEl=null;
             }
         },
         1500
     );
 }
-
 
 /* ==================================================
    다마고치 감정
@@ -4508,27 +5985,38 @@ function showTamaEmotion(
 ){
 
     const tama=
-        document.getElementById("tama");
+        document.getElementById(
+            "tama"
+        );
 
     const emotion=
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     emotion.className=
         "tamaEmotion";
 
-    emotion.textContent=emoji;
+    emotion.textContent=
+        emoji;
 
     emotion.style.left=
         obj.x+"%";
 
     emotion.style.top=
-        (obj.y-2)+"%";
+        (
+            obj.y-2
+        )+"%";
 
-    tama.appendChild(emotion);
+    tama.appendChild(
+        emotion
+    );
 
     setTimeout(
         ()=>{
-            if(emotion.parentNode){
+            if(
+                emotion.parentNode
+            ){
                 emotion.remove();
             }
         },
@@ -4536,21 +6024,23 @@ function showTamaEmotion(
     );
 }
 
-
 /* ==================================================
    다마고치 혼잣말
-   키우기 대사와 완전히 다른 배열 사용
 ================================================== */
 
-function autonomousSpeech(obj){
+function autonomousSpeech(
+    obj
+){
 
     if(
         obj.sleeping||
-        obj.dragging
+        obj.dragging||
+        game.dialogueLock
     )
         return;
 
-    const p=obj.data;
+    const p=
+        obj.data;
 
     showTamaSpeech(
         obj,
@@ -4562,10 +6052,11 @@ function autonomousSpeech(obj){
 
     showTamaEmotion(
         obj,
-        random(emotionSet(p))
+        random(
+            emotionSet(p)
+        )
     );
 }
-
 
 /* ==================================================
    다마고치 쓰다듬기
@@ -4580,19 +6071,23 @@ function tamaPet(){
                 !obj.dragging
         );
 
-    if(!candidates.length)
+    if(
+        !candidates.length
+    )
         return;
 
     const obj=
-        random(candidates);
+        random(
+            candidates
+        );
 
-    tamaReaction(obj);
+    tamaReaction(
+        obj
+    );
 }
-
 
 /* ==================================================
    간식
-   떨어지고 감자가 먹을 때까지 유지
 ================================================== */
 
 function tamaSnack(){
@@ -4603,7 +6098,9 @@ function tamaSnack(){
         return;
 
     const tama=
-        document.getElementById("tama");
+        document.getElementById(
+            "tama"
+        );
 
     const emojis=[
         "🍬",
@@ -4613,12 +6110,19 @@ function tamaSnack(){
         "🍩"
     ];
 
-    for(let i=0;i<8;i++){
+    for(
+        let i=0;
+        i<8;
+        i++
+    ){
 
         const el=
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        el.className="snack";
+        el.className=
+            "snack";
 
         el.textContent=
             random(emojis);
@@ -4649,15 +6153,21 @@ function tamaSnack(){
         el.style.top=
             snack.y+"%";
 
-        tama.appendChild(el);
+        tama.appendChild(
+            el
+        );
 
-        game.tamaSnacks.push(snack);
+        game.tamaSnacks.push(
+            snack
+        );
     }
 
     game.tamaPotatoes.forEach(
         obj=>{
 
-            if(obj.sleeping)
+            if(
+                obj.sleeping
+            )
                 return;
 
             showTamaSpeech(
@@ -4676,15 +6186,18 @@ function tamaSnack(){
     );
 }
 
-
 /* ==================================================
    간식 업데이트
 ================================================== */
 
-function updateSnacks(delta,now){
+function updateSnacks(
+    delta,
+    now
+){
 
     for(
-        let i=game.tamaSnacks.length-1;
+        let i=
+            game.tamaSnacks.length-1;
         i>=0;
         i--
     ){
@@ -4697,7 +6210,10 @@ function updateSnacks(delta,now){
             !snack.element.parentNode
         ){
 
-            game.tamaSnacks.splice(i,1);
+            game.tamaSnacks.splice(
+                i,
+                1
+            );
 
             continue;
         }
@@ -4709,7 +6225,9 @@ function updateSnacks(delta,now){
                 delta/
                 1000;
 
-            if(snack.y>=73){
+            if(
+                snack.y>=73
+            ){
 
                 snack.y=73;
                 snack.landed=true;
@@ -4722,7 +6240,9 @@ function updateSnacks(delta,now){
         snack.element.style.top=
             snack.y+"%";
 
-        if(snack.landed){
+        if(
+            snack.landed
+        ){
 
             let eater=null;
 
@@ -4734,7 +6254,8 @@ function updateSnacks(delta,now){
                     if(
                         obj.sleeping||
                         obj.dragging||
-                        now<obj.stunnedUntil
+                        now<
+                        obj.stunnedUntil
                     )
                         return;
 
@@ -4744,7 +6265,9 @@ function updateSnacks(delta,now){
                             obj.y-snack.y
                         );
 
-                    if(d<closest){
+                    if(
+                        d<closest
+                    ){
 
                         closest=d;
                         eater=obj;
@@ -4776,11 +6299,13 @@ function updateSnacks(delta,now){
                 snack.element.remove();
             }
 
-            game.tamaSnacks.splice(i,1);
+            game.tamaSnacks.splice(
+                i,
+                1
+            );
         }
     }
 }
-
 
 /* ==================================================
    간식 먹기
@@ -4799,7 +6324,10 @@ function eatSnack(
         snack.element.remove();
     }
 
-    game.tamaSnacks.splice(index,1);
+    game.tamaSnacks.splice(
+        index,
+        1
+    );
 
     obj.targetX=null;
     obj.targetY=null;
@@ -4816,12 +6344,14 @@ function eatSnack(
     showTamaEmotion(
         obj,
         obj.data.style==="toxic"
-        ?"😐"
-        :"😋"
+        ? "😐"
+        : "😋"
     );
 
     const el=
-        getTamaElement(obj);
+        getTamaElement(
+            obj
+        );
 
     if(el){
 
@@ -4836,7 +6366,6 @@ function eatSnack(
         );
     }
 }
-
 
 /* ==================================================
    잠
@@ -4853,10 +6382,14 @@ function tamaSleep(){
     game.sleeping=true;
 
     const tama=
-        document.getElementById("tama");
+        document.getElementById(
+            "tama"
+        );
 
     const overlay=
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     overlay.className=
         "sleepOverlay";
@@ -4864,7 +6397,9 @@ function tamaSleep(){
     overlay.textContent=
         "🌙 Zzz...";
 
-    tama.appendChild(overlay);
+    tama.appendChild(
+        overlay
+    );
 
     game.tamaPotatoes.forEach(
         obj=>{
@@ -4887,7 +6422,9 @@ function tamaSleep(){
     setTimeout(
         ()=>{
 
-            if(overlay.parentNode){
+            if(
+                overlay.parentNode
+            ){
                 overlay.remove();
             }
 
@@ -4909,7 +6446,6 @@ function tamaSleep(){
         10000
     );
 }
-
 
 /* ==================================================
    다마고치 RAF
@@ -4941,10 +6477,51 @@ function startTamaLoop(){
                 40
             );
 
-        game.lastTamaTime=now;
+        game.lastTamaTime=
+            now;
 
-        /* 대장 추종 */
-        updateLeaderFollowing();
+        /*
+           대화가 끝났는지 확인
+        */
+        if(
+            game.dialogueLock &&
+            now>=game.dialogueUntil
+        ){
+
+            game.dialogueLock=false;
+
+            game.tamaPotatoes.forEach(
+                obj=>{
+
+                    if(
+                        !obj.sleeping &&
+                        !obj.dragging
+                    ){
+
+                        obj.targetX=null;
+                        obj.targetY=null;
+                        obj.nextDecision=0;
+                    }
+                }
+            );
+        }
+
+        /*
+           대장 최우선 추종
+        */
+        if(
+            game.leaderHeld
+        ){
+
+            updateLeaderFollowing(
+                true
+            );
+        }else{
+
+            updateLeaderFollowing(
+                false
+            );
+        }
 
         /* 감자 이동 */
         game.tamaPotatoes.forEach(
@@ -4955,6 +6532,30 @@ function startTamaLoop(){
                     obj.dragging
                 )
                     return;
+
+                /*
+                   대화 중에는 움직이지 않음
+                */
+                if(
+                    game.dialogueLock
+                ){
+
+                    obj.vx=0;
+                    obj.vy=0;
+
+                    const el=
+                        getTamaElement(
+                            obj
+                        );
+
+                    if(el){
+                        el.classList.remove(
+                            "walking"
+                        );
+                    }
+
+                    return;
+                }
 
                 if(
                     now>
@@ -4968,8 +6569,8 @@ function startTamaLoop(){
 
                     obj.nextDecision=
                         now+
-                        1300+
-                        Math.random()*1700;
+                        2200+
+                        Math.random()*2500;
                 }
 
                 updateTamaMovement(
@@ -4978,19 +6579,17 @@ function startTamaLoop(){
                     now
                 );
 
-                /* 혼잣말 */
+                /*
+                   혼잣말
+                */
                 if(
                     now>
                     obj.nextSpeech
                 ){
 
-                    /*
-                       너무 자주 떠들지 않음.
-                       감자도 말 많은 사람은 피곤하다.
-                    */
-
                     if(
-                        Math.random()<.55
+                        Math.random()<.42 &&
+                        !game.dialogueLock
                     ){
 
                         autonomousSpeech(
@@ -5000,19 +6599,43 @@ function startTamaLoop(){
 
                     obj.nextSpeech=
                         now+
-                        5000+
-                        Math.random()*7000;
+                        7000+
+                        Math.random()*8000;
                 }
             }
         );
 
-        /* 감자끼리 대화 */
-        processPotatoInteractions(now);
+        /*
+           감자끼리 약간의 거리 유지.
+           밀어내는 힘은 매우 약함.
+        */
+        keepPotatoesSeparated();
 
-        /* 간식 */
-        updateSnacks(delta,now);
+        /*
+           2인/3인 그룹 대화
+        */
+        tryGroupDialogue(
+            now
+        );
 
-        /* 말풍선 감자 따라가기 */
+        /*
+           기존 가까운 감자 만남
+        */
+        processPotatoInteractions(
+            now
+        );
+
+        /*
+           간식
+        */
+        updateSnacks(
+            delta,
+            now
+        );
+
+        /*
+           말풍선 감자 따라가기
+        */
         game.tamaPotatoes.forEach(
             obj=>{
 
@@ -5025,23 +6648,30 @@ function startTamaLoop(){
                         obj.x+"%";
 
                     obj.speechEl.style.top=
-                        (obj.y-11)+"%";
+                        (
+                            obj.y-11
+                        )+"%";
                 }
             }
         );
 
         game.tamaAnimationId=
-            requestAnimationFrame(frame);
+            requestAnimationFrame(
+                frame
+            );
     }
 
     game.tamaAnimationId=
-        requestAnimationFrame(frame);
+        requestAnimationFrame(
+            frame
+        );
 }
-
 
 function stopTamaLoop(){
 
-    if(game.tamaAnimationId){
+    if(
+        game.tamaAnimationId
+    ){
 
         cancelAnimationFrame(
             game.tamaAnimationId
@@ -5051,13 +6681,11 @@ function stopTamaLoop(){
     }
 }
 
-
 /* ==================================================
    초기화
 ================================================== */
 
 updateGrow();
-
 
 /* ==================================================
    추가 복사 방지
@@ -5076,8 +6704,12 @@ document.addEventListener(
         ){
 
             if(
-                e.target.closest(".tama")||
-                e.target.closest(".petStage")
+                e.target.closest(
+                    ".tama"
+                )||
+                e.target.closest(
+                    ".petStage"
+                )
             ){
 
                 e.preventDefault();
