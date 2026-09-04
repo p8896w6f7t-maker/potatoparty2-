@@ -2,8 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>감자 키우기</title>
 
@@ -17,12 +16,7 @@ body{
   margin:0;
   background:#f5ead8;
   color:#4b3525;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Apple SD Gothic Neo",
-    "Noto Sans KR",
-    sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
 }
 
 button{
@@ -93,7 +87,7 @@ button{
 
 
 /* =========================
-   공통 헤더
+   헤더
 ========================= */
 
 .header{
@@ -119,11 +113,12 @@ button{
 
 .egg-scene{
   width:100%;
-  height:260px;
+  height:280px;
   display:flex;
   justify-content:center;
   align-items:flex-end;
   padding-bottom:20px;
+  position:relative;
 }
 
 .soil{
@@ -132,13 +127,14 @@ button{
   height:55px;
   background:#9a704e;
   border-radius:50%;
-  margin-bottom:0;
+  bottom:20px;
 }
 
-.sprout{
+.growth-emoji{
   position:relative;
   z-index:2;
-  font-size:75px;
+  font-size:80px;
+  line-height:1;
   animation:sproutBounce 2s ease-in-out infinite;
 }
 
@@ -146,10 +142,16 @@ button{
   0%,100%{
     transform:translateY(0);
   }
+
   50%{
     transform:translateY(-8px);
   }
 }
+
+
+/* =========================
+   성장 정보
+========================= */
 
 .growth-info{
   text-align:center;
@@ -184,6 +186,11 @@ button{
   transition:width .3s ease;
 }
 
+
+/* =========================
+   메시지
+========================= */
+
 .message{
   width:calc(100% - 32px);
   margin:14px 16px 18px;
@@ -206,6 +213,11 @@ button{
   display:block;
 }
 
+
+/* =========================
+   정보
+========================= */
+
 .info{
   padding:0 16px;
   position:relative;
@@ -227,6 +239,11 @@ button{
   font-weight:800;
   margin:0 0 18px;
 }
+
+
+/* =========================
+   스탯
+========================= */
 
 .stat{
   margin-bottom:12px;
@@ -255,6 +272,11 @@ button{
   border-radius:20px;
   transition:width .3s ease;
 }
+
+
+/* =========================
+   버튼
+========================= */
 
 .action-buttons{
   display:grid;
@@ -290,13 +312,13 @@ button{
 
 
 /* =========================
-   감자 이미지
+   감자
 ========================= */
 
 #potatoWrap{
   position:relative;
   width:100%;
-  min-height:260px;
+  min-height:270px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -318,7 +340,7 @@ button{
 
 
 /* =========================
-   감자 터치 애니메이션
+   감자 터치 반응
 ========================= */
 
 .potato-jump{
@@ -342,7 +364,6 @@ button{
     transform:translateY(0) scale(1);
   }
 }
-
 
 .potato-shy{
   animation:potatoShy .7s ease;
@@ -370,7 +391,6 @@ button{
   }
 }
 
-
 .potato-wiggle{
   animation:potatoWiggle .55s ease;
 }
@@ -392,7 +412,6 @@ button{
     transform:translateX(-10px);
   }
 }
-
 
 .potato-angry{
   animation:potatoAngry .5s ease;
@@ -416,7 +435,6 @@ button{
   }
 }
 
-
 .potato-happy{
   animation:potatoHappy .65s ease;
 }
@@ -438,7 +456,6 @@ button{
     transform:rotate(-8deg) scale(1.04);
   }
 }
-
 
 .potato-sleep{
   animation:potatoSleep 1s ease;
@@ -591,6 +608,77 @@ button{
   font-weight:900;
 }
 
+
+/* =========================
+   도감 상단 모은 감자
+========================= */
+
+.collected-potatoes{
+  min-height:105px;
+
+  margin:0 16px 18px;
+  padding:12px 14px;
+
+  background:#fff;
+
+  border:2px solid #eadcc6;
+  border-radius:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:10px;
+
+  overflow-x:auto;
+
+  -webkit-overflow-scrolling:touch;
+}
+
+.collected-potatoes:empty::before{
+  content:"아직 모은 감자가 없어요 🥔";
+  color:#a18c78;
+  font-size:12px;
+  font-weight:800;
+}
+
+.mini-potato-box{
+  flex-shrink:0;
+  width:68px;
+  text-align:center;
+}
+
+.mini-potato{
+  width:60px;
+  height:60px;
+  object-fit:contain;
+  animation:miniPotatoAppear .3s ease;
+}
+
+.mini-potato-name{
+  margin-top:2px;
+  font-size:9px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+@keyframes miniPotatoAppear{
+  0%{
+    opacity:0;
+    transform:scale(.5);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+
+/* =========================
+   도감 카드
+========================= */
+
 .collection-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -605,6 +693,7 @@ button{
   border-radius:18px;
   padding:14px 10px;
   text-align:center;
+
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -620,6 +709,7 @@ button{
 .collection-question{
   font-size:65px;
   height:115px;
+
   display:flex;
   justify-content:center;
   align-items:center;
@@ -647,20 +737,28 @@ button{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.4);
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   padding:20px;
+
   z-index:100;
 }
 
 .modal-box{
   width:100%;
   max-width:360px;
+
   background:#fffaf2;
+
   border-radius:22px;
+
   padding:25px 20px;
+
   text-align:center;
+
   box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
 
@@ -686,6 +784,7 @@ button{
   font-size:14px;
   font-weight:900;
 }
+
 </style>
 </head>
 
@@ -693,13 +792,15 @@ button{
 <body>
 
 
-<!-- =========================
+<!-- ==================================================
      시작 화면
-========================= -->
+================================================== -->
 
 <section id="startScreen" class="screen">
 
-  <div class="start-potato">🥔</div>
+  <div class="start-potato">
+    🥔
+  </div>
 
   <div class="start-title">
     감자 키우기
@@ -712,18 +813,22 @@ button{
   <button
     class="start-button"
     onclick="startGame()">
+
     감자 키우기 시작
+
   </button>
 
 </section>
 
 
 
-<!-- =========================
+<!-- ==================================================
      성장 화면
-========================= -->
+================================================== -->
 
-<section id="beforeScreen" class="screen hidden">
+<section
+  id="beforeScreen"
+  class="screen hidden">
 
   <div class="header">
 
@@ -742,8 +847,12 @@ button{
 
     <div class="soil"></div>
 
-    <div class="sprout">
+    <div
+      id="growthEmoji"
+      class="growth-emoji">
+
       🌱
+
     </div>
 
   </div>
@@ -758,14 +867,18 @@ button{
     <div
       id="growthPercent"
       class="growth-percent">
+
       성장도 0%
+
     </div>
 
     <div class="progress">
+
       <div
         id="growthBar"
         class="progress-bar">
       </div>
+
     </div>
 
   </div>
@@ -785,25 +898,33 @@ button{
     <button
       class="action-button"
       onclick="addGrowth(12)">
+
       🌱 비료 주기
+
     </button>
 
     <button
       class="action-button"
       onclick="addGrowth(10)">
+
       💧 물 주기
+
     </button>
 
     <button
       class="action-button"
       onclick="addGrowth(8)">
+
       ☀️ 햇빛 쬐기
+
     </button>
 
     <button
       class="action-button"
       onclick="addGrowth(5)">
+
       💕 응원하기
+
     </button>
 
   </div>
@@ -812,11 +933,13 @@ button{
 
 
 
-<!-- =========================
+<!-- ==================================================
      감자 화면
-========================= -->
+================================================== -->
 
-<section id="gameScreen" class="screen hidden">
+<section
+  id="gameScreen"
+  class="screen hidden">
 
   <div class="header">
 
@@ -849,13 +972,17 @@ button{
     <div
       id="messageLine1"
       class="birth-line">
+
       감자가 태어났어요!
+
     </div>
 
     <div
       id="messageLine2"
       class="birth-line">
+
       성격은 느긋한이에요!
+
     </div>
 
   </div>
@@ -874,81 +1001,101 @@ button{
     </div>
 
 
-    <!-- 배고픔 -->
-
     <div class="stat">
 
       <div class="stat-line">
+
         <span>🍖 배고픔</span>
-        <span id="hungerText">100 / 100</span>
+
+        <span id="hungerText">
+          100 / 100
+        </span>
+
       </div>
 
       <div class="stat-bar">
+
         <div
           id="hungerBar"
           class="stat-fill"
           style="background:#d79b55;">
         </div>
+
       </div>
 
     </div>
 
 
-    <!-- 물 -->
-
     <div class="stat">
 
       <div class="stat-line">
+
         <span>💧 수분</span>
-        <span id="waterText">100 / 100</span>
+
+        <span id="waterText">
+          100 / 100
+        </span>
+
       </div>
 
       <div class="stat-bar">
+
         <div
           id="waterBar"
           class="stat-fill"
           style="background:#78a9d6;">
         </div>
+
       </div>
 
     </div>
 
 
-    <!-- 사랑 -->
-
     <div class="stat">
 
       <div class="stat-line">
+
         <span>❤️ 사랑</span>
-        <span id="loveText">50 / 100</span>
+
+        <span id="loveText">
+          50 / 100
+        </span>
+
       </div>
 
       <div class="stat-bar">
+
         <div
           id="loveBar"
           class="stat-fill"
           style="background:#d98aa0;">
         </div>
+
       </div>
 
     </div>
 
 
-    <!-- 체력 -->
-
     <div class="stat">
 
       <div class="stat-line">
+
         <span>⚡ 체력</span>
-        <span id="energyText">100 / 100</span>
+
+        <span id="energyText">
+          100 / 100
+        </span>
+
       </div>
 
       <div class="stat-bar">
+
         <div
           id="energyBar"
           class="stat-fill"
           style="background:#d5ad55;">
         </div>
+
       </div>
 
     </div>
@@ -961,37 +1108,49 @@ button{
     <button
       class="action-button"
       onclick="feed()">
+
       🍖 먹이 주기
+
     </button>
 
     <button
       class="action-button"
       onclick="giveWater()">
+
       💧 물 주기
+
     </button>
 
     <button
       class="action-button"
       onclick="pet()">
+
       ❤️ 쓰다듬기
+
     </button>
 
     <button
       class="action-button"
       onclick="walk()">
+
       🏃 산책하기
+
     </button>
 
     <button
       class="action-button harvest"
       onclick="harvest()">
+
       🥔 수확하기
+
     </button>
 
     <button
       class="action-button"
       onclick="showCollection()">
+
       📖 도감 보기
+
     </button>
 
   </div>
@@ -1000,35 +1159,56 @@ button{
 
 
 
-<!-- =========================
+<!-- ==================================================
      도감 화면
-========================= -->
+================================================== -->
 
-<section id="collectionScreen" class="screen hidden">
+<section
+  id="collectionScreen"
+  class="screen hidden">
+
 
   <div class="collection-header">
 
     <button
       class="back-button"
       onclick="backToGame()">
+
       ← 돌아가기
+
     </button>
+
 
     <div class="collection-title">
       감자 도감
     </div>
+
 
     <div style="width:70px;"></div>
 
   </div>
 
 
+  <!-- 발견 숫자 -->
+
   <div
     id="collectionCount"
     class="collection-count">
+
     발견한 감자 0 / 5
+
   </div>
 
+
+  <!-- 모은 감자 미니 화면 -->
+
+  <div
+    id="collectedPotatoes"
+    class="collected-potatoes">
+  </div>
+
+
+  <!-- 전체 도감 -->
 
   <div
     id="collectionGrid"
@@ -1039,9 +1219,9 @@ button{
 
 
 
-<!-- =========================
+<!-- ==================================================
      모달
-========================= -->
+================================================== -->
 
 <div
   id="modal"
@@ -1052,18 +1232,24 @@ button{
     <div
       id="modalTitle"
       class="modal-title">
+
       🥔 새로운 감자 발견!
+
     </div>
+
 
     <div
       id="modalText"
       class="modal-text">
     </div>
 
+
     <button
       class="modal-button"
       onclick="closeModal()">
+
       확인
+
     </button>
 
   </div>
@@ -1074,9 +1260,10 @@ button{
 
 <script>
 
-/* =========================
+
+/* ==================================================
    감자 종류
-========================= */
+================================================== */
 
 const potatoes = [
 
@@ -1108,9 +1295,10 @@ const potatoes = [
 ];
 
 
-/* =========================
+
+/* ==================================================
    성격
-========================= */
+================================================== */
 
 const personalities = [
 
@@ -1123,13 +1311,19 @@ const personalities = [
 ];
 
 
+
+/* ==================================================
+   저장 키
+================================================== */
+
 const STORAGE_KEY =
-  "POTATO_GAME_FINAL_V3";
+  "POTATO_GAME_FINAL_V4";
 
 
-/* =========================
+
+/* ==================================================
    상태
-========================= */
+================================================== */
 
 let state = {
 
@@ -1157,9 +1351,9 @@ let state = {
 
 
 
-/* =========================
+/* ==================================================
    저장
-========================= */
+================================================== */
 
 function save(){
 
@@ -1171,30 +1365,52 @@ function save(){
 }
 
 
-/* =========================
+
+/* ==================================================
    불러오기
-========================= */
+================================================== */
 
 function load(){
 
   const saved =
-    localStorage.getItem(STORAGE_KEY);
+    localStorage.getItem(
+      STORAGE_KEY
+    );
 
-  if(!saved) return;
+
+  if(!saved){
+    return;
+  }
+
 
   try{
 
     const parsed =
       JSON.parse(saved);
 
+
     state = {
       ...state,
       ...parsed
     };
 
-  }catch(error){
 
-    console.log("저장 데이터 불러오기 실패");
+    if(
+      !Array.isArray(
+        state.collection
+      )
+    ){
+
+      state.collection = [];
+
+    }
+
+  }
+  catch(error){
+
+    console.log(
+      "저장 데이터 불러오기 실패"
+    );
 
   }
 
@@ -1202,9 +1418,9 @@ function load(){
 
 
 
-/* =========================
+/* ==================================================
    화면 전환
-========================= */
+================================================== */
 
 function hideAllScreens(){
 
@@ -1227,6 +1443,7 @@ function hideAllScreens(){
 }
 
 
+
 function startGame(){
 
   state.started = true;
@@ -1236,6 +1453,7 @@ function startGame(){
   showBeforeScreen();
 
 }
+
 
 
 function showBeforeScreen(){
@@ -1249,6 +1467,7 @@ function showBeforeScreen(){
   updateGrowth();
 
 }
+
 
 
 function showGameScreen(){
@@ -1266,6 +1485,7 @@ function showGameScreen(){
 }
 
 
+
 function showCollection(){
 
   hideAllScreens();
@@ -1279,6 +1499,7 @@ function showCollection(){
 }
 
 
+
 function backToGame(){
 
   showGameScreen();
@@ -1287,45 +1508,62 @@ function backToGame(){
 
 
 
-/* =========================
+/* ==================================================
    성장
-========================= */
+================================================== */
 
 function addGrowth(amount){
 
-  if(state.born) return;
+  if(state.born){
+    return;
+  }
+
 
   state.growth += amount;
 
+
   if(state.growth > 100){
+
     state.growth = 100;
+
   }
+
 
   save();
 
   updateGrowth();
 
+
   const messages = [
 
     "조금씩 자라고 있어요!",
+
     "감자가 힘을 내고 있어요!",
+
     "쑥쑥 자라는 중이에요!",
+
     "조금만 더 힘내요!",
+
     "땅속에서 무언가 움직여요..."
 
   ];
 
+
   document
     .getElementById("beforeMessage")
     .innerText =
+
       messages[
         Math.floor(
-          Math.random() * messages.length
+          Math.random() *
+          messages.length
         )
       ];
 
 
-  if(state.growth >= 100){
+  if(
+    state.growth >= 100
+  ){
 
     setTimeout(
       hatchPotato,
@@ -1337,60 +1575,114 @@ function addGrowth(amount){
 }
 
 
+
+/* ==================================================
+   성장 단계
+=========================
+   0~24   🌱
+   25~49  🌿
+   50~74  🌳
+   75~99  🥔
+   100    🥔
+================================================== */
+
 function updateGrowth(){
 
   const percent =
     state.growth;
 
+
   document
     .getElementById("growthPercent")
     .innerText =
+
       `성장도 ${percent}%`;
+
 
   document
     .getElementById("growthBar")
     .style.width =
+
       `${percent}%`;
+
+
+  const emoji =
+    document.getElementById(
+      "growthEmoji"
+    );
+
+
+  if(percent < 25){
+
+    emoji.innerText =
+      "🌱";
+
+  }
+  else if(percent < 50){
+
+    emoji.innerText =
+      "🌿";
+
+  }
+  else if(percent < 75){
+
+    emoji.innerText =
+      "🌳";
+
+  }
+  else{
+
+    emoji.innerText =
+      "🥔";
+
+  }
 
 }
 
 
 
-/* =========================
+/* ==================================================
    감자 탄생
-========================= */
+================================================== */
 
 function hatchPotato(){
 
-  if(state.born) return;
+  if(state.born){
+    return;
+  }
+
 
   const character =
+
     potatoes[
       Math.floor(
-        Math.random() * potatoes.length
+        Math.random() *
+        potatoes.length
       )
     ];
 
+
   const personality =
+
     personalities[
       Math.floor(
-        Math.random() * personalities.length
+        Math.random() *
+        personalities.length
       )
     ];
 
 
   state.born = true;
 
-  state.character = character;
+  state.character =
+    character;
 
-  state.personality = personality;
+  state.personality =
+    personality;
 
   state.hunger = 100;
-
   state.water = 100;
-
   state.love = 50;
-
   state.energy = 100;
 
 
@@ -1402,34 +1694,40 @@ function hatchPotato(){
   document
     .getElementById("messageLine1")
     .innerText =
+
       `🥔 ${character.name}가 태어났어요!`;
+
 
   document
     .getElementById("messageLine2")
     .innerText =
+
       `성격은 ${personality}이에요!`;
 
 }
 
 
 
-/* =========================
-   감자 이미지
-========================= */
+/* ==================================================
+   감자 정보
+================================================== */
 
 function updateCharacter(){
 
-  if(
-    !state.character
-  ) return;
+  if(!state.character){
+    return;
+  }
+
 
   const image =
     document.getElementById(
       "potatoImage"
     );
 
+
   image.src =
     state.character.image;
+
 
   image.alt =
     state.character.name;
@@ -1438,20 +1736,23 @@ function updateCharacter(){
   document
     .getElementById("potatoName")
     .innerText =
+
       state.character.name;
+
 
   document
     .getElementById("personality")
     .innerText =
+
       `성격 · ${state.personality}`;
 
 }
 
 
 
-/* =========================
-   메시지
-========================= */
+/* ==================================================
+   일반 메시지
+================================================== */
 
 function showMessage(type){
 
@@ -1464,8 +1765,6 @@ function showMessage(type){
     document.getElementById(
       "messageLine2"
     );
-
-  if(!line1 || !line2) return;
 
 
   const messages = {
@@ -1522,15 +1821,21 @@ function showMessage(type){
   const list =
     messages[type];
 
-  if(!list) return;
+
+  if(!list){
+    return;
+  }
 
 
   line1.innerText =
+
     list[
       Math.floor(
-        Math.random() * list.length
+        Math.random() *
+        list.length
       )
     ];
+
 
   line2.innerText = "";
 
@@ -1538,25 +1843,34 @@ function showMessage(type){
 
 
 
-/* =========================
+/* ==================================================
    먹이
-========================= */
+================================================== */
 
 function feed(){
 
-  if(!state.born) return;
+  if(!state.born){
+    return;
+  }
+
 
   state.hunger += 25;
 
-  if(state.hunger > 100){
-    state.hunger = 100;
-  }
+  state.hunger =
+    Math.min(
+      100,
+      state.hunger
+    );
+
 
   state.energy += 5;
 
-  if(state.energy > 100){
-    state.energy = 100;
-  }
+  state.energy =
+    Math.min(
+      100,
+      state.energy
+    );
+
 
   save();
 
@@ -1568,19 +1882,25 @@ function feed(){
 
 
 
-/* =========================
+/* ==================================================
    물
-========================= */
+================================================== */
 
 function giveWater(){
 
-  if(!state.born) return;
+  if(!state.born){
+    return;
+  }
+
 
   state.water += 30;
 
-  if(state.water > 100){
-    state.water = 100;
-  }
+  state.water =
+    Math.min(
+      100,
+      state.water
+    );
+
 
   save();
 
@@ -1592,25 +1912,34 @@ function giveWater(){
 
 
 
-/* =========================
+/* ==================================================
    쓰다듬기
-========================= */
+================================================== */
 
 function pet(){
 
-  if(!state.born) return;
+  if(!state.born){
+    return;
+  }
+
 
   state.love += 12;
 
-  if(state.love > 100){
-    state.love = 100;
-  }
+  state.love =
+    Math.min(
+      100,
+      state.love
+    );
+
 
   state.energy -= 2;
 
-  if(state.energy < 0){
-    state.energy = 0;
-  }
+  state.energy =
+    Math.max(
+      0,
+      state.energy
+    );
+
 
   save();
 
@@ -1622,15 +1951,20 @@ function pet(){
 
 
 
-/* =========================
+/* ==================================================
    산책
-========================= */
+================================================== */
 
 function walk(){
 
-  if(!state.born) return;
+  if(!state.born){
+    return;
+  }
 
-  if(state.energy < 15){
+
+  if(
+    state.energy < 15
+  ){
 
     showMessage("tired");
 
@@ -1640,25 +1974,37 @@ function walk(){
 
 
   state.energy -= 15;
-
   state.love += 10;
-
   state.hunger -= 8;
-
   state.water -= 8;
 
 
   state.energy =
-    Math.max(0,state.energy);
+    Math.max(
+      0,
+      state.energy
+    );
+
 
   state.love =
-    Math.min(100,state.love);
+    Math.min(
+      100,
+      state.love
+    );
+
 
   state.hunger =
-    Math.max(0,state.hunger);
+    Math.max(
+      0,
+      state.hunger
+    );
+
 
   state.water =
-    Math.max(0,state.water);
+    Math.max(
+      0,
+      state.water
+    );
 
 
   save();
@@ -1673,11 +2019,14 @@ function walk(){
       "potatoImage"
     );
 
+
   image.classList.remove(
     "walking"
   );
 
+
   void image.offsetWidth;
+
 
   image.classList.add(
     "walking"
@@ -1686,9 +2035,11 @@ function walk(){
 
   setTimeout(
     () => {
+
       image.classList.remove(
         "walking"
       );
+
     },
     1000
   );
@@ -1700,9 +2051,9 @@ function walk(){
 
 
 
-/* =========================
+/* ==================================================
    산책 효과
-========================= */
+================================================== */
 
 function createWalkEffect(){
 
@@ -1711,29 +2062,39 @@ function createWalkEffect(){
       "potatoWrap"
     );
 
+
   const effect =
     document.createElement(
       "div"
     );
 
+
   effect.className =
     "walk-effect";
+
 
   effect.innerText =
     "🏃";
 
+
   effect.style.left =
     "50%";
+
 
   effect.style.top =
     "55%";
 
-  wrap.appendChild(effect);
+
+  wrap.appendChild(
+    effect
+  );
 
 
   setTimeout(
     () => {
+
       effect.remove();
+
     },
     1000
   );
@@ -1742,9 +2103,9 @@ function createWalkEffect(){
 
 
 
-/* =========================
+/* ==================================================
    감자 터치
-========================= */
+================================================== */
 
 function potatoTouch(){
 
@@ -1752,7 +2113,9 @@ function potatoTouch(){
     !state.born ||
     !state.character
   ){
+
     return;
+
   }
 
 
@@ -1760,8 +2123,6 @@ function potatoTouch(){
     document.getElementById(
       "potatoImage"
     );
-
-  if(!potato) return;
 
 
   const reactions = [
@@ -1779,6 +2140,7 @@ function potatoTouch(){
 
 
   const reaction =
+
     reactions[
       Math.floor(
         Math.random() *
@@ -1802,84 +2164,116 @@ function potatoTouch(){
   void potato.offsetWidth;
 
 
-  if(reaction === "jump"){
+  if(
+    reaction === "jump"
+  ){
 
     potato.classList.add(
       "potato-jump"
     );
 
-    showTouchMessage("jump");
+    showTouchMessage(
+      "jump"
+    );
 
   }
 
 
-  if(reaction === "shy"){
+  if(
+    reaction === "shy"
+  ){
 
     potato.classList.add(
       "potato-shy"
     );
 
-    showTouchMessage("shy");
+    showTouchMessage(
+      "shy"
+    );
 
   }
 
 
-  if(reaction === "wiggle"){
+  if(
+    reaction === "wiggle"
+  ){
 
     potato.classList.add(
       "potato-wiggle"
     );
 
-    showTouchMessage("wiggle");
+    showTouchMessage(
+      "wiggle"
+    );
 
   }
 
 
-  if(reaction === "heart"){
+  if(
+    reaction === "heart"
+  ){
 
-    showTouchMessage("heart");
+    showTouchMessage(
+      "heart"
+    );
 
     createHeart();
 
   }
 
 
-  if(reaction === "angry"){
+  if(
+    reaction === "angry"
+  ){
 
     potato.classList.add(
       "potato-angry"
     );
 
-    showTouchMessage("angry");
+    showTouchMessage(
+      "angry"
+    );
 
   }
 
 
-  if(reaction === "happy"){
+  if(
+    reaction === "happy"
+  ){
 
     potato.classList.add(
       "potato-happy"
     );
 
-    showTouchMessage("happy");
+    showTouchMessage(
+      "happy"
+    );
 
   }
 
 
-  if(reaction === "sleep"){
+  if(
+    reaction === "sleep"
+  ){
 
     potato.classList.add(
       "potato-sleep"
     );
 
-    showTouchMessage("sleep");
+    showTouchMessage(
+      "sleep"
+    );
 
   }
 
 
-  if(reaction === "sparkle"){
+  if(
+    reaction === "sparkle"
+  ){
 
-    showTouchMessage("sparkle");
+    showTouchMessage(
+      "sparkle"
+    );
 
     createSparkles();
 
@@ -1889,9 +2283,9 @@ function potatoTouch(){
 
 
 
-/* =========================
+/* ==================================================
    터치 대사
-========================= */
+================================================== */
 
 function showTouchMessage(type){
 
@@ -1905,8 +2299,6 @@ function showTouchMessage(type){
       "messageLine2"
     );
 
-  if(!line1 || !line2) return;
-
 
   const name =
     state.character.name;
@@ -1916,50 +2308,50 @@ function showTouchMessage(type){
 
     jump:[
       `${name}가 폴짝 뛰었어요!`,
-      `우와! 갑자기 뛰었어요!`,
-      `잡아봐라~!`
+      "우와! 갑자기 뛰었어요!",
+      "잡아봐라~!"
     ],
 
     shy:[
       `${name}가 부끄러워해요...`,
-      `으... 갑자기 만지면 부끄러워요.`,
-      `/// 부끄러워 ///`
+      "으... 갑자기 만지면 부끄러워요.",
+      "/// 부끄러워 ///"
     ],
 
     wiggle:[
       `${name}가 꼬물꼬물 움직여요!`,
-      `간지러워요!`,
-      `꼬물꼬물~`
+      "간지러워요!",
+      "꼬물꼬물~"
     ],
 
     heart:[
       `${name}가 좋아해요!`,
-      `헤헤... 좋아!`,
-      `하트를 보냈어요!`
+      "헤헤... 좋아!",
+      "하트를 보냈어요!"
     ],
 
     angry:[
       `${name}가 삐졌어요!`,
-      `왜 자꾸 건드려!`,
-      `흥!`
+      "왜 자꾸 건드려!",
+      "흥!"
     ],
 
     happy:[
       `${name}가 신났어요!`,
-      `기분 최고!`,
-      `같이 놀아요!`
+      "기분 최고!",
+      "같이 놀아요!"
     ],
 
     sleep:[
       `${name}가 졸려요...`,
-      `조금만 쉬면 안 돼요...?`,
-      `Zzz...`
+      "조금만 쉬면 안 돼요...?",
+      "Zzz..."
     ],
 
     sparkle:[
       `${name}가 반짝반짝 빛나요!`,
-      `✨ 감자 파워! ✨`,
-      `반짝!`
+      "✨ 감자 파워! ✨",
+      "반짝!"
     ]
 
   };
@@ -1970,6 +2362,7 @@ function showTouchMessage(type){
 
 
   line1.innerText =
+
     list[
       Math.floor(
         Math.random() *
@@ -1984,9 +2377,9 @@ function showTouchMessage(type){
 
 
 
-/* =========================
-   하트 효과
-========================= */
+/* ==================================================
+   하트
+================================================== */
 
 function createHeart(){
 
@@ -1994,8 +2387,6 @@ function createHeart(){
     document.getElementById(
       "potatoWrap"
     );
-
-  if(!wrap) return;
 
 
   const heart =
@@ -2008,22 +2399,31 @@ function createHeart(){
     "touch-heart";
 
 
+  const hearts = [
+    "❤️",
+    "💕",
+    "💗",
+    "💖"
+  ];
+
+
   heart.innerText =
-    [
-      "❤️",
-      "💕",
-      "💗",
-      "💖"
-    ][
+
+    hearts[
       Math.floor(
-        Math.random() * 4
+        Math.random() *
+        hearts.length
       )
     ];
 
 
   heart.style.left =
-    (40 + Math.random() * 20)
-    + "%";
+
+    (
+      40 +
+      Math.random() * 20
+    ) + "%";
+
 
   heart.style.top =
     "30%";
@@ -2036,7 +2436,9 @@ function createHeart(){
 
   setTimeout(
     () => {
+
       heart.remove();
+
     },
     1000
   );
@@ -2045,9 +2447,9 @@ function createHeart(){
 
 
 
-/* =========================
-   반짝이 효과
-========================= */
+/* ==================================================
+   반짝이
+================================================== */
 
 function createSparkles(){
 
@@ -2055,8 +2457,6 @@ function createSparkles(){
     document.getElementById(
       "potatoWrap"
     );
-
-  if(!wrap) return;
 
 
   for(
@@ -2074,23 +2474,32 @@ function createSparkles(){
     sparkle.className =
       "touch-sparkle";
 
+
     sparkle.innerText =
       "✨";
 
 
     sparkle.style.left =
-      (25 + Math.random() * 50)
-      + "%";
+
+      (
+        25 +
+        Math.random() * 50
+      ) + "%";
 
 
     sparkle.style.top =
-      (20 + Math.random() * 35)
-      + "%";
+
+      (
+        20 +
+        Math.random() * 35
+      ) + "%";
 
 
     sparkle.style.animationDelay =
-      (i * 0.08)
-      + "s";
+
+      (
+        i * 0.08
+      ) + "s";
 
 
     wrap.appendChild(
@@ -2100,7 +2509,9 @@ function createSparkles(){
 
     setTimeout(
       () => {
+
         sparkle.remove();
+
       },
       900
     );
@@ -2111,78 +2522,83 @@ function createSparkles(){
 
 
 
-/* =========================
-   스탯 업데이트
-========================= */
+/* ==================================================
+   스탯
+================================================== */
 
 function updateStats(){
 
-  if(!state.born) return;
+  if(!state.born){
+    return;
+  }
 
 
-  document
-    .getElementById("hungerText")
-    .innerText =
-      `${state.hunger} / 100`;
-
-  document
-    .getElementById("waterText")
-    .innerText =
-      `${state.water} / 100`;
-
-  document
-    .getElementById("loveText")
-    .innerText =
-      `${state.love} / 100`;
-
-  document
-    .getElementById("energyText")
-    .innerText =
-      `${state.energy} / 100`;
+  document.getElementById(
+    "hungerText"
+  ).innerText =
+    `${state.hunger} / 100`;
 
 
-  document
-    .getElementById("hungerBar")
-    .style.width =
-      `${state.hunger}%`;
+  document.getElementById(
+    "waterText"
+  ).innerText =
+    `${state.water} / 100`;
 
-  document
-    .getElementById("waterBar")
-    .style.width =
-      `${state.water}%`;
 
-  document
-    .getElementById("loveBar")
-    .style.width =
-      `${state.love}%`;
+  document.getElementById(
+    "loveText"
+  ).innerText =
+    `${state.love} / 100`;
 
-  document
-    .getElementById("energyBar")
-    .style.width =
-      `${state.energy}%`;
+
+  document.getElementById(
+    "energyText"
+  ).innerText =
+    `${state.energy} / 100`;
+
+
+  document.getElementById(
+    "hungerBar"
+  ).style.width =
+    `${state.hunger}%`;
+
+
+  document.getElementById(
+    "waterBar"
+  ).style.width =
+    `${state.water}%`;
+
+
+  document.getElementById(
+    "loveBar"
+  ).style.width =
+    `${state.love}%`;
+
+
+  document.getElementById(
+    "energyBar"
+  ).style.width =
+    `${state.energy}%`;
 
 }
 
 
 
-/* =========================
-   자동 감소
-========================= */
+/* ==================================================
+   자동 스탯 감소
+================================================== */
 
 setInterval(
+
   () => {
 
-    if(
-      !state.born
-    ){
+    if(!state.born){
       return;
     }
 
 
     state.hunger -= 2;
-
     state.water -= 2;
-
     state.energy -= 1;
 
 
@@ -2192,11 +2608,13 @@ setInterval(
         state.hunger
       );
 
+
     state.water =
       Math.max(
         0,
         state.water
       );
+
 
     state.energy =
       Math.max(
@@ -2210,31 +2628,39 @@ setInterval(
     updateStats();
 
 
-    if(state.hunger <= 20){
+    if(
+      state.hunger <= 20
+    ){
 
       showMessage("hungry");
 
     }
-    else if(state.water <= 20){
+    else if(
+      state.water <= 20
+    ){
 
       showMessage("thirsty");
 
     }
-    else if(state.energy <= 20){
+    else if(
+      state.energy <= 20
+    ){
 
       showMessage("tired");
 
     }
 
   },
+
   10000
+
 );
 
 
 
-/* =========================
+/* ==================================================
    수확
-========================= */
+================================================== */
 
 function harvest(){
 
@@ -2242,7 +2668,9 @@ function harvest(){
     !state.born ||
     !state.character
   ){
+
     return;
+
   }
 
 
@@ -2250,7 +2678,12 @@ function harvest(){
     state.character;
 
 
+  /*
+    수확할 때만 도감 등록
+  */
+
   const isNew =
+
     !state.collection.includes(
       character.name
     );
@@ -2264,6 +2697,10 @@ function harvest(){
 
   }
 
+
+  /*
+    감자 초기화
+  */
 
   state.born = false;
 
@@ -2291,8 +2728,12 @@ function harvest(){
   if(isNew){
 
     openModal(
+
       "🥔 새로운 감자 발견!",
-      `${character.name}를 수확했어요!<br><br>도감에 등록되었습니다.`
+
+      `${character.name}를 수확했어요!<br><br>
+       도감에 등록되었습니다.`
+
     );
 
   }
@@ -2303,6 +2744,7 @@ function harvest(){
         "beforeMessage"
       )
       .innerText =
+
         `${character.name}는 이미 도감에 등록되어 있어요!`;
 
   }
@@ -2311,9 +2753,9 @@ function harvest(){
 
 
 
-/* =========================
+/* ==================================================
    도감
-========================= */
+================================================== */
 
 function renderCollection(){
 
@@ -2322,24 +2764,129 @@ function renderCollection(){
       "collectionGrid"
     );
 
+
   const count =
     document.getElementById(
       "collectionCount"
     );
 
 
-  const found =
-    state.collection.length;
+  const collected =
+    document.getElementById(
+      "collectedPotatoes"
+    );
 
+
+  /*
+    발견 숫자
+  */
 
   count.innerText =
-    `발견한 감자 ${found} / ${potatoes.length}`;
 
+    `발견한 감자 ${state.collection.length} / ${potatoes.length}`;
+
+
+  /*
+    기존 내용 삭제
+  */
 
   grid.innerHTML = "";
 
+  collected.innerHTML = "";
+
+
+  /*
+    =========================
+    상단 미니 감자
+    =========================
+
+    실제로 발견한 감자만 표시
+  */
+
+  state.collection.forEach(
+
+    name => {
+
+      const potato =
+        potatoes.find(
+          p => p.name === name
+        );
+
+
+      if(!potato){
+        return;
+      }
+
+
+      const box =
+        document.createElement(
+          "div"
+        );
+
+
+      box.className =
+        "mini-potato-box";
+
+
+      const img =
+        document.createElement(
+          "img"
+        );
+
+
+      img.className =
+        "mini-potato";
+
+
+      img.src =
+        potato.image;
+
+
+      img.alt =
+        potato.name;
+
+
+      const nameText =
+        document.createElement(
+          "div"
+        );
+
+
+      nameText.className =
+        "mini-potato-name";
+
+
+      nameText.innerText =
+        potato.name;
+
+
+      box.appendChild(
+        img
+      );
+
+
+      box.appendChild(
+        nameText
+      );
+
+
+      collected.appendChild(
+        box
+      );
+
+    }
+
+  );
+
+
+  /*
+    =========================
+    전체 도감 카드
+  =========================
+  */
 
   potatoes.forEach(
+
     potato => {
 
       const card =
@@ -2347,15 +2894,21 @@ function renderCollection(){
           "div"
         );
 
+
       card.className =
         "collection-card";
 
 
       const isFound =
+
         state.collection.includes(
           potato.name
         );
 
+
+      /*
+        발견한 감자
+      */
 
       if(isFound){
 
@@ -2363,7 +2916,8 @@ function renderCollection(){
 
           <img
             src="${potato.image}"
-            alt="${potato.name}">
+            alt="${potato.name}"
+          >
 
           <div class="collection-name">
             ${potato.name}
@@ -2376,6 +2930,12 @@ function renderCollection(){
         `;
 
       }
+
+
+      /*
+        미발견 감자
+      */
+
       else{
 
         card.innerHTML = `
@@ -2402,15 +2962,16 @@ function renderCollection(){
       );
 
     }
+
   );
 
 }
 
 
 
-/* =========================
+/* ==================================================
    모달
-========================= */
+================================================== */
 
 function openModal(
   title,
@@ -2444,6 +3005,7 @@ function openModal(
 }
 
 
+
 function closeModal(){
 
   document
@@ -2458,23 +3020,29 @@ function closeModal(){
 
 
 
-/* =========================
-   시작
-========================= */
+/* ==================================================
+   게임 실행
+================================================== */
 
 load();
 
 
-if(state.born){
+if(
+  state.born
+){
 
   showGameScreen();
 
 }
-else if(state.started){
+
+else if(
+  state.started
+){
 
   showBeforeScreen();
 
 }
+
 else{
 
   hideAllScreens();
