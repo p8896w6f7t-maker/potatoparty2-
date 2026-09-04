@@ -584,7 +584,7 @@ button{
     inset 0 0 0 7px #ead2ad,
     0 6px 0 #382519;
 
-  image-rendering:pixelated;
+  image-rendering:auto;
 
   user-select:none;
   -webkit-user-select:none;
@@ -610,20 +610,20 @@ button{
 
   z-index:30;
 
-  opacity:.35;
+  opacity:.22;
 
   background-image:
     linear-gradient(
-      rgba(81,55,37,.08) 1px,
+      rgba(81,55,37,.07) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(81,55,37,.08) 1px,
+      rgba(81,55,37,.07) 1px,
       transparent 1px
     );
 
-  background-size:5px 5px;
+  background-size:4px 4px;
 
 }
 
@@ -755,8 +755,6 @@ button{
   position:absolute;
 
   z-index:5;
-
-  image-rendering:pixelated;
 
 }
 
@@ -1145,8 +1143,6 @@ button{
 
   z-index:15;
 
-  image-rendering:pixelated;
-
   left:50%;
   bottom:78px;
 
@@ -1158,7 +1154,122 @@ button{
 
 
 /* ==================================================
-   방 아이템
+   여러 감자 표시
+================================================== */
+
+.room-potato-group{
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:16;
+
+  pointer-events:none;
+
+}
+
+.room-friend{
+
+  position:absolute;
+
+  width:62px;
+
+  height:62px;
+
+  object-fit:contain;
+
+  z-index:16;
+
+  transition:
+    left .4s ease,
+    top .4s ease,
+    transform .4s ease;
+
+}
+
+.room-friend-name{
+
+  position:absolute;
+
+  z-index:20;
+
+  transform:translateX(-50%);
+
+  padding:3px 5px;
+
+  background:#d7b78f;
+
+  border:2px solid #60402c;
+
+  color:#4b3525;
+
+  font-family:"Courier New",monospace;
+
+  font-size:7px;
+
+  font-weight:900;
+
+  line-height:1;
+
+  white-space:nowrap;
+
+}
+
+
+/* ==================================================
+   대장 따라오기 표시
+================================================== */
+
+.follow-indicator{
+
+  position:absolute;
+
+  left:50%;
+
+  top:18px;
+
+  transform:translateX(-50%);
+
+  z-index:40;
+
+  padding:5px 9px;
+
+  border-radius:10px;
+
+  background:#fff0c9;
+
+  border:2px solid #d9b77c;
+
+  color:#65452f;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  pointer-events:none;
+
+  animation:indicatorFade .35s ease;
+
+}
+
+@keyframes indicatorFade{
+
+  from{
+    opacity:0;
+    transform:translateX(-50%) translateY(-5px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+}
+
+
+/* ==================================================
+   아이템
 ================================================== */
 
 .room-items{
@@ -1277,18 +1388,26 @@ button{
 
   position:absolute;
 
-  z-index:25;
+  z-index:45;
 
   left:50%;
   top:45%;
 
   transform:translate(-50%,-50%);
 
-  font-size:30px;
-
   pointer-events:none;
 
   animation:itemEffect .9s ease forwards;
+
+}
+
+.item-effect canvas{
+
+  width:52px;
+
+  height:52px;
+
+  image-rendering:pixelated;
 
 }
 
@@ -1522,6 +1641,298 @@ button{
   font-size:14px;
 
   font-weight:900;
+
+}
+
+
+/* ==================================================
+   놀이터 감자
+================================================== */
+
+.play-potato{
+
+  position:absolute;
+
+  width:58px;
+
+  height:58px;
+
+  z-index:35;
+
+  cursor:pointer;
+
+  touch-action:none;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+  image-rendering:pixelated;
+
+  transition:
+    filter .15s ease;
+
+}
+
+.play-potato.dragging{
+
+  filter:
+    drop-shadow(0 4px 0 rgba(80,45,20,.3))
+    brightness(1.08);
+
+  transform:scale(1.12);
+
+}
+
+.play-potato-name{
+
+  pointer-events:none;
+
+}
+
+
+/* ==================================================
+   놀이터 애니메이션
+================================================== */
+
+.play-touch{
+
+  animation:playTouch .35s ease;
+
+}
+
+@keyframes playTouch{
+
+  0%,100%{
+    transform:scale(1);
+  }
+
+  40%{
+    transform:scale(1.12);
+  }
+
+  70%{
+    transform:scale(.95);
+  }
+
+}
+
+.play-jump{
+
+  animation:playJump .55s ease;
+
+}
+
+@keyframes playJump{
+
+  0%,100%{
+    transform:translateY(0) rotate(0);
+  }
+
+  40%{
+    transform:translateY(-24px) rotate(-7deg) scale(1.08);
+  }
+
+  70%{
+    transform:translateY(-8px) rotate(5deg);
+  }
+
+}
+
+.play-shy{
+
+  animation:playShy .55s ease;
+
+}
+
+@keyframes playShy{
+
+  0%,100%{
+    transform:translateX(0);
+  }
+
+  25%{
+    transform:translateX(-10px) rotate(-5deg);
+  }
+
+  50%{
+    transform:translateX(10px) rotate(5deg);
+  }
+
+  75%{
+    transform:translateX(-5px);
+  }
+
+}
+
+.play-spin{
+
+  animation:playSpin .65s ease;
+
+}
+
+@keyframes playSpin{
+
+  0%{
+    transform:rotate(0) scale(1);
+  }
+
+  50%{
+    transform:rotate(180deg) scale(1.1);
+  }
+
+  100%{
+    transform:rotate(360deg) scale(1);
+  }
+
+}
+
+.play-angry{
+
+  animation:playAngry .45s ease;
+
+}
+
+@keyframes playAngry{
+
+  0%,100%{
+    transform:scale(1);
+  }
+
+  30%{
+    transform:scale(1.12) rotate(-6deg);
+  }
+
+  60%{
+    transform:scale(1.12) rotate(6deg);
+  }
+
+}
+
+.play-stun{
+
+  animation:playStun 1.5s ease;
+
+}
+
+@keyframes playStun{
+
+  0%{
+    transform:rotate(0);
+    opacity:1;
+  }
+
+  20%{
+    transform:rotate(-12deg);
+  }
+
+  40%{
+    transform:rotate(12deg);
+  }
+
+  60%{
+    transform:rotate(-8deg);
+  }
+
+  80%{
+    transform:rotate(8deg);
+  }
+
+  100%{
+    transform:rotate(0);
+    opacity:.65;
+  }
+
+}
+
+
+/* ==================================================
+   놀이터 효과 캔버스
+================================================== */
+
+.play-effect{
+
+  position:absolute;
+
+  width:50px;
+  height:50px;
+
+  z-index:60;
+
+  pointer-events:none;
+
+  image-rendering:pixelated;
+
+  animation:playEffect .8s ease forwards;
+
+}
+
+@keyframes playEffect{
+
+  0%{
+    opacity:0;
+    transform:translate(-50%,-20%) scale(.5);
+  }
+
+  25%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.15);
+  }
+
+  100%{
+    opacity:0;
+    transform:translate(-50%,-90%) scale(.75);
+  }
+
+}
+
+
+/* ==================================================
+   방 감자 애니메이션
+================================================== */
+
+.room-friend.bounce{
+
+  animation:roomFriendBounce .55s ease;
+
+}
+
+@keyframes roomFriendBounce{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  40%{
+    transform:translateY(-12px) rotate(-5deg) scale(1.08);
+  }
+
+  70%{
+    transform:translateY(-3px) rotate(4deg);
+  }
+
+}
+
+
+/* ==================================================
+   반응형
+================================================== */
+
+@media(max-width:380px){
+
+  .room-friend{
+    width:54px;
+    height:54px;
+  }
+
+  .play-potato{
+    width:54px;
+    height:54px;
+  }
+
+  .room-friend-name{
+    font-size:6px;
+  }
 
 }
 
@@ -1921,11 +2332,11 @@ button{
       id="roomFurniture">
     </div>
 
-    <img
-      id="roomPotato"
-      class="room-potato hidden"
-      src=""
-      alt="감자">
+    <!-- 모든 방에서 발견된 감자를 표시 -->
+    <div
+      id="roomPotatoGroup"
+      class="room-potato-group">
+    </div>
 
   </div>
 
@@ -2083,7 +2494,7 @@ const personalities = [
 
 
 const STORAGE_KEY =
-  "POTATO_GAME_FINAL_V4";
+  "POTATO_GAME_FINAL_V5";
 
 
 /* ==================================================
@@ -2131,9 +2542,17 @@ let currentRoom =
    놀이터
 ================================================== */
 
-let playgroundTimer = null;
+let playgroundTimer =
+  null;
 
-let playgroundPotatoes = [];
+let playgroundPotatoes =
+  [];
+
+let leaderFollowing =
+  false;
+
+let followTarget =
+  null;
 
 
 /* ==================================================
@@ -2156,24 +2575,72 @@ function save(){
 
 function load(){
 
-  const saved =
+  let saved =
     localStorage.getItem(
       STORAGE_KEY
     );
 
+
+  /*
+    이전 버전 저장 데이터도 가져오기
+  */
+
   if(!saved){
-    return;
+
+    const oldKeys = [
+
+      "POTATO_GAME_FINAL_V4",
+      "POTATO_GAME_FINAL_V3",
+      "POTATO_GAME_FINAL_V2"
+
+    ];
+
+
+    for(
+      const key of oldKeys
+    ){
+
+      const oldData =
+        localStorage.getItem(
+          key
+        );
+
+
+      if(oldData){
+
+        saved =
+          oldData;
+
+        break;
+
+      }
+
+    }
+
   }
+
+
+  if(!saved){
+
+    return;
+
+  }
+
 
   try{
 
     const parsed =
       JSON.parse(saved);
 
+
     state = {
+
       ...state,
+
       ...parsed
+
     };
+
 
     if(
       !Array.isArray(
@@ -2184,6 +2651,7 @@ function load(){
       state.collection = [];
 
     }
+
 
     if(
       typeof state.cleanliness !== "number"
@@ -2662,6 +3130,7 @@ function showMessage(type){
     document.getElementById(
       "messageLine1"
     );
+
 
   const line2 =
     document.getElementById(
@@ -3208,6 +3677,7 @@ function showTouchMessage(type){
       "messageLine1"
     );
 
+
   const line2 =
     document.getElementById(
       "messageLine2"
@@ -3702,6 +4172,73 @@ function sleepPotato(){
 
 
 /* ==================================================
+   픽셀 효과 만들기
+================================================== */
+
+function createPixelEffectCanvas(
+  symbol,
+  size = 32
+){
+
+  const canvas =
+    document.createElement(
+      "canvas"
+    );
+
+
+  canvas.width =
+    size;
+
+  canvas.height =
+    size;
+
+
+  const ctx =
+    canvas.getContext(
+      "2d"
+    );
+
+
+  ctx.imageSmoothingEnabled =
+    false;
+
+
+  ctx.clearRect(
+    0,
+    0,
+    size,
+    size
+  );
+
+
+  /*
+    작은 해상도에서 이모지를 먼저 그린 뒤
+    크게 확대하면 픽셀 느낌이 생김
+  */
+
+  ctx.font =
+    `${Math.floor(size * .72)}px Apple Color Emoji, Segoe UI Emoji, sans-serif`;
+
+  ctx.textAlign =
+    "center";
+
+  ctx.textBaseline =
+    "middle";
+
+
+  ctx.fillText(
+    symbol,
+    size / 2,
+    size / 2 + 1
+  );
+
+
+  return canvas;
+
+}
+
+
+/* ==================================================
    방 메시지
 ================================================== */
 
@@ -3726,8 +4263,16 @@ function showRoomMessage(
     "item-effect";
 
 
-  effect.innerText =
-    symbol;
+  const canvas =
+    createPixelEffectCanvas(
+      symbol,
+      24
+    );
+
+
+  effect.appendChild(
+    canvas
+  );
 
 
   room.appendChild(
@@ -3765,6 +4310,9 @@ function changeRoom(room){
     room;
 
 
+  stopPlayground();
+
+
   const roomElement =
     document.getElementById(
       "room"
@@ -3786,12 +4334,6 @@ function changeRoom(room){
   const furniture =
     document.getElementById(
       "roomFurniture"
-    );
-
-
-  const roomPotato =
-    document.getElementById(
-      "roomPotato"
     );
 
 
@@ -3836,14 +4378,6 @@ function changeRoom(room){
 
     `;
 
-
-    roomPotato.classList.add(
-      "hidden"
-    );
-
-
-    startPlayground();
-
   }
 
 
@@ -3867,20 +4401,6 @@ function changeRoom(room){
 
     `;
 
-
-    roomPotato.classList.remove(
-      "hidden"
-    );
-
-
-    roomPotato.src =
-      state.character ?
-      state.character.image :
-      "";
-
-
-    stopPlayground();
-
   }
 
 
@@ -3903,20 +4423,6 @@ function changeRoom(room){
       <div class="furniture bedside"></div>
 
     `;
-
-
-    roomPotato.classList.remove(
-      "hidden"
-    );
-
-
-    roomPotato.src =
-      state.character ?
-      state.character.image :
-      "";
-
-
-    stopPlayground();
 
   }
 
@@ -3949,20 +4455,6 @@ function changeRoom(room){
       <div class="furniture toilet"></div>
 
     `;
-
-
-    roomPotato.classList.remove(
-      "hidden"
-    );
-
-
-    roomPotato.src =
-      state.character ?
-      state.character.image :
-      "";
-
-
-    stopPlayground();
 
   }
 
@@ -4014,7 +4506,210 @@ function changeRoom(room){
     );
 
 
+  renderRoomPotatoes();
+
   renderRoomItems();
+
+
+  if(
+    room === "living"
+  ){
+
+    startPlayground();
+
+  }
+
+}
+
+
+/* ==================================================
+   모든 방에 수확 감자 표시
+================================================== */
+
+function renderRoomPotatoes(){
+
+  const group =
+    document.getElementById(
+      "roomPotatoGroup"
+    );
+
+
+  if(!group){
+    return;
+  }
+
+
+  group.innerHTML =
+    "";
+
+
+  if(
+    !state.collection ||
+    state.collection.length === 0
+  ){
+
+    return;
+
+  }
+
+
+  const positions = [
+
+    {
+      left:20,
+      top:185,
+      rotate:-5
+    },
+
+    {
+      left:46,
+      top:220,
+      rotate:4
+    },
+
+    {
+      left:70,
+      top:175,
+      rotate:-3
+    },
+
+    {
+      left:34,
+      top:250,
+      rotate:6
+    },
+
+    {
+      left:61,
+      top:255,
+      rotate:-7
+    }
+
+  ];
+
+
+  state.collection.forEach(
+    (name,index) => {
+
+      const potato =
+        potatoes.find(
+          p => p.name === name
+        );
+
+
+      if(!potato){
+        return;
+      }
+
+
+      const img =
+        document.createElement(
+          "img"
+        );
+
+
+      img.className =
+        "room-friend";
+
+
+      img.src =
+        potato.image;
+
+
+      img.alt =
+        potato.name;
+
+
+      const pos =
+        positions[
+          index %
+          positions.length
+        ];
+
+
+      img.style.left =
+        `${pos.left}%`;
+
+
+      img.style.top =
+        `${pos.top}px`;
+
+
+      img.style.transform =
+        `translateX(-50%) rotate(${pos.rotate}deg)`;
+
+
+      /*
+        감자 이름
+      */
+
+      const label =
+        document.createElement(
+          "div"
+        );
+
+
+      label.className =
+        "room-friend-name";
+
+
+      label.innerText =
+        potato.name;
+
+
+      label.style.left =
+        `${pos.left}%`;
+
+
+      label.style.top =
+        `${pos.top + 61}px`;
+
+
+      group.appendChild(
+        img
+      );
+
+
+      group.appendChild(
+        label
+      );
+
+
+      /*
+        가끔 살짝 움직임
+      */
+
+      setTimeout(
+        () => {
+
+          if(
+            Math.random() < .45
+          ){
+
+            img.classList.add(
+              "bounce"
+            );
+
+            setTimeout(
+              () => {
+
+                img.classList.remove(
+                  "bounce"
+                );
+
+              },
+              600
+            );
+
+          }
+
+        },
+        300 +
+        index * 180
+      );
+
+    }
+  );
 
 }
 
@@ -4043,7 +4738,7 @@ function renderRoomItems(){
 
       <button
         class="room-item"
-        onclick="showRoomMessage('🥔','아직 감자가 없어요!')">
+        onclick="showRoomMessage('🥔','아직 키우는 감자가 없어요!')">
         🥔<br>
         감자 없음
       </button>
@@ -4285,8 +4980,8 @@ function renderCollection(){
 
 
 /* ==================================================
-   놀이터
-   갈색 테마 픽셀 감자
+   놀이터용 픽셀 감자 생성
+   기존 12×12에서 24×24로 개선
 ================================================== */
 
 function createPixelPotato(
@@ -4300,15 +4995,22 @@ function createPixelPotato(
 
   source.onload = () => {
 
+    /*
+      너무 작은 12×12 때문에
+      감자 얼굴이 뭉개지는 문제 해결
+    */
+
     const small =
       document.createElement(
         "canvas"
       );
 
 
-    small.width = 12;
+    small.width =
+      24;
 
-    small.height = 12;
+    small.height =
+      24;
 
 
     const ctx =
@@ -4327,8 +5029,8 @@ function createPixelPotato(
     ctx.clearRect(
       0,
       0,
-      12,
-      12
+      24,
+      24
     );
 
 
@@ -4336,17 +5038,22 @@ function createPixelPotato(
       source,
       0,
       0,
-      12,
-      12
+      24,
+      24
     );
 
+
+    /*
+      원본의 밝기를 기준으로
+      갈색 픽셀톤을 입힘
+    */
 
     const imageData =
       ctx.getImageData(
         0,
         0,
-        12,
-        12
+        24,
+        24
       );
 
 
@@ -4399,37 +5106,55 @@ function createPixelPotato(
 
 
       if(
-        brightness > 205
+        brightness > 220
       ){
 
-        nr = 231;
-        ng = 205;
-        nb = 168;
+        nr = 242;
+        ng = 219;
+        nb = 185;
+
+      }
+      else if(
+        brightness > 185
+      ){
+
+        nr = 215;
+        ng = 178;
+        nb = 134;
 
       }
       else if(
         brightness > 145
       ){
 
-        nr = 190;
-        ng = 151;
-        nb = 106;
+        nr = 184;
+        ng = 142;
+        nb = 96;
 
       }
       else if(
-        brightness > 80
+        brightness > 95
       ){
 
-        nr = 125;
-        ng = 83;
-        nb = 55;
+        nr = 132;
+        ng = 88;
+        nb = 58;
+
+      }
+      else if(
+        brightness > 50
+      ){
+
+        nr = 88;
+        ng = 54;
+        nb = 37;
 
       }
       else{
 
-        nr = 72;
-        ng = 45;
-        nb = 31;
+        nr = 52;
+        ng = 31;
+        nb = 23;
 
       }
 
@@ -4453,6 +5178,10 @@ function createPixelPotato(
     );
 
 
+    /*
+      최종 표시용 72×72
+    */
+
     const finalCanvas =
       document.createElement(
         "canvas"
@@ -4460,11 +5189,11 @@ function createPixelPotato(
 
 
     finalCanvas.width =
-      48;
+      72;
 
 
     finalCanvas.height =
-      48;
+      72;
 
 
     const finalCtx =
@@ -4480,8 +5209,8 @@ function createPixelPotato(
     finalCtx.clearRect(
       0,
       0,
-      48,
-      48
+      72,
+      72
     );
 
 
@@ -4489,12 +5218,12 @@ function createPixelPotato(
       small,
       0,
       0,
-      12,
-      12,
+      24,
+      24,
       0,
       0,
-      48,
-      48
+      72,
+      72
     );
 
 
@@ -4631,6 +5360,13 @@ function stopPlayground(){
   playgroundPotatoes = [];
 
 
+  leaderFollowing =
+    false;
+
+  followTarget =
+    null;
+
+
   const playground =
     document.getElementById(
       "room"
@@ -4644,7 +5380,8 @@ function stopPlayground(){
 
         ".play-potato, " +
         ".play-potato-name, " +
-        ".play-effect"
+        ".play-effect, " +
+        ".follow-indicator"
 
       );
 
@@ -4684,11 +5421,11 @@ function createPlayPotato(
 
 
   img.width =
-    48;
+    72;
 
 
   img.height =
-    48;
+    72;
 
 
   img.setAttribute(
@@ -4708,15 +5445,15 @@ function createPlayPotato(
 
 
   img.style.width =
-    "48px";
+    "58px";
 
 
   img.style.height =
-    "48px";
+    "58px";
 
 
   img.style.zIndex =
-    "15";
+    "35";
 
 
   const name =
@@ -4738,7 +5475,7 @@ function createPlayPotato(
 
 
   name.style.zIndex =
-    "20";
+    "40";
 
 
   name.style.transform =
@@ -4820,11 +5557,11 @@ function createPlayPotato(
       ),
 
     y:
-      95 +
+      115 +
       Math.random() *
       Math.max(
         50,
-        height - 180
+        height - 205
       ),
 
     vx:
@@ -4847,9 +5584,25 @@ function createPlayPotato(
 
     longPressTimer:null,
 
-    suppressClick:false
+    suppressClick:false,
+
+    isLeader:false
 
   };
+
+
+  /*
+    대장감자 여부
+  */
+
+  if(
+    potato.style === "leader"
+  ){
+
+    actor.isLeader =
+      true;
+
+  }
 
 
   createPixelPotato(
@@ -4874,8 +5627,8 @@ function createPlayPotato(
       ctx.clearRect(
         0,
         0,
-        48,
-        48
+        72,
+        72
       );
 
 
@@ -4883,13 +5636,17 @@ function createPlayPotato(
         canvas,
         0,
         0,
-        48,
-        48
+        72,
+        72
       );
 
     }
   );
 
+
+  /*
+    짧게 터치
+  */
 
   img.addEventListener(
     "click",
@@ -4919,6 +5676,10 @@ function createPlayPotato(
     }
   );
 
+
+  /*
+    길게 누르기
+  */
 
   img.addEventListener(
     "pointerdown",
@@ -4956,6 +5717,38 @@ function createPlayPotato(
             }
 
 
+            /*
+              대장감자를 길게 누르면
+              팔로우 모드
+            */
+
+            if(
+              actor.isLeader
+            ){
+
+              actor.suppressClick =
+                true;
+
+              toggleLeaderFollow(
+                actor
+              );
+
+              actor.pressing =
+                false;
+
+              actor.longPressTimer =
+                null;
+
+              return;
+
+            }
+
+
+            /*
+              나머지 감자는 기존처럼
+              길게 누르면 드래그
+            */
+
             actor.dragging =
               true;
 
@@ -4988,6 +5781,10 @@ function createPlayPotato(
   );
 
 
+  /*
+    드래그
+  */
+
   img.addEventListener(
     "pointermove",
     function(e){
@@ -5013,13 +5810,13 @@ function createPlayPotato(
       actor.x =
         e.clientX -
         rect.left -
-        24;
+        29;
 
 
       actor.y =
         e.clientY -
         rect.top -
-        24;
+        29;
 
 
       keepInside(
@@ -5106,6 +5903,123 @@ function createPlayPotato(
 
   updateActorPosition(
     actor
+  );
+
+}
+
+
+/* ==================================================
+   대장감자 따라오기
+================================================== */
+
+function toggleLeaderFollow(
+  leader
+){
+
+  if(
+    leaderFollowing &&
+    followTarget === leader
+  ){
+
+    leaderFollowing =
+      false;
+
+    followTarget =
+      null;
+
+
+    showFollowIndicator(
+      "따라오기 해제"
+    );
+
+
+    return;
+
+  }
+
+
+  leaderFollowing =
+    true;
+
+  followTarget =
+    leader;
+
+
+  showFollowIndicator(
+    "대장감자를 따라가요!"
+  );
+
+
+  playActorAnimation(
+    leader,
+    "jump"
+  );
+
+
+  createPlayEffect(
+    leader,
+    "♥"
+  );
+
+}
+
+
+/* ==================================================
+   따라오기 표시
+================================================== */
+
+function showFollowIndicator(
+  text
+){
+
+  const playground =
+    document.getElementById(
+      "room"
+    );
+
+
+  if(!playground){
+    return;
+  }
+
+
+  const old =
+    playground.querySelector(
+      ".follow-indicator"
+    );
+
+
+  if(old){
+    old.remove();
+  }
+
+
+  const indicator =
+    document.createElement(
+      "div"
+    );
+
+
+  indicator.className =
+    "follow-indicator";
+
+
+  indicator.innerText =
+    text;
+
+
+  playground.appendChild(
+    indicator
+  );
+
+
+  setTimeout(
+    () => {
+
+      indicator.remove();
+
+    },
+    1200
   );
 
 }
@@ -5300,7 +6214,7 @@ function updateActorPosition(
 
 
   const maxX =
-    playground.clientWidth - 53;
+    playground.clientWidth - 65;
 
 
   const maxY =
@@ -5336,11 +6250,11 @@ function updateActorPosition(
 
 
   actor.label.style.left =
-    `${actor.x + 24}px`;
+    `${actor.x + 29}px`;
 
 
   actor.label.style.top =
-    `${actor.y + 48}px`;
+    `${actor.y + 58}px`;
 
 }
 
@@ -5379,6 +6293,89 @@ function playgroundTick(){
         updateActorPosition(
           actor
         );
+
+        return;
+
+      }
+
+
+      /*
+        대장감자를 따라오는 상태
+      */
+
+      if(
+        leaderFollowing &&
+        followTarget &&
+        !actor.isLeader
+      ){
+
+        const leader =
+          followTarget;
+
+
+        const leaderIndex =
+          playgroundPotatoes.indexOf(
+            actor
+          );
+
+
+        const angle =
+          (
+            leaderIndex *
+            2.1
+          );
+
+
+        const followDistance =
+          55 +
+          (
+            leaderIndex *
+            8
+          );
+
+
+        const targetX =
+          leader.x +
+          Math.cos(angle) *
+          followDistance;
+
+
+        const targetY =
+          leader.y +
+          Math.sin(angle) *
+          followDistance;
+
+
+        moveToward(
+          actor,
+          targetX,
+          targetY,
+          1.7
+        );
+
+
+        /*
+          따라가는 동안 가끔 폴짝
+        */
+
+        randomAction(
+          actor,
+          [
+            "jump"
+          ],
+          .012
+        );
+
+
+        keepInside(
+          actor
+        );
+
+
+        updateActorPosition(
+          actor
+        );
+
 
         return;
 
@@ -5437,7 +6434,7 @@ function playgroundTick(){
 
         moveToward(
           actor,
-          centerX - 24,
+          centerX - 29,
           centerY,
           .45
         );
@@ -5595,9 +6592,11 @@ function getNearestOther(
   actor
 ){
 
-  let nearest = null;
+  let nearest =
+    null;
 
-  let distance = Infinity;
+  let distance =
+    Infinity;
 
 
   playgroundPotatoes.forEach(
@@ -5636,9 +6635,11 @@ function getNearestOther(
         d < distance
       ){
 
-        distance = d;
+        distance =
+          d;
 
-        nearest = other;
+        nearest =
+          other;
 
       }
 
@@ -5721,7 +6722,7 @@ function keepInside(
 
 
   const maxX =
-    playground.clientWidth - 53;
+    playground.clientWidth - 65;
 
 
   const maxY =
@@ -5955,7 +6956,7 @@ function checkPlaygroundCollisions(){
 
 
       if(
-        distance < 43
+        distance < 45
       ){
 
         if(
@@ -6132,7 +7133,8 @@ function stunPotato(
   attacker
 ){
 
-  victim.stunned = true;
+  victim.stunned =
+    true;
 
 
   victim.img.classList.remove(
@@ -6170,7 +7172,8 @@ function stunPotato(
 
     () => {
 
-      victim.stunned = false;
+      victim.stunned =
+        false;
 
       victim.img.classList.remove(
         "play-stun"
@@ -6235,32 +7238,24 @@ function createCollisionEffect(
     "play-effect";
 
 
-  effect.style.position =
-    "absolute";
-
-
-  effect.style.zIndex =
-    "30";
-
-
-  effect.style.pointerEvents =
-    "none";
-
-
   effect.style.left =
-    `${x + 24}px`;
+    `${x + 29}px`;
 
 
   effect.style.top =
-    `${y + 24}px`;
+    `${y + 29}px`;
 
 
-  effect.style.fontSize =
-    "25px";
+  const canvas =
+    createPixelEffectCanvas(
+      "X",
+      24
+    );
 
 
-  effect.innerText =
-    "X";
+  effect.appendChild(
+    canvas
+  );
 
 
   playground.appendChild(
@@ -6310,32 +7305,24 @@ function createPlayEffect(
     "play-effect";
 
 
-  effect.style.position =
-    "absolute";
-
-
-  effect.style.zIndex =
-    "30";
-
-
-  effect.style.pointerEvents =
-    "none";
-
-
   effect.style.left =
-    `${actor.x + 24}px`;
+    `${actor.x + 29}px`;
 
 
   effect.style.top =
-    `${actor.y + 16}px`;
+    `${actor.y + 20}px`;
 
 
-  effect.style.fontSize =
-    "25px";
+  const canvas =
+    createPixelEffectCanvas(
+      symbol,
+      24
+    );
 
 
-  effect.innerText =
-    symbol;
+  effect.appendChild(
+    canvas
+  );
 
 
   playground.appendChild(
@@ -6440,23 +7427,43 @@ function harvest(){
   }
 
 
-  state.born = false;
+  /*
+    수확하면 현재 대장 따라오기 상태 초기화
+  */
 
-  state.growth = 0;
+  leaderFollowing =
+    false;
 
-  state.character = null;
+  followTarget =
+    null;
 
-  state.personality = null;
 
-  state.hunger = 100;
+  state.born =
+    false;
 
-  state.water = 100;
+  state.growth =
+    0;
 
-  state.love = 50;
+  state.character =
+    null;
 
-  state.energy = 100;
+  state.personality =
+    null;
 
-  state.cleanliness = 100;
+  state.hunger =
+    100;
+
+  state.water =
+    100;
+
+  state.love =
+    50;
+
+  state.energy =
+    100;
+
+  state.cleanliness =
+    100;
 
 
   save();
@@ -6471,7 +7478,8 @@ function harvest(){
       "🥔 새로운 감자 발견!",
 
       `${character.name}를 수확했어요!<br><br>
-       도감에 등록되었습니다.`
+       도감에 등록되었습니다.<br>
+       이제 모든 방에서 ${character.name}를 볼 수 있어요.`
 
     );
 
@@ -6550,21 +7558,27 @@ setInterval(
       state.hunger <= 20
     ){
 
-      showMessage("hungry");
+      showMessage(
+        "hungry"
+      );
 
     }
     else if(
       state.water <= 20
     ){
 
-      showMessage("thirsty");
+      showMessage(
+        "thirsty"
+      );
 
     }
     else if(
       state.energy <= 20
     ){
 
-      showMessage("tired");
+      showMessage(
+        "tired"
+      );
 
     }
 
