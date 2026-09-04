@@ -6681,6 +6681,40 @@ function stopTamaLoop(){
     }
 }
 
+// ================================
+// 꾼감자 특별 행동
+// ================================
+
+const kkung = potatoes.find(p => p.name === "꾼감자");
+
+if (kkung) {
+
+    // 폭력감자와 가족처럼 지내기
+    const violent = potatoes.find(p => p.name === "폭력감자");
+
+    if (
+        violent &&
+        Math.random() < 0.003
+    ) {
+        kkung.targetX = violent.x;
+        kkung.targetY = violent.y;
+
+        kkung.dialogue = "폭력감자야~";
+        kkung.dialogueTimer = 180;
+    }
+
+    // 대장감자를 잘 따르기
+    const leader = potatoes.find(p => p.name === "대장감자");
+
+    if (
+        leader &&
+        Math.random() < 0.004
+    ) {
+        kkung.targetX = leader.x;
+        kkung.targetY = leader.y;
+    }
+}
+
 /* ==================================================
    초기화
 ================================================== */
