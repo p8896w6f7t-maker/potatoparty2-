@@ -6846,6 +6846,84 @@ document.addEventListener(
 
 })();
 
+/* ==========================================
+   💾 게임 자동 저장
+========================================== */
+
+const SAVE_KEY = "potatoGameSave";
+
+function saveGame(){
+
+    const saveData = {
+        potatoes: potatoes
+    };
+
+    localStorage.setItem(
+        SAVE_KEY,
+        JSON.stringify(saveData)
+    );
+}
+
+
+function loadGame(){
+
+    const saved =
+        localStorage.getItem(SAVE_KEY);
+
+    if(!saved) return;
+
+    try{
+
+        const data =
+            JSON.parse(saved);
+
+        if(data.potatoes){
+
+            data.potatoes.forEach(savedPotato => {
+
+                const potato =
+                    potatoes.find(
+                        p => p.name === savedPotato.name
+                    );
+
+                if(!potato) return;
+
+                Object.assign(
+                    potato,
+                    savedPotato
+                );
+            });
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "저장 데이터 불러오기 실패",
+            error
+        );
+
+    }
+}
+
+
+/* 게임 시작할 때 저장 데이터 불러오기 */
+loadGame();
+
+
+/* 3초마다 자동 저장 */
+setInterval(
+    saveGame,
+    3000
+);
+
+
+/* 사이트를 나갈 때 한 번 더 저장 */
+window.addEventListener(
+    "beforeunload",
+    saveGame
+);
+
 </script>
 
 </body>
