@@ -6722,6 +6722,67 @@ if (kkung) {
 updateGrow();
 
 /* ==================================================
+   💾 게임 저장
+================================================== */
+
+const SAVE_KEY = "potatoGameSave";
+
+function saveGame() {
+    localStorage.setItem(
+        SAVE_KEY,
+        JSON.stringify({
+            potatoes: potatoes
+        })
+    );
+}
+
+function loadGame() {
+    const saved = localStorage.getItem(SAVE_KEY);
+
+    if (!saved) return;
+
+    try {
+        const data = JSON.parse(saved);
+
+        if (data.potatoes && typeof potatoes !== "undefined") {
+            data.potatoes.forEach(savedPotato => {
+
+                const potato = potatoes.find(
+                    p => p.name === savedPotato.name
+                );
+
+                if (potato) {
+                    Object.assign(
+                        potato,
+                        savedPotato
+                    );
+                }
+            });
+        }
+
+        updateGrow();
+
+    } catch (e) {
+        console.log("저장 데이터 불러오기 실패");
+    }
+}
+
+
+/* 처음 들어왔을 때 저장 데이터 불러오기 */
+loadGame();
+
+
+/* 3초마다 자동 저장 */
+setInterval(saveGame, 3000);
+
+
+/* 사이트를 나갈 때 저장 */
+window.addEventListener(
+    "beforeunload",
+    saveGame
+);
+
+/* ==================================================
    추가 복사 방지
 ================================================== */
 
@@ -6845,84 +6906,6 @@ document.addEventListener(
 
 
 })();
-
-/* ==========================================
-   💾 게임 자동 저장
-========================================== */
-
-const SAVE_KEY = "potatoGameSave";
-
-function saveGame(){
-
-    const saveData = {
-        potatoes: potatoes
-    };
-
-    localStorage.setItem(
-        SAVE_KEY,
-        JSON.stringify(saveData)
-    );
-}
-
-
-function loadGame(){
-
-    const saved =
-        localStorage.getItem(SAVE_KEY);
-
-    if(!saved) return;
-
-    try{
-
-        const data =
-            JSON.parse(saved);
-
-        if(data.potatoes){
-
-            data.potatoes.forEach(savedPotato => {
-
-                const potato =
-                    potatoes.find(
-                        p => p.name === savedPotato.name
-                    );
-
-                if(!potato) return;
-
-                Object.assign(
-                    potato,
-                    savedPotato
-                );
-            });
-
-        }
-
-    }catch(error){
-
-        console.log(
-            "저장 데이터 불러오기 실패",
-            error
-        );
-
-    }
-}
-
-
-/* 게임 시작할 때 저장 데이터 불러오기 */
-loadGame();
-
-
-/* 3초마다 자동 저장 */
-setInterval(
-    saveGame,
-    3000
-);
-
-
-/* 사이트를 나갈 때 한 번 더 저장 */
-window.addEventListener(
-    "beforeunload",
-    saveGame
-);
 
 </script>
 
