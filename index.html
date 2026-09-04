@@ -4,1971 +4,4173 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>감자 키우기</title>
+
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#f4efe5;color:#4b392b;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
-button{font:inherit;border:0;cursor:pointer}
-.app{width:100%;max-width:500px;margin:auto;min-height:100vh;background:#fffaf2}
-.screen{display:none;min-height:100vh;padding:24px 16px}
-.screen.active{display:block}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
 
-.start{display:flex;align-items:center;justify-content:center;text-align:center}
-.start-box{width:100%;padding:30px 10px}
-.big-potato{font-size:80px;animation:bob 2s ease-in-out infinite}
-h1{font-size:34px;margin:10px 0 8px}
-.sub{color:#8a7767;margin-bottom:28px}
-.main-btn{width:100%;padding:16px;border-radius:16px;background:#7aa95c;color:white;font-weight:800;font-size:18px;box-shadow:0 5px 0 #5e8845}
-.main-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #5e8845}
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  background:#f8f4e8;
+  color:#3d3428;
+}
 
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.header h2{margin:0;font-size:22px}
-.back{background:#eee4d5;padding:9px 12px;border-radius:12px}
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
+.screen{
+  display:none;
+  min-height:100vh;
+}
+
+.screen.active{
+  display:block;
+}
+
+/* =========================
+   시작 화면
+========================= */
+
+#startScreen{
+  min-height:100vh;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  background:
+    radial-gradient(circle at 20% 20%,#fff5bd 0 5%,transparent 6%),
+    linear-gradient(#dff5ff 0 48%,#b9df8d 48% 100%);
+}
+
+#startScreen.active{
+  display:flex;
+}
+
+.start-box{
+  width:min(90vw,420px);
+  padding:40px 25px;
+  background:rgba(255,255,255,.9);
+  border-radius:30px;
+  box-shadow:0 15px 45px rgba(72,52,25,.15);
+}
+
+.start-potato{
+  font-size:80px;
+  animation:startBounce 2s infinite ease-in-out;
+}
+
+@keyframes startBounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+.start-box h1{
+  margin:12px 0 8px;
+  font-size:34px;
+}
+
+.start-box p{
+  margin:0 0 25px;
+  color:#756957;
+}
+
+.start-btn{
+  border:0;
+  padding:16px 25px;
+  border-radius:18px;
+  background:#8cbd5a;
+  color:white;
+  font-size:17px;
+  font-weight:800;
+  box-shadow:0 5px 0 #67953b;
+}
+
+.start-btn:active{
+  transform:translateY(4px);
+  box-shadow:0 1px 0 #67953b;
+}
+
+/* =========================
+   공통 게임
+========================= */
+
+.game-wrap{
+  width:min(100%,600px);
+  margin:0 auto;
+  padding-bottom:30px;
+}
 
 .sticky-top{
-position:sticky;
-top:0;
-z-index:50;
-background:#fffaf2;
-padding-top:8px;
-padding-bottom:8px
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(248,244,232,.96);
+  backdrop-filter:blur(12px);
+  padding:12px 14px 10px;
+  border-bottom:1px solid rgba(80,65,40,.08);
 }
 
-.potato-card{
-text-align:center;
-background:#f5ead8;
-border-radius:22px;
-padding:14px 10px;
-margin-bottom:10px;
-overflow:hidden
+.title{
+  text-align:center;
+  font-size:22px;
+  font-weight:900;
+  margin:3px 0 10px;
 }
 
-.potato-wrap{
-height:170px;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative
+.potato-area{
+  position:relative;
+  height:250px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
-.potato-img{
-width:145px;
-height:145px;
-object-fit:contain;
-user-select:none;
--webkit-user-drag:none;
-transition:transform .2s
+.main-potato{
+  width:190px;
+  max-width:55vw;
+  user-select:none;
+  -webkit-user-drag:none;
+  cursor:pointer;
+  transition:transform .18s ease;
 }
 
-.potato-img.jump{animation:jump .55s ease}
-.potato-img.shy{animation:shy .5s ease}
-.potato-img.wiggle{animation:wiggle .5s ease}
-.potato-img.angry{animation:angry .5s ease}
-.potato-img.happy{animation:happy .65s ease}
-.potato-img.sleep{animation:sleep 1s ease}
-.potato-img.sparkle{animation:sparkle .7s ease}
+.main-potato:active{
+  transform:scale(.94);
+}
 
-.message{min-height:42px;font-weight:700;color:#654b38}
-.touch-hint{font-size:12px;color:#9b8877;margin-top:4px}
+.message{
+  min-height:55px;
+  padding:12px 16px;
+  margin:4px 0;
+  border-radius:18px;
+  background:white;
+  text-align:center;
+  font-size:15px;
+  font-weight:700;
+  box-shadow:0 3px 12px rgba(60,45,25,.08);
+}
+
+/* =========================
+   성장
+========================= */
+
+.growth-box{
+  padding:20px 16px;
+  text-align:center;
+}
+
+.growth-potato{
+  font-size:100px;
+  margin:25px 0;
+}
+
+.growth-percent{
+  font-size:28px;
+  font-weight:900;
+}
+
+.progress{
+  width:100%;
+  height:18px;
+  background:#ddd6c7;
+  border-radius:20px;
+  overflow:hidden;
+  margin:12px 0 25px;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:#8cbd5a;
+  transition:width .3s ease;
+}
+
+.growth-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.growth-buttons button{
+  border:0;
+  border-radius:16px;
+  padding:15px 8px;
+  background:white;
+  box-shadow:0 3px 10px rgba(60,45,25,.08);
+  font-size:15px;
+  font-weight:800;
+}
+
+.hatch-btn{
+  grid-column:1/-1;
+  background:#8cbd5a !important;
+  color:white;
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* =========================
+   상태
+========================= */
 
 .stats{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px;
-margin:12px 0
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  padding:12px 14px;
 }
 
-.stat{background:#f3eee7;border-radius:13px;padding:10px}
-.stat-top{display:flex;justify-content:space-between;font-size:13px}
-.bar{height:8px;background:#ddd3c7;border-radius:9px;overflow:hidden;margin-top:6px}
-.fill{height:100%;width:50%;background:#79a95c;transition:width .25s}
+.stat{
+  background:white;
+  padding:11px 13px;
+  border-radius:15px;
+  box-shadow:0 3px 10px rgba(60,45,25,.06);
+}
+
+.stat-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.stat-bar{
+  height:9px;
+  border-radius:20px;
+  background:#e5e0d5;
+  overflow:hidden;
+}
+
+.stat-fill{
+  height:100%;
+  width:100%;
+  border-radius:20px;
+  transition:width .3s;
+}
+
+.hunger-fill{background:#f0a85c}
+.water-fill{background:#71b8dc}
+.love-fill{background:#e7839e}
+.energy-fill{background:#d4bd57}
+
+/* =========================
+   행동 버튼
+========================= */
 
 .actions{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:9px
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:8px 14px;
 }
 
-.action{
-padding:14px 8px;
-border-radius:14px;
-background:#eee6da;
-font-weight:700
+.actions button{
+  border:0;
+  padding:15px 8px;
+  border-radius:17px;
+  background:white;
+  font-size:15px;
+  font-weight:800;
+  box-shadow:0 3px 10px rgba(60,45,25,.07);
 }
 
-.action:active{transform:scale(.97)}
-.action.primary{background:#dcebcf}
-.action.danger{background:#f1ddd6}
-.info{font-size:13px;color:#8b7969;text-align:center;margin:13px 0}
-
-.growth{text-align:center}
-.growth-potato{
-font-size:110px;
-height:230px;
-display:flex;
-align-items:center;
-justify-content:center
-}
-.growth-percent{font-size:25px;font-weight:900}
-.growth-bar{
-height:15px;
-background:#ded4c6;
-border-radius:20px;
-overflow:hidden;
-margin:12px 0 20px
-}
-.growth-fill{
-height:100%;
-background:#76a65a;
-width:0%;
-transition:width .25s
+.actions button:active{
+  transform:scale(.96);
 }
 
-.growth-actions{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px
+.harvest-btn{
+  background:#a47b4d !important;
+  color:white;
 }
 
-.grow-btn{
-padding:16px 8px;
-border-radius:15px;
-background:#eee5d9;
-font-weight:800
+.collection-btn{
+  background:#6e9c5b !important;
+  color:white;
 }
 
-.hatch{background:#dcebcf!important}
+/* =========================
+   걷기
+========================= */
 
-.collection-count{
-text-align:center;
-font-weight:800;
-color:#786556;
-margin:12px
+.walking{
+  animation:walking .65s infinite alternate ease-in-out;
 }
 
-.cards{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px
+@keyframes walking{
+  from{transform:translateX(-15px) rotate(-3deg)}
+  to{transform:translateX(15px) rotate(3deg)}
 }
 
-.card{
-background:#f4eee5;
-border-radius:17px;
-padding:14px;
-text-align:center;
-min-height:175px
+.walk-effect{
+  position:absolute;
+  font-size:32px;
+  animation:walkEffect .9s forwards;
 }
 
-.card img{
-width:105px;
-height:105px;
-object-fit:contain
+@keyframes walkEffect{
+  from{
+    opacity:1;
+    transform:translateY(0);
+  }
+  to{
+    opacity:0;
+    transform:translateY(-55px);
+  }
 }
 
-.card .unknown{
-font-size:72px;
-height:105px;
-display:flex;
-align-items:center;
-justify-content:center
-}
+/* =========================
+   터치 반응
+========================= */
 
-.card-name{font-weight:900;margin-top:5px}
-.card-sub{font-size:12px;color:#978475;margin-top:5px}
-
-.playground{
-position:relative;
-height:340px;
-border-radius:24px;
-overflow:hidden;
-margin-top:12px;
-touch-action:none;
-background:
-radial-gradient(circle at 15% 18%,rgba(255,255,255,.7) 0 3px,transparent 4px),
-radial-gradient(circle at 82% 25%,rgba(255,255,255,.6) 0 3px,transparent 4px),
-linear-gradient(#bfe49b 0 38%,#91c96d 38% 100%)
-}
-
-.playground:before{
-content:"";
-position:absolute;
-inset:0;
-background:
-radial-gradient(ellipse at 12% 75%,#7eb45e 0 7%,transparent 7.5%),
-radial-gradient(ellipse at 87% 65%,#78ad58 0 8%,transparent 8.5%),
-radial-gradient(ellipse at 50% 92%,#79ad57 0 10%,transparent 10.5%);
-opacity:.55
-}
-
-.sun{
-position:absolute;
-right:18px;
-top:15px;
-font-size:38px
-}
-
-.tree{
-position:absolute;
-font-size:48px;
-user-select:none;
-pointer-events:none
-}
-
-.tree.t1{left:8px;top:20px}
-.tree.t2{right:10px;top:115px}
-.tree.t3{left:34%;bottom:4px;font-size:42px}
-
-.flower{
-position:absolute;
-font-size:22px;
-pointer-events:none
-}
-
-.fl1{left:17%;bottom:18px}
-.fl2{left:70%;bottom:38px}
-.fl3{right:18%;bottom:12px}
-.fl4{left:48%;top:52%}
-
-.log{
-position:absolute;
-left:12px;
-bottom:14px;
-font-size:42px;
-pointer-events:none
-}
-
-.pond{
-position:absolute;
-right:10px;
-bottom:10px;
-width:105px;
-height:48px;
-border-radius:50%;
-background:#76c7d6;
-opacity:.8;
-pointer-events:none
-}
-
-.play-potato{
-position:absolute;
-width:64px;
-height:64px;
-display:flex;
-align-items:center;
-justify-content:center;
-touch-action:none;
-user-select:none;
-z-index:5;
-transition:filter .15s
-}
-
-.play-potato img{
-width:58px;
-height:58px;
-object-fit:contain;
-user-select:none;
--webkit-user-drag:none;
-pointer-events:none
-}
-
-.play-potato.dragging{
-z-index:100;
-filter:drop-shadow(0 8px 5px rgba(0,0,0,.25));
-transform:scale(1.18)
-}
-
-.play-potato.stunned img{animation:stun .7s infinite}
-
-.play-name{
-position:absolute;
-top:-17px;
-left:50%;
-transform:translateX(-50%);
-font-size:9px;
-font-weight:800;
-white-space:nowrap;
-background:rgba(255,255,255,.8);
-padding:2px 5px;
-border-radius:6px;
-pointer-events:none
-}
-
-.play-effect{
-position:absolute;
-z-index:20;
-font-size:23px;
-pointer-events:none;
-animation:floatup .9s ease forwards
-}
-
-.playground-help{
-text-align:center;
-font-size:12px;
-color:#8e7b69;
-margin:8px 0
-}
-
-.modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.45);
-display:none;
-align-items:center;
-justify-content:center;
-padding:20px;
-z-index:200
-}
-
-.modal.show{display:flex}
-
-.modal-box{
-background:#fffaf2;
-border-radius:22px;
-padding:24px;
-max-width:380px;
-width:100%;
-text-align:center
-}
-
-.modal-box h3{margin-top:0}
-
-.modal-close{
-margin-top:15px;
-width:100%;
-padding:13px;
-border-radius:13px;
-background:#e9dfd2;
-font-weight:800
-}
-
-@keyframes bob{
-50%{transform:translateY(-8px)}
+.react-jump{
+  animation:jump .55s ease;
 }
 
 @keyframes jump{
-50%{transform:translateY(-28px) rotate(-5deg)}
+  0%{transform:translateY(0)}
+  40%{transform:translateY(-28px) rotate(-4deg)}
+  70%{transform:translateY(0) rotate(4deg)}
+  100%{transform:translateY(0)}
+}
+
+.react-shy{
+  animation:shy .65s ease;
 }
 
 @keyframes shy{
-50%{transform:scale(.82) translateX(8px)}
+  0%{transform:scale(1)}
+  30%{transform:scale(.9) rotate(-5deg)}
+  60%{transform:scale(.9) rotate(5deg)}
+  100%{transform:scale(1)}
+}
+
+.react-wiggle{
+  animation:wiggle .55s ease;
 }
 
 @keyframes wiggle{
-25%{transform:rotate(-8deg)}
-75%{transform:rotate(8deg)}
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(-9deg)}
+  75%{transform:rotate(9deg)}
+}
+
+.react-heart{
+  animation:heart .6s ease;
+}
+
+@keyframes heart{
+  0%{transform:scale(1)}
+  45%{transform:scale(1.13)}
+  100%{transform:scale(1)}
+}
+
+.react-angry{
+  animation:angry .5s ease;
 }
 
 @keyframes angry{
-25%{transform:translateX(-7px)}
-75%{transform:translateX(7px)}
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-8px)}
+  75%{transform:translateX(8px)}
+}
+
+.react-happy{
+  animation:happy .65s ease;
 }
 
 @keyframes happy{
-50%{transform:translateY(-18px) scale(1.08)}
+  0%{transform:scale(1)}
+  50%{transform:scale(1.12) translateY(-7px)}
+  100%{transform:scale(1)}
+}
+
+.react-sleep{
+  animation:sleep .9s ease;
 }
 
 @keyframes sleep{
-50%{transform:scale(.92);opacity:.7}
+  0%{transform:translateY(0)}
+  50%{transform:translateY(7px) scale(.96)}
+  100%{transform:translateY(0)}
 }
 
-@keyframes sparkle{
-50%{transform:scale(1.14) rotate(8deg)}
+/* =========================
+   도감 / 놀이터
+========================= */
+
+#collectionScreen{
+  background:#b9df8d;
 }
 
-@keyframes stun{
-50%{transform:rotate(20deg)}
+.collection-head{
+  position:sticky;
+  top:0;
+  z-index:40;
+  padding:13px 14px;
+  background:rgba(244,250,229,.94);
+  backdrop-filter:blur(10px);
 }
 
-@keyframes floatup{
-0%{opacity:1;transform:translateY(0) scale(.8)}
-100%{opacity:0;transform:translateY(-35px) scale(1.2)}
+.collection-title{
+  text-align:center;
+  font-size:22px;
+  font-weight:900;
+}
+
+.collection-count{
+  text-align:center;
+  margin-top:5px;
+  font-size:14px;
+  font-weight:700;
+  color:#647152;
+}
+
+.back-btn{
+  position:absolute;
+  left:12px;
+  top:10px;
+  border:0;
+  background:white;
+  border-radius:12px;
+  padding:9px 11px;
+  font-weight:800;
+}
+
+/* 농장 놀이터 */
+
+.playground{
+  position:relative;
+  width:100%;
+  height:390px;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      to bottom,
+      #9dd56d 0%,
+      #a9db76 48%,
+      #b6df83 48%,
+      #b6df83 100%
+    );
+  border-bottom:5px solid rgba(94,124,57,.3);
+}
+
+/* 잔디 점 */
+
+.playground::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.35;
+  background-image:
+    radial-gradient(circle,#6ea451 1.5px,transparent 1.7px),
+    radial-gradient(circle,#d8efad 1px,transparent 1.4px);
+  background-size:38px 38px,27px 27px;
+  background-position:8px 7px,20px 16px;
+  pointer-events:none;
+}
+
+/* 길 */
+
+.dirt-path{
+  position:absolute;
+  left:-10%;
+  bottom:-45px;
+  width:120%;
+  height:125px;
+  background:#d9b77a;
+  border-radius:50% 50% 0 0;
+  transform:rotate(-3deg);
+  box-shadow:inset 0 9px 0 rgba(177,132,76,.18);
+  pointer-events:none;
+}
+
+/* 연못 */
+
+.pond{
+  position:absolute;
+  left:20px;
+  bottom:55px;
+  width:115px;
+  height:62px;
+  background:#72c5dc;
+  border-radius:50%;
+  border:5px solid #80bd76;
+  box-shadow:inset 0 7px 0 rgba(255,255,255,.2);
+  pointer-events:none;
+}
+
+.pond::after{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:7px;
+  border-top:2px solid rgba(255,255,255,.55);
+  border-radius:50%;
+  left:42px;
+  top:24px;
+}
+
+/* 해 */
+
+.sun{
+  position:absolute;
+  right:25px;
+  top:18px;
+  font-size:48px;
+  pointer-events:none;
+}
+
+/* 구름 */
+
+.cloud{
+  position:absolute;
+  font-size:36px;
+  opacity:.8;
+  pointer-events:none;
+}
+
+.cloud1{
+  left:18px;
+  top:20px;
+}
+
+.cloud2{
+  left:44%;
+  top:55px;
+  font-size:28px;
+}
+
+/* 나무 */
+
+.tree{
+  position:absolute;
+  font-size:58px;
+  pointer-events:none;
+  z-index:1;
+}
+
+.tree1{
+  right:10px;
+  bottom:145px;
+}
+
+.tree2{
+  right:85px;
+  bottom:170px;
+  font-size:46px;
+}
+
+.tree3{
+  left:120px;
+  bottom:150px;
+  font-size:43px;
+}
+
+/* 통나무 */
+
+.log{
+  position:absolute;
+  right:18px;
+  bottom:65px;
+  font-size:43px;
+  pointer-events:none;
+}
+
+/* 꽃 */
+
+.flower{
+  position:absolute;
+  font-size:24px;
+  pointer-events:none;
+}
+
+.flower1{left:17%;bottom:115px}
+.flower2{left:34%;bottom:85px}
+.flower3{right:30%;bottom:125px}
+.flower4{right:12%;bottom:105px}
+
+/* 놀이터 감자 */
+
+.play-potato{
+  position:absolute;
+  width:62px;
+  height:62px;
+  object-fit:contain;
+  z-index:10;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-user-drag:none;
+
+  pointer-events:auto;
+  touch-action:none;
+
+  cursor:grab;
+
+  transition:
+    transform .16s ease,
+    filter .16s ease;
+}
+
+.play-potato.dragging{
+  cursor:grabbing;
+  transform:scale(1.28);
+  filter:drop-shadow(0 12px 8px rgba(50,40,20,.32));
+  z-index:100;
+  transition:none;
+}
+
+.play-potato.leader-near{
+  animation:leaderNear .6s infinite alternate ease-in-out;
+}
+
+@keyframes leaderNear{
+  from{transform:translateY(0)}
+  to{transform:translateY(-4px)}
+}
+
+.play-potato.bounce{
+  animation:miniBounce .45s ease;
+}
+
+@keyframes miniBounce{
+  0%,100%{transform:scale(1)}
+  40%{transform:scale(1.14) translateY(-10px)}
+}
+
+.play-potato.wiggle{
+  animation:miniWiggle .5s ease;
+}
+
+@keyframes miniWiggle{
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(-10deg)}
+  75%{transform:rotate(10deg)}
+}
+
+.play-potato.sleep{
+  animation:miniSleep 1s ease;
+}
+
+@keyframes miniSleep{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(5px) scale(.95)}
+}
+
+.play-potato.angry{
+  animation:miniAngry .45s ease;
+}
+
+@keyframes miniAngry{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+
+.play-potato.happy{
+  animation:miniHappy .55s ease;
+}
+
+@keyframes miniHappy{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15) translateY(-6px)}
+}
+
+/* 충돌 */
+
+.collision-effect{
+  position:absolute;
+  z-index:120;
+  font-size:30px;
+  pointer-events:none;
+  animation:collision .7s forwards;
+}
+
+@keyframes collision{
+  0%{
+    opacity:1;
+    transform:scale(.5) rotate(0);
+  }
+  45%{
+    opacity:1;
+    transform:scale(1.25) rotate(15deg);
+  }
+  100%{
+    opacity:0;
+    transform:scale(1.5) rotate(-10deg) translateY(-12px);
+  }
+}
+
+/* 도감 */
+
+.collection-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  padding:14px;
+  background:#edf5dc;
+}
+
+.collection-card{
+  background:white;
+  border-radius:20px;
+  padding:14px 10px;
+  text-align:center;
+  min-height:170px;
+  box-shadow:0 4px 12px rgba(55,70,35,.1);
+}
+
+.collection-card img{
+  width:100px;
+  height:100px;
+  object-fit:contain;
+}
+
+.collection-card .unknown{
+  width:100px;
+  height:100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#e5eadb;
+  border-radius:50%;
+  font-size:42px;
+}
+
+.collection-name{
+  margin-top:7px;
+  font-size:16px;
+  font-weight:900;
+}
+
+.collection-status{
+  margin-top:5px;
+  font-size:12px;
+  color:#78905d;
+  font-weight:700;
+}
+
+/* =========================
+   모달
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.42);
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  width:min(90vw,380px);
+  background:white;
+  border-radius:25px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+
+.modal-potato{
+  width:150px;
+  height:150px;
+  object-fit:contain;
+}
+
+.modal-box h2{
+  margin:8px 0;
+}
+
+.modal-box p{
+  color:#756957;
+}
+
+.modal-close{
+  border:0;
+  background:#6e9c5b;
+  color:white;
+  padding:12px 25px;
+  border-radius:14px;
+  font-weight:800;
+}
+
+/* 작은 화면 */
+
+@media(max-width:380px){
+  .playground{
+    height:360px;
+  }
+
+  .play-potato{
+    width:56px;
+    height:56px;
+  }
+
+  .main-potato{
+    width:170px;
+  }
 }
 </style>
 </head>
 
 <body>
-<div class="app">
 
-<section id="startScreen" class="screen active start">
-<div class="start-box">
-<div class="big-potato">🥔</div>
-<h1>감자 키우기</h1>
-<div class="sub">나만의 감자를 키워보세요!</div>
-<button class="main-btn" onclick="startGrowth()">감자 키우기 시작</button>
-</div>
+<!-- =========================
+     시작
+========================= -->
+
+<section id="startScreen" class="screen active">
+  <div class="start-box">
+    <div class="start-potato">🥔</div>
+    <h1>감자 키우기</h1>
+    <p>나만의 감자를 키워보세요!</p>
+    <button class="start-btn" onclick="startGame()">감자 키우기 시작</button>
+  </div>
 </section>
 
-<section id="growthScreen" class="screen growth">
-<div class="header">
-<h2>감자를 키우는 중</h2>
-</div>
 
-<div class="growth-potato" id="growthEmoji">🌱</div>
+<!-- =========================
+     성장 화면
+========================= -->
 
-<div class="growth-percent" id="growthPercent">0%</div>
+<section id="growthScreen" class="screen">
+  <div class="game-wrap">
 
-<div class="growth-bar">
-<div class="growth-fill" id="growthFill"></div>
-</div>
+    <div class="sticky-top">
+      <div class="title">🥔 감자 키우기</div>
 
-<div class="growth-actions">
-<button class="grow-btn" onclick="grow(12)">🌱 비료 +12</button>
-<button class="grow-btn" onclick="grow(10)">💧 물주기 +10</button>
-<button class="grow-btn" onclick="grow(8)">☀️ 햇빛 +8</button>
-<button class="grow-btn" onclick="grow(5)">💗 응원하기 +5</button>
-<button class="grow-btn hatch" onclick="hatch()">🥔 감자 탄생!</button>
-</div>
+      <div class="message" id="growthMessage">
+        감자가 자라기를 기다리고 있어요!
+      </div>
+    </div>
+
+    <div class="growth-box">
+
+      <div id="growthPotato" class="growth-potato">🌱</div>
+
+      <div class="growth-percent">
+        <span id="growthPercent">0</span>%
+      </div>
+
+      <div class="progress">
+        <div id="growthBar" class="progress-bar"></div>
+      </div>
+
+      <div class="growth-buttons">
+
+        <button onclick="grow(12)">
+          🌱 비료 주기<br>
+          +12
+        </button>
+
+        <button onclick="grow(10)">
+          💧 물 주기<br>
+          +10
+        </button>
+
+        <button onclick="grow(8)">
+          ☀️ 햇빛 쬐기<br>
+          +8
+        </button>
+
+        <button onclick="grow(5)">
+          💕 응원하기<br>
+          +5
+        </button>
+
+        <button id="hatchButton"
+                class="hatch-btn hidden"
+                onclick="hatchPotato()">
+          🥔 감자 태어나기
+        </button>
+
+      </div>
+    </div>
+
+  </div>
 </section>
+
+
+<!-- =========================
+     성장 후 게임
+========================= -->
 
 <section id="gameScreen" class="screen">
+  <div class="game-wrap">
 
-<div class="sticky-top">
+    <div class="sticky-top">
 
-<div class="header">
-<h2 id="gameTitle">🥔 감자</h2>
-<button class="back" onclick="showScreen('startScreen')">처음으로</button>
-</div>
+      <div class="title">
+        🥔 감자 키우기
+      </div>
 
-<div class="potato-card">
-<div class="potato-wrap">
-<img id="potatoImg" class="potato-img" src="" alt="감자">
-</div>
+      <div class="potato-area" id="potatoArea">
 
-<div class="message" id="message">안녕!</div>
-<div class="touch-hint">감자를 톡 눌러보세요</div>
-</div>
+        <img
+          id="mainPotato"
+          class="main-potato"
+          src=""
+          alt="감자"
+          onclick="potatoTouch()"
+        >
 
-</div>
+      </div>
 
-<div class="stats">
+      <div id="message" class="message">
+        감자가 태어났어요!
+      </div>
 
-<div class="stat">
-<div class="stat-top">
-<span>🍎 배고픔</span>
-<b id="hungerText">100</b>
-</div>
-<div class="bar">
-<div id="hungerFill" class="fill"></div>
-</div>
-</div>
+    </div>
 
-<div class="stat">
-<div class="stat-top">
-<span>💧 수분</span>
-<b id="waterText">100</b>
-</div>
-<div class="bar">
-<div id="waterFill" class="fill"></div>
-</div>
-</div>
 
-<div class="stat">
-<div class="stat-top">
-<span>💗 사랑</span>
-<b id="loveText">100</b>
-</div>
-<div class="bar">
-<div id="loveFill" class="fill"></div>
-</div>
-</div>
+    <div class="stats">
 
-<div class="stat">
-<div class="stat-top">
-<span>⚡ 에너지</span>
-<b id="energyText">100</b>
-</div>
-<div class="bar">
-<div id="energyFill" class="fill"></div>
-</div>
-</div>
+      <div class="stat">
+        <div class="stat-top">
+          <span>🍚 배고픔</span>
+          <b id="hungerText">100</b>
+        </div>
+        <div class="stat-bar">
+          <div id="hungerBar" class="stat-fill hunger-fill"></div>
+        </div>
+      </div>
 
-</div>
+      <div class="stat">
+        <div class="stat-top">
+          <span>💧 물</span>
+          <b id="waterText">100</b>
+        </div>
+        <div class="stat-bar">
+          <div id="waterBar" class="stat-fill water-fill"></div>
+        </div>
+      </div>
 
-<div class="actions">
-<button class="action primary" onclick="doAction('feed')">🍎 먹이 주기</button>
-<button class="action" onclick="doAction('water')">💧 물 주기</button>
-<button class="action primary" onclick="doAction('pet')">🖐️ 쓰다듬기</button>
-<button class="action" onclick="doAction('walk')">🏃 산책하기</button>
-<button class="action danger" onclick="harvest()">🥔 수확하기</button>
-<button class="action" onclick="showCollection()">📖 도감 보기</button>
-</div>
+      <div class="stat">
+        <div class="stat-top">
+          <span>💕 사랑</span>
+          <b id="loveText">50</b>
+        </div>
+        <div class="stat-bar">
+          <div id="loveBar" class="stat-fill love-fill"></div>
+        </div>
+      </div>
 
-<div class="info">
-10초마다 배고픔·수분·에너지가 조금씩 줄어들어요.
-</div>
+      <div class="stat">
+        <div class="stat-top">
+          <span>⚡ 에너지</span>
+          <b id="energyText">100</b>
+        </div>
+        <div class="stat-bar">
+          <div id="energyBar" class="stat-fill energy-fill"></div>
+        </div>
+      </div>
 
+    </div>
+
+
+    <div class="actions">
+
+      <button onclick="feed()">
+        🍚 밥 주기
+      </button>
+
+      <button onclick="giveWater()">
+        💧 물 주기
+      </button>
+
+      <button onclick="pet()">
+        💕 쓰다듬기
+      </button>
+
+      <button onclick="walk()">
+        🏃 산책하기
+      </button>
+
+      <button class="harvest-btn" onclick="harvest()">
+        🥔 수확하기
+      </button>
+
+      <button class="collection-btn" onclick="showCollection()">
+        📖 도감 보기
+      </button>
+
+    </div>
+
+  </div>
 </section>
+
+
+<!-- =========================
+     도감
+========================= -->
 
 <section id="collectionScreen" class="screen">
 
-<div class="header">
-<h2>📖 감자 도감</h2>
-<button class="back" onclick="showScreen('gameScreen')">돌아가기</button>
-</div>
+  <div class="collection-head">
 
-<div class="collection-count" id="collectionCount">
-발견한 감자 0 / 5
-</div>
+    <button class="back-btn" onclick="backToGame()">
+      ← 돌아가기
+    </button>
 
-<div class="cards" id="cards"></div>
+    <div class="collection-title">
+      📖 감자 도감
+    </div>
 
-<h2 style="margin-top:28px">🌱 감자 놀이터</h2>
+    <div class="collection-count">
+      발견한 감자 <span id="collectionCount">0</span> / 5
+    </div>
 
-<div class="playground" id="playground">
+  </div>
 
-<div class="sun">☀️</div>
 
-<div class="tree t1">🌳</div>
-<div class="tree t2">🌳</div>
-<div class="tree t3">🌲</div>
+  <div id="playground" class="playground">
 
-<div class="flower fl1">🌼</div>
-<div class="flower fl2">🌷</div>
-<div class="flower fl3">🌻</div>
-<div class="flower fl4">🌸</div>
+    <div class="sun">☀️</div>
 
-<div class="log">🪵</div>
-<div class="pond"></div>
+    <div class="cloud cloud1">☁️</div>
+    <div class="cloud cloud2">☁️</div>
 
-</div>
+    <div class="tree tree1">🌳</div>
+    <div class="tree tree2">🌲</div>
+    <div class="tree tree3">🌳</div>
 
-<div class="playground-help">
-감자를 꾸욱 누르면 들어서 원하는 곳으로 옮길 수 있어요.
-</div>
+    <div class="pond"></div>
+
+    <div class="log">🪵</div>
+
+    <div class="flower flower1">🌼</div>
+    <div class="flower flower2">🌷</div>
+    <div class="flower flower3">🌸</div>
+    <div class="flower flower4">🌻</div>
+
+    <div class="dirt-path"></div>
+
+  </div>
+
+
+  <div id="collectionGrid" class="collection-grid"></div>
 
 </section>
 
+
+<!-- =========================
+     모달
+========================= -->
+
 <div id="modal" class="modal">
 
-<div class="modal-box">
-<h3 id="modalTitle">감자</h3>
-<p id="modalText"></p>
-<button class="modal-close" onclick="closeModal()">닫기</button>
-</div>
+  <div class="modal-box">
+
+    <img id="modalPotato" class="modal-potato" src="" alt="감자">
+
+    <h2 id="modalTitle"></h2>
+
+    <p id="modalText"></p>
+
+    <button class="modal-close" onclick="closeModal()">
+      닫기
+    </button>
+
+  </div>
 
 </div>
 
-</div>
 
 <script>
 
-const potatoes=[
-{name:"꾼감자",file:"Potato1.PNG",style:"social"},
-{name:"대장감자",file:"Potato2.PNG",style:"leader"},
-{name:"독감자",file:"Potato3.PNG",style:"poison"},
-{name:"폭력감자",file:"Potato4.PNG",style:"violent"},
-{name:"저능감자",file:"Potato5.PNG",style:"silly"}
+/* =====================================================
+   감자 데이터
+===================================================== */
+
+const potatoes = [
+
+  {
+    name:"꾼감자",
+    image:"Potato1.PNG",
+    style:"social"
+  },
+
+  {
+    name:"대장감자",
+    image:"Potato2.PNG",
+    style:"leader"
+  },
+
+  {
+    name:"독감자",
+    image:"Potato3.PNG",
+    style:"poison"
+  },
+
+  {
+    name:"폭력감자",
+    image:"Potato4.PNG",
+    style:"violent"
+  },
+
+  {
+    name:"저능감자",
+    image:"Potato5.PNG",
+    style:"silly"
+  }
+
 ];
 
-const personalities=[
-"애교쟁이",
-"느긋한",
-"장난꾸러기",
-"호기심 많은",
-"겁이 많은"
+
+const personalities = [
+
+  "애교쟁이",
+  "느긋한",
+  "장난꾸러기",
+  "호기심 많은",
+  "겁이 많은"
+
 ];
 
-const dialogue={
-feed:{
-"애교쟁이":"냠냠! 역시 최고야!",
-"느긋한":"천천히 먹을게.",
-"장난꾸러기":"이거 내가 먹어도 되는 거야?",
-"호기심 많은":"오? 이건 무슨 맛이지?",
-"겁이 많은":"조금만... 조심해서 줘."
-},
 
-water:{
-"애교쟁이":"물이다! 시원해!",
-"느긋한":"촉촉해서 좋네.",
-"장난꾸러기":"물장난 해도 돼?",
-"호기심 많은":"물이 어디서 오는 거야?",
-"겁이 많은":"차갑지는 않지?"
-},
+const STORAGE_KEY = "POTATO_GAME_FINAL_V4";
 
-pet:{
-"애교쟁이":"더 쓰다듬어줘!",
-"느긋한":"음... 편안하네.",
-"장난꾸러기":"잡았다!",
-"호기심 많은":"손가락 신기하다.",
-"겁이 많은":"살살 만져줘..."
-},
 
-walk:{
-"애교쟁이":"같이 가자!",
-"느긋한":"천천히 걷자.",
-"장난꾸러기":"누가 더 빠른지 보자!",
-"호기심 많은":"저쪽에 뭐가 있어!",
-"겁이 많은":"너무 멀리는 가지 마..."
-},
+let state = {
 
-hungry:{
-"애교쟁이":"배고파아...",
-"느긋한":"슬슬 뭐 좀 먹을까.",
-"장난꾸러기":"먹을 거 내놔!",
-"호기심 많은":"뭔가 맛있는 냄새가 나.",
-"겁이 많은":"혹시 먹을 거 있어?"
-},
+  started:false,
+  born:false,
 
-thirsty:{
-"애교쟁이":"목말라!",
-"느긋한":"물이 있으면 좋겠네.",
-"장난꾸러기":"물 한 컵!",
-"호기심 많은":"물이 필요해.",
-"겁이 많은":"목이 좀 말라..."
-},
+  growth:0,
 
-tired:{
-"애교쟁이":"조금 쉬었다가 놀자.",
-"느긋한":"낮잠이나 잘까.",
-"장난꾸러기":"잠깐만... 충전 중.",
-"호기심 많은":"눈이 자꾸 감기네.",
-"겁이 많은":"쉬고 싶어..."
-}
+  character:null,
+  personality:null,
+
+  hunger:100,
+  water:100,
+  love:50,
+  energy:100,
+
+  collection:[],
+
+  /*
+    감자 종류별로 처음 발견했을 때의 성격을 저장
+  */
+  collectionData:{}
+
 };
 
-let state={
-growth:0,
-character:null,
-personality:null,
-hunger:100,
-water:100,
-love:100,
-energy:100,
-collection:[],
-collectionData:{}
-};
 
-try{
-const saved=JSON.parse(localStorage.getItem("POTATO_GAME_FINAL_V4"));
+/* =====================================================
+   저장 / 불러오기
+===================================================== */
 
-if(saved){
-state={
-...state,
-...saved,
-collectionData:saved.collectionData||{}
-};
+function saveState(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(state)
+  );
+
 }
-}catch(e){}
 
-let touchTimer=null;
-let touching=false;
 
-function save(){
-localStorage.setItem(
-"POTATO_GAME_FINAL_V4",
-JSON.stringify(state)
-);
+function loadState(){
+
+  const saved =
+    localStorage.getItem(STORAGE_KEY);
+
+  if(!saved) return;
+
+  try{
+
+    const parsed =
+      JSON.parse(saved);
+
+    state = {
+      ...state,
+      ...parsed
+    };
+
+    if(!Array.isArray(state.collection)){
+      state.collection=[];
+    }
+
+    if(!state.collectionData){
+      state.collectionData={};
+    }
+
+  }catch(e){
+
+    console.log("저장 데이터 불러오기 실패");
+
+  }
+
 }
+
+
+/* =====================================================
+   화면 전환
+===================================================== */
 
 function showScreen(id){
 
-document.querySelectorAll(".screen")
-.forEach(s=>s.classList.remove("active"));
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen=>{
+      screen.classList.remove("active");
+    });
 
-document.getElementById(id)
-.classList.add("active");
+  document
+    .getElementById(id)
+    .classList.add("active");
 
-if(id==="collectionScreen"){
-renderCollection();
 }
+
+
+/* =====================================================
+   게임 시작
+===================================================== */
+
+function startGame(){
+
+  state.started=true;
+  state.born=false;
+  state.growth=0;
+
+  saveState();
+
+  showScreen("growthScreen");
+
+  updateGrowth();
+
 }
 
-function startGrowth(){
 
-state.growth=0;
-
-updateGrowth();
-
-showScreen("growthScreen");
-}
+/* =====================================================
+   성장
+===================================================== */
 
 function grow(amount){
 
-if(state.growth>=100)return;
+  if(state.growth>=100) return;
 
-state.growth=Math.min(
-100,
-state.growth+amount
-);
+  state.growth += amount;
 
-updateGrowth();
+  if(state.growth>100){
+    state.growth=100;
+  }
+
+  updateGrowth();
+
+  if(state.growth<25){
+
+    showGrowthMessage(
+      "🌱 아직 작은 새싹이에요!"
+    );
+
+  }else if(state.growth<50){
+
+    showGrowthMessage(
+      "🌿 쑥쑥 자라고 있어요!"
+    );
+
+  }else if(state.growth<75){
+
+    showGrowthMessage(
+      "🌳 제법 많이 자랐어요!"
+    );
+
+  }else if(state.growth<100){
+
+    showGrowthMessage(
+      "🥔 감자가 거의 다 자랐어요!"
+    );
+
+  }else{
+
+    showGrowthMessage(
+      "🥔 감자가 다 자랐어요!"
+    );
+
+    document
+      .getElementById("hatchButton")
+      .classList.remove("hidden");
+
+  }
+
+  saveState();
+
 }
+
+
+function showGrowthMessage(text){
+
+  document
+    .getElementById("growthMessage")
+    .textContent=text;
+
+}
+
 
 function updateGrowth(){
 
-const g=state.growth;
+  const percent =
+    state.growth;
 
-document.getElementById("growthPercent")
-.textContent=g+"%";
+  let emoji="🌱";
 
-document.getElementById("growthFill")
-.style.width=g+"%";
+  if(percent>=25 && percent<50){
+    emoji="🌿";
+  }
 
-document.getElementById("growthEmoji")
-.textContent=
-g<25?"🌱":
-g<50?"🌿":
-g<75?"🌳":
-g<100?"🥔":
-"🥔";
+  if(percent>=50 && percent<75){
+    emoji="🌳";
+  }
+
+  if(percent>=75 && percent<100){
+    emoji="🥔";
+  }
+
+  if(percent>=100){
+    emoji="🥔";
+  }
+
+  document
+    .getElementById("growthPotato")
+    .textContent=emoji;
+
+  document
+    .getElementById("growthPercent")
+    .textContent=percent;
+
+  document
+    .getElementById("growthBar")
+    .style.width=percent+"%";
+
+  if(percent>=100){
+
+    document
+      .getElementById("hatchButton")
+      .classList.remove("hidden");
+
+  }
+
 }
 
-function hatch(){
 
-if(state.growth<100){
+/* =====================================================
+   감자 탄생
+===================================================== */
 
-state.growth=Math.min(
-100,
-state.growth+5
-);
+function hatchPotato(){
 
-updateGrowth();
+  if(state.growth<100) return;
 
-return;
+  const character =
+    potatoes[
+      Math.floor(
+        Math.random()*potatoes.length
+      )
+    ];
+
+  const personality =
+    personalities[
+      Math.floor(
+        Math.random()*personalities.length
+      )
+    ];
+
+  state.character=character;
+  state.personality=personality;
+
+  state.hunger=100;
+  state.water=100;
+  state.love=50;
+  state.energy=100;
+
+  state.born=true;
+
+  saveState();
+
+  showScreen("gameScreen");
+
+  updateCharacter();
+
+  showMessage(
+    `${character.name}가 태어났어요! ${personality} 성격이에요.`
+  );
+
 }
 
-state.character=
-potatoes[
-Math.floor(
-Math.random()*potatoes.length
-)
-];
 
-state.personality=
-personalities[
-Math.floor(
-Math.random()*personalities.length
-)
-];
+function updateCharacter(){
 
-state.hunger=100;
-state.water=100;
-state.love=100;
-state.energy=100;
+  if(!state.character) return;
 
-document.getElementById("gameTitle")
-.textContent="🥔 "+state.character.name;
+  const img =
+    document.getElementById("mainPotato");
 
-document.getElementById("potatoImg")
-.src=state.character.file;
+  img.src =
+    state.character.image;
 
-setMessage(
-"안녕! 나는 "+
-state.personality+" "+
-state.character.name+"야!"
-);
+  img.alt =
+    state.character.name;
 
-updateStats();
-
-showScreen("gameScreen");
-
-save();
 }
 
-function setMessage(text){
-document.getElementById("message")
-.textContent=text;
+
+/* =====================================================
+   메시지
+===================================================== */
+
+function showMessage(text){
+
+  document
+    .getElementById("message")
+    .textContent=text;
+
 }
 
-function doAction(type){
 
-const img=document.getElementById("potatoImg");
+/* =====================================================
+   성격별 대사
+===================================================== */
 
-if(type==="feed"){
-state.hunger=Math.min(
-100,
-state.hunger+22
-);
-react("happy");
+const dialogue = {
+
+  "애교쟁이":{
+
+    feed:[
+      "밥이다아! 나 진짜 기다렸어!",
+      "냠냠! 맛있어! 한 번만 더!",
+      "주인 최고! 밥도 최고!"
+    ],
+
+    water:[
+      "꿀꺽꿀꺽! 물 너무 좋아!",
+      "시원하다아!",
+      "물 줘서 고마워!"
+    ],
+
+    pet:[
+      "헤헤 쓰다듬어줘서 좋아!",
+      "조금만 더 쓰다듬어줘!",
+      "주인 손 따뜻해!"
+    ],
+
+    walk:[
+      "산책 가자! 빨리빨리!",
+      "밖에 나가는 거 좋아!",
+      "같이 가자!"
+    ],
+
+    tired:[
+      "조금 졸려...",
+      "나 잠깐만 쉴래...",
+      "꾸벅꾸벅..."
+    ],
+
+    hungry:[
+      "배고파아...",
+      "밥 먹고 싶어...",
+      "뭐 먹을 거 없어?"
+    ],
+
+    thirsty:[
+      "목말라...",
+      "물 조금만 줘...",
+      "물을 마시고 싶어!"
+    ]
+
+  },
+
+
+  "느긋한":{
+
+    feed:[
+      "음... 밥이구나.",
+      "천천히 먹어야지.",
+      "배가 조금 채워졌네."
+    ],
+
+    water:[
+      "물 한 모금...",
+      "시원하네.",
+      "천천히 마셔야지."
+    ],
+
+    pet:[
+      "편안하네...",
+      "이대로 조금만 있자.",
+      "음... 좋구나."
+    ],
+
+    walk:[
+      "천천히 걷자.",
+      "급할 필요 없어.",
+      "바람이 좋네."
+    ],
+
+    tired:[
+      "조금 쉬자.",
+      "잠깐 눈 좀 붙일게.",
+      "피곤하구나."
+    ],
+
+    hungry:[
+      "배가 조금 고프네.",
+      "슬슬 밥을 먹을까.",
+      "천천히 먹고 싶다."
+    ],
+
+    thirsty:[
+      "물이 필요하네.",
+      "조금 목마르구나.",
+      "물 한 잔이면 되겠어."
+    ]
+
+  },
+
+
+  "장난꾸러기":{
+
+    feed:[
+      "내 밥이다! 아무도 못 줘!",
+      "냠! 몰래 하나 더 먹어도 돼?",
+      "밥 먹고 힘내서 장난쳐야지!"
+    ],
+
+    water:[
+      "물이다! 물장난 해도 돼?",
+      "꿀꺽! 안 흘렸지?",
+      "물 마셨으니까 이제 뛰어야지!"
+    ],
+
+    pet:[
+      "간지럽다!",
+      "잡았다!",
+      "헤헤 도망가야지!"
+    ],
+
+    walk:[
+      "산책이다! 뛰어!",
+      "먼저 가 있을게!",
+      "잡아봐!"
+    ],
+
+    tired:[
+      "나 안 졸려! ...조금 졸리네.",
+      "쉬는 척하는 중이야.",
+      "딱 5분만 잘게."
+    ],
+
+    hungry:[
+      "배고파! 간식 내놔!",
+      "몰래 밥 먹어도 되나?",
+      "배고프니까 장난칠 거야!"
+    ],
+
+    thirsty:[
+      "목마르다! 물 빨리!",
+      "물 찾으러 간다!",
+      "물 마시고 도망갈래!"
+    ]
+
+  },
+
+
+  "호기심 많은":{
+
+    feed:[
+      "이건 무슨 맛이지?",
+      "밥은 왜 맛있는 걸까?",
+      "냠냠... 신기하다!"
+    ],
+
+    water:[
+      "물이 어디에서 오는 거지?",
+      "물방울은 왜 반짝이지?",
+      "시원해! 신기해!"
+    ],
+
+    pet:[
+      "이건 무슨 느낌이지?",
+      "손이 움직이는 게 신기해.",
+      "더 관찰해볼래!"
+    ],
+
+    walk:[
+      "저쪽에는 뭐가 있을까?",
+      "가보자! 궁금해!",
+      "새로운 곳이다!"
+    ],
+
+    tired:[
+      "졸린 것도 신기하네...",
+      "잠은 왜 오는 걸까?",
+      "조금 관찰하다가 잘래."
+    ],
+
+    hungry:[
+      "배고프면 왜 배에서 소리가 나지?",
+      "밥을 먹으면 배가 차는 걸까?",
+      "먹을 게 어디 있지?"
+    ],
+
+    thirsty:[
+      "목이 마른다는 건 신기한 느낌이야.",
+      "물은 왜 필요한 거지?",
+      "물이 필요해!"
+    ]
+
+  },
+
+
+  "겁이 많은":{
+
+    feed:[
+      "밥... 안전한 거 맞지?",
+      "고마워... 조심해서 먹을게.",
+      "냠... 괜찮다."
+    ],
+
+    water:[
+      "물... 갑자기 움직이지 않지?",
+      "조심조심 마실게.",
+      "시원하다..."
+    ],
+
+    pet:[
+      "깜짝이야!",
+      "조금 놀랐어...",
+      "살살 해줘..."
+    ],
+
+    walk:[
+      "밖에 나가도 괜찮을까?",
+      "무서운 건 없겠지?",
+      "조금만 같이 있어줘."
+    ],
+
+    tired:[
+      "무서운 꿈 꾸면 어떡하지...",
+      "조금만 옆에 있어줘.",
+      "졸리다..."
+    ],
+
+    hungry:[
+      "배고픈데... 무서워.",
+      "밥 먹어도 괜찮지?",
+      "조금만 먹을게."
+    ],
+
+    thirsty:[
+      "목말라...",
+      "물이 있는 곳으로 가도 될까?",
+      "조심해서 마실게."
+    ]
+
+  }
+
+};
+
+
+function personalityMessage(action){
+
+  const list =
+    dialogue[state.personality]?.[action];
+
+  if(!list || !list.length){
+    return "";
+  }
+
+  return list[
+    Math.floor(
+      Math.random()*list.length
+    )
+  ];
+
 }
 
-if(type==="water"){
-state.water=Math.min(
-100,
-state.water+22
-);
-react("sparkle");
+
+/* =====================================================
+   밥
+===================================================== */
+
+function feed(){
+
+  if(!state.born) return;
+
+  state.hunger=
+    Math.min(100,state.hunger+20);
+
+  state.energy=
+    Math.min(100,state.energy+3);
+
+  saveState();
+
+  showMessage(
+    personalityMessage("feed")
+  );
+
+  reactMain("happy");
+
+  updateStats();
+
 }
 
-if(type==="pet"){
-state.love=Math.min(
-100,
-state.love+10
-);
-react("heart");
+
+/* =====================================================
+   물
+===================================================== */
+
+function giveWater(){
+
+  if(!state.born) return;
+
+  state.water=
+    Math.min(100,state.water+20);
+
+  saveState();
+
+  showMessage(
+    personalityMessage("water")
+  );
+
+  reactMain("happy");
+
+  updateStats();
+
 }
 
-if(type==="walk"){
 
-if(state.energy<12){
+/* =====================================================
+   쓰다듬기
+===================================================== */
 
-setMessage(
-dialogue.tired[state.personality]
-);
+function pet(){
 
-react("sleep");
+  if(!state.born) return;
 
-return;
+  state.love=
+    Math.min(100,state.love+8);
+
+  saveState();
+
+  showMessage(
+    personalityMessage("pet")
+  );
+
+  reactMain(
+    state.personality==="겁이 많은"
+      ? "shy"
+      : "heart"
+  );
+
+  updateStats();
+
 }
 
-state.energy=Math.max(
-0,
-state.energy-12
-);
 
-react("jump");
+/* =====================================================
+   산책
+===================================================== */
+
+function walk(){
+
+  if(!state.born) return;
+
+  if(state.energy<15){
+
+    showMessage(
+      personalityMessage("tired")
+    );
+
+    reactMain("sleep");
+
+    return;
+
+  }
+
+  state.energy=
+    Math.max(0,state.energy-15);
+
+  state.love=
+    Math.min(100,state.love+5);
+
+  state.hunger=
+    Math.max(0,state.hunger-5);
+
+  state.water=
+    Math.max(0,state.water-5);
+
+  saveState();
+
+  showMessage(
+    personalityMessage("walk")
+  );
+
+  const img =
+    document.getElementById("mainPotato");
+
+  img.classList.add("walking");
+
+  createWalkEffect();
+
+  setTimeout(()=>{
+    img.classList.remove("walking");
+  },3000);
+
+  updateStats();
+
 }
 
-if(dialogue[type]?.[state.personality]){
-setMessage(
-dialogue[type][state.personality]
-);
+
+function createWalkEffect(){
+
+  const area =
+    document.getElementById("potatoArea");
+
+  const effect =
+    document.createElement("div");
+
+  effect.className="walk-effect";
+
+  effect.textContent="🏃";
+
+  effect.style.left=
+    (45+Math.random()*10)+"%";
+
+  effect.style.top="55%";
+
+  area.appendChild(effect);
+
+  setTimeout(()=>{
+    effect.remove();
+  },900);
+
 }
 
-updateStats();
 
-save();
+/* =====================================================
+   메인 감자 터치
+===================================================== */
+
+function potatoTouch(){
+
+  if(!state.born) return;
+
+  const img =
+    document.getElementById("mainPotato");
+
+  const reactions=[
+    "jump",
+    "shy",
+    "wiggle",
+    "heart",
+    "happy",
+    "sleep"
+  ];
+
+  let reaction;
+
+  if(state.personality==="애교쟁이"){
+    reaction="heart";
+  }
+
+  else if(state.personality==="느긋한"){
+    reaction="sleep";
+  }
+
+  else if(state.personality==="장난꾸러기"){
+    reaction="wiggle";
+  }
+
+  else if(state.personality==="호기심 많은"){
+    reaction="jump";
+  }
+
+  else if(state.personality==="겁이 많은"){
+    reaction="shy";
+  }
+
+  else{
+    reaction=
+      reactions[
+        Math.floor(
+          Math.random()*reactions.length
+        )
+      ];
+  }
+
+  reactMain(reaction);
+
+  state.love=
+    Math.min(100,state.love+2);
+
+  saveState();
+
 }
 
-function react(type){
 
-const img=document.getElementById("potatoImg");
+function reactMain(type){
 
-img.classList.remove(
-"jump",
-"shy",
-"wiggle",
-"angry",
-"happy",
-"sleep",
-"sparkle"
-);
+  const img =
+    document.getElementById("mainPotato");
 
-void img.offsetWidth;
+  img.classList.remove(
+    "react-jump",
+    "react-shy",
+    "react-wiggle",
+    "react-heart",
+    "react-angry",
+    "react-happy",
+    "react-sleep"
+  );
 
-img.classList.add(type);
+  void img.offsetWidth;
 
-if(type==="heart"){
-showEffect("💗",img);
+  img.classList.add(
+    "react-"+type
+  );
+
 }
 
-if(type==="sparkle"){
-showEffect("✨",img);
-}
-}
 
-function showEffect(txt,target){
-
-const r=target.getBoundingClientRect();
-
-const e=document.createElement("div");
-
-e.className="play-effect";
-e.textContent=txt;
-
-e.style.position="fixed";
-e.style.left=(r.left+r.width/2)+"px";
-e.style.top=r.top+"px";
-
-document.body.appendChild(e);
-
-setTimeout(
-()=>e.remove(),
-900
-);
-}
+/* =====================================================
+   상태 표시
+===================================================== */
 
 function updateStats(){
 
-const vals={
-hunger:state.hunger,
-water:state.water,
-love:state.love,
-energy:state.energy
-};
+  document
+    .getElementById("hungerText")
+    .textContent=state.hunger;
 
-for(const k in vals){
+  document
+    .getElementById("waterText")
+    .textContent=state.water;
 
-document.getElementById(k+"Text")
-.textContent=vals[k];
+  document
+    .getElementById("loveText")
+    .textContent=state.love;
 
-document.getElementById(k+"Fill")
-.style.width=vals[k]+"%";
+  document
+    .getElementById("energyText")
+    .textContent=state.energy;
+
+
+  document
+    .getElementById("hungerBar")
+    .style.width=
+      state.hunger+"%";
+
+  document
+    .getElementById("waterBar")
+    .style.width=
+      state.water+"%";
+
+  document
+    .getElementById("loveBar")
+    .style.width=
+      state.love+"%";
+
+  document
+    .getElementById("energyBar")
+    .style.width=
+      state.energy+"%";
+
+
+  if(state.hunger<=25){
+
+    showMessage(
+      personalityMessage("hungry")
+    );
+
+  }
+
 }
 
-if(state.hunger<=25){
 
-setMessage(
-dialogue.hungry[state.personality]
-);
-
-}else if(state.water<=25){
-
-setMessage(
-dialogue.thirsty[state.personality]
-);
-
-}else if(state.energy<=20){
-
-setMessage(
-dialogue.tired[state.personality]
-);
-}
-}
+/* =====================================================
+   자동 감소
+===================================================== */
 
 setInterval(()=>{
 
-if(!state.character)return;
+  if(!state.born) return;
 
-state.hunger=
-Math.max(0,state.hunger-3);
+  state.hunger=
+    Math.max(0,state.hunger-2);
 
-state.water=
-Math.max(0,state.water-3);
+  state.water=
+    Math.max(0,state.water-2);
 
-state.energy=
-Math.max(0,state.energy-2);
+  state.energy=
+    Math.max(0,state.energy-1);
 
-updateStats();
 
-save();
+  if(state.hunger<=15){
+
+    showMessage(
+      personalityMessage("hungry")
+    );
+
+  }
+
+  else if(state.water<=15){
+
+    showMessage(
+      personalityMessage("thirsty")
+    );
+
+  }
+
+  else if(state.energy<=10){
+
+    showMessage(
+      personalityMessage("tired")
+    );
+
+  }
+
+
+  saveState();
+
+  updateStats();
 
 },10000);
 
+
+/* =====================================================
+   수확
+===================================================== */
+
 function harvest(){
 
-if(!state.character)return;
+  if(!state.born || !state.character) return;
 
-const n=state.character.name;
+  const name =
+    state.character.name;
 
-if(!state.collection.includes(n)){
-state.collection.push(n);
+  const alreadyFound =
+    state.collection.includes(name);
+
+
+  if(!alreadyFound){
+
+    state.collection.push(name);
+
+    /*
+      처음 발견했을 때의 성격 저장
+    */
+
+    if(!state.collectionData){
+      state.collectionData={};
+    }
+
+    state.collectionData[name]=
+      state.personality;
+
+  }
+
+
+  const harvested =
+    state.character;
+
+
+  saveState();
+
+  openModal(
+    harvested,
+    alreadyFound
+  );
+
 }
 
-if(!state.collectionData[n]){
 
-state.collectionData[n]={
-personality:state.personality
-};
+/* =====================================================
+   수확 후 새 감자 시작
+===================================================== */
+
+function continueAfterHarvest(){
+
+  closeModal();
+
+  state.born=false;
+  state.character=null;
+  state.personality=null;
+  state.growth=0;
+
+  saveState();
+
+  showScreen("growthScreen");
+
+  updateGrowth();
 
 }
 
-save();
 
-showModal(
-"🥔 수확 완료",
-n+"을(를) 도감에 등록했어요!"
-);
-}
+/* =====================================================
+   도감
+===================================================== */
 
 function showCollection(){
-showScreen("collectionScreen");
+
+  renderCollection();
+
+  showScreen("collectionScreen");
+
+  startPlayground();
+
 }
+
+
+function backToGame(){
+
+  stopPlayground();
+
+  showScreen("gameScreen");
+
+}
+
+
+function getCollectionPersonality(potato,index){
+
+  if(
+    state.collectionData &&
+    state.collectionData[potato.name]
+  ){
+
+    return state.collectionData[potato.name];
+
+  }
+
+
+  /*
+    옛 저장 데이터에 성격 정보가 없으면
+    종류별로 고정된 성격을 하나 배정
+  */
+
+  const personality =
+    personalities[
+      index % personalities.length
+    ];
+
+
+  if(!state.collectionData){
+    state.collectionData={};
+  }
+
+  state.collectionData[potato.name]=
+    personality;
+
+  saveState();
+
+  return personality;
+
+}
+
 
 function renderCollection(){
 
-document.getElementById("collectionCount")
-.textContent=
-"발견한 감자 "+
-state.collection.length+
-" / 5";
+  const grid =
+    document.getElementById("collectionGrid");
 
-const cards=
-document.getElementById("cards");
+  grid.innerHTML="";
 
-cards.innerHTML="";
 
-potatoes.forEach(p=>{
+  potatoes.forEach((potato,index)=>{
 
-const found=
-state.collection.includes(p.name);
+    const found =
+      state.collection.includes(
+        potato.name
+      );
 
-const c=
-document.createElement("div");
 
-c.className="card";
+    const card =
+      document.createElement("div");
 
-if(found){
+    card.className=
+      "collection-card";
 
-const personality=
-state.collectionData?.[p.name]?.personality||
-"성격 미상";
 
-c.innerHTML=`
-<img src="${p.file}" alt="${p.name}">
-<div class="card-name">${p.name}</div>
-<div class="card-sub">
-발견 완료 ✓<br>
-${personality}
-</div>
-`;
+    if(found){
 
-}else{
+      const personality =
+        getCollectionPersonality(
+          potato,
+          index
+        );
 
-c.innerHTML=`
-<div class="unknown">❓</div>
-<div class="card-name">???</div>
-<div class="card-sub">
-아직 발견하지 못했어요
-</div>
-`;
+
+      card.innerHTML=`
+
+        <img
+          src="${potato.image}"
+          alt="${potato.name}"
+        >
+
+        <div class="collection-name">
+          ${potato.name}
+        </div>
+
+        <div class="collection-status">
+          발견 완료 ✓
+        </div>
+
+      `;
+
+    }
+
+    else{
+
+      card.innerHTML=`
+
+        <div class="unknown">
+          ❓
+        </div>
+
+        <div class="collection-name">
+          ???
+        </div>
+
+        <div class="collection-status">
+          아직 발견하지 못했어요
+        </div>
+
+      `;
+
+    }
+
+
+    grid.appendChild(card);
+
+  });
+
+
+  document
+    .getElementById("collectionCount")
+    .textContent=
+      state.collection.length;
+
 }
 
-cards.appendChild(c);
 
-});
+/* =====================================================
+   놀이터
+===================================================== */
 
-buildPlayground();
-}
+let playgroundTimer=null;
 
-let actors=[];
-let playLoop=null;
+let playgroundPotatoes=[];
 
-function buildPlayground(){
+let playgroundRunning=false;
 
-const area=
-document.getElementById("playground");
 
-area
-.querySelectorAll(".play-potato")
-.forEach(e=>e.remove());
+/*
+  드래그 상태
+*/
 
-actors=[];
+let dragState={
 
-state.collection.forEach((name,i)=>{
+  actor:null,
 
-const p=
-potatoes.find(
-x=>x.name===name
-);
+  pointerId:null,
 
-if(p){
-createPlayPotato(
-p,
-i,
-area
-);
-}
+  startX:0,
+  startY:0,
 
-});
+  offsetX:0,
+  offsetY:0,
 
-if(!playLoop){
-playLoop=
-requestAnimationFrame(playTick);
-}
-}
+  longPressTimer:null,
 
-function createPlayPotato(p,i,area){
+  dragging:false,
 
-const el=
-document.createElement("div");
-
-el.className="play-potato";
-
-el.innerHTML=`
-<span class="play-name">${p.name}</span>
-<img src="${p.file}" alt="${p.name}">
-`;
-
-area.appendChild(el);
-
-const personality=
-state.collectionData?.[p.name]?.personality||
-personalities[i%personalities.length];
-
-const actor={
-
-el,
-p,
-
-x:40+
-Math.random()*
-Math.max(
-40,
-area.clientWidth-100
-),
-
-y:80+
-Math.random()*
-Math.max(
-80,
-area.clientHeight-145
-),
-
-vx:0,
-vy:0,
-
-behavior:"wander",
-
-until:
-performance.now()+
-1000+
-Math.random()*2000,
-
-target:null,
-
-stunned:0,
-
-lastCollision:0,
-
-dragging:false,
-
-personality,
-
-lastEffect:0
+  moved:false
 
 };
 
-actors.push(actor);
 
-setupDrag(actor,area);
+/* =====================================================
+   놀이터 시작
+===================================================== */
 
-positionActor(actor);
+function startPlayground(){
+
+  stopPlayground();
+
+  playgroundRunning=true;
+
+  playgroundPotatoes=[];
+
+
+  const playground =
+    document.getElementById("playground");
+
+  playground
+    .querySelectorAll(".play-potato")
+    .forEach(el=>el.remove());
+
+
+  /*
+    발견된 감자만 놀이터에 등장
+  */
+
+  const found =
+    potatoes.filter(p=>
+      state.collection.includes(p.name)
+    );
+
+
+  found.forEach((potato,index)=>{
+
+    createPlayPotato(
+      potato,
+      index
+    );
+
+  });
+
+
+  /*
+    80ms마다 부드럽게 움직임
+  */
+
+  playgroundTimer =
+    setInterval(
+      playgroundTick,
+      80
+    );
+
 }
 
-function positionActor(a){
 
-a.el.style.left=
-a.x+"px";
+function stopPlayground(){
 
-a.el.style.top=
-a.y+"px";
+  playgroundRunning=false;
+
+  if(playgroundTimer){
+
+    clearInterval(
+      playgroundTimer
+    );
+
+    playgroundTimer=null;
+
+  }
+
+
+  clearDragState();
+
+  playgroundPotatoes=[];
+
 }
 
-function chooseBehavior(a,now){
 
-const r=Math.random();
+/* =====================================================
+   놀이터 감자 생성
+===================================================== */
 
-const p=a.p.style;
-
-a.target=null;
-
-if(
-a.personality==="겁이 많은" &&
-r<.32
+function createPlayPotato(
+  potato,
+  index
 ){
 
-a.behavior="avoid";
+  const playground =
+    document.getElementById("playground");
 
-a.until=
-now+
-1200+
-Math.random()*1400;
+
+  const img =
+    document.createElement("img");
+
+
+  img.src=
+    potato.image;
+
+  img.alt=
+    potato.name;
+
+  img.className=
+    "play-potato";
+
+
+  /*
+    처음 위치
+  */
+
+  const rect =
+    playground.getBoundingClientRect();
+
+
+  const padding=25;
+
+
+  const actor={
+
+    element:img,
+
+    data:potato,
+
+    x:
+      padding+
+      Math.random()*
+      Math.max(
+        1,
+        rect.width-80
+      ),
+
+    y:
+      120+
+      Math.random()*
+      Math.max(
+        1,
+        rect.height-190
+      ),
+
+    vx:
+      (Math.random()-.5)*.5,
+
+    vy:
+      (Math.random()-.5)*.5,
+
+    targetX:null,
+    targetY:null,
+
+    followingLeader:false,
+
+    stunnedUntil:0,
+
+    reactionCooldown:0,
+
+    nextDecision:
+      Date.now()+
+      Math.random()*2000,
+
+    directionTimer:0
+
+  };
+
+
+  playgroundPotatoes.push(actor);
+
+  updateActorPosition(actor);
+
+
+  /*
+    터치 / 마우스 드래그
+  */
+
+  img.addEventListener(
+    "pointerdown",
+    e=>{
+      handlePointerDown(e,actor);
+    }
+  );
+
+
+  img.addEventListener(
+    "pointermove",
+    e=>{
+      handlePointerMove(e,actor);
+    }
+  );
+
+
+  img.addEventListener(
+    "pointerup",
+    e=>{
+      handlePointerUp(e,actor);
+    }
+  );
+
+
+  img.addEventListener(
+    "pointercancel",
+    e=>{
+      handlePointerCancel(e,actor);
+    }
+  );
+
+
+  /*
+    드래그 후 클릭 방지
+  */
+
+  img.addEventListener(
+    "click",
+    e=>{
+
+      if(
+        actor.ignoreNextClick
+      ){
+
+        actor.ignoreNextClick=false;
+
+        e.preventDefault();
+
+        return;
+
+      }
+
+      /*
+        일반 짧은 터치
+      */
+
+      playPotatoReaction(actor);
+
+    }
+  );
+
+
+  playground.appendChild(img);
 
 }
 
-else if(
-a.personality==="애교쟁이" &&
-r<.38
+
+/* =====================================================
+   위치 적용
+===================================================== */
+
+function updateActorPosition(actor){
+
+  const el =
+    actor.element;
+
+
+  el.style.left=
+    actor.x+"px";
+
+  el.style.top=
+    actor.y+"px";
+
+}
+
+
+/* =====================================================
+   포인터 다운
+===================================================== */
+
+function handlePointerDown(
+  e,
+  actor
 ){
 
-a.behavior="social";
+  if(
+    !playgroundRunning
+  ) return;
 
-a.until=
-now+
-1300+
-Math.random()*1500;
+
+  /*
+    이미 다른 감자를 드래그 중이면 무시
+  */
+
+  if(
+    dragState.actor &&
+    dragState.actor!==actor
+  ){
+
+    return;
+
+  }
+
+
+  e.preventDefault();
+
+
+  const playground =
+    document.getElementById("playground");
+
+  const rect =
+    playground.getBoundingClientRect();
+
+
+  dragState.actor=actor;
+
+  dragState.pointerId=
+    e.pointerId;
+
+  dragState.startX=
+    e.clientX;
+
+  dragState.startY=
+    e.clientY;
+
+  dragState.offsetX=
+    e.clientX-
+    rect.left-
+    actor.x;
+
+  dragState.offsetY=
+    e.clientY-
+    rect.top-
+    actor.y;
+
+  dragState.dragging=false;
+
+  dragState.moved=false;
+
+
+  /*
+    0.45초 꾹 누르면 들기
+  */
+
+  dragState.longPressTimer=
+    setTimeout(()=>{
+
+      if(
+        dragState.actor===actor &&
+        !dragState.moved
+      ){
+
+        startDragging(actor);
+
+      }
+
+    },450);
+
+
+  /*
+    포인터 캡처
+  */
+
+  try{
+
+    actor.element.setPointerCapture(
+      e.pointerId
+    );
+
+  }catch(err){}
 
 }
 
-else if(
-a.personality==="느긋한" &&
-r<.48
+
+/* =====================================================
+   포인터 이동
+===================================================== */
+
+function handlePointerMove(
+  e,
+  actor
 ){
 
-a.behavior="idle";
+  if(
+    dragState.actor!==actor
+  ) return;
 
-a.until=
-now+
-1300+
-Math.random()*2500;
+
+  const dx=
+    e.clientX-
+    dragState.startX;
+
+  const dy=
+    e.clientY-
+    dragState.startY;
+
+
+  if(
+    Math.abs(dx)>10 ||
+    Math.abs(dy)>10
+  ){
+
+    dragState.moved=true;
+
+    /*
+      아직 꾹 누르기 전이면
+      실수로 움직인 것으로 취급
+    */
+
+    if(
+      !dragState.dragging &&
+      dragState.longPressTimer
+    ){
+
+      clearTimeout(
+        dragState.longPressTimer
+      );
+
+      dragState.longPressTimer=null;
+
+    }
+
+  }
+
+
+  if(
+    !dragState.dragging
+  ){
+
+    return;
+
+  }
+
+
+  e.preventDefault();
+
+
+  const playground =
+    document.getElementById("playground");
+
+  const rect =
+    playground.getBoundingClientRect();
+
+
+  const maxX=
+    rect.width-
+    actor.element.offsetWidth;
+
+  const maxY=
+    rect.height-
+    actor.element.offsetHeight;
+
+
+  actor.x=
+    e.clientX-
+    rect.left-
+    dragState.offsetX;
+
+  actor.y=
+    e.clientY-
+    rect.top-
+    dragState.offsetY;
+
+
+  actor.x=
+    Math.max(
+      0,
+      Math.min(
+        maxX,
+        actor.x
+      )
+    );
+
+
+  actor.y=
+    Math.max(
+      0,
+      Math.min(
+        maxY,
+        actor.y
+      )
+    );
+
+
+  updateActorPosition(actor);
+
+
+  /*
+    대장감자를 들고 있으면
+    다른 감자들이 즉시 따라옴
+  */
+
+  if(
+    actor.data.style==="leader"
+  ){
+
+    makeFollowersGather(actor);
+
+  }
 
 }
 
-else if(
-a.personality==="장난꾸러기" &&
-r<.4
+
+/* =====================================================
+   드래그 시작
+===================================================== */
+
+function startDragging(actor){
+
+  dragState.dragging=true;
+
+  actor.element.classList.add(
+    "dragging"
+  );
+
+  actor.ignoreNextClick=true;
+
+
+  /*
+    AI 정지
+  */
+
+  actor.vx=0;
+  actor.vy=0;
+
+
+  /*
+    대장감자를 들면
+    다른 감자들을 빠르게 집결 상태로
+  */
+
+  if(
+    actor.data.style==="leader"
+  ){
+
+    playgroundPotatoes
+      .forEach(other=>{
+
+        if(other===actor) return;
+
+        other.followingLeader=true;
+
+        other.element.classList.add(
+          "leader-near"
+        );
+
+      });
+
+  }
+
+}
+
+
+/* =====================================================
+   대장 주변 빠른 집결
+===================================================== */
+
+function makeFollowersGather(leader){
+
+  const followers =
+    playgroundPotatoes.filter(
+      actor=>
+        actor!==leader &&
+        actor.followingLeader
+    );
+
+
+  followers.forEach((actor,index)=>{
+
+    /*
+      감자마다 다른 위치를 잡아서
+      한 점에 겹치지 않게 함
+    */
+
+    const angle =
+      (
+        index/
+        Math.max(
+          1,
+          followers.length
+        )
+      )*
+      Math.PI*2;
+
+
+    const radius=
+      58+
+      (index%2)*14;
+
+
+    const targetX=
+      leader.x+
+      Math.cos(angle)*
+      radius;
+
+
+    const targetY=
+      leader.y+
+      Math.sin(angle)*
+      radius;
+
+
+    /*
+      화면 안으로 제한
+    */
+
+    const playground =
+      document.getElementById("playground");
+
+    const maxX=
+      playground.clientWidth-
+      actor.element.offsetWidth;
+
+    const maxY=
+      playground.clientHeight-
+      actor.element.offsetHeight;
+
+
+    const tx=
+      Math.max(
+        5,
+        Math.min(
+          maxX-5,
+          targetX
+        )
+      );
+
+
+    const ty=
+      Math.max(
+        90,
+        Math.min(
+          maxY-5,
+          targetY
+        )
+      );
+
+
+    /*
+      아주 빠르게 접근
+    */
+
+    moveActorToward(
+      actor,
+      tx,
+      ty,
+      5.5
+    );
+
+
+    /*
+      거의 도착하면 살짝 모여있기
+    */
+
+    const distance=
+      Math.hypot(
+        actor.x-tx,
+        actor.y-ty
+      );
+
+
+    if(distance<15){
+
+      actor.vx*=.3;
+      actor.vy*=.3;
+
+    }
+
+  });
+
+}
+
+
+/* =====================================================
+   포인터 업
+===================================================== */
+
+function handlePointerUp(
+  e,
+  actor
 ){
 
-a.behavior="play";
+  if(
+    dragState.actor!==actor
+  ) return;
 
-a.until=
-now+
-1000+
-Math.random()*1300;
+
+  if(
+    dragState.longPressTimer
+  ){
+
+    clearTimeout(
+      dragState.longPressTimer
+    );
+
+    dragState.longPressTimer=null;
+
+  }
+
+
+  if(
+    dragState.dragging
+  ){
+
+    e.preventDefault();
+
+    dropDraggedActor(actor);
+
+  }
+
+
+  clearDragState();
 
 }
 
-else if(
-a.personality==="호기심 많은" &&
-r<.45
+
+/* =====================================================
+   포인터 취소
+===================================================== */
+
+function handlePointerCancel(
+  e,
+  actor
 ){
 
-a.behavior="explore";
+  if(
+    dragState.actor!==actor
+  ) return;
 
-a.until=
-now+
-1300+
-Math.random()*1700;
+
+  if(
+    dragState.longPressTimer
+  ){
+
+    clearTimeout(
+      dragState.longPressTimer
+    );
+
+  }
+
+
+  if(
+    dragState.dragging
+  ){
+
+    dropDraggedActor(actor);
+
+  }
+
+
+  clearDragState();
 
 }
 
-else if(
-p==="social"
+
+/* =====================================================
+   감자 내려놓기
+===================================================== */
+
+function dropDraggedActor(actor){
+
+  actor.element.classList.remove(
+    "dragging"
+  );
+
+
+  /*
+    대장감자를 내려놓으면
+    전부 각자 AI로 복귀
+  */
+
+  if(
+    actor.data.style==="leader"
+  ){
+
+    playgroundPotatoes
+      .forEach(other=>{
+
+        other.followingLeader=false;
+
+        other.element.classList.remove(
+          "leader-near"
+        );
+
+        /*
+          다시 자유롭게 움직이기
+        */
+
+        other.vx=
+          (Math.random()-.5)*.8;
+
+        other.vy=
+          (Math.random()-.5)*.8;
+
+        other.nextDecision=
+          Date.now()+
+          Math.random()*1500;
+
+      });
+
+  }
+
+}
+
+
+/* =====================================================
+   드래그 상태 초기화
+===================================================== */
+
+function clearDragState(){
+
+  if(
+    dragState.longPressTimer
+  ){
+
+    clearTimeout(
+      dragState.longPressTimer
+    );
+
+  }
+
+
+  dragState={
+    actor:null,
+
+    pointerId:null,
+
+    startX:0,
+    startY:0,
+
+    offsetX:0,
+    offsetY:0,
+
+    longPressTimer:null,
+
+    dragging:false,
+
+    moved:false
+
+  };
+
+}
+
+
+/* =====================================================
+   놀이터 AI
+===================================================== */
+
+function playgroundTick(){
+
+  if(!playgroundRunning) return;
+
+
+  const now=
+    Date.now();
+
+
+  /*
+    현재 들고 있는 감자
+  */
+
+  const draggedActor=
+    dragState.dragging
+      ? dragState.actor
+      : null;
+
+
+  playgroundPotatoes
+    .forEach(actor=>{
+
+      /*
+        들고 있는 감자는 AI 정지
+      */
+
+      if(
+        actor===draggedActor
+      ){
+
+        return;
+
+      }
+
+
+      /*
+        대장감자를 들고 있을 때
+        다른 감자는 집결 AI
+      */
+
+      if(
+        draggedActor &&
+        draggedActor.data.style==="leader" &&
+        actor.followingLeader
+      ){
+
+        return;
+
+      }
+
+
+      /*
+        기절
+      */
+
+      if(
+        actor.stunnedUntil>now
+      ){
+
+        return;
+
+      }
+
+
+      /*
+        AI 결정
+      */
+
+      if(
+        now>=actor.nextDecision
+      ){
+
+        actor.nextDecision=
+          now+
+          900+
+          Math.random()*2200;
+
+
+        decideActor(actor);
+
+      }
+
+
+      /*
+        이동
+      */
+
+      actor.x+=actor.vx;
+      actor.y+=actor.vy;
+
+
+      /*
+        벽 충돌
+      */
+
+      const playground =
+        document.getElementById("playground");
+
+
+      const maxX=
+        playground.clientWidth-
+        actor.element.offsetWidth;
+
+      const maxY=
+        playground.clientHeight-
+        actor.element.offsetHeight;
+
+
+      if(
+        actor.x<=5 ||
+        actor.x>=maxX-5
+      ){
+
+        actor.vx*=-1;
+
+      }
+
+
+      if(
+        actor.y<=90 ||
+        actor.y>=maxY-5
+      ){
+
+        actor.vy*=-1;
+
+      }
+
+
+      actor.x=
+        Math.max(
+          5,
+          Math.min(
+            maxX-5,
+            actor.x
+          )
+        );
+
+
+      actor.y=
+        Math.max(
+          90,
+          Math.min(
+            maxY-5,
+            actor.y
+          )
+        );
+
+
+      updateActorPosition(actor);
+
+
+      /*
+        충돌
+      */
+
+      checkCollisions(actor);
+
+    });
+
+}
+
+
+/* =====================================================
+   AI 결정
+===================================================== */
+
+function decideActor(actor){
+
+  const style=
+    actor.data.style;
+
+
+  /*
+    기본 속도
+  */
+
+  let speed=.65;
+
+
+  if(style==="leader"){
+
+    /*
+      대장감자는 비교적 느긋하게 돌아다님
+    */
+
+    speed=.55;
+
+    randomDirection(
+      actor,
+      speed
+    );
+
+
+    /*
+      가끔 가운데에서 점프
+    */
+
+    if(
+      Math.random()<.10
+    ){
+
+      miniReaction(
+        actor,
+        "bounce"
+      );
+
+    }
+
+  }
+
+
+  else if(style==="social"){
+
+    speed=.7;
+
+    /*
+      주변 감자에게 살짝 다가감
+    */
+
+    const target=
+      findNearestActor(actor);
+
+    if(
+      target &&
+      Math.random()<.55
+    ){
+
+      moveActorToward(
+        actor,
+        target.x,
+        target.y,
+        speed
+      );
+
+    }
+
+    else{
+
+      randomDirection(
+        actor,
+        speed
+      );
+
+    }
+
+
+    if(
+      Math.random()<.055
+    ){
+
+      miniReaction(
+        actor,
+        "happy"
+      );
+
+    }
+
+  }
+
+
+  else if(style==="poison"){
+
+    /*
+      독감자는 혼자 돌아다니는 편
+    */
+
+    speed=.55;
+
+    randomDirection(
+      actor,
+      speed
+    );
+
+
+    if(
+      Math.random()<.045
+    ){
+
+      miniReaction(
+        actor,
+        "angry"
+      );
+
+    }
+
+  }
+
+
+  else if(style==="violent"){
+
+    /*
+      폭력감자도 평소에는 얌전하게.
+      싸움은 충돌 시 아주 드물게.
+    */
+
+    speed=.75;
+
+    const target=
+      findNearestActor(actor);
+
+
+    if(
+      target &&
+      Math.random()<.18
+    ){
+
+      moveActorToward(
+        actor,
+        target.x,
+        target.y,
+        speed
+      );
+
+    }
+
+    else{
+
+      randomDirection(
+        actor,
+        speed
+      );
+
+    }
+
+
+    if(
+      Math.random()<.035
+    ){
+
+      miniReaction(
+        actor,
+        "bounce"
+      );
+
+    }
+
+  }
+
+
+  else if(style==="silly"){
+
+    /*
+      저능감자는 방향을 자주 까먹음
+    */
+
+    speed=.6;
+
+    randomDirection(
+      actor,
+      speed
+    );
+
+
+    if(
+      Math.random()<.09
+    ){
+
+      actor.vx*=-1;
+
+    }
+
+
+    if(
+      Math.random()<.07
+    ){
+
+      actor.vy*=-1;
+
+    }
+
+
+    if(
+      Math.random()<.06
+    ){
+
+      miniReaction(
+        actor,
+        "wiggle"
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   랜덤 이동
+===================================================== */
+
+function randomDirection(
+  actor,
+  speed
 ){
 
-a.behavior="social";
+  const angle=
+    Math.random()*
+    Math.PI*2;
 
-a.until=
-now+
-1200+
-Math.random()*1700;
+
+  actor.vx=
+    Math.cos(angle)*
+    speed;
+
+  actor.vy=
+    Math.sin(angle)*
+    speed;
 
 }
 
-else if(
-p==="leader"
+
+/* =====================================================
+   특정 위치로 이동
+===================================================== */
+
+function moveActorToward(
+  actor,
+  tx,
+  ty,
+  speed
 ){
 
-a.behavior="center";
+  const dx=
+    tx-actor.x;
 
-a.until=
-now+
-1500+
-Math.random()*2500;
+  const dy=
+    ty-actor.y;
+
+
+  const distance=
+    Math.hypot(dx,dy);
+
+
+  if(distance<1){
+
+    actor.vx=0;
+    actor.vy=0;
+
+    return;
+
+  }
+
+
+  actor.vx=
+    dx/distance*
+    speed;
+
+  actor.vy=
+    dy/distance*
+    speed;
 
 }
 
-else if(
-p==="poison" &&
-r<.12
+
+/* =====================================================
+   가장 가까운 감자
+===================================================== */
+
+function findNearestActor(actor){
+
+  let nearest=null;
+
+  let nearestDistance=
+    Infinity;
+
+
+  playgroundPotatoes
+    .forEach(other=>{
+
+      if(other===actor) return;
+
+
+      const distance=
+        Math.hypot(
+          actor.x-other.x,
+          actor.y-other.y
+        );
+
+
+      if(
+        distance<
+        nearestDistance
+      ){
+
+        nearestDistance=
+          distance;
+
+        nearest=other;
+
+      }
+
+    });
+
+
+  return nearest;
+
+}
+
+
+/* =====================================================
+   감자 반응
+===================================================== */
+
+function miniReaction(
+  actor,
+  type
 ){
 
-a.behavior="rareChase";
+  if(
+    Date.now()<
+    actor.reactionCooldown
+  ){
 
-a.until=
-now+
-700+
-Math.random()*900;
+    return;
+
+  }
+
+
+  actor.reactionCooldown=
+    Date.now()+1000;
+
+
+  const el=
+    actor.element;
+
+
+  el.classList.remove(
+    "bounce",
+    "wiggle",
+    "sleep",
+    "angry",
+    "happy"
+  );
+
+
+  void el.offsetWidth;
+
+
+  el.classList.add(type);
+
+
+  setTimeout(()=>{
+
+    el.classList.remove(type);
+
+  },900);
 
 }
 
-else if(
-p==="violent" &&
-r<.18
+
+/* =====================================================
+   짧은 터치 성격 반응
+===================================================== */
+
+function playPotatoReaction(actor){
+
+  const personality =
+    getCollectionPersonality(
+      actor.data,
+      potatoes.indexOf(actor.data)
+    );
+
+
+  let reaction="bounce";
+
+
+  if(personality==="애교쟁이"){
+
+    reaction="happy";
+
+  }
+
+  else if(personality==="느긋한"){
+
+    reaction="sleep";
+
+  }
+
+  else if(personality==="장난꾸러기"){
+
+    reaction="wiggle";
+
+  }
+
+  else if(personality==="호기심 많은"){
+
+    reaction="bounce";
+
+  }
+
+  else if(personality==="겁이 많은"){
+
+    reaction="wiggle";
+
+  }
+
+
+  miniReaction(
+    actor,
+    reaction
+  );
+
+}
+
+
+/* =====================================================
+   충돌
+===================================================== */
+
+function checkCollisions(actor){
+
+  /*
+    드래그 중인 감자는 충돌 제외
+  */
+
+  if(
+    dragState.dragging
+  ){
+
+    return;
+
+  }
+
+
+  const now=
+    Date.now();
+
+
+  playgroundPotatoes
+    .forEach(other=>{
+
+      if(
+        other===actor
+      ) return;
+
+
+      if(
+        dragState.dragging &&
+        (
+          dragState.actor===actor ||
+          dragState.actor===other
+        )
+      ){
+
+        return;
+
+      }
+
+
+      /*
+        이미 최근 충돌했다면 무시
+      */
+
+      if(
+        actor.reactionCooldown>now
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        other.reactionCooldown>now
+      ){
+
+        return;
+
+      }
+
+
+      const distance=
+        Math.hypot(
+          actor.x-other.x,
+          actor.y-other.y
+        );
+
+
+      if(
+        distance>43
+      ){
+
+        return;
+
+      }
+
+
+      /*
+        겹치지 않게 살짝 튕김
+      */
+
+      const dx=
+        actor.x-other.x;
+
+      const dy=
+        actor.y-other.y;
+
+
+      const length=
+        Math.max(
+          .1,
+          Math.hypot(dx,dy)
+        );
+
+
+      actor.vx+=
+        dx/length*.35;
+
+      actor.vy+=
+        dy/length*.35;
+
+
+      other.vx-=
+        dx/length*.35;
+
+      other.vy-=
+        dy/length*.35;
+
+
+      /*
+        충돌 쿨다운
+      */
+
+      actor.reactionCooldown=
+        now+900;
+
+      other.reactionCooldown=
+        now+900;
+
+
+      /*
+        대부분은 그냥 놀다가 부딪힌 것
+      */
+
+      const rareIncident=
+        Math.random()<.07;
+
+
+      if(!rareIncident){
+
+        miniReaction(
+          actor,
+          "bounce"
+        );
+
+        miniReaction(
+          other,
+          "bounce"
+        );
+
+        return;
+
+      }
+
+
+      /*
+        아주 드물게 싸움
+      */
+
+      if(
+        actor.data.style==="violent" ||
+        other.data.style==="violent"
+      ){
+
+        miniReaction(
+          actor,
+          "angry"
+        );
+
+        miniReaction(
+          other,
+          "wiggle"
+        );
+
+
+        createCollisionEffect(
+          actor,
+          other
+        );
+
+
+        /*
+          폭력감자 충돌 시
+          아주 낮은 확률로 상대가 잠깐 멈춤
+        */
+
+        if(
+          Math.random()<.22
+        ){
+
+          const target=
+            actor.data.style==="violent"
+              ? other
+              : actor;
+
+
+          target.stunnedUntil=
+            now+900;
+
+        }
+
+      }
+
+      else if(
+        actor.data.style==="poison" ||
+        other.data.style==="poison"
+      ){
+
+        miniReaction(
+          actor,
+          "wiggle"
+        );
+
+        miniReaction(
+          other,
+          "wiggle"
+        );
+
+
+        createCollisionEffect(
+          actor,
+          other
+        );
+
+      }
+
+      else{
+
+        miniReaction(
+          actor,
+          "bounce"
+        );
+
+        miniReaction(
+          other,
+          "bounce"
+        );
+
+      }
+
+    });
+
+}
+
+
+/* =====================================================
+   충돌 이펙트
+===================================================== */
+
+function createCollisionEffect(
+  actor,
+  other
 ){
 
-a.behavior="rareChase";
+  const playground =
+    document.getElementById("playground");
 
-a.until=
-now+
-700+
-Math.random()*1000;
+
+  const effect =
+    document.createElement("div");
+
+
+  effect.className=
+    "collision-effect";
+
+
+  effect.textContent="💥";
+
+
+  effect.style.left=
+    (
+      (actor.x+other.x)/2
+    )+"px";
+
+
+  effect.style.top=
+    (
+      (actor.y+other.y)/2
+    )+"px";
+
+
+  playground.appendChild(effect);
+
+
+  setTimeout(()=>{
+
+    effect.remove();
+
+  },700);
 
 }
 
-else if(
-p==="silly"
+
+/* =====================================================
+   모달
+===================================================== */
+
+function openModal(
+  potato,
+  alreadyFound
 ){
 
-a.behavior="silly";
+  const modal =
+    document.getElementById("modal");
 
-a.until=
-now+
-700+
-Math.random()*1600;
 
-}
+  const image =
+    document.getElementById("modalPotato");
 
-else{
 
-a.behavior="wander";
+  const title =
+    document.getElementById("modalTitle");
 
-a.until=
-now+
-1200+
-Math.random()*2000;
-}
-}
 
-function nearest(a){
+  const text =
+    document.getElementById("modalText");
 
-let best=null;
-let bd=9999;
 
-actors.forEach(b=>{
+  image.src=
+    potato.image;
 
-if(
-b===a||
-b.dragging
-)return;
 
-const d=
-Math.hypot(
-a.x-b.x,
-a.y-b.y
-);
+  title.textContent=
+    potato.name;
 
-if(d<bd){
 
-bd=d;
-best=b;
-}
-});
+  if(alreadyFound){
 
-return best;
-}
+    text.textContent=
+      "이미 도감에 등록된 감자예요!";
 
-function playTick(now){
+  }
 
-const area=
-document.getElementById("playground");
+  else{
 
-if(
-!area||
-!document
-.getElementById("collectionScreen")
-.classList.contains("active")
-){
+    text.textContent=
+      "새로운 감자를 발견했어요! 도감에 등록되었습니다.";
 
-playLoop=null;
+  }
 
-return;
-}
 
-const w=area.clientWidth;
-const h=area.clientHeight;
-
-actors.forEach(a=>{
-
-if(a.dragging)return;
-
-if(a.stunned>now){
-
-a.el.classList.add("stunned");
-
-return;
+  modal.classList.add("active");
 
 }
 
-a.el.classList.remove("stunned");
-
-if(now>a.until){
-
-chooseBehavior(a,now);
-}
-
-let speed=
-a.p.style==="violent"?.85:
-a.p.style==="poison"?.55:
-a.p.style==="leader"?.35:
-.48;
-
-if(
-a.personality==="느긋한"
-){
-speed*=.62;
-}
-
-if(
-a.personality==="겁이 많은"
-){
-speed*=.8;
-}
-
-if(a.behavior==="idle"){
-
-a.vx*=.86;
-a.vy*=.86;
-
-}
-
-else if(a.behavior==="center"){
-
-const tx=w/2-32;
-const ty=h/2-32;
-
-a.vx+=(tx-a.x)*.004;
-a.vy+=(ty-a.y)*.004;
-
-}
-
-else if(
-a.behavior==="social"||
-a.behavior==="play"
-){
-
-const t=nearest(a);
-
-if(t){
-
-const dx=t.x-a.x;
-const dy=t.y-a.y;
-const d=Math.hypot(dx,dy)||1;
-
-if(d>75){
-
-a.vx+=
-dx/d*.035;
-
-a.vy+=
-dy/d*.035;
-
-}else{
-
-a.vx*=.92;
-a.vy*=.92;
-
-}
-
-}
-
-}
-
-else if(
-a.behavior==="rareChase"
-){
-
-const t=nearest(a);
-
-if(t){
-
-const dx=t.x-a.x;
-const dy=t.y-a.y;
-const d=Math.hypot(dx,dy)||1;
-
-a.vx+=
-dx/d*.055;
-
-a.vy+=
-dy/d*.055;
-}
-
-}
-
-else if(
-a.behavior==="avoid"
-){
-
-const t=nearest(a);
-
-if(t){
-
-const dx=a.x-t.x;
-const dy=a.y-t.y;
-
-const d=
-Math.hypot(dx,dy)||1;
-
-if(d<150){
-
-a.vx+=
-dx/d*.07;
-
-a.vy+=
-dy/d*.07;
-
-}else{
-
-a.vx+=
-Math.cos(
-now/900+iSeed(a)
-)*.02;
-
-a.vy+=
-Math.sin(
-now/900+iSeed(a)
-)*.02;
-}
-
-}
-
-}
-
-else if(
-a.behavior==="explore"
-){
-
-a.vx+=
-Math.cos(
-now/850+iSeed(a)
-)*.025;
-
-a.vy+=
-Math.sin(
-now/700+iSeed(a)
-)*.025;
-
-}
-
-else if(
-a.behavior==="silly"
-){
-
-a.vx+=
-Math.cos(
-now/330+iSeed(a)
-)*.055;
-
-a.vy+=
-Math.sin(
-now/410+iSeed(a)
-)*.055;
-
-}
-
-else{
-
-a.vx+=
-Math.cos(
-now/1100+iSeed(a)
-)*.025;
-
-a.vy+=
-Math.sin(
-now/900+iSeed(a)
-)*.025;
-}
-
-const mag=
-Math.hypot(
-a.vx,
-a.vy
-);
-
-if(mag>speed){
-
-a.vx=
-a.vx/mag*speed;
-
-a.vy=
-a.vy/mag*speed;
-}
-
-a.x+=a.vx;
-a.y+=a.vy;
-
-if(a.x<4){
-
-a.x=4;
-a.vx=Math.abs(a.vx);
-}
-
-if(a.y<20){
-
-a.y=20;
-a.vy=Math.abs(a.vy);
-}
-
-if(a.x>w-68){
-
-a.x=w-68;
-a.vx=-Math.abs(a.vx);
-}
-
-if(a.y>h-70){
-
-a.y=h-70;
-a.vy=-Math.abs(a.vy);
-}
-
-positionActor(a);
-
-maybePersonalityAction(a,now);
-
-});
-
-for(
-let i=0;
-i<actors.length;
-i++
-){
-
-for(
-let j=i+1;
-j<actors.length;
-j++
-){
-
-const a=actors[i];
-const b=actors[j];
-
-if(
-a.dragging||
-b.dragging||
-a.stunned>now||
-b.stunned>now
-)continue;
-
-const d=
-Math.hypot(
-a.x-b.x,
-a.y-b.y
-);
-
-if(
-d<48 &&
-now-a.lastCollision>5500 &&
-now-b.lastCollision>5500
-){
-
-if(Math.random()<.08){
-
-a.lastCollision=now;
-b.lastCollision=now;
-
-collision(a,b,now);
-}
-
-}
-
-}
-
-}
-
-playLoop=
-requestAnimationFrame(playTick);
-}
-
-function iSeed(a){
-
-return a.p.name.length*17+
-(actors.indexOf(a)+1)*31;
-}
-
-function maybePersonalityAction(a,now){
-
-if(now%1000>25)return;
-
-if(now-a.lastEffect<1800)return;
-
-const r=Math.random();
-
-if(
-a.personality==="애교쟁이" &&
-r<.08
-){
-
-a.lastEffect=now;
-effectAt(a,"💗");
-
-}
-
-else if(
-a.personality==="장난꾸러기" &&
-r<.1
-){
-
-a.lastEffect=now;
-effectAt(a,"✨");
-smallJump(a);
-
-}
-
-else if(
-a.personality==="느긋한" &&
-r<.06
-){
-
-a.lastEffect=now;
-effectAt(a,"💤");
-
-}
-
-else if(
-a.personality==="호기심 많은" &&
-r<.08
-){
-
-a.lastEffect=now;
-effectAt(a,"❔");
-
-}
-
-else if(
-a.personality==="겁이 많은" &&
-r<.07
-){
-
-a.lastEffect=now;
-effectAt(a,"😳");
-
-}
-}
-
-function smallJump(a){
-
-a.el.animate(
-[
-{transform:"translateY(0)"},
-{transform:"translateY(-16px)"},
-{transform:"translateY(0)"}
-],
-{
-duration:500
-}
-);
-}
-
-function effectAt(a,txt){
-
-const e=
-document.createElement("div");
-
-e.className="play-effect";
-e.textContent=txt;
-
-e.style.left=
-(a.x+25)+"px";
-
-e.style.top=
-(a.y-8)+"px";
-
-document
-.getElementById("playground")
-.appendChild(e);
-
-setTimeout(
-()=>e.remove(),
-900
-);
-}
-
-function collision(a,b,now){
-
-if(Math.random()<.7){
-
-effectAt(a,"✨");
-effectAt(b,"💗");
-
-smallJump(a);
-smallJump(b);
-
-return;
-}
-
-if(
-a.p.style==="poison"||
-b.p.style==="poison"
-){
-
-const victim=
-a.p.style==="poison"
-?b:a;
-
-if(Math.random()<.3){
-
-victim.stunned=
-now+1500;
-
-effectAt(victim,"😵");
-
-}else{
-
-effectAt(a,"💢");
-effectAt(b,"😳");
-}
-
-}else{
-
-effectAt(a,"💢");
-effectAt(b,"💢");
-
-if(Math.random()<.35){
-smallJump(a);
-}
-
-if(Math.random()<.35){
-smallJump(b);
-}
-
-}
-}
-
-function setupDrag(a,area){
-
-let startX=0;
-let startY=0;
-let moved=false;
-let pointerId=null;
-
-a.el.addEventListener(
-"pointerdown",
-e=>{
-
-if(
-e.pointerType==="mouse"&&
-e.button!==0
-)return;
-
-pointerId=e.pointerId;
-
-startX=e.clientX;
-startY=e.clientY;
-
-moved=false;
-touching=true;
-
-clearTimeout(touchTimer);
-
-touchTimer=setTimeout(()=>{
-
-if(!touching)return;
-
-a.dragging=true;
-
-a.el.classList.add("dragging");
-
-if(a.el.setPointerCapture){
-a.el.setPointerCapture(pointerId);
-}
-
-effectAt(a,"✋");
-
-},450);
-
-}
-);
-
-a.el.addEventListener(
-"pointermove",
-e=>{
-
-if(
-pointerId!==e.pointerId
-)return;
-
-if(!a.dragging){
-
-if(
-Math.hypot(
-e.clientX-startX,
-e.clientY-startY
-)>8
-){
-
-moved=true;
-
-clearTimeout(touchTimer);
-}
-
-return;
-}
-
-const rect=
-area.getBoundingClientRect();
-
-a.x=Math.max(
-0,
-Math.min(
-rect.width-68,
-e.clientX-
-rect.left-
-32
-)
-);
-
-a.y=Math.max(
-15,
-Math.min(
-rect.height-68,
-e.clientY-
-rect.top-
-32
-)
-);
-
-positionActor(a);
-
-}
-);
-
-function end(e){
-
-if(
-pointerId!==e.pointerId
-)return;
-
-touching=false;
-
-clearTimeout(touchTimer);
-
-if(a.dragging){
-
-a.dragging=false;
-
-a.el.classList.remove("dragging");
-
-effectAt(a,"✨");
-
-}else if(!moved){
-
-if(
-a.personality==="애교쟁이"
-){
-
-effectAt(a,"💗");
-
-}else if(
-a.personality==="겁이 많은"
-){
-
-effectAt(a,"😳");
-
-}else if(
-a.personality==="장난꾸러기"
-){
-
-effectAt(a,"😝");
-
-}else if(
-a.personality==="느긋한"
-){
-
-effectAt(a,"💤");
-
-}else{
-
-effectAt(a,"❔");
-
-}
-
-}
-
-pointerId=null;
-}
-
-a.el.addEventListener(
-"pointerup",
-end
-);
-
-a.el.addEventListener(
-"pointercancel",
-end
-);
-}
-
-function showModal(title,text){
-
-document.getElementById("modalTitle")
-.textContent=title;
-
-document.getElementById("modalText")
-.textContent=text;
-
-document.getElementById("modal")
-.classList.add("show");
-}
 
 function closeModal(){
 
-document.getElementById("modal")
-.classList.remove("show");
+  const modal =
+    document.getElementById("modal");
+
+  modal.classList.remove("active");
+
 }
 
-updateGrowth();
+
+/*
+  모달 닫기 후 수확 완료 처리는
+  닫기 버튼이 아니라 별도 동작으로 하지 않으면
+  사용자가 다시 시작하기 어려우므로
+  모달 닫을 때 새 감자를 바로 시작
+*/
+
+document
+  .querySelector(".modal-close")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      state.born=false;
+      state.character=null;
+      state.personality=null;
+      state.growth=0;
+
+      saveState();
+
+      showScreen(
+        "growthScreen"
+      );
+
+      updateGrowth();
+
+    }
+  );
+
+
+/* =====================================================
+   저장 데이터 로드
+===================================================== */
+
+loadState();
+
+
+/* =====================================================
+   초기 화면 복구
+===================================================== */
+
+if(state.born && state.character){
+
+  showScreen(
+    "gameScreen"
+  );
+
+  updateCharacter();
+
+  updateStats();
+
+  showMessage(
+    `${state.character.name}와 함께하고 있어요!`
+  );
+
+}
+
+else if(
+  state.started &&
+  state.growth>0
+){
+
+  showScreen(
+    "growthScreen"
+  );
+
+  updateGrowth();
+
+}
+
+else{
+
+  showScreen(
+    "startScreen"
+  );
+
+}
 
 </script>
+
 </body>
 </html>
