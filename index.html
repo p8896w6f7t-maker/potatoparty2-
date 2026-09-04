@@ -1,170 +1,287 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0"
+>
 
 <title>감자키우기</title>
 
 <style>
+
+/* ==================================================
+   기본
+================================================== */
+
 *{
     box-sizing:border-box;
+
     -webkit-tap-highlight-color:transparent;
+
     -webkit-user-select:none;
     user-select:none;
+
+    -webkit-touch-callout:none;
 }
 
-html,body{
+html,
+body{
+
     margin:0;
     padding:0;
+
     width:100%;
     min-height:100%;
+
     background:#f3ead7;
+
     font-family:
         "Apple SD Gothic Neo",
         "Noto Sans KR",
         sans-serif;
+
     overflow-x:hidden;
 }
 
+body{
+
+    overscroll-behavior-x:none;
+}
+
 button{
+
     font-family:inherit;
+
     border:0;
+
     cursor:pointer;
+
     -webkit-user-select:none;
     user-select:none;
+
+    -webkit-touch-callout:none;
+}
+
+img{
+
+    -webkit-user-drag:none;
+    user-drag:none;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    pointer-events:none;
 }
 
 #app{
+
     width:100%;
     min-height:100vh;
 }
 
 .screen{
+
     width:100%;
     min-height:100vh;
 }
+
+.hidden{
+
+    display:none!important;
+}
+
+.page{
+
+    width:min(600px,100%);
+
+    min-height:100vh;
+
+    margin:auto;
+
+    background:#fffaf0;
+}
+
+button:active{
+
+    transform:scale(.94);
+}
+
 
 /* ==================================================
    시작 화면
 ================================================== */
 
 #startScreen{
+
     display:flex;
+
     justify-content:center;
     align-items:center;
+
     background:
-        radial-gradient(circle at center,#fff9eb 0%,#f3dfb8 100%);
+        radial-gradient(
+            circle at center,
+            #fff9eb 0%,
+            #f3dfb8 100%
+        );
 }
 
 .startBox{
+
     text-align:center;
+
     padding:40px 25px;
 }
 
 .bigPotato{
+
     font-size:80px;
-    animation:floatPotato 2s infinite ease-in-out;
+
+    animation:
+        floatPotato
+        2s
+        infinite
+        ease-in-out;
 }
 
 @keyframes floatPotato{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-10px)}
+
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
 }
 
 .gameTitle{
+
     font-size:34px;
+
     font-weight:900;
+
     margin:10px 0 25px;
 }
 
 .startBtn{
+
     padding:15px 55px;
+
     border-radius:18px;
+
     background:#76502e;
+
     color:white;
+
     font-size:20px;
+
     font-weight:900;
-    box-shadow:0 6px 0 #50351f;
+
+    box-shadow:
+        0 6px 0 #50351f;
 }
 
 .startBtn:active{
+
     transform:translateY(5px);
-    box-shadow:0 1px 0 #50351f;
+
+    box-shadow:
+        0 1px 0 #50351f;
 }
 
-/* ==================================================
-   공통
-================================================== */
-
-.hidden{
-    display:none!important;
-}
-
-.page{
-    width:min(600px,100%);
-    min-height:100vh;
-    margin:auto;
-    background:#fffaf0;
-}
-
-button:active{
-    transform:scale(.94);
-}
 
 /* ==================================================
    성장 화면
 ================================================== */
 
 .growPage{
+
     padding-bottom:30px;
 }
 
 .growHeader{
+
     padding:18px 18px 10px;
+
     text-align:center;
 }
 
 .growHeader h1{
+
     margin:0;
+
     font-size:25px;
 }
 
 .dayText{
+
     margin-top:5px;
+
     font-size:14px;
+
     color:#777;
 }
 
 .growArea{
+
     position:relative;
+
     height:360px;
+
     margin:10px 15px;
+
     overflow:hidden;
+
     border-radius:25px;
+
     background:
-        linear-gradient(#bfe8ff 0 67%,#8fc66c 67% 100%);
+        linear-gradient(
+            #bfe8ff 0 67%,
+            #8fc66c 67% 100%
+        );
+
     border:4px solid #725236;
 }
 
 .sun{
+
     position:absolute;
+
     top:25px;
     right:35px;
+
     font-size:45px;
-    animation:sunPulse 2s infinite;
+
+    animation:
+        sunPulse
+        2s
+        infinite;
 }
 
 @keyframes sunPulse{
-    50%{transform:scale(1.08)}
+
+    50%{
+        transform:scale(1.08);
+    }
+
 }
 
 .ground{
+
     position:absolute;
+
     bottom:0;
+
     width:100%;
     height:32%;
+
     background:
         repeating-linear-gradient(
             0deg,
@@ -176,315 +293,743 @@ button:active{
 }
 
 .growPotato{
+
     position:absolute;
+
     left:50%;
     bottom:20%;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     width:150px;
     height:180px;
+
     display:flex;
+
     justify-content:center;
     align-items:center;
+
     font-size:100px;
+
     z-index:5;
-    transition:.3s;
+
+    transition:
+        font-size .2s ease;
 }
 
 .growPotato.jump{
-    animation:potatoJump .6s ease;
+
+    animation:
+        potatoJump
+        .6s
+        ease;
 }
 
 @keyframes potatoJump{
-    0%{transform:translateX(-50%) translateY(0) rotate(0)}
-    35%{transform:translateX(-50%) translateY(-55px) rotate(-8deg)}
-    70%{transform:translateX(-50%) translateY(-25px) rotate(8deg)}
-    100%{transform:translateX(-50%) translateY(0) rotate(0)}
-}
 
-.growPotato.shake{
-    animation:shake .5s;
-}
+    0%{
+        transform:
+            translateX(-50%)
+            translateY(0)
+            rotate(0);
+    }
 
-@keyframes shake{
-    0%,100%{transform:translateX(-50%)}
-    25%{transform:translateX(calc(-50% - 10px))}
-    75%{transform:translateX(calc(-50% + 10px))}
+    35%{
+        transform:
+            translateX(-50%)
+            translateY(-55px)
+            rotate(-8deg);
+    }
+
+    70%{
+        transform:
+            translateX(-50%)
+            translateY(-25px)
+            rotate(8deg);
+    }
+
+    100%{
+        transform:
+            translateX(-50%)
+            translateY(0)
+            rotate(0);
+    }
+
 }
 
 .growthInfo{
+
     padding:0 20px;
 }
 
 .growthTop{
+
     display:flex;
+
     justify-content:space-between;
+
     font-weight:800;
+
     margin-bottom:7px;
 }
 
 .progress{
+
     width:100%;
+
     height:20px;
+
     background:#e5d9c5;
+
     border-radius:20px;
+
     overflow:hidden;
 }
 
 .progressBar{
+
     height:100%;
+
     width:0%;
+
     background:#72ad50;
+
     border-radius:20px;
-    transition:.4s;
+
+    transition:
+        width .4s ease;
 }
 
 .growActions{
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
+
     gap:10px;
+
     padding:18px;
 }
 
 .actionBtn{
+
     padding:15px 8px;
+
     border-radius:15px;
+
     background:#f0e1c5;
+
     font-size:15px;
+
     font-weight:800;
 }
 
 .actionBtn:hover{
+
     background:#e8d2ad;
 }
+
 
 /* ==================================================
    키우기 화면
 ================================================== */
 
 .petPage{
+
     min-height:100vh;
+
     position:relative;
 }
 
+
+/*
+   핵심:
+   감자 + 이름 + 성격까지 하나의 sticky 영역으로 묶음
+*/
+
+.petSticky{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:200;
+
+    background:#fffaf0;
+
+    box-shadow:
+        0 5px 15px rgba(80,50,20,.08);
+}
+
 .petTop{
-    padding:14px 18px 8px;
+
+    padding:10px 18px 4px;
+
     text-align:center;
 }
 
 .petTop h1{
+
     margin:0;
-    font-size:24px;
+
+    font-size:23px;
 }
 
 .petDay{
+
     font-size:13px;
+
     color:#888;
-    margin-top:4px;
+
+    margin-top:3px;
 }
 
 .petMain{
+
     padding:0 15px;
 }
 
 .petStage{
+
     position:relative;
-    height:330px;
+
+    height:285px;
+
     border-radius:24px;
+
     background:
-        linear-gradient(#c7ecff 0 70%,#9bc76e 70%);
+        linear-gradient(
+            #c7ecff 0 70%,
+            #9bc76e 70%
+        );
+
     border:4px solid #725236;
+
     overflow:hidden;
-}
 
-.petSun{
-    position:absolute;
-    top:15px;
-    right:25px;
-    font-size:40px;
-}
-
-.petGround{
-    position:absolute;
-    bottom:0;
-    height:30%;
-    width:100%;
-    background:#91bf69;
-}
-
-.petImage{
-    position:absolute;
-    width:170px;
-    height:170px;
-    object-fit:contain;
-    left:50%;
-    top:46%;
-    transform:translate(-50%,-50%);
-    image-rendering:pixelated;
-    z-index:5;
     touch-action:none;
 }
 
-.petImage.running{
-    animation:runPotato .35s infinite alternate;
+.petSun{
+
+    position:absolute;
+
+    top:15px;
+    right:25px;
+
+    font-size:40px;
+
+    animation:
+        sunPulse
+        2s
+        infinite;
 }
 
-@keyframes runPotato{
-    from{transform:translate(-50%,-50%) translateX(-12px) rotate(-4deg)}
-    to{transform:translate(-50%,-50%) translateX(12px) rotate(4deg)}
+.petGround{
+
+    position:absolute;
+
+    bottom:0;
+
+    height:30%;
+
+    width:100%;
+
+    background:#91bf69;
 }
+
+
+/*
+   키우기 감자는 img 유지.
+   상단 고정 영역 안에서 잘 보이게 함.
+*/
+
+.petImage{
+
+    position:absolute;
+
+    width:165px;
+    height:165px;
+
+    object-fit:contain;
+
+    left:50%;
+    top:46%;
+
+    transform:
+        translate(-50%,-50%);
+
+    image-rendering:pixelated;
+
+    z-index:5;
+
+    touch-action:none;
+
+    -webkit-user-drag:none;
+
+    pointer-events:auto;
+
+    -webkit-touch-callout:none;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    will-change:
+        transform,
+        left,
+        top;
+}
+
+
+/* 숨쉬는 모션 */
+
+.petImage.breathe{
+
+    animation:
+        potatoBreathe
+        2.2s
+        ease-in-out
+        infinite;
+}
+
+@keyframes potatoBreathe{
+
+    0%,
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1)
+            rotate(0);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-52%)
+            scale(1.025)
+            rotate(-1deg);
+    }
+
+}
+
+
+/* 점프 */
 
 .petImage.petJump{
-    animation:petJump .65s;
+
+    animation:
+        petJump
+        .65s
+        ease;
 }
 
 @keyframes petJump{
-    0%{transform:translate(-50%,-50%) translateY(0)}
-    45%{transform:translate(-50%,-50%) translateY(-70px) rotate(10deg)}
-    100%{transform:translate(-50%,-50%) translateY(0)}
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            translateY(0)
+            rotate(0);
+    }
+
+    30%{
+        transform:
+            translate(-50%,-50%)
+            translateY(-55px)
+            rotate(-8deg)
+            scale(1.03);
+    }
+
+    55%{
+        transform:
+            translate(-50%,-50%)
+            translateY(-70px)
+            rotate(8deg)
+            scale(1.04);
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            translateY(0)
+            rotate(0)
+            scale(1);
+    }
+
 }
 
-.message{
+
+/* 갸웃 */
+
+.petImage.tilt{
+
+    animation:
+        potatoTilt
+        .55s
+        ease;
+}
+
+@keyframes potatoTilt{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            rotate(0);
+    }
+
+    25%{
+        transform:
+            translate(-50%,-50%)
+            rotate(-10deg);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-50%)
+            rotate(10deg);
+    }
+
+    75%{
+        transform:
+            translate(-50%,-50%)
+            rotate(-5deg);
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            rotate(0);
+    }
+
+}
+
+
+/* 산책 */
+
+.petImage.running{
+
+    animation:
+        runPotato
+        .25s
+        infinite
+        alternate;
+}
+
+@keyframes runPotato{
+
+    from{
+
+        transform:
+            translate(-50%,-50%)
+            translateY(2px)
+            rotate(-5deg);
+    }
+
+    to{
+
+        transform:
+            translate(-50%,-50%)
+            translateY(-5px)
+            rotate(5deg);
+    }
+
+}
+
+
+/* 감정 이모티콘 */
+
+.petEmotion{
+
     position:absolute;
+
+    z-index:30;
+
     left:50%;
-    bottom:15px;
-    transform:translateX(-50%);
-    width:80%;
-    min-height:45px;
+
+    top:30%;
+
+    font-size:30px;
+
+    pointer-events:none;
+
+    animation:
+        emotionFloat
+        1s
+        ease-out
+        forwards;
+}
+
+@keyframes emotionFloat{
+
+    0%{
+        opacity:0;
+
+        transform:
+            translate(-50%,10px)
+            scale(.5);
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translate(-50%,-45px)
+            scale(1.15);
+    }
+
+}
+
+
+/* 말풍선 */
+
+.message{
+
+    position:absolute;
+
+    left:50%;
+    bottom:12px;
+
+    transform:
+        translateX(-50%);
+
+    width:82%;
+
+    min-height:42px;
+
     background:white;
+
     border:3px solid #543b26;
+
     border-radius:18px;
-    padding:10px;
+
+    padding:9px;
+
     text-align:center;
-    font-size:14px;
+
+    font-size:13px;
+
     font-weight:700;
-    z-index:10;
+
+    z-index:40;
 }
 
 .nameBox{
-    padding:15px 5px 5px;
+
+    padding:7px 5px 10px;
+
+    background:#fffaf0;
 }
 
 .potatoName{
-    font-size:22px;
+
+    font-size:21px;
+
     font-weight:900;
 }
 
 .personality{
+
     color:#777;
-    margin-top:3px;
+
+    margin-top:2px;
+
+    font-size:13px;
 }
+
 
 /* ==================================================
    스탯
 ================================================== */
 
 .stats{
-    margin:10px 15px;
+
+    margin:12px 0;
+
     padding:12px;
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
+
     gap:10px;
+
     background:#f2e7d4;
+
     border-radius:20px;
 }
 
 .stat{
+
     background:white;
+
     border-radius:15px;
+
     padding:9px;
+
     display:flex;
+
     align-items:center;
+
     gap:8px;
 }
 
 .statCircle{
+
     width:42px;
     height:42px;
+
     border-radius:50%;
+
     background:#eee4d2;
+
     display:flex;
+
     justify-content:center;
     align-items:center;
+
     font-size:19px;
+
     flex-shrink:0;
 }
 
 .statText{
+
     font-size:12px;
+
     font-weight:800;
 }
 
 .statValue{
+
     font-size:11px;
+
     color:#777;
+
     margin-top:2px;
 }
 
+
 /* ==================================================
-   상호작용
+   키우기 버튼
 ================================================== */
 
 .petActions{
-    padding:12px 15px 25px;
+
+    padding:4px 0 30px;
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
+
     gap:10px;
 }
 
 .petAction{
+
     padding:14px 5px;
+
     border-radius:15px;
+
     background:#ead8ba;
+
     font-size:14px;
+
     font-weight:900;
 }
+
 
 /* ==================================================
    감자사전
 ================================================== */
 
 .dictionary{
+
     min-height:100vh;
+
     background:#fffaf0;
 }
 
 .dictionaryHeader{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:15px;
+
     border-bottom:2px solid #e5d7c0;
 }
 
 .dictionaryHeader h1{
+
     margin:0;
+
     font-size:20px;
 }
 
 .backBtn{
+
     padding:7px 11px;
+
     border-radius:10px;
+
     background:#e5d5b8;
+
     font-weight:800;
 }
 
+
+/* ==================================================
+   다마고치 방
+================================================== */
+
 .tama{
+
     margin:18px auto;
+
     width:min(92vw,500px);
+
     aspect-ratio:1/1;
+
     max-height:500px;
+
     position:relative;
+
     overflow:hidden;
+
     border:12px solid #473d35;
+
     border-radius:12px;
+
     background:#9aaf72;
+
     image-rendering:pixelated;
+
     touch-action:none;
+
+    -webkit-user-select:none;
+    user-select:none;
+
+    -webkit-touch-callout:none;
+
+    overscroll-behavior:none;
 }
 
+
+/* 벽 */
+
 .pixelWall{
+
     position:absolute;
+
     inset:0;
+
     background:
         repeating-linear-gradient(
             0deg,
@@ -495,11 +1040,19 @@ button:active{
         );
 }
 
+
+/* 바닥 */
+
 .pixelFloor{
+
     position:absolute;
+
     bottom:0;
+
     width:100%;
+
     height:31%;
+
     background:
         repeating-linear-gradient(
             90deg,
@@ -508,227 +1061,703 @@ button:active{
         );
 }
 
+
+/* 창문 */
+
 .window{
+
     position:absolute;
+
     top:28px;
     left:25px;
+
     width:100px;
     height:75px;
+
     background:#9edcf1;
+
     border:8px solid #6e4c36;
-    box-shadow:inset 0 0 0 4px #d7e9dc;
+
+    box-shadow:
+        inset 0 0 0 4px #d7e9dc;
 }
 
 .window:before{
+
     content:"";
+
     position:absolute;
+
     left:50%;
     top:0;
+
     width:5px;
     height:100%;
+
     background:#6e4c36;
 }
 
 .window:after{
+
     content:"";
+
     position:absolute;
+
     left:0;
     top:50%;
+
     width:100%;
     height:5px;
+
     background:#6e4c36;
 }
 
+
+/* 소파 */
+
 .sofa{
+
     position:absolute;
+
     bottom:65px;
     right:20px;
+
     width:130px;
     height:55px;
+
     background:#865d4c;
+
     border:7px solid #654535;
 }
 
+
+/* TV */
+
 .tv{
+
     position:absolute;
+
     top:25px;
     right:22px;
+
     width:75px;
     height:55px;
+
     background:#2e302e;
+
     border:7px solid #4b4035;
 }
 
 .tvScreen{
+
     position:absolute;
+
     inset:7px;
+
     background:#71a3a2;
+
+    animation:
+        tvGlow
+        2s
+        infinite
+        alternate;
 }
 
+@keyframes tvGlow{
+
+    from{
+        opacity:.65;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+
+/* ==================================================
+   다마고치 감자
+================================================== */
+
+/*
+   중요:
+   이제 <img>가 아님.
+   div의 background-image로 표시.
+
+   그래서 iPhone에서 감자를 꾸욱 눌러도
+   이미지 복사/저장 메뉴가 뜨는 구조를 제거함.
+*/
+
 .tamaPotato{
+
     position:absolute;
+
     width:65px;
     height:65px;
-    object-fit:contain;
+
+    background-repeat:no-repeat;
+
+    background-position:center;
+
+    background-size:contain;
+
     image-rendering:pixelated;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate3d(-50%,-50%,0);
+
     z-index:20;
+
     touch-action:none;
-    transition:left .3s,top .3s;
+
+    -webkit-user-select:none;
+    user-select:none;
+
+    -webkit-touch-callout:none;
+
+    -webkit-user-drag:none;
+
+    cursor:grab;
+
+    will-change:
+        transform,
+        left,
+        top;
+
+    /*
+       이미지 자체 선택을 방지하기 위해
+       background-image 사용
+    */
+}
+
+.tamaPotato:active{
+
+    cursor:grabbing;
 }
 
 .tamaPotato.selected{
-    filter:drop-shadow(0 0 8px white);
+
+    filter:
+        drop-shadow(0 0 6px white)
+        brightness(1.08);
 }
 
+
+/* 감자 움직일 때 살짝 통통 */
+
+.tamaPotato.walking{
+
+    animation:
+        tamaWalk
+        .22s
+        infinite
+        alternate;
+}
+
+@keyframes tamaWalk{
+
+    from{
+
+        margin-top:2px;
+
+        transform:
+            translate3d(-50%,-50%,0)
+            rotate(-3deg);
+    }
+
+    to{
+
+        margin-top:-2px;
+
+        transform:
+            translate3d(-50%,-50%,0)
+            rotate(3deg);
+    }
+
+}
+
+
+/* 감정 점프 */
+
+.tamaPotato.reactionJump{
+
+    animation:
+        tamaReactionJump
+        .6s
+        ease;
+}
+
+@keyframes tamaReactionJump{
+
+    0%{
+
+        transform:
+            translate3d(-50%,-50%,0)
+            translateY(0)
+            rotate(0);
+    }
+
+    35%{
+
+        transform:
+            translate3d(-50%,-50%,0)
+            translateY(-18px)
+            rotate(-10deg);
+    }
+
+    65%{
+
+        transform:
+            translate3d(-50%,-50%,0)
+            translateY(-10px)
+            rotate(10deg);
+    }
+
+    100%{
+
+        transform:
+            translate3d(-50%,-50%,0)
+            translateY(0)
+            rotate(0);
+    }
+
+}
+
+
+/* 갸웃 */
+
+.tamaPotato.reactionTilt{
+
+    animation:
+        tamaTilt
+        .65s
+        ease;
+}
+
+@keyframes tamaTilt{
+
+    0%{
+        transform:
+            translate3d(-50%,-50%,0)
+            rotate(0);
+    }
+
+    25%{
+        transform:
+            translate3d(-50%,-50%,0)
+            rotate(-12deg);
+    }
+
+    50%{
+        transform:
+            translate3d(-50%,-50%,0)
+            rotate(12deg);
+    }
+
+    75%{
+        transform:
+            translate3d(-50%,-50%,0)
+            rotate(-5deg);
+    }
+
+    100%{
+        transform:
+            translate3d(-50%,-50%,0)
+            rotate(0);
+    }
+
+}
+
+
+/* ==================================================
+   다마고치 말풍선
+================================================== */
+
 .tamaSpeech{
+
     position:absolute;
-    z-index:50;
+
+    z-index:70;
+
     background:white;
+
     border:2px solid #332a22;
+
     border-radius:10px;
+
     padding:3px 6px;
+
     font-size:10px;
+
     font-weight:900;
+
     white-space:nowrap;
+
     pointer-events:none;
-    animation:speech .8s;
+
+    animation:
+        speech
+        1.3s
+        ease
+        forwards;
 }
 
 @keyframes speech{
-    0%{opacity:0;transform:translateY(8px)}
-    20%,80%{opacity:1}
-    100%{opacity:0;transform:translateY(-10px)}
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translate(-50%,8px)
+            scale(.8);
+    }
+
+    20%{
+
+        opacity:1;
+
+        transform:
+            translate(-50%,0)
+            scale(1);
+    }
+
+    80%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            translate(-50%,-15px)
+            scale(.95);
+    }
+
 }
 
-.tamaControls{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-    padding:0 15px;
-}
 
-.tamaControl{
-    padding:13px 4px;
-    border-radius:14px;
-    background:#e4d0ad;
-    font-size:13px;
-    font-weight:900;
-}
+/* ==================================================
+   다마고치 감정 이모티콘
+================================================== */
 
-.discovery{
-    margin:20px 15px;
-    padding:16px;
-    border-radius:18px;
-    background:#f0e3cd;
-}
+.tamaEmotion{
 
-.discoveryTitle{
-    font-weight:900;
-    font-size:19px;
-}
-
-.discoverySub{
-    font-size:13px;
-    color:#777;
-    margin:4px 0 15px;
-}
-
-.potatoList{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:7px;
-}
-
-.bookItem{
-    background:white;
-    border-radius:12px;
-    padding:7px 3px;
-    text-align:center;
-}
-
-.bookItem img{
-    width:45px;
-    height:45px;
-    object-fit:contain;
-    image-rendering:pixelated;
-}
-
-.bookItem div{
-    font-size:10px;
-    font-weight:800;
-}
-
-.switch{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:15px;
-    padding-top:12px;
-    border-top:2px solid #dfceb1;
-}
-
-.toggle{
-    width:50px;
-    height:28px;
-    border-radius:20px;
-    background:#aaa;
-    position:relative;
-}
-
-.toggle.on{
-    background:#6ca04c;
-}
-
-.toggle:after{
-    content:"";
     position:absolute;
-    top:4px;
-    left:4px;
-    width:20px;
-    height:20px;
-    background:white;
-    border-radius:50%;
-    transition:.2s;
+
+    z-index:80;
+
+    pointer-events:none;
+
+    font-size:22px;
+
+    animation:
+        tamaEmotionFloat
+        1s
+        ease-out
+        forwards;
 }
 
-.toggle.on:after{
-    left:26px;
+@keyframes tamaEmotionFloat{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translate(-50%,10px)
+            scale(.5);
+    }
+
+    20%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            translate(-50%,-30px)
+            scale(1.1);
+    }
+
 }
+
+
+/* ==================================================
+   스턴
+================================================== */
+
+.tamaPotato.stunned{
+
+    filter:
+        grayscale(1)
+        brightness(.7);
+
+    animation:
+        stunShake
+        .25s
+        infinite
+        alternate;
+}
+
+@keyframes stunShake{
+
+    from{
+        margin-left:-3px;
+    }
+
+    to{
+        margin-left:3px;
+    }
+
+}
+
 
 /* ==================================================
    간식
 ================================================== */
 
 .snack{
+
     position:absolute;
+
     z-index:100;
+
     font-size:28px;
-    animation:snackFall 2.2s linear forwards;
+
     pointer-events:none;
+
+    animation:
+        snackFall
+        2.2s
+        linear
+        forwards;
 }
 
 @keyframes snackFall{
-    0%{top:-40px}
-    100%{top:75%}
+
+    0%{
+
+        top:-40px;
+
+        transform:
+            rotate(0);
+    }
+
+    50%{
+
+        transform:
+            rotate(180deg);
+    }
+
+    100%{
+
+        top:75%;
+
+        transform:
+            rotate(360deg);
+    }
+
 }
+
 
 /* ==================================================
    잠
 ================================================== */
 
 .sleepOverlay{
+
     position:absolute;
+
     inset:0;
-    background:rgba(25,30,55,.58);
-    z-index:90;
+
+    background:
+        rgba(25,30,55,.58);
+
+    z-index:150;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     color:white;
+
     font-size:22px;
+
+    font-weight:900;
+
+    pointer-events:none;
+}
+
+
+/* ==================================================
+   다마고치 버튼
+================================================== */
+
+.tamaControls{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:8px;
+
+    padding:0 15px;
+}
+
+.tamaControl{
+
+    padding:13px 4px;
+
+    border-radius:14px;
+
+    background:#e4d0ad;
+
+    font-size:13px;
+
     font-weight:900;
 }
+
+
+/* ==================================================
+   도감
+================================================== */
+
+.discovery{
+
+    margin:20px 15px;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:#f0e3cd;
+}
+
+.discoveryTitle{
+
+    font-weight:900;
+
+    font-size:19px;
+}
+
+.discoverySub{
+
+    font-size:13px;
+
+    color:#777;
+
+    margin:4px 0 15px;
+}
+
+.potatoList{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:7px;
+}
+
+.bookItem{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:7px 3px;
+
+    text-align:center;
+}
+
+.bookItem img{
+
+    width:45px;
+    height:45px;
+
+    object-fit:contain;
+
+    image-rendering:pixelated;
+}
+
+.bookItem div{
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+
+/* ==================================================
+   ON / OFF
+================================================== */
+
+.switch{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:15px;
+
+    padding-top:12px;
+
+    border-top:
+        2px solid #dfceb1;
+}
+
+.toggle{
+
+    width:50px;
+    height:28px;
+
+    border-radius:20px;
+
+    background:#aaa;
+
+    position:relative;
+}
+
+.toggle.on{
+
+    background:#6ca04c;
+}
+
+.toggle:after{
+
+    content:"";
+
+    position:absolute;
+
+    top:4px;
+    left:4px;
+
+    width:20px;
+    height:20px;
+
+    background:white;
+
+    border-radius:50%;
+
+    transition:.2s;
+}
+
+.toggle.on:after{
+
+    left:26px;
+}
+
 
 /* ==================================================
    모바일
@@ -736,50 +1765,96 @@ button:active{
 
 @media(max-width:420px){
 
-    .growArea{
-        height:330px;
+    .petTop{
+
+        padding-top:8px;
     }
 
     .petStage{
-        height:310px;
+
+        height:275px;
     }
 
     .petImage{
+
         width:150px;
         height:150px;
     }
 
+    .nameBox{
+
+        padding-bottom:8px;
+    }
+
     .stats{
+
         gap:7px;
+
         padding:9px;
     }
 
     .stat{
+
         padding:7px;
     }
 
     .statCircle{
+
         width:38px;
         height:38px;
     }
 
+    .tamaPotato{
+
+        width:58px;
+        height:58px;
+    }
+
 }
+
+
+/* ==================================================
+   작은 화면 높이 대응
+================================================== */
+
+@media(max-height:700px){
+
+    .petStage{
+
+        height:250px;
+    }
+
+    .petImage{
+
+        width:140px;
+        height:140px;
+    }
+
+}
+
 </style>
 </head>
+
 
 <body>
 
 <div id="app">
 
+
 <!-- ==================================================
-     START
+     시작
 ================================================== -->
 
-<section id="startScreen" class="screen">
+<section
+    id="startScreen"
+    class="screen"
+>
 
     <div class="startBox">
 
-        <div class="bigPotato">🥔</div>
+        <div class="bigPotato">
+            🥔
+        </div>
 
         <div class="gameTitle">
             감자키우기
@@ -787,7 +1862,8 @@ button:active{
 
         <button
             class="startBtn"
-            id="startBtn">
+            id="startBtn"
+        >
             시작
         </button>
 
@@ -796,19 +1872,28 @@ button:active{
 </section>
 
 
+
 <!-- ==================================================
-     GROW
+     성장
 ================================================== -->
 
-<section id="growScreen" class="screen hidden">
+<section
+    id="growScreen"
+    class="screen hidden"
+>
 
 <div class="page growPage">
 
     <div class="growHeader">
 
-        <h1>🥔 감자키우기</h1>
+        <h1>
+            🥔 감자키우기
+        </h1>
 
-        <div class="dayText" id="growDay">
+        <div
+            class="dayText"
+            id="growDay"
+        >
             감자를 심어주세요
         </div>
 
@@ -817,13 +1902,16 @@ button:active{
 
     <div class="growArea">
 
-        <div class="sun">☀️</div>
+        <div class="sun">
+            ☀️
+        </div>
 
         <div class="ground"></div>
 
         <div
             id="growPotato"
-            class="growPotato">
+            class="growPotato"
+        >
             🌱
         </div>
 
@@ -833,15 +1921,24 @@ button:active{
     <div class="growthInfo">
 
         <div class="growthTop">
-            <span id="stageText">싹</span>
-            <span id="growthText">0 / 100%</span>
+
+            <span id="stageText">
+                싹
+            </span>
+
+            <span id="growthText">
+                0 / 100%
+            </span>
+
         </div>
 
         <div class="progress">
+
             <div
                 id="growthBar"
-                class="progressBar">
-            </div>
+                class="progressBar"
+            ></div>
+
         </div>
 
     </div>
@@ -851,25 +1948,29 @@ button:active{
 
         <button
             class="actionBtn"
-            onclick="growAction('fertilizer')">
+            onclick="growAction('fertilizer')"
+        >
             🌱 비료 주기
         </button>
 
         <button
             class="actionBtn"
-            onclick="growAction('water')">
+            onclick="growAction('water')"
+        >
             💧 물 주기
         </button>
 
         <button
             class="actionBtn"
-            onclick="growAction('sun')">
+            onclick="growAction('sun')"
+        >
             ☀️ 햇빛 쬐기
         </button>
 
         <button
             class="actionBtn"
-            onclick="growAction('cheer')">
+            onclick="growAction('cheer')"
+        >
             💕 응원하기
         </button>
 
@@ -880,120 +1981,208 @@ button:active{
 </section>
 
 
+
 <!-- ==================================================
-     PET
+     키우기
 ================================================== -->
 
-<section id="petScreen" class="screen hidden">
+<section
+    id="petScreen"
+    class="screen hidden"
+>
 
 <div class="page petPage">
 
-    <div class="petTop">
 
-        <h1>나의 감자</h1>
+    <!--
+        이 부분 전체가 고정됨.
+        스크롤해도
+        나의 감자
+        몇일차
+        감자
+        말풍선
+        이름
+        성격
+        모두 화면 위에 남음.
+    -->
 
-        <div
-            class="petDay"
-            id="petDay">
-            1일차
+    <div class="petSticky">
+
+
+        <div class="petTop">
+
+            <h1>
+                나의 감자
+            </h1>
+
+            <div
+                class="petDay"
+                id="petDay"
+            >
+                1일차
+            </div>
+
+        </div>
+
+
+        <div class="petMain">
+
+            <div
+                class="petStage"
+                id="petStage"
+            >
+
+                <div class="petSun">
+                    ☀️
+                </div>
+
+                <div class="petGround"></div>
+
+
+                <img
+                    id="petImage"
+                    class="petImage breathe"
+                    src="Potato1.PNG"
+                    draggable="false"
+                    alt="감자"
+                >
+
+
+                <div
+                    id="petMessage"
+                    class="message"
+                >
+                    ...
+                </div>
+
+            </div>
+
+
+            <div class="nameBox">
+
+                <div
+                    id="potatoName"
+                    class="potatoName"
+                >
+                    감자
+                </div>
+
+                <div
+                    id="potatoPersonality"
+                    class="personality"
+                >
+                    성격 • ...
+                </div>
+
+            </div>
+
         </div>
 
     </div>
 
 
+    <!--
+        여기부터 스크롤 영역
+    -->
+
     <div class="petMain">
-
-        <div
-            class="petStage"
-            id="petStage">
-
-            <div class="petSun">
-                ☀️
-            </div>
-
-            <div class="petGround"></div>
-
-            <img
-                id="petImage"
-                class="petImage"
-                src="Potato1.PNG"
-                draggable="false"
-                alt="감자">
-
-            <div
-                id="petMessage"
-                class="message">
-                ...
-            </div>
-
-        </div>
-
-
-        <div class="nameBox">
-
-            <div
-                id="potatoName"
-                class="potatoName">
-                감자
-            </div>
-
-            <div
-                id="potatoPersonality"
-                class="personality">
-                성격 • ...
-            </div>
-
-        </div>
 
 
         <div class="stats">
 
             <div class="stat">
-                <div class="statCircle">🍖</div>
+
+                <div class="statCircle">
+                    🍖
+                </div>
+
                 <div>
-                    <div class="statText">배고픔</div>
+
+                    <div class="statText">
+                        배고픔
+                    </div>
+
                     <div
                         class="statValue"
-                        id="hunger">
+                        id="hunger"
+                    >
                         0 / 100
                     </div>
+
                 </div>
+
             </div>
 
-            <div class="stat">
-                <div class="statCircle">💧</div>
-                <div>
-                    <div class="statText">수분</div>
-                    <div
-                        class="statValue"
-                        id="water">
-                        0 / 100
-                    </div>
-                </div>
-            </div>
 
             <div class="stat">
-                <div class="statCircle">❤️</div>
+
+                <div class="statCircle">
+                    💧
+                </div>
+
                 <div>
-                    <div class="statText">사랑</div>
+
+                    <div class="statText">
+                        수분
+                    </div>
+
                     <div
                         class="statValue"
-                        id="love">
+                        id="water"
+                    >
                         0 / 100
                     </div>
+
                 </div>
+
             </div>
 
+
             <div class="stat">
-                <div class="statCircle">⚡</div>
+
+                <div class="statCircle">
+                    ❤️
+                </div>
+
                 <div>
-                    <div class="statText">체력</div>
+
+                    <div class="statText">
+                        사랑
+                    </div>
+
                     <div
                         class="statValue"
-                        id="energy">
+                        id="love"
+                    >
                         0 / 100
                     </div>
+
                 </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="statCircle">
+                    ⚡
+                </div>
+
+                <div>
+
+                    <div class="statText">
+                        체력
+                    </div>
+
+                    <div
+                        class="statValue"
+                        id="energy"
+                    >
+                        0 / 100
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
@@ -1003,37 +2192,43 @@ button:active{
 
             <button
                 class="petAction"
-                onclick="petAction('food')">
+                onclick="petAction('food')"
+            >
                 🍖 먹이 주기
             </button>
 
             <button
                 class="petAction"
-                onclick="petAction('water')">
+                onclick="petAction('water')"
+            >
                 💧 물 주기
             </button>
 
             <button
                 class="petAction"
-                onclick="petAction('pet')">
+                onclick="petAction('pet')"
+            >
                 ❤️ 쓰다듬기
             </button>
 
             <button
                 class="petAction"
-                onclick="petAction('walk')">
+                onclick="petAction('walk')"
+            >
                 🏃 산책하기
             </button>
 
             <button
                 class="petAction"
-                onclick="harvest()">
+                onclick="harvest()"
+            >
                 🥔 수확하기
             </button>
 
             <button
                 class="petAction"
-                onclick="openDictionary()">
+                onclick="openDictionary()"
+            >
                 📖 감자사전
             </button>
 
@@ -1046,27 +2241,36 @@ button:active{
 </section>
 
 
+
 <!-- ==================================================
-     DICTIONARY
+     사전
 ================================================== -->
 
-<section id="dictionaryScreen" class="screen hidden">
+<section
+    id="dictionaryScreen"
+    class="screen hidden"
+>
 
 <div class="page dictionary">
+
 
     <div class="dictionaryHeader">
 
         <button
             class="backBtn"
-            onclick="backToPet()">
+            onclick="backToPet()"
+        >
             ← 키우기로
         </button>
 
-        <h1>🥔 감자사전</h1>
+        <h1>
+            🥔 감자사전
+        </h1>
 
         <div
             id="dictionaryDay"
-            class="dayText">
+            class="dayText"
+        >
             1일차
         </div>
 
@@ -1075,9 +2279,11 @@ button:active{
 
     <div
         id="tama"
-        class="tama">
+        class="tama"
+    >
 
         <div class="pixelWall"></div>
+
         <div class="pixelFloor"></div>
 
         <div class="window"></div>
@@ -1085,7 +2291,9 @@ button:active{
         <div class="sofa"></div>
 
         <div class="tv">
+
             <div class="tvScreen"></div>
+
         </div>
 
     </div>
@@ -1095,19 +2303,22 @@ button:active{
 
         <button
             class="tamaControl"
-            onclick="tamaPet()">
+            onclick="tamaPet()"
+        >
             ❤️ 쓰다듬기
         </button>
 
         <button
             class="tamaControl"
-            onclick="tamaSnack()">
+            onclick="tamaSnack()"
+        >
             🍬 간식주기
         </button>
 
         <button
             class="tamaControl"
-            onclick="tamaSleep()">
+            onclick="tamaSleep()"
+        >
             😴 잠자기
         </button>
 
@@ -1126,14 +2337,15 @@ button:active{
 
         <div
             id="discoveredCount"
-            class="discoverySub">
+            class="discoverySub"
+        >
             발견한 감자 0/5
         </div>
 
         <div
             id="potatoList"
-            class="potatoList">
-        </div>
+            class="potatoList"
+        ></div>
 
 
         <div class="switch">
@@ -1145,8 +2357,8 @@ button:active{
             <button
                 id="toggleButton"
                 class="toggle on"
-                onclick="toggleDictionary()">
-            </button>
+                onclick="toggleDictionary()"
+            ></button>
 
         </div>
 
@@ -1159,6 +2371,7 @@ button:active{
 </div>
 
 
+
 <script>
 
 /* ==================================================
@@ -1167,155 +2380,214 @@ button:active{
 
 const POTATOES = [
 
-{
-    name:"꾼감자",
-    image:"Potato1.PNG",
-    style:"social",
-    personality:"사교적이고 사랑이 넘친다",
-    favorite:"모두",
-    lines:{
-        food:[
-            "오! 먹을 거다! 나눠 먹자!",
-            "냠냠! 이것도 사랑의 맛인가?",
-            "맛있다! 너도 먹을래?"
-        ],
-        water:[
-            "물이다! 시원하다!",
-            "역시 물은 생명의 친구야!",
-            "한 모금 마시면 모두 좋아져!"
-        ],
-        pet:[
-            "꺄! 더 쓰다듬어줘!",
-            "너 정말 좋은 감자구나!",
-            "하트 받아! ❤️❤️❤️"
-        ],
-        walk:[
-            "산책이다! 같이 가자!",
-            "어디든 좋아! 친구랑 가면!",
-            "달려어어어!!"
-        ]
-    }
-},
+    {
+        name:"꾼감자",
 
-{
-    name:"대장감자",
-    image:"Potato2.PNG",
-    style:"leader",
-    personality:"당당하고 책임감이 강하다",
-    favorite:"저능감자",
-    lines:{
-        food:[
-            "좋다. 대장에게 힘을 보태라.",
-            "훌륭한 보급이다.",
-            "먹고 다시 대열을 지휘하지."
-        ],
-        water:[
-            "좋아. 수분 보충 완료.",
-            "대장에게 필요한 물이다.",
-            "모두 물을 챙겼나?"
-        ],
-        pet:[
-            "흠. 나쁘지 않군.",
-            "대장도 가끔은 쉬어야 하지.",
-            "좋다. 계속하도록."
-        ],
-        walk:[
-            "전원 따라와!",
-            "대장이 앞장선다!",
-            "행군 시작이다!"
-        ]
-    }
-},
+        image:"Potato1.PNG",
 
-{
-    name:"독감자",
-    image:"Potato3.PNG",
-    style:"toxic",
-    personality:"예민하고 혼자 있는 것을 좋아한다",
-    favorite:"폭력감자",
-    lines:{
-        food:[
-            "가까이 오지 말고 그냥 놔.",
-            "먹을 건 두고 가.",
-            "흥. 나쁘진 않네."
-        ],
-        water:[
-            "물은 두고 가.",
-            "목말랐던 건 아니야.",
-            "시끄럽게 하지 마."
-        ],
-        pet:[
-            "만지지 마.",
-            "...한 번 정도는 봐줄게.",
-            "다음에는 물 수도 있어."
-        ],
-        walk:[
-            "혼자 갈 거야.",
-            "따라오지 마.",
-            "조용한 곳이 좋다고."
-        ]
-    }
-},
+        style:"social",
 
-{
-    name:"폭력감자",
-    image:"Potato4.PNG",
-    style:"violent",
-    personality:"다혈질이고 싸움을 좋아한다",
-    favorite:"독감자",
-    lines:{
-        food:[
-            "더 줘! 이걸로 부족해!",
-            "힘이 난다! 누구 없냐!",
-            "먹고 싸우러 간다!"
-        ],
-        water:[
-            "물! 좋다!",
-            "힘이 돌아온다!",
-            "한 통 더 줘!"
-        ],
-        pet:[
-            "뭐야! 건드렸냐!",
-            "...계속해도 된다.",
-            "흥. 오늘은 봐준다."
-        ],
-        walk:[
-            "달려! 누가 먼저 도착하나!",
-            "비켜! 지나간다!",
-            "싸울 상대를 찾아보자!"
-        ]
-    }
-},
+        personality:
+            "사교적이고 사랑이 넘친다",
 
-{
-    name:"저능감자",
-    image:"Potato5.PNG",
-    style:"dummy",
-    personality:"느긋하고 순하며 조금 멍하다",
-    favorite:"모두",
-    lines:{
-        food:[
-            "먹는 거... 맞지?",
-            "우와... 맛있다...",
-            "또 먹어도 돼?"
-        ],
-        water:[
-            "물이네...",
-            "꼴깍... 시원하다...",
-            "물은 왜 이렇게 맛있지?"
-        ],
-        pet:[
-            "헤헤...",
-            "기분 좋다...",
-            "나 좋아해?"
-        ],
-        walk:[
-            "어... 어디 가?",
-            "잠깐만... 나도 갈래.",
-            "우와! 뛰는 거 재밌다!"
-        ]
+        favorite:"모두",
+
+        lines:{
+
+            food:[
+                "오! 먹을 거다! 나눠 먹자!",
+                "냠냠! 이것도 사랑의 맛인가?",
+                "맛있다! 너도 먹을래?"
+            ],
+
+            water:[
+                "물이다! 시원하다!",
+                "역시 물은 생명의 친구야!",
+                "한 모금 마시면 모두 좋아져!"
+            ],
+
+            pet:[
+                "꺄! 더 쓰다듬어줘!",
+                "너 정말 좋은 감자구나!",
+                "하트 받아! ❤️❤️❤️"
+            ],
+
+            walk:[
+                "산책이다! 같이 가자!",
+                "어디든 좋아! 친구랑 가면!",
+                "달려어어어!!"
+            ]
+
+        }
+    },
+
+
+    {
+        name:"대장감자",
+
+        image:"Potato2.PNG",
+
+        style:"leader",
+
+        personality:
+            "당당하고 책임감이 강하다",
+
+        favorite:"저능감자",
+
+        lines:{
+
+            food:[
+                "좋다. 대장에게 힘을 보태라.",
+                "훌륭한 보급이다.",
+                "먹고 다시 대열을 지휘하지."
+            ],
+
+            water:[
+                "좋아. 수분 보충 완료.",
+                "대장에게 필요한 물이다.",
+                "모두 물을 챙겼나?"
+            ],
+
+            pet:[
+                "흠. 나쁘지 않군.",
+                "대장도 가끔은 쉬어야 하지.",
+                "좋다. 계속하도록."
+            ],
+
+            walk:[
+                "전원 따라와!",
+                "대장이 앞장선다!",
+                "행군 시작이다!"
+            ]
+
+        }
+    },
+
+
+    {
+        name:"독감자",
+
+        image:"Potato3.PNG",
+
+        style:"toxic",
+
+        personality:
+            "예민하고 혼자 있는 것을 좋아한다",
+
+        favorite:"폭력감자",
+
+        lines:{
+
+            food:[
+                "가까이 오지 말고 그냥 놔.",
+                "먹을 건 두고 가.",
+                "흥. 나쁘진 않네."
+            ],
+
+            water:[
+                "물은 두고 가.",
+                "목말랐던 건 아니야.",
+                "시끄럽게 하지 마."
+            ],
+
+            pet:[
+                "만지지 마.",
+                "...한 번 정도는 봐줄게.",
+                "다음에는 물 수도 있어."
+            ],
+
+            walk:[
+                "혼자 갈 거야.",
+                "따라오지 마.",
+                "조용한 곳이 좋다고."
+            ]
+
+        }
+    },
+
+
+    {
+        name:"폭력감자",
+
+        image:"Potato4.PNG",
+
+        style:"violent",
+
+        personality:
+            "다혈질이고 싸움을 좋아한다",
+
+        favorite:"독감자",
+
+        lines:{
+
+            food:[
+                "더 줘! 이걸로 부족해!",
+                "힘이 난다! 누구 없냐!",
+                "먹고 싸우러 간다!"
+            ],
+
+            water:[
+                "물! 좋다!",
+                "힘이 돌아온다!",
+                "한 통 더 줘!"
+            ],
+
+            pet:[
+                "뭐야! 건드렸냐!",
+                "...계속해도 된다.",
+                "흥. 오늘은 봐준다."
+            ],
+
+            walk:[
+                "달려! 누가 먼저 도착하나!",
+                "비켜! 지나간다!",
+                "싸울 상대를 찾아보자!"
+            ]
+
+        }
+    },
+
+
+    {
+        name:"저능감자",
+
+        image:"Potato5.PNG",
+
+        style:"dummy",
+
+        personality:
+            "느긋하고 순하며 조금 멍하다",
+
+        favorite:"모두",
+
+        lines:{
+
+            food:[
+                "먹는 거... 맞지?",
+                "우와... 맛있다...",
+                "또 먹어도 돼?"
+            ],
+
+            water:[
+                "물이네...",
+                "꼴깍... 시원하다...",
+                "물은 왜 이렇게 맛있지?"
+            ],
+
+            pet:[
+                "헤헤...",
+                "기분 좋다...",
+                "나 좋아해?"
+            ],
+
+            walk:[
+                "어... 어디 가?",
+                "잠깐만... 나도 갈래.",
+                "우와! 뛰는 거 재밌다!"
+            ]
+
+        }
     }
-}
 
 ];
 
@@ -1335,10 +2607,15 @@ let game = {
     potato:null,
 
     stats:{
+
         hunger:0,
+
         water:0,
+
         love:0,
+
         energy:0
+
     },
 
     discovered:[],
@@ -1347,22 +2624,37 @@ let game = {
 
     tamaPotatoes:[],
 
-    sleeping:false
+    sleeping:false,
+
+    tamaAnimationId:null,
+
+    lastTamaTime:0,
+
+    lastSocialTime:0
+
 };
 
 
+/* ==================================================
+   성장 단계
+================================================== */
+
 const STAGES = [
+
     "싹",
     "이파리",
     "나무",
     "감자"
+
 ];
 
 const STAGE_EMOJIS = [
+
     "🌱",
     "🌿",
     "🌳",
     "🥔"
+
 ];
 
 
@@ -1371,28 +2663,49 @@ const STAGE_EMOJIS = [
 ================================================== */
 
 const startScreen =
-    document.getElementById("startScreen");
+    document.getElementById(
+        "startScreen"
+    );
 
 const growScreen =
-    document.getElementById("growScreen");
+    document.getElementById(
+        "growScreen"
+    );
 
 const petScreen =
-    document.getElementById("petScreen");
+    document.getElementById(
+        "petScreen"
+    );
 
 const dictionaryScreen =
-    document.getElementById("dictionaryScreen");
+    document.getElementById(
+        "dictionaryScreen"
+    );
 
 const growPotato =
-    document.getElementById("growPotato");
+    document.getElementById(
+        "growPotato"
+    );
 
 const growthBar =
-    document.getElementById("growthBar");
+    document.getElementById(
+        "growthBar"
+    );
 
 const growthText =
-    document.getElementById("growthText");
+    document.getElementById(
+        "growthText"
+    );
 
 const stageText =
-    document.getElementById("stageText");
+    document.getElementById(
+        "stageText"
+    );
+
+const petImage =
+    document.getElementById(
+        "petImage"
+    );
 
 
 /* ==================================================
@@ -1406,11 +2719,42 @@ function showScreen(screen){
         growScreen,
         petScreen,
         dictionaryScreen
-    ].forEach(s=>s.classList.add("hidden"));
 
-    screen.classList.remove("hidden");
+    ].forEach(
+        s=>s.classList.add("hidden")
+    );
 
-    window.scrollTo(0,0);
+
+    screen.classList.remove(
+        "hidden"
+    );
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+
+    /*
+       다마고치 화면에서만
+       RAF 루프가 필요함.
+    */
+
+    if(
+        screen === dictionaryScreen
+    ){
+
+        startTamaLoop();
+
+    }
+
+    else{
+
+        stopTamaLoop();
+
+    }
+
 }
 
 
@@ -1419,77 +2763,114 @@ function showScreen(screen){
 ================================================== */
 
 document
-.getElementById("startBtn")
-.addEventListener("click",()=>{
+    .getElementById("startBtn")
+    .addEventListener(
+        "click",
+        ()=>{
 
-    game.growth=0;
-    game.stage=0;
-    game.day=1;
+            game.growth=0;
 
-    updateGrow();
+            game.stage=0;
 
-    showScreen(growScreen);
+            game.day=1;
 
-});
+            game.potato=null;
+
+            updateGrow();
+
+            showScreen(
+                growScreen
+            );
+
+        }
+    );
 
 
 /* ==================================================
    성장
 ================================================== */
 
+let creatingPotato=false;
+
 function growAction(type){
 
-    let amount = 7;
+    if(creatingPotato){
+        return;
+    }
+
+
+    let amount=7;
+
 
     if(type==="fertilizer"){
-
-        amount = 12;
-
+        amount=12;
     }
 
     if(type==="water"){
-
-        amount = 8;
-
+        amount=8;
     }
 
     if(type==="sun"){
-
-        amount = 9;
-
+        amount=9;
     }
 
     if(type==="cheer"){
-
-        amount = 6;
-
+        amount=6;
     }
+
 
     game.growth += amount;
 
-    if(game.growth>100){
+
+    if(
+        game.growth>100
+    ){
         game.growth=100;
     }
+
 
     game.stage =
         Math.min(
             3,
-            Math.floor(game.growth/25)
+            Math.floor(
+                game.growth/25
+            )
         );
 
-    growPotato.classList.remove("jump");
+
+    growPotato
+        .classList
+        .remove("jump");
+
 
     void growPotato.offsetWidth;
 
-    growPotato.classList.add("jump");
+
+    growPotato
+        .classList
+        .add("jump");
+
 
     updateGrow();
 
-    if(game.growth>=100){
+
+    if(
+        game.growth>=100 &&
+        !creatingPotato
+    ){
+
+        creatingPotato=true;
+
 
         setTimeout(
-            createRandomPotato,
-            600
+            ()=>{
+
+                createRandomPotato();
+
+                creatingPotato=false;
+
+            },
+            650
         );
 
     }
@@ -1502,19 +2883,24 @@ function updateGrow(){
     growthBar.style.width =
         game.growth+"%";
 
+
     growthText.textContent =
         game.growth+" / 100%";
+
 
     stageText.textContent =
         STAGES[game.stage];
 
+
     growPotato.textContent =
         STAGE_EMOJIS[game.stage];
 
+
     document
-    .getElementById("growDay")
-    .textContent =
+        .getElementById("growDay")
+        .textContent =
         game.day+"일차";
+
 }
 
 
@@ -1527,11 +2913,14 @@ function createRandomPotato(){
     const potato =
         POTATOES[
             Math.floor(
-                Math.random()*POTATOES.length
+                Math.random() *
+                POTATOES.length
             )
         ];
 
-    game.potato = potato;
+
+    game.potato=potato;
+
 
     if(
         !game.discovered.includes(
@@ -1545,19 +2934,38 @@ function createRandomPotato(){
 
     }
 
+
     game.stats={
+
         hunger:50,
+
         water:50,
+
         love:50,
+
         energy:100
+
     };
+
 
     updatePet();
 
-    showScreen(petScreen);
+
+    showScreen(
+        petScreen
+    );
+
+
+    showEmotion(
+        emotionEmoji(
+            potato
+        )
+    );
+
 
     speak(
-        "태어났다! "+potato.name+
+        "태어났다! "+
+        potato.name+
         "이다! 🥔"
     );
 
@@ -1565,273 +2973,8 @@ function createRandomPotato(){
 
 
 /* ==================================================
-   감자 터치
+   키우기 감정
 ================================================== */
-
-const petImage =
-    document.getElementById("petImage");
-
-let petTouchStart=0;
-let petTouchMoved=false;
-
-petImage.addEventListener(
-    "pointerdown",
-    e=>{
-
-        e.preventDefault();
-
-        petTouchStart =
-            Date.now();
-
-        petTouchMoved=false;
-
-    },
-    {passive:false}
-);
-
-petImage.addEventListener(
-    "pointermove",
-    e=>{
-
-        e.preventDefault();
-
-        if(
-            Math.abs(
-                e.clientX-
-                petImage.getBoundingClientRect().left
-            )>5
-        ){
-            petTouchMoved=true;
-        }
-
-    },
-    {passive:false}
-);
-
-petImage.addEventListener(
-    "pointerup",
-    e=>{
-
-        e.preventDefault();
-
-        if(
-            !petTouchMoved &&
-            Date.now()-petTouchStart<800
-        ){
-
-            touchPet();
-
-        }
-
-    },
-    {passive:false}
-);
-
-
-function touchPet(){
-
-    if(!game.potato) return;
-
-    petImage.classList.remove(
-        "petJump"
-    );
-
-    void petImage.offsetWidth;
-
-    petImage.classList.add(
-        "petJump"
-    );
-
-    const lines =
-        game.potato.lines.pet;
-
-    speak(
-        random(lines)
-        +" "+emotionEmoji(game.potato)
-    );
-
-    game.stats.love =
-        clamp(
-            game.stats.love+5
-        );
-
-    updateStats();
-
-}
-
-
-/* ==================================================
-   키우기 상호작용
-================================================== */
-
-function petAction(type){
-
-    if(!game.potato) return;
-
-    const p=game.potato;
-
-    if(type==="food"){
-
-        game.stats.hunger =
-            clamp(
-                game.stats.hunger+20
-            );
-
-        speak(
-            random(p.lines.food)
-            +" "+emotionEmoji(p)
-        );
-
-        jumpPet();
-
-    }
-
-
-    if(type==="water"){
-
-        game.stats.water =
-            clamp(
-                game.stats.water+20
-            );
-
-        speak(
-            random(p.lines.water)
-            +" "+emotionEmoji(p)
-        );
-
-        jumpPet();
-
-    }
-
-
-    if(type==="pet"){
-
-        game.stats.love =
-            clamp(
-                game.stats.love+15
-            );
-
-        speak(
-            random(p.lines.pet)
-            +" "+emotionEmoji(p)
-        );
-
-        jumpPet();
-
-    }
-
-
-    if(type==="walk"){
-
-        game.stats.energy =
-            clamp(
-                game.stats.energy-15
-            );
-
-        speak(
-            random(p.lines.walk)
-            +" "+emotionEmoji(p)
-        );
-
-        runPet();
-
-    }
-
-    updateStats();
-
-}
-
-
-/* ==================================================
-   모션
-================================================== */
-
-function jumpPet(){
-
-    petImage.classList.remove(
-        "petJump"
-    );
-
-    void petImage.offsetWidth;
-
-    petImage.classList.add(
-        "petJump"
-    );
-
-}
-
-
-function runPet(){
-
-    petImage.classList.add(
-        "running"
-    );
-
-    const stage =
-        document.getElementById("petStage");
-
-    let direction=1;
-    let x=50;
-
-    const timer =
-        setInterval(()=>{
-
-            x += direction*2;
-
-            if(x>78){
-                direction=-1;
-            }
-
-            if(x<22){
-                direction=1;
-            }
-
-            petImage.style.left =
-                x+"%";
-
-        },50);
-
-    setTimeout(()=>{
-
-        clearInterval(timer);
-
-        petImage.classList.remove(
-            "running"
-        );
-
-        petImage.style.left="50%";
-
-    },3000);
-
-}
-
-
-/* ==================================================
-   메시지
-================================================== */
-
-function speak(text){
-
-    const box =
-        document.getElementById(
-            "petMessage"
-        );
-
-    box.textContent=text;
-
-    box.animate(
-        [
-            {transform:"translateX(-50%) scale(.9)"},
-            {transform:"translateX(-50%) scale(1.03)"},
-            {transform:"translateX(-50%) scale(1)"}
-        ],
-        {
-            duration:300
-        }
-    );
-
-}
-
 
 function emotionEmoji(p){
 
@@ -1852,6 +2995,669 @@ function emotionEmoji(p){
 }
 
 
+function emotionSet(p){
+
+    if(p.style==="social")
+        return [
+            "💕",
+            "❤️",
+            "🥰",
+            "✨"
+        ];
+
+    if(p.style==="leader")
+        return [
+            "🫡",
+            "⭐",
+            "📣",
+            "💪"
+        ];
+
+    if(p.style==="toxic")
+        return [
+            "☠️",
+            "💢",
+            "😑",
+            "⚠️"
+        ];
+
+    if(p.style==="violent")
+        return [
+            "💢",
+            "👊",
+            "🔥",
+            "😤"
+        ];
+
+    return [
+        "🥺",
+        "😳",
+        "💭",
+        "😊"
+    ];
+
+}
+
+
+function showEmotion(
+    emoji
+){
+
+    const stage =
+        document.getElementById(
+            "petStage"
+        );
+
+
+    const old =
+        stage.querySelector(
+            ".petEmotion"
+        );
+
+
+    if(old){
+        old.remove();
+    }
+
+
+    const el =
+        document.createElement(
+            "div"
+        );
+
+
+    el.className=
+        "petEmotion";
+
+
+    el.textContent=
+        emoji;
+
+
+    stage.appendChild(
+        el
+    );
+
+
+    setTimeout(
+        ()=>{
+            el.remove();
+        },
+        1000
+    );
+
+}
+
+
+/* ==================================================
+   감자 터치
+================================================== */
+
+let petTouchStart=0;
+
+let petTouchStartX=0;
+
+let petTouchStartY=0;
+
+let petTouchMoved=false;
+
+
+petImage.addEventListener(
+    "pointerdown",
+    e=>{
+
+        e.preventDefault();
+
+
+        petTouchStart=
+            performance.now();
+
+
+        petTouchStartX=
+            e.clientX;
+
+
+        petTouchStartY=
+            e.clientY;
+
+
+        petTouchMoved=false;
+
+
+        try{
+
+            petImage.setPointerCapture(
+                e.pointerId
+            );
+
+        }catch(err){}
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+petImage.addEventListener(
+    "pointermove",
+    e=>{
+
+        e.preventDefault();
+
+
+        const dx =
+            e.clientX -
+            petTouchStartX;
+
+
+        const dy =
+            e.clientY -
+            petTouchStartY;
+
+
+        if(
+            Math.hypot(
+                dx,
+                dy
+            ) > 8
+        ){
+
+            petTouchMoved=true;
+
+        }
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+petImage.addEventListener(
+    "pointerup",
+    e=>{
+
+        e.preventDefault();
+
+
+        const elapsed =
+            performance.now() -
+            petTouchStart;
+
+
+        if(
+            !petTouchMoved &&
+            elapsed < 800
+        ){
+
+            touchPet();
+
+        }
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+function touchPet(){
+
+    if(!game.potato){
+        return;
+    }
+
+
+    const p =
+        game.potato;
+
+
+    petImage
+        .classList
+        .remove(
+            "breathe",
+            "petJump",
+            "tilt"
+        );
+
+
+    void petImage.offsetWidth;
+
+
+    /*
+       랜덤하게 점프 또는 갸웃
+    */
+
+    if(
+        Math.random()<.55
+    ){
+
+        petImage
+            .classList
+            .add(
+                "petJump"
+            );
+
+    }
+
+    else{
+
+        petImage
+            .classList
+            .add(
+                "tilt"
+            );
+
+    }
+
+
+    petImage
+        .classList
+        .add(
+            "breathe"
+        );
+
+
+    const emotions =
+        emotionSet(p);
+
+
+    showEmotion(
+        random(emotions)
+    );
+
+
+    speak(
+        random(
+            p.lines.pet
+        )+
+        " "+
+        random(emotions)
+    );
+
+
+    game.stats.love=
+        clamp(
+            game.stats.love+5
+        );
+
+
+    updateStats();
+
+}
+
+
+/* ==================================================
+   키우기 상호작용
+================================================== */
+
+function petAction(type){
+
+    if(!game.potato){
+        return;
+    }
+
+
+    const p=
+        game.potato;
+
+
+    if(type==="food"){
+
+        game.stats.hunger=
+            clamp(
+                game.stats.hunger+20
+            );
+
+
+        speak(
+            random(
+                p.lines.food
+            )+
+            " "+
+            random(
+                emotionSet(p)
+            )
+        );
+
+
+        showEmotion(
+            random(
+                emotionSet(p)
+            )
+        );
+
+
+        jumpPet();
+
+    }
+
+
+    if(type==="water"){
+
+        game.stats.water=
+            clamp(
+                game.stats.water+20
+            );
+
+
+        speak(
+            random(
+                p.lines.water
+            )+
+            " "+
+            random(
+                emotionSet(p)
+            )
+        );
+
+
+        showEmotion(
+            random([
+                "💧",
+                "😊",
+                "✨"
+            ])
+        );
+
+
+        jumpPet();
+
+    }
+
+
+    if(type==="pet"){
+
+        game.stats.love=
+            clamp(
+                game.stats.love+15
+            );
+
+
+        speak(
+            random(
+                p.lines.pet
+            )+
+            " "+
+            random(
+                emotionSet(p)
+            )
+        );
+
+
+        showEmotion(
+            random(
+                emotionSet(p)
+            )
+        );
+
+
+        if(
+            Math.random()<.5
+        ){
+
+            jumpPet();
+
+        }
+
+        else{
+
+            tiltPet();
+
+        }
+
+    }
+
+
+    if(type==="walk"){
+
+        game.stats.energy=
+            clamp(
+                game.stats.energy-15
+            );
+
+
+        speak(
+            random(
+                p.lines.walk
+            )+
+            " "+
+            random([
+                "🏃",
+                "💨",
+                "😆"
+            ])
+        );
+
+
+        showEmotion("🏃");
+
+
+        runPet();
+
+    }
+
+
+    updateStats();
+
+}
+
+
+/* ==================================================
+   키우기 모션
+================================================== */
+
+function jumpPet(){
+
+    petImage
+        .classList
+        .remove(
+            "petJump",
+            "tilt"
+        );
+
+
+    void petImage.offsetWidth;
+
+
+    petImage
+        .classList
+        .add(
+            "petJump"
+        );
+
+}
+
+
+function tiltPet(){
+
+    petImage
+        .classList
+        .remove(
+            "petJump",
+            "tilt"
+        );
+
+
+    void petImage.offsetWidth;
+
+
+    petImage
+        .classList
+        .add(
+            "tilt"
+        );
+
+}
+
+
+/* ==================================================
+   산책
+   requestAnimationFrame 사용
+================================================== */
+
+let petWalkFrame=null;
+
+let petWalkStart=0;
+
+let petWalkX=50;
+
+let petWalkDirection=1;
+
+
+function runPet(){
+
+    if(
+        petWalkFrame
+    ){
+
+        cancelAnimationFrame(
+            petWalkFrame
+        );
+
+    }
+
+
+    petImage
+        .classList
+        .add(
+            "running"
+        );
+
+
+    petWalkStart=
+        performance.now();
+
+
+    petWalkX=50;
+
+    petWalkDirection=
+        Math.random()<.5
+        ? -1
+        : 1;
+
+
+    function walkFrame(now){
+
+        const elapsed =
+            now -
+            petWalkStart;
+
+
+        if(
+            elapsed>=3000
+        ){
+
+            petImage
+                .classList
+                .remove(
+                    "running"
+                );
+
+
+            petImage.style.left=
+                "50%";
+
+
+            petWalkFrame=null;
+
+
+            return;
+
+        }
+
+
+        petWalkX +=
+            petWalkDirection *
+            .12;
+
+
+        if(
+            petWalkX>=78
+        ){
+
+            petWalkX=78;
+
+            petWalkDirection=-1;
+
+        }
+
+
+        if(
+            petWalkX<=22
+        ){
+
+            petWalkX=22;
+
+            petWalkDirection=1;
+
+        }
+
+
+        petImage.style.left=
+            petWalkX+"%";
+
+
+        petWalkFrame=
+            requestAnimationFrame(
+                walkFrame
+            );
+
+    }
+
+
+    petWalkFrame=
+        requestAnimationFrame(
+            walkFrame
+        );
+
+}
+
+
+/* ==================================================
+   메시지
+================================================== */
+
+function speak(text){
+
+    const box =
+        document.getElementById(
+            "petMessage"
+        );
+
+
+    box.textContent=
+        text;
+
+
+    box.animate(
+        [
+
+            {
+                transform:
+                    "translateX(-50%) scale(.9)"
+            },
+
+            {
+                transform:
+                    "translateX(-50%) scale(1.03)"
+            },
+
+            {
+                transform:
+                    "translateX(-50%) scale(1)"
+            }
+
+        ],
+        {
+            duration:300
+        }
+    );
+
+}
+
+
 /* ==================================================
    스탯
 ================================================== */
@@ -1860,7 +3666,10 @@ function clamp(value){
 
     return Math.max(
         0,
-        Math.min(100,value)
+        Math.min(
+            100,
+            value
+        )
     );
 
 }
@@ -1868,49 +3677,72 @@ function clamp(value){
 
 function updateStats(){
 
-    document.getElementById("hunger")
-    .textContent =
-        game.stats.hunger+" / 100";
+    document
+        .getElementById("hunger")
+        .textContent =
+        game.stats.hunger+
+        " / 100";
 
-    document.getElementById("water")
-    .textContent =
-        game.stats.water+" / 100";
 
-    document.getElementById("love")
-    .textContent =
-        game.stats.love+" / 100";
+    document
+        .getElementById("water")
+        .textContent =
+        game.stats.water+
+        " / 100";
 
-    document.getElementById("energy")
-    .textContent =
-        game.stats.energy+" / 100";
+
+    document
+        .getElementById("love")
+        .textContent =
+        game.stats.love+
+        " / 100";
+
+
+    document
+        .getElementById("energy")
+        .textContent =
+        game.stats.energy+
+        " / 100";
 
 }
 
 
+/* ==================================================
+   감자 정보
+================================================== */
+
 function updatePet(){
 
-    if(!game.potato) return;
+    if(!game.potato){
+        return;
+    }
 
-    document.getElementById(
-        "petImage"
-    ).src =
+
+    petImage.src=
         game.potato.image;
 
-    document.getElementById(
-        "potatoName"
-    ).textContent =
+
+    document
+        .getElementById("potatoName")
+        .textContent =
         game.potato.name;
 
-    document.getElementById(
-        "potatoPersonality"
-    ).textContent =
+
+    document
+        .getElementById(
+            "potatoPersonality"
+        )
+        .textContent =
         "성격 • "+
         game.potato.personality;
 
-    document.getElementById(
-        "petDay"
-    ).textContent =
-        game.day+"일차";
+
+    document
+        .getElementById("petDay")
+        .textContent =
+        game.day+
+        "일차";
+
 
     updateStats();
 
@@ -1923,36 +3755,52 @@ function updatePet(){
 
 function harvest(){
 
-    if(!game.potato) return;
+    if(!game.potato){
+        return;
+    }
 
-    const old =
+
+    const old=
         game.potato;
+
 
     speak(
         old.name+
         "을 수확했습니다! 🥔"
     );
 
-    setTimeout(()=>{
 
-        game.potato=null;
+    showEmotion("🥔");
 
-        game.growth=0;
-        game.stage=0;
 
-        game.day++;
+    setTimeout(
+        ()=>{
 
-        updateGrow();
+            game.potato=null;
 
-        showScreen(growScreen);
+            game.growth=0;
 
-    },900);
+            game.stage=0;
+
+            game.day++;
+
+
+            updateGrow();
+
+
+            showScreen(
+                growScreen
+            );
+
+        },
+        900
+    );
 
 }
 
 
 /* ==================================================
-   감자사전
+   사전 열기
 ================================================== */
 
 function openDictionary(){
@@ -1970,61 +3818,141 @@ function backToPet(){
 
     updatePet();
 
-    showScreen(petScreen);
+    showScreen(
+        petScreen
+    );
 
 }
 
 
+/* ==================================================
+   도감
+================================================== */
+
 function renderDictionary(){
 
-    document.getElementById(
-        "dictionaryDay"
-    ).textContent =
-        game.day+"일차";
+    document
+        .getElementById(
+            "dictionaryDay"
+        )
+        .textContent =
+        game.day+
+        "일차";
 
-    document.getElementById(
-        "discoveredCount"
-    ).textContent =
+
+    document
+        .getElementById(
+            "discoveredCount"
+        )
+        .textContent =
         "발견한 감자 "+
         game.discovered.length+
         "/5";
+
 
     const list =
         document.getElementById(
             "potatoList"
         );
 
+
     list.innerHTML="";
 
-    POTATOES.forEach(p=>{
 
-        const found =
-            game.discovered.includes(
-                p.name
+    POTATOES.forEach(
+        p=>{
+
+            const found =
+                game.discovered.includes(
+                    p.name
+                );
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className=
+                "bookItem";
+
+
+            if(found){
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+                img.src=
+                    p.image;
+
+                img.alt=
+                    p.name;
+
+                img.draggable=false;
+
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+                name.textContent=
+                    p.name;
+
+
+                div.appendChild(
+                    img
+                );
+
+                div.appendChild(
+                    name
+                );
+
+            }
+
+            else{
+
+                const q =
+                    document.createElement(
+                        "div"
+                    );
+
+                q.style.fontSize=
+                    "35px";
+
+                q.textContent="?";
+
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+                name.textContent=
+                    "미발견";
+
+
+                div.appendChild(
+                    q
+                );
+
+                div.appendChild(
+                    name
+                );
+
+            }
+
+
+            list.appendChild(
+                div
             );
 
-        const div =
-            document.createElement(
-                "div"
-            );
+        }
+    );
 
-        div.className="bookItem";
-
-        div.innerHTML = found
-            ?
-            `
-            <img src="${p.image}">
-            <div>${p.name}</div>
-            `
-            :
-            `
-            <div style="font-size:35px">?</div>
-            <div>미발견</div>
-            `;
-
-        list.appendChild(div);
-
-    });
 
     renderTama();
 
@@ -2032,10 +3960,8 @@ function renderDictionary(){
 
 
 /* ==================================================
-   다마고치 상태
+   다마고치 생성
 ================================================== */
-
-let tamaTimer=null;
 
 function renderTama(){
 
@@ -2044,112 +3970,242 @@ function renderTama(){
             "tama"
         );
 
+
     tama
-    .querySelectorAll(
-        ".tamaPotato,.tamaSpeech,.snack,.sleepOverlay"
-    )
-    .forEach(el=>el.remove());
+        .querySelectorAll(
+            ".tamaPotato,"+
+            ".tamaSpeech,"+
+            ".tamaEmotion,"+
+            ".snack,"+
+            ".sleepOverlay"
+        )
+        .forEach(
+            el=>el.remove()
+        );
 
-    if(!game.tamaEnabled){
 
-        game.tamaEnabled={};
-
-    }
+    /*
+       발견한 감자 중
+       ON인 감자만 등장
+    */
 
     const selected =
         game.discovered.filter(
-            name =>
-                game.tamaEnabled[name] !== false
+            name=>
+                game.tamaEnabled[name]
+                !==false
         );
+
 
     game.tamaPotatoes =
         selected.map(
-            name=>{
+            (name,index)=>{
 
-                const p =
+                const p=
                     POTATOES.find(
-                        x=>x.name===name
+                        x=>
+                            x.name===name
                     );
 
+
+                /*
+                   서로 겹치지 않도록
+                   처음 위치 분산
+                */
+
+                const angle =
+                    (Math.PI*2/
+                    Math.max(
+                        selected.length,
+                        1
+                    ))*
+                    index;
+
+
+                const radius=20;
+
+
                 return {
+
+                    id:
+                        "tama_"+index+
+                        "_"+
+                        Date.now(),
 
                     data:p,
 
                     x:
-                        20+
-                        Math.random()*60,
+                        50+
+                        Math.cos(angle)*
+                        radius,
 
                     y:
-                        55+
-                        Math.random()*30,
+                        63+
+                        Math.sin(angle)*
+                        18,
+
+                    vx:0,
+
+                    vy:0,
 
                     targetX:null,
+
                     targetY:null,
 
-                    sleeping:false
+                    speed:
+                        5+
+                        Math.random()*3,
+
+                    maxSpeed:
+                        5+
+                        Math.random()*3,
+
+                    acceleration:0.08,
+
+                    friction:0.92,
+
+                    direction:
+                        Math.random()<.5
+                        ? -1
+                        : 1,
+
+                    nextDecision:
+                        0,
+
+                    nextSpeech:
+                        0,
+
+                    nextInteraction:
+                        0,
+
+                    dragging:false,
+
+                    sleeping:false,
+
+                    stunnedUntil:0,
+
+                    reactionUntil:0,
+
+                    snackTarget:null
 
                 };
 
             }
         );
 
+
     game.tamaPotatoes.forEach(
         createTamaPotato
     );
 
+
+    /*
+       생성 직후 약간씩 움직이도록
+       첫 목표 지정
+    */
+
+    game.tamaPotatoes.forEach(
+        obj=>{
+            chooseInitialTarget(
+                obj
+            );
+        }
+    );
+
 }
 
 
 /* ==================================================
-   다마고치 감자 생성
+   다마고치 감자 DOM
 ================================================== */
 
 function createTamaPotato(obj){
 
-    const img =
+    /*
+       중요:
+       IMG가 아니라 DIV.
+       background-image로 감자 표시.
+    */
+
+    const el =
         document.createElement(
-            "img"
+            "div"
         );
 
-    img.className="tamaPotato";
 
-    img.src =
-        obj.data.image;
+    el.className=
+        "tamaPotato";
 
-    img.alt =
+
+    el.dataset.name=
         obj.data.name;
 
-    img.draggable=false;
 
-    img.style.left =
+    el.dataset.id=
+        obj.id;
+
+
+    el.setAttribute(
+        "role",
+        "img"
+    );
+
+
+    el.setAttribute(
+        "aria-label",
+        obj.data.name
+    );
+
+
+    el.style.backgroundImage=
+        `url("${obj.data.image}")`;
+
+
+    el.style.left=
         obj.x+"%";
 
-    img.style.top =
+
+    el.style.top=
         obj.y+"%";
 
-    img.dataset.name =
-        obj.data.name;
 
-    img.addEventListener(
-        "contextmenu",
-        e=>e.preventDefault()
+    el.draggable=false;
+
+
+    const tama =
+        document.getElementById(
+            "tama"
+        );
+
+
+    tama.appendChild(
+        el
     );
+
 
     enableLongPress(
-        img,
+        el,
         obj
     );
-
-    document
-    .getElementById("tama")
-    .appendChild(img);
 
 }
 
 
 /* ==================================================
-   복붙 / 선택 방지
+   브라우저 기본 기능 완전 차단
 ================================================== */
+
+function stopBrowserInteraction(e){
+
+    e.preventDefault();
+
+}
+
+
+/*
+   다마고치 영역에서
+   우클릭 / 길게 누르기 메뉴 제거
+*/
 
 document.addEventListener(
     "contextmenu",
@@ -2164,8 +4220,16 @@ document.addEventListener(
 
         }
 
+    },
+    {
+        passive:false
     }
 );
+
+
+/*
+   텍스트 선택 제거
+*/
 
 document.addEventListener(
     "selectstart",
@@ -2180,866 +4244,40 @@ document.addEventListener(
 
         }
 
+    },
+    {
+        passive:false
     }
 );
 
 
-/* ==================================================
-   꾹 누르기
-================================================== */
-
-function enableLongPress(element,obj){
-
-    let startX=0;
-    let startY=0;
-
-    let dragging=false;
-
-    element.addEventListener(
-        "pointerdown",
-        e=>{
-
-            e.preventDefault();
-
-            startX=e.clientX;
-            startY=e.clientY;
-
-            dragging=true;
-
-            element.setPointerCapture(
-                e.pointerId
-            );
-
-            element.classList.add(
-                "selected"
-            );
-
-        },
-        {passive:false}
-    );
-
-
-    element.addEventListener(
-        "pointermove",
-        e=>{
-
-            if(!dragging) return;
-
-            e.preventDefault();
-
-            const tama =
-                document.getElementById(
-                    "tama"
-                );
-
-            const rect =
-                tama.getBoundingClientRect();
-
-            let x =
-                ((e.clientX-rect.left)/
-                rect.width)*100;
-
-            let y =
-                ((e.clientY-rect.top)/
-                rect.height)*100;
-
-            x=clamp(x);
-            y=clamp(y);
-
-            obj.x=x;
-            obj.y=y;
-
-            element.style.left =
-                x+"%";
-
-            element.style.top =
-                y+"%";
-
-        },
-        {passive:false}
-    );
-
-
-    element.addEventListener(
-        "pointerup",
-        e=>{
-
-            if(!dragging) return;
-
-            e.preventDefault();
-
-            dragging=false;
-
-            element.classList.remove(
-                "selected"
-            );
-
-            tamaReaction(
-                obj
-            );
-
-        },
-        {passive:false}
-    );
-
-}
-
-
-/* ==================================================
-   다마고치 반응
-================================================== */
-
-function tamaReaction(obj){
-
-    const p=obj.data;
-
-    let text="";
-
-    if(p.style==="social"){
-
-        text=random([
-            "다들 좋아! ❤️",
-            "친구다!💕",
-            "같이 놀자!"
-        ]);
-
-    }
-
-    else if(p.style==="leader"){
-
-        text=random([
-            "전원 집합!",
-            "저능감자는 어디 있지?",
-            "대장이 지켜본다."
-        ]);
-
-        makeLeaderFollow(
-            obj
-        );
-
-    }
-
-    else if(p.style==="toxic"){
-
-        text=random([
-            "가까이 오지 마.",
-            "혼자 있고 싶어.",
-            "건드리지 마."
-        ]);
-
-        toxicAttack(
-            obj
-        );
-
-    }
-
-    else if(p.style==="violent"){
-
-        text=random([
-            "누구냐!",
-            "한판 붙자!",
-            "독감자는 어디 있어?"
-        ]);
-
-    }
-
-    else{
-
-        text=random([
-            "어... 안녕?",
-            "헤헤...",
-            "나 여기 있어."
-        ]);
-
-    }
-
-    showTamaSpeech(
-        obj,
-        text
-    );
-
-}
-
-
-/* ==================================================
-   대장감자 추종
-================================================== */
-
-function makeLeaderFollow(leader){
-
-    if(
-        leader.data.style!=="leader"
-    ){
-        return;
-    }
-
-    game.tamaPotatoes.forEach(
-        other=>{
-
-            if(
-                other===leader ||
-                other.data.style==="toxic"
-            ){
-                return;
-            }
-
-            other.targetX =
-                leader.x+
-                (Math.random()*12-6);
-
-            other.targetY =
-                leader.y+
-                (Math.random()*12-6);
-
-            moveTamaObject(
-                other
-            );
-
-        }
-    );
-
-}
-
-
-/* ==================================================
-   독감자 스턴
-================================================== */
-
-function toxicAttack(toxic){
-
-    game.tamaPotatoes.forEach(
-        other=>{
-
-            if(
-                other===toxic
-            ){
-                return;
-            }
-
-            if(
-                other.data.style==="violent"
-            ){
-                return;
-            }
-
-            const distance =
-                Math.hypot(
-                    toxic.x-other.x,
-                    toxic.y-other.y
-                );
-
-            if(
-                distance<15 &&
-                Math.random()<.1
-            ){
-
-                stunTama(
-                    other
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-function stunTama(obj){
-
-    const tama =
-        document.getElementById(
-            "tama"
-        );
-
-    const el =
-        [...tama.querySelectorAll(
-            ".tamaPotato"
-        )]
-        .find(
-            x=>
-                x.dataset.name===
-                obj.data.name
-        );
-
-    if(!el) return;
-
-    el.style.filter=
-        "grayscale(1)";
-
-    showTamaSpeech(
-        obj,
-        "어... 움직일 수 없어... 😵"
-    );
-
-    setTimeout(()=>{
-
-        el.style.filter="";
-
-    },3000);
-
-}
-
-
-/* ==================================================
-   감자 이동
-================================================== */
-
-function moveTamaObject(obj){
-
-    if(
-        obj.data.style==="toxic"
-    ){
-        return;
-    }
-
-    const tama =
-        document.getElementById(
-            "tama"
-        );
-
-    const el =
-        [...tama.querySelectorAll(
-            ".tamaPotato"
-        )]
-        .find(
-            x=>
-                x.dataset.name===
-                obj.data.name
-        );
-
-    if(!el) return;
-
-    if(
-        obj.targetX===null
-    ){
-        return;
-    }
-
-    obj.x =
-        clamp(obj.targetX);
-
-    obj.y =
-        clamp(obj.targetY);
-
-    el.style.left =
-        obj.x+"%";
-
-    el.style.top =
-        obj.y+"%";
-
-}
-
-
-/* ==================================================
-   다마고치 자동 AI
-================================================== */
-
-setInterval(()=>{
-
-    if(
-        dictionaryScreen.classList.contains(
-            "hidden"
-        )
-    ){
-        return;
-    }
-
-    if(
-        game.tamaPotatoes.length===0
-    ){
-        return;
-    }
-
-    game.tamaPotatoes.forEach(
-        obj=>{
-
-            if(obj.sleeping){
-                return;
-            }
-
-            const p=obj.data;
-
-            if(
-                p.style==="social"
-            ){
-
-                const other =
-                    random(
-                        game.tamaPotatoes
-                    );
-
-                if(
-                    other &&
-                    other!==obj
-                ){
-
-                    obj.targetX =
-                        other.x;
-
-                    obj.targetY =
-                        other.y;
-
-                    moveTamaObject(obj);
-
-                    if(
-                        Math.random()<.5
-                    ){
-
-                        showTamaSpeech(
-                            obj,
-                            "좋아! ❤️"
-                        );
-
-                    }
-
-                }
-
-            }
-
-            else if(
-                p.style==="leader"
-            ){
-
-                makeLeaderFollow(
-                    obj
-                );
-
-            }
-
-            else if(
-                p.style==="violent"
-            ){
-
-                const toxic =
-                    game.tamaPotatoes.find(
-                        x=>
-                            x.data.style===
-                            "toxic"
-                    );
-
-                if(toxic){
-
-                    obj.targetX =
-                        toxic.x;
-
-                    obj.targetY =
-                        toxic.y;
-
-                    moveTamaObject(
-                        obj
-                    );
-
-                    showTamaSpeech(
-                        obj,
-                        "독감자! ❤️"
-                    );
-
-                }
-
-                else{
-
-                    showTamaSpeech(
-                        obj,
-                        "누구랑 싸우지?"
-                    );
-
-                }
-
-            }
-
-            else if(
-                p.style==="dummy"
-            ){
-
-                const leader =
-                    game.tamaPotatoes.find(
-                        x=>
-                            x.data.style===
-                            "leader"
-                    );
-
-                if(leader){
-
-                    obj.targetX =
-                        leader.x;
-
-                    obj.targetY =
-                        leader.y;
-
-                    moveTamaObject(
-                        obj
-                    );
-
-                }
-
-            }
-
-            else if(
-                p.style==="toxic"
-            ){
-
-                /* 독감자는 혼자 있으려고 한다 */
-
-                obj.targetX =
-                    20+
-                    Math.random()*60;
-
-                obj.targetY =
-                    55+
-                    Math.random()*25;
-
-                moveTamaObject(
-                    obj
-                );
-
-                toxicAttack(
-                    obj
-                );
-
-            }
-
-        }
-    );
-
-},3500);
-
-
-/* ==================================================
-   다마고치 말풍선
-================================================== */
-
-function showTamaSpeech(
-    obj,
-    text
-){
-
-    const tama =
-        document.getElementById(
-            "tama"
-        );
-
-    const speech =
-        document.createElement(
-            "div"
-        );
-
-    speech.className=
-        "tamaSpeech";
-
-    speech.textContent=
-        text;
-
-    speech.style.left=
-        obj.x+"%";
-
-    speech.style.top=
-        (obj.y-10)+"%";
-
-    tama.appendChild(
-        speech
-    );
-
-    setTimeout(
-        ()=>{
-            speech.remove();
-        },
-        1200
-    );
-
-}
-
-
-/* ==================================================
-   다마고치 쓰다듬기
-================================================== */
-
-function tamaPet(){
-
-    if(
-        game.tamaPotatoes.length===0
-    ){
-        return;
-    }
-
-    const obj =
-        random(
-            game.tamaPotatoes
-        );
-
-    const tama =
-        document.getElementById(
-            "tama"
-        );
-
-    const el =
-        [...tama.querySelectorAll(
-            ".tamaPotato"
-        )]
-        .find(
-            x=>
-                x.dataset.name===
-                obj.data.name
-        );
-
-    if(el){
-
-        el.animate(
-            [
-                {
-                    transform:
-                    "translate(-50%,-50%) rotate(0)"
-                },
-                {
-                    transform:
-                    "translate(-50%,-70%) rotate(15deg)"
-                },
-                {
-                    transform:
-                    "translate(-50%,-50%) rotate(-15deg)"
-                },
-                {
-                    transform:
-                    "translate(-50%,-50%) rotate(0)"
-                }
-            ],
-            {
-                duration:700
-            }
-        );
-
-    }
-
-    tamaReaction(
-        obj
-    );
-
-}
-
-
-/* ==================================================
-   간식
-================================================== */
-
-function tamaSnack(){
-
-    if(
-        game.tamaPotatoes.length===0
-    ){
-        return;
-    }
-
-    const tama =
-        document.getElementById(
-            "tama"
-        );
-
-    const snackEmojis=[
-        "🍬",
-        "🍪",
-        "🍭",
-        "🍫",
-        "🍩"
-    ];
-
-    const snacks=[];
-
-    for(
-        let i=0;
-        i<8;
-        i++
-    ){
-
-        const snack =
-            document.createElement(
-                "div"
-            );
-
-        snack.className="snack";
-
-        snack.textContent=
-            random(snackEmojis);
-
-        snack.style.left=
-            (10+
-            Math.random()*80)+"%";
-
-        tama.appendChild(
-            snack
-        );
-
-        snacks.push(
-            snack
-        );
-
-    }
-
-    game.tamaPotatoes.forEach(
-        obj=>{
-
-            showTamaSpeech(
-                obj,
-                obj.data.style==="dummy"
-                ?
-                "먹어도 돼?"
-                :
-                "간식이다! 🍬"
-            );
-
-        }
-    );
-
-    setTimeout(()=>{
-
-        snacks.forEach(
-            x=>x.remove()
-        );
-
-    },2300);
-
-}
-
-
-/* ==================================================
-   잠자기
-================================================== */
-
-function tamaSleep(){
-
-    if(game.sleeping){
-        return;
-    }
-
-    game.sleeping=true;
-
-    const tama =
-        document.getElementById(
-            "tama"
-        );
-
-    const overlay =
-        document.createElement(
-            "div"
-        );
-
-    overlay.className=
-        "sleepOverlay";
-
-    overlay.textContent=
-        "🌙 Zzz...";
-
-    tama.appendChild(
-        overlay
-    );
-
-    game.tamaPotatoes.forEach(
-        obj=>{
-
-            obj.sleeping=true;
-
-            showTamaSpeech(
-                obj,
-                "Zzz... 😴"
-            );
-
-        }
-    );
-
-    setTimeout(()=>{
-
-        overlay.remove();
-
-        game.tamaPotatoes.forEach(
-            obj=>{
-                obj.sleeping=false;
-            }
-        );
-
-        game.sleeping=false;
-
-    },10000);
-
-}
-
-
-/* ==================================================
-   ON / OFF
-================================================== */
-
-function toggleDictionary(){
-
-    const button =
-        document.getElementById(
-            "toggleButton"
-        );
-
-    const enabled =
-        button.classList.contains(
-            "on"
-        );
-
-    button.classList.toggle(
-        "on"
-    );
-
-    const selected =
-        game.discovered;
-
-    selected.forEach(
-        name=>{
-            game.tamaEnabled[name]=
-                !enabled;
-        }
-    );
-
-    renderTama();
-
-}
-
-
-/* ==================================================
-   유틸
-================================================== */
-
-function random(array){
-
-    if(
-        !array ||
-        array.length===0
-    ){
-        return "";
-    }
-
-    return array[
-        Math.floor(
-            Math.random()*array.length
-        )
-    ];
-
-}
-
-
-/* ==================================================
-   브라우저 기본 드래그 차단
-================================================== */
+/*
+   이미지 드래그 제거
+*/
 
 document.addEventListener(
     "dragstart",
     e=>{
 
         if(
-            e.target.tagName==="IMG"
+            e.target.tagName==="IMG" ||
+            e.target.closest(".tamaPotato")
         ){
+
             e.preventDefault();
+
         }
 
+    },
+    {
+        passive:false
     }
 );
 
 
-/* ==================================================
-   모바일 롱프레스 메뉴 차단
-================================================== */
+/*
+   iPhone 길게 누르기 차단.
+*/
 
 document.addEventListener(
     "touchstart",
@@ -3065,11 +4303,3286 @@ document.addEventListener(
 );
 
 
+/*
+   감자 영역에서 터치 스크롤 자체가
+   발생하지 않게 함.
+*/
+
+document
+    .getElementById("tama")
+    .addEventListener(
+        "touchmove",
+        e=>{
+
+            if(
+                e.target.closest(
+                    ".tamaPotato"
+                )
+            ){
+
+                e.preventDefault();
+
+            }
+
+        },
+        {
+            passive:false
+        }
+    );
+
+
+/* ==================================================
+   롱프레스 드래그
+================================================== */
+
+function enableLongPress(
+    element,
+    obj
+){
+
+    let pointerId=null;
+
+    let startX=0;
+
+    let startY=0;
+
+    let lastX=0;
+
+    let lastY=0;
+
+    let moved=false;
+
+    let longPressTimer=null;
+
+    let dragging=false;
+
+
+    element.addEventListener(
+        "pointerdown",
+        e=>{
+
+            e.preventDefault();
+
+            pointerId=
+                e.pointerId;
+
+
+            startX=
+                e.clientX;
+
+            startY=
+                e.clientY;
+
+
+            lastX=
+                e.clientX;
+
+            lastY=
+                e.clientY;
+
+
+            moved=false;
+
+            dragging=false;
+
+
+            try{
+
+                element.setPointerCapture(
+                    pointerId
+                );
+
+            }catch(err){}
+
+
+            /*
+               0.45초 이상 누르면
+               확실한 롱프레스.
+            */
+
+            longPressTimer=
+                setTimeout(
+                    ()=>{
+
+                        dragging=true;
+
+                        obj.dragging=true;
+
+                        obj.vx=0;
+                        obj.vy=0;
+
+                        element.classList.add(
+                            "selected"
+                        );
+
+                    },
+                    450
+                );
+
+        },
+        {
+            passive:false
+        }
+    );
+
+
+    element.addEventListener(
+        "pointermove",
+        e=>{
+
+            if(
+                e.pointerId!==pointerId
+            ){
+
+                return;
+
+            }
+
+
+            e.preventDefault();
+
+
+            lastX=
+                e.clientX;
+
+            lastY=
+                e.clientY;
+
+
+            const dx=
+                e.clientX-startX;
+
+            const dy=
+                e.clientY-startY;
+
+
+            if(
+                Math.hypot(
+                    dx,
+                    dy
+                )>8
+            ){
+
+                moved=true;
+
+            }
+
+
+            /*
+               롱프레스가 시작되기 전에
+               움직이면 드래그하지 않음.
+            */
+
+            if(
+                !dragging
+            ){
+
+                if(moved){
+
+                    clearTimeout(
+                        longPressTimer
+                    );
+
+                }
+
+                return;
+
+            }
+
+
+            const tama=
+                document.getElementById(
+                    "tama"
+                );
+
+
+            const rect=
+                tama.getBoundingClientRect();
+
+
+            let x=
+                ((e.clientX-
+                rect.left)/
+                rect.width)*
+                100;
+
+
+            let y=
+                ((e.clientY-
+                rect.top)/
+                rect.height)*
+                100;
+
+
+            /*
+               감자가 방 밖으로
+               빠져나가지 않도록 함.
+            */
+
+            x=
+                clampTamaX(x);
+
+            y=
+                clampTamaY(y);
+
+
+            obj.x=x;
+
+            obj.y=y;
+
+            obj.vx=0;
+
+            obj.vy=0;
+
+
+            updateTamaDOM(
+                obj
+            );
+
+
+            /*
+               대장감자를 끌고 있으면
+               다른 감자가 따라오는 효과.
+            */
+
+            if(
+                obj.data.style==="leader"
+            ){
+
+                game.tamaPotatoes
+                    .forEach(
+                        other=>{
+
+                            if(
+                                other===obj ||
+                                other.dragging ||
+                                other.sleeping
+                            ){
+
+                                return;
+
+                            }
+
+
+                            const distance=
+                                distanceBetween(
+                                    obj,
+                                    other
+                                );
+
+
+                            if(
+                                distance<45
+                            ){
+
+                                other.targetX=
+                                    obj.x+
+                                    randomRange(
+                                        -7,
+                                        7
+                                    );
+
+                                other.targetY=
+                                    obj.y+
+                                    randomRange(
+                                        -7,
+                                        7
+                                    );
+
+                            }
+
+                        }
+                    );
+
+            }
+
+        },
+        {
+            passive:false
+        }
+    );
+
+
+    function finishPointer(e){
+
+        if(
+            e.pointerId!==pointerId
+        ){
+
+            return;
+
+        }
+
+
+        e.preventDefault();
+
+
+        clearTimeout(
+            longPressTimer
+        );
+
+
+        /*
+           실제 드래그였다면
+           드래그 종료.
+        */
+
+        if(
+            dragging
+        ){
+
+            obj.dragging=false;
+
+            dragging=false;
+
+            element.classList.remove(
+                "selected"
+            );
+
+
+            tamaReaction(
+                obj
+            );
+
+        }
+
+        else if(
+            !moved
+        ){
+
+            /*
+               짧게 터치한 경우
+               감자 반응.
+            */
+
+            tamaReaction(
+                obj
+            );
+
+        }
+
+
+        pointerId=null;
+
+    }
+
+
+    element.addEventListener(
+        "pointerup",
+        finishPointer,
+        {
+            passive:false
+        }
+    );
+
+
+    element.addEventListener(
+        "pointercancel",
+        finishPointer,
+        {
+            passive:false
+        }
+    );
+
+}
+
+
+/* ==================================================
+   다마고치 좌표
+================================================== */
+
+function clampTamaX(x){
+
+    /*
+       감자 크기를 고려해서
+       7~93% 정도까지만 허용.
+    */
+
+    return Math.max(
+        8,
+        Math.min(
+            92,
+            x
+        )
+    );
+
+}
+
+
+function clampTamaY(y){
+
+    return Math.max(
+        48,
+        Math.min(
+            90,
+            y
+        )
+    );
+
+}
+
+
+function distanceBetween(a,b){
+
+    return Math.hypot(
+        a.x-b.x,
+        a.y-b.y
+    );
+
+}
+
+
+function randomRange(
+    min,
+    max
+){
+
+    return min+
+        Math.random()*
+        (max-min);
+
+}
+
+
+/* ==================================================
+   다마고치 DOM 갱신
+================================================== */
+
+function getTamaElement(obj){
+
+    const tama=
+        document.getElementById(
+            "tama"
+        );
+
+
+    return [
+        ...tama.querySelectorAll(
+            ".tamaPotato"
+        )
+    ].find(
+        el=>
+            el.dataset.id===
+            obj.id
+    );
+
+}
+
+
+function updateTamaDOM(obj){
+
+    const el=
+        getTamaElement(
+            obj
+        );
+
+
+    if(!el){
+        return;
+    }
+
+
+    el.style.left=
+        obj.x+"%";
+
+
+    el.style.top=
+        obj.y+"%";
+
+}
+
+
+/* ==================================================
+   최초 목표
+================================================== */
+
+function chooseInitialTarget(
+    obj
+){
+
+    if(
+        obj.data.style==="toxic"
+    ){
+
+        obj.targetX=
+            randomRange(
+                18,
+                82
+            );
+
+        obj.targetY=
+            randomRange(
+                58,
+                85
+            );
+
+        return;
+
+    }
+
+
+    obj.targetX=
+        randomRange(
+            18,
+            82
+        );
+
+
+    obj.targetY=
+        randomRange(
+            58,
+            85
+        );
+
+}
+
+
+/* ==================================================
+   AI 목표 선택
+================================================== */
+
+function chooseAITarget(
+    obj,
+    now
+){
+
+    if(
+        obj.sleeping ||
+        obj.dragging ||
+        now < obj.stunnedUntil
+    ){
+
+        return;
+
+    }
+
+
+    const p=
+        obj.data;
+
+
+    /*
+       ==============================================
+       꾼감자
+       ==============================================
+       모두에게 친근하게 접근.
+    */
+
+    if(
+        p.style==="social"
+    ){
+
+        const others=
+            game.tamaPotatoes.filter(
+                x=>
+                    x!==obj &&
+                    !x.sleeping
+            );
+
+
+        if(
+            others.length>0
+        ){
+
+            const other=
+                random(
+                    others
+                );
+
+
+            obj.targetX=
+                other.x+
+                randomRange(
+                    -5,
+                    5
+                );
+
+
+            obj.targetY=
+                other.y+
+                randomRange(
+                    -5,
+                    5
+                );
+
+        }
+
+        else{
+
+            chooseInitialTarget(
+                obj
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+       ==============================================
+       대장감자
+       ==============================================
+       혼자 목적지를 정해서 움직이고
+       다른 감자에게 따라오게 함.
+    */
+
+    if(
+        p.style==="leader"
+    ){
+
+        obj.targetX=
+            randomRange(
+                18,
+                82
+            );
+
+        obj.targetY=
+            randomRange(
+                58,
+                82
+            );
+
+
+        /*
+           대장을 따라오게 만들기.
+           독감자는 제외.
+        */
+
+        game.tamaPotatoes
+            .forEach(
+                other=>{
+
+                    if(
+                        other===obj ||
+                        other.data.style==="toxic" ||
+                        other.dragging ||
+                        other.sleeping
+                    ){
+
+                        return;
+
+                    }
+
+
+                    other.targetX=
+                        obj.x+
+                        randomRange(
+                            -12,
+                            12
+                        );
+
+
+                    other.targetY=
+                        obj.y+
+                        randomRange(
+                            -8,
+                            8
+                        );
+
+                }
+            );
+
+
+        return;
+
+    }
+
+
+    /*
+       ==============================================
+       독감자
+       ==============================================
+       다른 감자와 거리를 유지.
+    */
+
+    if(
+        p.style==="toxic"
+    ){
+
+        let nearest=null;
+
+        let nearestDistance=
+            Infinity;
+
+
+        game.tamaPotatoes
+            .forEach(
+                other=>{
+
+                    if(
+                        other===obj
+                    ){
+                        return;
+                    }
+
+
+                    const d=
+                        distanceBetween(
+                            obj,
+                            other
+                        );
+
+
+                    if(
+                        d<
+                        nearestDistance
+                    ){
+
+                        nearestDistance=d;
+
+                        nearest=other;
+
+                    }
+
+                }
+            );
+
+
+        if(
+            nearest &&
+            nearestDistance<30
+        ){
+
+            /*
+               가까우면 반대 방향으로 도망.
+            */
+
+            let dx=
+                obj.x-
+                nearest.x;
+
+            let dy=
+                obj.y-
+                nearest.y;
+
+
+            const length=
+                Math.hypot(
+                    dx,
+                    dy
+                )||1;
+
+
+            dx/=length;
+
+            dy/=length;
+
+
+            obj.targetX=
+                clampTamaX(
+                    obj.x+
+                    dx*30
+                );
+
+
+            obj.targetY=
+                clampTamaY(
+                    obj.y+
+                    dy*22
+                );
+
+        }
+
+        else{
+
+            /*
+               평소에는 외진 곳으로 이동.
+            */
+
+            obj.targetX=
+                randomRange(
+                    15,
+                    85
+                );
+
+            obj.targetY=
+                randomRange(
+                    58,
+                    86
+                );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+       ==============================================
+       폭력감자
+       ==============================================
+       독감자를 적극적으로 추적.
+       독감자를 가장 좋아한다는 이상한 감자.
+    */
+
+    if(
+        p.style==="violent"
+    ){
+
+        const toxic=
+            game.tamaPotatoes.find(
+                x=>
+                    x.data.style==="toxic"
+            );
+
+
+        if(toxic){
+
+            /*
+               너무 바짝 붙지는 않고
+               주변을 맴돌도록 함.
+            */
+
+            const angle=
+                Math.random()*
+                Math.PI*2;
+
+
+            const radius=
+                9+
+                Math.random()*8;
+
+
+            obj.targetX=
+                clampTamaX(
+                    toxic.x+
+                    Math.cos(angle)*
+                    radius
+                );
+
+
+            obj.targetY=
+                clampTamaY(
+                    toxic.y+
+                    Math.sin(angle)*
+                    radius
+                );
+
+        }
+
+        else{
+
+            chooseInitialTarget(
+                obj
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+       ==============================================
+       저능감자
+       ==============================================
+       대장감자를 느릿하게 따라감.
+    */
+
+    if(
+        p.style==="dummy"
+    ){
+
+        const leader=
+            game.tamaPotatoes.find(
+                x=>
+                    x.data.style==="leader"
+            );
+
+
+        if(
+            leader
+        ){
+
+            obj.targetX=
+                leader.x+
+                randomRange(
+                    -10,
+                    10
+                );
+
+
+            obj.targetY=
+                leader.y+
+                randomRange(
+                    -8,
+                    8
+                );
+
+        }
+
+        else{
+
+            chooseInitialTarget(
+                obj
+            );
+
+        }
+
+    }
+
+}
+
+
+/* ==================================================
+   부드러운 이동
+   핵심 requestAnimationFrame
+================================================== */
+
+function updateTamaMovement(
+    obj,
+    delta,
+    now
+){
+
+    if(
+        obj.sleeping ||
+        obj.dragging
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        now<
+        obj.stunnedUntil
+    ){
+
+        obj.vx*=0.85;
+
+        obj.vy*=0.85;
+
+        return;
+
+    }
+
+
+    /*
+       목표가 없으면 새로 만듦.
+    */
+
+    if(
+        obj.targetX===null ||
+        obj.targetY===null
+    ){
+
+        chooseAITarget(
+            obj,
+            now
+        );
+
+    }
+
+
+    if(
+        obj.targetX===null
+    ){
+
+        return;
+
+    }
+
+
+    let dx=
+        obj.targetX-
+        obj.x;
+
+
+    let dy=
+        obj.targetY-
+        obj.y;
+
+
+    const distance=
+        Math.hypot(
+            dx,
+            dy
+        );
+
+
+    /*
+       목표에 가까워지면
+       바로 다음 목표를 잡지 않고
+       살짝 감속해서 자연스럽게 멈춤.
+    */
+
+    if(
+        distance<2.2
+    ){
+
+        obj.vx*=0.88;
+
+        obj.vy*=0.88;
+
+
+        if(
+            Math.abs(obj.vx)+
+            Math.abs(obj.vy)
+            <.03
+        ){
+
+            obj.vx=0;
+
+            obj.vy=0;
+
+        }
+
+
+        return;
+
+    }
+
+
+    dx/=distance;
+
+    dy/=distance;
+
+
+    /*
+       감자마다 이동속도 차이.
+    */
+
+    let speed=
+        obj.maxSpeed;
+
+
+    /*
+       저능감자는 느림.
+    */
+
+    if(
+        obj.data.style==="dummy"
+    ){
+
+        speed*=0.55;
+
+    }
+
+
+    /*
+       독감자는 빠르게 도망.
+    */
+
+    if(
+        obj.data.style==="toxic"
+    ){
+
+        speed*=1.15;
+
+    }
+
+
+    /*
+       폭력감자는 추적할 때 빠름.
+    */
+
+    if(
+        obj.data.style==="violent"
+    ){
+
+        speed*=1.15;
+
+    }
+
+
+    /*
+       가속.
+       순간이동이 아니라
+       속도가 서서히 붙음.
+    */
+
+    const acceleration=
+        0.07;
+
+
+    obj.vx +=
+        dx*
+        acceleration;
+
+
+    obj.vy +=
+        dy*
+        acceleration;
+
+
+    /*
+       최대 속도 제한.
+    */
+
+    const velocity=
+        Math.hypot(
+            obj.vx,
+            obj.vy
+        );
+
+
+    if(
+        velocity>speed
+    ){
+
+        obj.vx=
+            obj.vx/
+            velocity*
+            speed;
+
+
+        obj.vy=
+            obj.vy/
+            velocity*
+            speed;
+
+    }
+
+
+    /*
+       프레임 시간에 따른 이동.
+       60fps와 120fps에서도
+       속도가 지나치게 달라지지 않음.
+    */
+
+    const frameScale=
+        Math.min(
+            delta/16.6667,
+            2
+        );
+
+
+    obj.x +=
+        obj.vx*
+        frameScale;
+
+
+    obj.y +=
+        obj.vy*
+        frameScale;
+
+
+    /*
+       방 밖 방지.
+    */
+
+    if(
+        obj.x<8
+    ){
+
+        obj.x=8;
+
+        obj.vx=
+            Math.abs(obj.vx);
+
+    }
+
+
+    if(
+        obj.x>92
+    ){
+
+        obj.x=92;
+
+        obj.vx=
+            -Math.abs(obj.vx);
+
+    }
+
+
+    if(
+        obj.y<48
+    ){
+
+        obj.y=48;
+
+        obj.vy=
+            Math.abs(obj.vy);
+
+    }
+
+
+    if(
+        obj.y>90
+    ){
+
+        obj.y=90;
+
+        obj.vy=
+            -Math.abs(obj.vy);
+
+    }
+
+
+    /*
+       이동 여부에 따라
+       걷기 애니메이션.
+    */
+
+    const el=
+        getTamaElement(
+            obj
+        );
+
+
+    if(el){
+
+        if(
+            velocity>.35
+        ){
+
+            el.classList.add(
+                "walking"
+            );
+
+        }
+
+        else{
+
+            el.classList.remove(
+                "walking"
+            );
+
+        }
+
+    }
+
+
+    updateTamaDOM(
+        obj
+    );
+
+}
+
+
+/* ==================================================
+   감자끼리 상호작용
+================================================== */
+
+function processPotatoInteractions(
+    now
+){
+
+    const list=
+        game.tamaPotatoes;
+
+
+    for(
+        let i=0;
+        i<list.length;
+        i++
+    ){
+
+        const a=list[i];
+
+
+        for(
+            let j=i+1;
+            j<list.length;
+            j++
+        ){
+
+            const b=list[j];
+
+
+            if(
+                a.sleeping ||
+                b.sleeping ||
+                a.dragging ||
+                b.dragging
+            ){
+
+                continue;
+
+            }
+
+
+            const distance=
+                distanceBetween(
+                    a,
+                    b
+                );
+
+
+            /*
+               일정 거리 안으로 들어오면
+               서로 반응.
+            */
+
+            if(
+                distance<11 &&
+                now>
+                Math.min(
+                    a.nextInteraction,
+                    b.nextInteraction
+                )
+            ){
+
+                handlePotatoMeeting(
+                    a,
+                    b,
+                    now
+                );
+
+            }
+
+
+            /*
+               물리적으로 너무 겹치지 않게
+               서로 밀어냄.
+            */
+
+            if(
+                distance<7 &&
+                distance>0
+            ){
+
+                let dx=
+                    a.x-b.x;
+
+                let dy=
+                    a.y-b.y;
+
+
+                const len=
+                    Math.hypot(
+                        dx,
+                        dy
+                    )||1;
+
+
+                dx/=len;
+
+                dy/=len;
+
+
+                const push=
+                    (7-distance)*
+                    .04;
+
+
+                if(
+                    !a.dragging
+                ){
+
+                    a.vx+=
+                        dx*push;
+
+                    a.vy+=
+                        dy*push;
+
+                }
+
+
+                if(
+                    !b.dragging
+                ){
+
+                    b.vx-=
+                        dx*push;
+
+                    b.vy-=
+                        dy*push;
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* ==================================================
+   감자 만남
+================================================== */
+
+function handlePotatoMeeting(
+    a,
+    b,
+    now
+){
+
+    a.nextInteraction=
+        now+
+        1800+
+        Math.random()*2500;
+
+
+    b.nextInteraction=
+        now+
+        1800+
+        Math.random()*2500;
+
+
+    /*
+       독감자 접촉.
+    */
+
+    if(
+        a.data.style==="toxic" ||
+        b.data.style==="toxic"
+    ){
+
+        const toxic=
+            a.data.style==="toxic"
+            ? a
+            : b;
+
+
+        const target=
+            toxic===a
+            ? b
+            : a;
+
+
+        /*
+           폭력감자는 독감자 스턴 면역.
+        */
+
+        if(
+            target.data.style!=="violent" &&
+            Math.random()<.10
+        ){
+
+            stunTama(
+                target
+            );
+
+
+            showTamaSpeech(
+                toxic,
+                "건드리지 마. ☠️"
+            );
+
+
+            showTamaSpeech(
+                target,
+                "어... 움직일 수 없어... 😵"
+            );
+
+
+            showTamaEmotion(
+                toxic,
+                "☠️"
+            );
+
+
+            return;
+
+        }
+
+
+        /*
+           폭력감자와 독감자는
+           서로 이상하게 친함.
+        */
+
+        if(
+            target.data.style==="violent"
+        ){
+
+            showTamaSpeech(
+                target,
+                "독감자! ❤️"
+            );
+
+
+            showTamaSpeech(
+                toxic,
+                "...또 너냐."
+            );
+
+
+            showTamaEmotion(
+                target,
+                "❤️"
+            );
+
+
+            showTamaEmotion(
+                toxic,
+                "😑"
+            );
+
+
+            return;
+
+        }
+
+    }
+
+
+    /*
+       꾼감자는 누구에게나 하트.
+    */
+
+    if(
+        a.data.style==="social"
+    ){
+
+        showTamaSpeech(
+            a,
+            "친구다! ❤️"
+        );
+
+
+        showTamaEmotion(
+            a,
+            "💕"
+        );
+
+    }
+
+
+    if(
+        b.data.style==="social"
+    ){
+
+        showTamaSpeech(
+            b,
+            "같이 놀자! ❤️"
+        );
+
+
+        showTamaEmotion(
+            b,
+            "💕"
+        );
+
+    }
+
+
+    /*
+       대장 -> 저능감자
+    */
+
+    if(
+        a.data.style==="leader" &&
+        b.data.style==="dummy"
+    ){
+
+        showTamaSpeech(
+            a,
+            "따라와라."
+        );
+
+
+        showTamaSpeech(
+            b,
+            "응... 어디 가?"
+        );
+
+
+        showTamaEmotion(
+            a,
+            "🫡"
+        );
+
+    }
+
+
+    if(
+        b.data.style==="leader" &&
+        a.data.style==="dummy"
+    ){
+
+        showTamaSpeech(
+            b,
+            "따라와라."
+        );
+
+
+        showTamaSpeech(
+            a,
+            "응... 어디 가?"
+        );
+
+
+        showTamaEmotion(
+            b,
+            "🫡"
+        );
+
+    }
+
+
+    /*
+       저능감자는 모두에게 사랑받음.
+       독감자 제외.
+    */
+
+    if(
+        a.data.style==="dummy" &&
+        b.data.style!=="toxic"
+    ){
+
+        showTamaEmotion(
+            b,
+            b.data.style==="violent"
+            ? "❤️"
+            : "💕"
+        );
+
+    }
+
+
+    if(
+        b.data.style==="dummy" &&
+        a.data.style!=="toxic"
+    ){
+
+        showTamaEmotion(
+            a,
+            a.data.style==="violent"
+            ? "❤️"
+            : "💕"
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   스턴
+================================================== */
+
+function stunTama(
+    obj
+){
+
+    const now=
+        performance.now();
+
+
+    obj.stunnedUntil=
+        now+
+        3000;
+
+
+    obj.vx=0;
+
+    obj.vy=0;
+
+
+    const el=
+        getTamaElement(
+            obj
+        );
+
+
+    if(!el){
+        return;
+    }
+
+
+    el.classList.add(
+        "stunned"
+    );
+
+
+    showTamaEmotion(
+        obj,
+        "😵"
+    );
+
+
+    setTimeout(
+        ()=>{
+
+            el.classList.remove(
+                "stunned"
+            );
+
+        },
+        3000
+    );
+
+}
+
+
+/* ==================================================
+   다마고치 반응
+================================================== */
+
+function tamaReaction(
+    obj
+){
+
+    if(
+        !obj ||
+        obj.sleeping
+    ){
+
+        return;
+
+    }
+
+
+    const p=
+        obj.data;
+
+
+    const el=
+        getTamaElement(
+            obj
+        );
+
+
+    if(el){
+
+        el.classList.remove(
+            "reactionJump",
+            "reactionTilt"
+        );
+
+
+        void el.offsetWidth;
+
+
+        if(
+            Math.random()<.55
+        ){
+
+            el.classList.add(
+                "reactionJump"
+            );
+
+        }
+
+        else{
+
+            el.classList.add(
+                "reactionTilt"
+            );
+
+        }
+
+    }
+
+
+    if(
+        p.style==="social"
+    ){
+
+        showTamaSpeech(
+            obj,
+            random([
+                "다들 좋아! ❤️",
+                "친구다!💕",
+                "같이 놀자!",
+                "하트 받아! ❤️"
+            ])
+        );
+
+
+        showTamaEmotion(
+            obj,
+            random([
+                "💕",
+                "❤️",
+                "🥰"
+            ])
+        );
+
+    }
+
+
+    else if(
+        p.style==="leader"
+    ){
+
+        showTamaSpeech(
+            obj,
+            random([
+                "전원 집합!",
+                "저능감자는 어디 있지?",
+                "대장이 지켜본다.",
+                "따라와라!"
+            ])
+        );
+
+
+        showTamaEmotion(
+            obj,
+            "🫡"
+        );
+
+
+        makeLeaderFollow(
+            obj
+        );
+
+    }
+
+
+    else if(
+        p.style==="toxic"
+    ){
+
+        showTamaSpeech(
+            obj,
+            random([
+                "가까이 오지 마.",
+                "혼자 있고 싶어.",
+                "건드리지 마.",
+                "저리 가."
+            ])
+        );
+
+
+        showTamaEmotion(
+            obj,
+            random([
+                "☠️",
+                "💢",
+                "😑"
+            ])
+        );
+
+
+        /*
+           독감자 터치 시 주변 감자
+           스턴 판정
+        */
+
+        toxicAttack(
+            obj
+        );
+
+    }
+
+
+    else if(
+        p.style==="violent"
+    ){
+
+        showTamaSpeech(
+            obj,
+            random([
+                "누구냐!",
+                "한판 붙자!",
+                "독감자는 어디 있어?",
+                "싸우자!"
+            ])
+        );
+
+
+        showTamaEmotion(
+            obj,
+            random([
+                "💢",
+                "👊",
+                "🔥"
+            ])
+        );
+
+    }
+
+
+    else{
+
+        showTamaSpeech(
+            obj,
+            random([
+                "어... 안녕?",
+                "헤헤...",
+                "나 여기 있어.",
+                "뭐 하고 있어?"
+            ])
+        );
+
+
+        showTamaEmotion(
+            obj,
+            random([
+                "🥺",
+                "😊",
+                "💭"
+            ])
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   대장 따라가기
+================================================== */
+
+function makeLeaderFollow(
+    leader
+){
+
+    if(
+        !leader ||
+        leader.data.style!=="leader"
+    ){
+
+        return;
+
+    }
+
+
+    game.tamaPotatoes
+        .forEach(
+            other=>{
+
+                if(
+                    other===leader ||
+                    other.data.style==="toxic" ||
+                    other.dragging ||
+                    other.sleeping
+                ){
+
+                    return;
+
+                }
+
+
+                other.targetX=
+                    leader.x+
+                    randomRange(
+                        -10,
+                        10
+                    );
+
+
+                other.targetY=
+                    leader.y+
+                    randomRange(
+                        -7,
+                        7
+                    );
+
+            }
+        );
+
+}
+
+
+/* ==================================================
+   독감자 공격
+================================================== */
+
+function toxicAttack(
+    toxic
+){
+
+    game.tamaPotatoes
+        .forEach(
+            other=>{
+
+                if(
+                    other===toxic ||
+                    other.data.style==="violent"
+                ){
+
+                    return;
+
+                }
+
+
+                const distance=
+                    distanceBetween(
+                        toxic,
+                        other
+                    );
+
+
+                if(
+                    distance<15 &&
+                    Math.random()<.10
+                ){
+
+                    stunTama(
+                        other
+                    );
+
+                }
+
+            }
+        );
+
+}
+
+
+/* ==================================================
+   말풍선
+================================================== */
+
+function showTamaSpeech(
+    obj,
+    text
+){
+
+    const tama=
+        document.getElementById(
+            "tama"
+        );
+
+
+    const speech=
+        document.createElement(
+            "div"
+        );
+
+
+    speech.className=
+        "tamaSpeech";
+
+
+    speech.textContent=
+        text;
+
+
+    speech.style.left=
+        obj.x+"%";
+
+
+    speech.style.top=
+        (obj.y-11)+"%";
+
+
+    tama.appendChild(
+        speech
+    );
+
+
+    setTimeout(
+        ()=>{
+
+            if(
+                speech.parentNode
+            ){
+
+                speech.remove();
+
+            }
+
+        },
+        1300
+    );
+
+}
+
+
+/* ==================================================
+   감정 이모티콘
+================================================== */
+
+function showTamaEmotion(
+    obj,
+    emoji
+){
+
+    const tama=
+        document.getElementById(
+            "tama"
+        );
+
+
+    const emotion=
+        document.createElement(
+            "div"
+        );
+
+
+    emotion.className=
+        "tamaEmotion";
+
+
+    emotion.textContent=
+        emoji;
+
+
+    emotion.style.left=
+        obj.x+"%";
+
+
+    emotion.style.top=
+        (obj.y-2)+"%";
+
+
+    tama.appendChild(
+        emotion
+    );
+
+
+    setTimeout(
+        ()=>{
+
+            emotion.remove();
+
+        },
+        1000
+    );
+
+}
+
+
+/* ==================================================
+   다마고치 RAF 루프
+================================================== */
+
+function startTamaLoop(){
+
+    stopTamaLoop();
+
+
+    game.lastTamaTime=
+        performance.now();
+
+
+    function frame(now){
+
+        /*
+           사전 화면이 아니면
+           루프 종료.
+        */
+
+        if(
+            dictionaryScreen.classList.contains(
+                "hidden"
+            )
+        ){
+
+            game.tamaAnimationId=null;
+
+            return;
+
+        }
+
+
+        const delta=
+            Math.min(
+                now-
+                game.lastTamaTime,
+                40
+            );
+
+
+        game.lastTamaTime=
+            now;
+
+
+        /*
+           AI 판단은 매 프레임이 아니라
+           감자별 nextDecision으로 조절.
+           실제 이동은 매 프레임.
+        */
+
+        game.tamaPotatoes
+            .forEach(
+                obj=>{
+
+                    if(
+                        obj.sleeping ||
+                        obj.dragging
+                    ){
+
+                        return;
+
+                    }
+
+
+                    if(
+                        now>
+                        obj.nextDecision
+                    ){
+
+                        chooseAITarget(
+                            obj,
+                            now
+                        );
+
+
+                        /*
+                           감자별로
+                           판단 주기를 다르게 함.
+                        */
+
+                        obj.nextDecision=
+                            now+
+                            1200+
+                            Math.random()*1800;
+
+                    }
+
+
+                    updateTamaMovement(
+                        obj,
+                        delta,
+                        now
+                    );
+
+
+                    /*
+                       일정 확률로 혼잣말.
+                    */
+
+                    if(
+                        now>
+                        obj.nextSpeech
+                    ){
+
+                        if(
+                            Math.random()<.12
+                        ){
+
+                            autonomousSpeech(
+                                obj
+                            );
+
+                        }
+
+
+                        obj.nextSpeech=
+                            now+
+                            5000+
+                            Math.random()*7000;
+
+                    }
+
+                }
+            );
+
+
+        /*
+           감자끼리 충돌 / 상호작용.
+        */
+
+        processPotatoInteractions(
+            now
+        );
+
+
+        /*
+           다시 다음 프레임.
+        */
+
+        game.tamaAnimationId=
+            requestAnimationFrame(
+                frame
+            );
+
+    }
+
+
+    game.tamaAnimationId=
+        requestAnimationFrame(
+            frame
+        );
+
+}
+
+
+function stopTamaLoop(){
+
+    if(
+        game.tamaAnimationId
+    ){
+
+        cancelAnimationFrame(
+            game.tamaAnimationId
+        );
+
+        game.tamaAnimationId=null;
+
+    }
+
+}
+
+
+/* ==================================================
+   감자 혼잣말
+================================================== */
+
+function autonomousSpeech(
+    obj
+){
+
+    if(
+        obj.sleeping ||
+        obj.dragging
+    ){
+
+        return;
+
+    }
+
+
+    const p=
+        obj.data;
+
+
+    if(
+        p.style==="social"
+    ){
+
+        showTamaSpeech(
+            obj,
+            random([
+                "친구 어디 있어? ❤️",
+                "같이 놀자!",
+                "기분 좋다!",
+                "하트!"
+            ])
+        );
+
+
+        showTamaEmotion(
+            obj,
+            random([
+                "💕",
+                "❤️"
+            ])
+        );
+
+    }
+
+
+    else if(
+        p.style==="leader"
+    ){
+
+        showTamaSpeech(
+            obj,
+            random([
+                "전원 확인.",
+                "모두 잘 있군.",
+                "대열 유지.",
+                "흠. 좋다."
+            ])
+        );
+
+
+        showTamaEmotion(
+            obj,
+            "🫡"
+        );
+
+    }
+
+
+    else if(
+        p.style==="toxic"
+    ){
+
+        showTamaSpeech(
+            obj,
+            random([
+                "조용하네.",
+                "혼자가 편해.",
+                "가까이 오지 마.",
+                "...",
+                "흠."
+            ])
+        );
+
+
+        showTamaEmotion(
+            obj,
+            random([
+                "☠️",
+                "😑"
+            ])
+        );
+
+    }
+
+
+    else if(
+        p.style==="violent"
+    ){
+
+        const toxic=
+            game.tamaPotatoes.find(
+                x=>
+                    x.data.style==="toxic"
+            );
+
+
+        if(toxic){
+
+            showTamaSpeech(
+                obj,
+                "독감자! ❤️"
+            );
+
+
+            showTamaEmotion(
+                obj,
+                "❤️"
+            );
+
+        }
+
+        else{
+
+            showTamaSpeech(
+                obj,
+                random([
+                    "심심한데.",
+                    "누구 없냐!",
+                    "싸우고 싶다!",
+                    "흠..."
+                ])
+            );
+
+
+            showTamaEmotion(
+                obj,
+                "💢"
+            );
+
+        }
+
+    }
+
+
+    else{
+
+        showTamaSpeech(
+            obj,
+            random([
+                "음...",
+                "뭐 하지?",
+                "배고픈가?",
+                "저기 뭐야?",
+                "헤헤..."
+            ])
+        );
+
+
+        showTamaEmotion(
+            obj,
+            random([
+                "🥺",
+                "💭",
+                "😊"
+            ])
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   다마고치 쓰다듬기
+================================================== */
+
+function tamaPet(){
+
+    if(
+        game.tamaPotatoes.length===0
+    ){
+
+        return;
+
+    }
+
+
+    const candidates=
+        game.tamaPotatoes.filter(
+            obj=>
+                !obj.sleeping &&
+                !obj.dragging
+        );
+
+
+    if(
+        candidates.length===0
+    ){
+
+        return;
+
+    }
+
+
+    const obj=
+        random(
+            candidates
+        );
+
+
+    tamaReaction(
+        obj
+    );
+
+}
+
+
+/* ==================================================
+   간식
+================================================== */
+
+function tamaSnack(){
+
+    if(
+        game.tamaPotatoes.length===0
+    ){
+
+        return;
+
+    }
+
+
+    const tama=
+        document.getElementById(
+            "tama"
+        );
+
+
+    const snackEmojis=[
+
+        "🍬",
+        "🍪",
+        "🍭",
+        "🍫",
+        "🍩"
+
+    ];
+
+
+    const snacks=[];
+
+
+    for(
+        let i=0;
+        i<8;
+        i++
+    ){
+
+        const snack=
+            document.createElement(
+                "div"
+            );
+
+
+        snack.className=
+            "snack";
+
+
+        snack.textContent=
+            random(
+                snackEmojis
+            );
+
+
+        snack.style.left=
+            (10+
+            Math.random()*80)+
+            "%";
+
+
+        tama.appendChild(
+            snack
+        );
+
+
+        snacks.push(
+            snack
+        );
+
+    }
+
+
+    game.tamaPotatoes
+        .forEach(
+            obj=>{
+
+                if(
+                    obj.sleeping
+                ){
+
+                    return;
+
+                }
+
+
+                showTamaSpeech(
+                    obj,
+                    obj.data.style==="dummy"
+                    ?
+                    "먹어도 돼?"
+                    :
+                    "간식이다! 🍬"
+                );
+
+
+                showTamaEmotion(
+                    obj,
+                    "🍬"
+                );
+
+            }
+        );
+
+
+    /*
+       간식이 바닥에 떨어진 뒤
+       감자들이 간식 위치로 이동.
+    */
+
+    setTimeout(
+        ()=>{
+
+            snacks.forEach(
+                snack=>{
+
+                    if(
+                        !snack.parentNode
+                    ){
+
+                        return;
+
+                    }
+
+
+                    const rect=
+                        snack.getBoundingClientRect();
+
+
+                    const tamaRect=
+                        tama.getBoundingClientRect();
+
+
+                    const snackX=
+                        (
+                            (
+                                rect.left+
+                                rect.width/2-
+                                tamaRect.left
+                            )/
+                            tamaRect.width
+                        )*
+                        100;
+
+
+                    const snackY=
+                        (
+                            (
+                                rect.top+
+                                rect.height/2-
+                                tamaRect.top
+                            )/
+                            tamaRect.height
+                        )*
+                        100;
+
+
+                    /*
+                       가까운 감자에게
+                       간식 먹으러 가라고 함.
+                    */
+
+                    let nearest=null;
+
+                    let nearestDistance=
+                        Infinity;
+
+
+                    game.tamaPotatoes
+                        .forEach(
+                            obj=>{
+
+                                if(
+                                    obj.sleeping
+                                ){
+
+                                    return;
+
+                                }
+
+
+                                const d=
+                                    Math.hypot(
+                                        obj.x-snackX,
+                                        obj.y-snackY
+                                    );
+
+
+                                if(
+                                    d<
+                                    nearestDistance
+                                ){
+
+                                    nearestDistance=d;
+
+                                    nearest=obj;
+
+                                }
+
+                            }
+                        );
+
+
+                    if(
+                        nearest
+                    ){
+
+                        nearest.snackTarget={
+                            x:snackX,
+                            y:snackY,
+                            element:snack
+                        };
+
+
+                        nearest.targetX=
+                            snackX;
+
+
+                        nearest.targetY=
+                            snackY;
+
+                    }
+
+                }
+            );
+
+        },
+        2200
+    );
+
+
+    /*
+       7초 뒤 남은 간식 제거.
+    */
+
+    setTimeout(
+        ()=>{
+
+            snacks.forEach(
+                x=>{
+
+                    if(
+                        x.parentNode
+                    ){
+
+                        x.remove();
+
+                    }
+
+                }
+            );
+
+        },
+        7000
+    );
+
+}
+
+
+/* ==================================================
+   간식 먹기 처리
+================================================== */
+
+function processSnackEating(
+    obj
+){
+
+    if(
+        !obj.snackTarget ||
+        obj.sleeping
+    ){
+
+        return;
+
+    }
+
+
+    const target=
+        obj.snackTarget;
+
+
+    const distance=
+        Math.hypot(
+            obj.x-target.x,
+            obj.y-target.y
+        );
+
+
+    if(
+        distance<7
+    ){
+
+        if(
+            target.element &&
+            target.element.parentNode
+        ){
+
+            target.element.remove();
+
+        }
+
+
+        obj.snackTarget=null;
+
+        obj.targetX=null;
+
+        obj.targetY=null;
+
+
+        showTamaSpeech(
+            obj,
+            obj.data.style==="dummy"
+            ?
+            "냠냠..."
+            :
+            "맛있다! 🍬"
+        );
+
+
+        showTamaEmotion(
+            obj,
+            obj.data.style==="toxic"
+            ?
+            "😐"
+            :
+            "😋"
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   잠
+================================================== */
+
+function tamaSleep(){
+
+    if(
+        game.sleeping
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        game.tamaPotatoes.length===0
+    ){
+
+        return;
+
+    }
+
+
+    game.sleeping=true;
+
+
+    const tama=
+        document.getElementById(
+            "tama"
+        );
+
+
+    const overlay=
+        document.createElement(
+            "div"
+        );
+
+
+    overlay.className=
+        "sleepOverlay";
+
+
+    overlay.textContent=
+        "🌙 Zzz...";
+
+
+    tama.appendChild(
+        overlay
+    );
+
+
+    game.tamaPotatoes
+        .forEach(
+            obj=>{
+
+                obj.sleeping=true;
+
+                obj.vx=0;
+
+                obj.vy=0;
+
+
+                showTamaSpeech(
+                    obj,
+                    "Zzz... 😴"
+                );
+
+            }
+        );
+
+
+    setTimeout(
+        ()=>{
+
+            if(
+                overlay.parentNode
+            ){
+
+                overlay.remove();
+
+            }
+
+
+            game.tamaPotatoes
+                .forEach(
+                    obj=>{
+
+                        obj.sleeping=false;
+
+                        obj.targetX=null;
+
+                        obj.targetY=null;
+
+                        obj.nextDecision=0;
+
+                    }
+                );
+
+
+            game.sleeping=false;
+
+        },
+        10000
+    );
+
+}
+
+
+/* ==================================================
+   ON / OFF
+================================================== */
+
+function toggleDictionary(){
+
+    const button=
+        document.getElementById(
+            "toggleButton"
+        );
+
+
+    const wasEnabled=
+        button.classList.contains(
+            "on"
+        );
+
+
+    button.classList.toggle(
+        "on"
+    );
+
+
+    /*
+       현재 ON이었다면 OFF로,
+       OFF였다면 ON으로.
+    */
+
+    game.discovered
+        .forEach(
+            name=>{
+
+                game.tamaEnabled[name]=
+                    !wasEnabled;
+
+            }
+        );
+
+
+    renderTama();
+
+}
+
+
+/* ==================================================
+   유틸
+================================================== */
+
+function random(array){
+
+    if(
+        !array ||
+        array.length===0
+    ){
+
+        return "";
+
+    }
+
+
+    return array[
+        Math.floor(
+            Math.random()*
+            array.length
+        )
+    ];
+
+}
+
+
+/* ==================================================
+   화면이 열릴 때
+   감자 움직임에 간식 처리 추가
+================================================== */
+
+const originalFrameFunctionNote=true;
+
+
+/*
+   기존 RAF 루프를 조금 확장.
+   위에서 선언한 함수들을 이용해
+   간식 섭취를 지속적으로 확인한다.
+*/
+
+const originalStartTamaLoop=
+    startTamaLoop;
+
+
+/*
+   실제 루프를 다시 정의.
+   이동 자체는 여전히 RAF.
+*/
+
+startTamaLoop=function(){
+
+    stopTamaLoop();
+
+
+    game.lastTamaTime=
+        performance.now();
+
+
+    function frame(now){
+
+        if(
+            dictionaryScreen.classList.contains(
+                "hidden"
+            )
+        ){
+
+            game.tamaAnimationId=null;
+
+            return;
+
+        }
+
+
+        const delta=
+            Math.min(
+                now-
+                game.lastTamaTime,
+                40
+            );
+
+
+        game.lastTamaTime=
+            now;
+
+
+        game.tamaPotatoes
+            .forEach(
+                obj=>{
+
+                    if(
+                        obj.sleeping ||
+                        obj.dragging
+                    ){
+
+                        return;
+
+                    }
+
+
+                    /*
+                       간식이 있으면
+                       우선적으로 간식 추적.
+                    */
+
+                    if(
+                        obj.snackTarget
+                    ){
+
+                        updateTamaMovement(
+                            obj,
+                            delta,
+                            now
+                        );
+
+
+                        processSnackEating(
+                            obj
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    /*
+                       일반 AI 판단.
+                    */
+
+                    if(
+                        now>
+                        obj.nextDecision
+                    ){
+
+                        chooseAITarget(
+                            obj,
+                            now
+                        );
+
+
+                        obj.nextDecision=
+                            now+
+                            1200+
+                            Math.random()*1800;
+
+                    }
+
+
+                    updateTamaMovement(
+                        obj,
+                        delta,
+                        now
+                    );
+
+
+                    /*
+                       혼잣말.
+                    */
+
+                    if(
+                        now>
+                        obj.nextSpeech
+                    ){
+
+                        if(
+                            Math.random()<.12
+                        ){
+
+                            autonomousSpeech(
+                                obj
+                            );
+
+                        }
+
+
+                        obj.nextSpeech=
+                            now+
+                            5000+
+                            Math.random()*7000;
+
+                    }
+
+                }
+            );
+
+
+        processPotatoInteractions(
+            now
+        );
+
+
+        game.tamaAnimationId=
+            requestAnimationFrame(
+                frame
+            );
+
+    }
+
+
+    game.tamaAnimationId=
+        requestAnimationFrame(
+            frame
+        );
+
+};
+
+
 /* ==================================================
    초기화
 ================================================== */
 
 updateGrow();
+
+
+/* ==================================================
+   추가적인 이미지 복사 방지
+================================================== */
+
+document.addEventListener(
+    "copy",
+    e=>{
+
+        if(
+            e.target.closest(".tama") ||
+            e.target.closest(".petStage")
+        ){
+
+            e.preventDefault();
+
+        }
+
+    },
+    {
+        passive:false
+    }
+);
+
+
+/*
+   키보드 복사 단축키도 차단.
+*/
+
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        if(
+            (
+                e.ctrlKey ||
+                e.metaKey
+            ) &&
+            (
+                e.key==="c" ||
+                e.key==="C"
+            )
+        ){
+
+            if(
+                e.target.closest(".tama") ||
+                e.target.closest(".petStage")
+            ){
+
+                e.preventDefault();
+
+            }
+
+        }
+
+    },
+    {
+        passive:false
+    }
+);
 
 </script>
 
