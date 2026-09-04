@@ -2389,11 +2389,22 @@ function petAction(type){
 
     const p=game.potato;
 
+
+    /* ------------------------------
+       밥
+    ------------------------------ */
+
     if(type==="food"){
 
         game.stats.hunger=
             clamp(
                 game.stats.hunger+20
+            );
+
+        // 밥 먹으면 체력 +10
+        game.stats.energy=
+            clamp(
+                game.stats.energy+10
             );
 
         speak(
@@ -2409,11 +2420,22 @@ function petAction(type){
         jumpPet();
     }
 
+
+    /* ------------------------------
+       물
+    ------------------------------ */
+
     if(type==="water"){
 
         game.stats.water=
             clamp(
                 game.stats.water+20
+            );
+
+        // 물 마시면 체력 +10
+        game.stats.energy=
+            clamp(
+                game.stats.energy+10
             );
 
         speak(
@@ -2428,6 +2450,11 @@ function petAction(type){
 
         jumpPet();
     }
+
+
+    /* ------------------------------
+       쓰다듬기
+    ------------------------------ */
 
     if(type==="pet"){
 
@@ -2453,11 +2480,29 @@ function petAction(type){
         }
     }
 
+
+    /* ------------------------------
+       산책
+    ------------------------------ */
+
     if(type==="walk"){
 
+        // 산책하면 체력 -15
         game.stats.energy=
             clamp(
                 game.stats.energy-15
+            );
+
+        // 산책하면 배고픔 -1
+        game.stats.hunger=
+            clamp(
+                game.stats.hunger-1
+            );
+
+        // 산책하면 수분 -1
+        game.stats.water=
+            clamp(
+                game.stats.water-1
             );
 
         speak(
@@ -2471,7 +2516,9 @@ function petAction(type){
         runPet();
     }
 
+
     updateStats();
+
 }
 
 /* ==================================================
